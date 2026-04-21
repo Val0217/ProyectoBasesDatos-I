@@ -18,7 +18,7 @@ CREATE TABLE PetState (
     Name VARCHAR2(25)
 );
 
-CREATE TABLE PetLillness (
+CREATE TABLE PetIllness (
     Id NUMBER(8),
     Name VARCHAR2(25),
     Description VARCHAR(100)
