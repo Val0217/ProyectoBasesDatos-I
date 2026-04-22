@@ -216,9 +216,8 @@ CREATE TABLE User (
     FirstName VARCHAR2(25),
     LastName VARCHAR2(25),
     Password VARCHAR2(15),
-    Notes VARCHAR2(25), -- No se porque tiene Notas el usuario, quiza deberiamos meterles Distric
-    IdEmail NUMBER(8),
-    IdFosterHome NUMBER(8) -- el modelo logico esta mal con lo que viene despues :p
+    Notes VARCHAR2(25) -- No se porque tiene Notas el usuario, quiza deberiamos meterles Distric
+-- el modelo logico esta mal con lo que viene despues :p
 );
 
 CREATE TABLE ReportList (
@@ -229,7 +228,7 @@ CREATE TABLE ReportList (
     DateReport DATE -- estaria bien agregar la fecha del reporte
 );
 
-CREATE TABLE Rescuer (
+CREATE TABLE Rescuer ( -- esto puede y es redundante (Para corregirlo lige los recates a los rescatistas)
     Id NUMBER(8),
     IdUser NUMBER(8)
 );
