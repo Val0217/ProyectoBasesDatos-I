@@ -146,11 +146,11 @@ CREATE TABLE SpaceRequiredXFosterHome (
 
 CREATE TABLE FoundReport (
     Id NUMBER(8),
-    Date DATE,
+    FoundDate DATE, -- se cambio el nombre
     Place VARCHAR2(100), -- podria ligarse a district
     Description VARCHAR2(100),
     IdPet NUMBER(8),
-    IdUser NUMBER(8)
+    IdPerson NUMBER(8)
 );
 
 CREATE TABLE Match (
@@ -164,7 +164,7 @@ CREATE TABLE Match (
 
 CREATE TABLE LostReport (
     Id NUMBER(8),
-    Date DATE,
+    LostDate DATE,  -- se cambio el nombre
     Place VARCHAR2(100), -- podria ligarse a district
     Description VARCHAR2(100),
     Reward NUMBER(8),
@@ -187,10 +187,10 @@ CREATE TABLE Adoption (
 
 CREATE TABLE Rescued (
     Id NUMBER(8),
-    Date DATE,
+    RescueDate DATE,  -- se cambio el nombre
     Place VARCHAR2(100), -- esto se podria ligar a distric
     BeforePhoto LONG,
-    AfterPhoto LONG,
+    AfterPhoto LONG, -- no puede haber dos LONG es una tabla
     Description VARCHAR2(100),
     IdPet NUMBER(8),
     IdRescuer NUMBER(8),
@@ -200,8 +200,8 @@ CREATE TABLE Rescued (
 CREATE TABLE Donation (
     Id NUMBER(8),
     Amount NUMBER(8),
-    Date Date,
-    IdUser NUMBER(8),
+    DonationDate Date,  -- se cambio el nombre
+    IdPerson NUMBER(8),
     IdCurrency NUMBER(8),
     IdAssociation NUMBER(8)
 );
@@ -211,68 +211,68 @@ CREATE TABLE Currency (
     Name VARCHAR2(25)
 );
 
-CREATE TABLE User (
+CREATE TABLE Person (  -- se cambio el nombre
     Id NUMBER(8),
     FirstName VARCHAR2(25),
     LastName VARCHAR2(25),
     Password VARCHAR2(15),
     Notes VARCHAR2(25) -- No se porque tiene Notas el usuario, quiza deberiamos meterles Distric
--- el modelo logico esta mal con lo que viene despues :p
+    -- el modelo logico esta mal con lo que viene despues :p
 );
 
 CREATE TABLE ReportList (
     Id NUMBER(8),
     Description VARCHAR2(250),
-    IdUser NUMBER(8),
+    IdPerson NUMBER(8),
     IdReporter NUMBER(8), -- estaria bien agregar a quien hizo el reporte
     DateReport DATE -- estaria bien agregar la fecha del reporte
 );
 
-CREATE TABLE Rescuer ( -- esto puede y es redundante (Para corregirlo lige los recates a los rescatistas)
+CREATE TABLE Rescuer (
     Id NUMBER(8),
-    IdUser NUMBER(8)
+    IdPerson NUMBER(8)
 );
 
 CREATE TABLE Adopter (
     Id NUMBER(8),
-    IdUser NUMBER(8)
+    IdPerson NUMBER(8)
 );
 
 CREATE TABLE Calification (
     Id NUMBER(8),
     Stars NUMBER(8),
     Note VARCHAR2(250),
-    Date DATE,
-    IdUser NUMBER(8)
+    CalificationDate DATE,  -- se cambio el nombre
+    IdPerson NUMBER(8)
 );
 
 CREATE TABLE FosterHome (
     Id NUMBER(8),
     NeedsDonation VARCHAR2(1),
-    IdUser NUMBER(8)
+    IdPerson NUMBER(8)
 );
 
 CREATE TABLE Admin (
     Id NUMBER(8),
-    IdUser NUMBER(8)
+    IdPerson NUMBER(8)
 );
 
 CREATE TABLE Email (
     Id NUMBER(8),
     Email VARCHAR2(25),
-    IdUser NUMBER(8)
+    IdPerson NUMBER(8)
 );
 
 CREATE TABLE Phone (
     Id NUMBER(8),
     Phone NUMBER(8),
-    IdUser NUMBER(8)
+    IdPerson NUMBER(8)
 );
 
 CREATE TABLE BlockList (
     Id NUMBER(8),
-    Date DATE,
-    IdUser NUMBER(8)
+    BlockDate DATE,  -- se cambio el nombre
+    IdPerson NUMBER(8)
 );
 
 CREATE TABLE Association (

@@ -1,26 +1,26 @@
-ALTER TABLE ReportList ADD CONSTRAINT fk_ReportList_User FOREIGN KEY (IdUser) REFERENCES User(Id);
+ALTER TABLE ReportList ADD CONSTRAINT fk_ReportList_Person FOREIGN KEY (IdPerson) REFERENCES Person(Id);
 
-ALTER TABLE Rescuer ADD CONSTRAINT fk_Rescuer_User FOREIGN KEY (IdUser) REFERENCES User(Id);
+ALTER TABLE Rescuer ADD CONSTRAINT fk_Rescuer_Person FOREIGN KEY (IdPerson) REFERENCES Person(Id);
 
-ALTER TABLE Admin ADD CONSTRAINT fk_Admin_User FOREIGN KEY (IdUser) REFERENCES User(Id);
+ALTER TABLE Admin ADD CONSTRAINT fk_Admin_Person FOREIGN KEY (IdPerson) REFERENCES Person(Id);
 
-ALTER TABLE Adopter ADD CONSTRAINT fk_Adopter_User FOREIGN KEY (IdUser) REFERENCES User(Id);
+ALTER TABLE Adopter ADD CONSTRAINT fk_Adopter_Person FOREIGN KEY (IdPerson) REFERENCES Person(Id);
 
-ALTER TABLE Email ADD CONSTRAINT fk_Email_User FOREIGN KEY (IdUser) REFERENCES User(Id);
+ALTER TABLE Email ADD CONSTRAINT fk_Email_Person FOREIGN KEY (IdPerson) REFERENCES Person(Id);
 
-ALTER TABLE Donation ADD CONSTRAINT fk_Donation_User FOREIGN KEY (IdUser) REFERENCES User(Id);
+ALTER TABLE Donation ADD CONSTRAINT fk_Donation_Person FOREIGN KEY (IdPerson) REFERENCES Person(Id);
 
 ALTER TABLE Donation ADD CONSTRAINT fk_Donation_Currency FOREIGN KEY (IdCurrency) REFERENCES Currency(Id);
 
 ALTER TABLE Donation ADD CONSTRAINT fk_Donation_Association FOREIGN KEY (IdAssociation) REFERENCES Association(Id);
 
-ALTER TABLE Calification ADD CONSTRAINT fk_Calification_User FOREIGN KEY (IdUser) REFERENCES User(Id);
+ALTER TABLE Calification ADD CONSTRAINT fk_Calification_Person FOREIGN KEY (IdPerson) REFERENCES Person(Id);
 
-ALTER TABLE Phone ADD CONSTRAINT fk_Phone_User FOREIGN KEY (IdUser) REFERENCES User(Id);
+ALTER TABLE Phone ADD CONSTRAINT fk_Phone_Person FOREIGN KEY (IdPerson) REFERENCES Person(Id);
 
-ALTER TABLE FosterHome ADD CONSTRAINT fk_FosterHome_User FOREIGN KEY (IdUser) REFERENCES User(Id);
+ALTER TABLE FosterHome ADD CONSTRAINT fk_FosterHome_Person FOREIGN KEY (IdPerson) REFERENCES Person(Id);
 
-ALTER TABLE BlockList ADD CONSTRAINT fk_BlockList_User FOREIGN KEY (IdUser) REFERENCES User(Id);
+ALTER TABLE BlockList ADD CONSTRAINT fk_BlockList_Person FOREIGN KEY (IdPerson) REFERENCES Person(Id);
 
 ALTER TABLE PetPhoto ADD CONSTRAINT fk_PetPhoto_Pet FOREIGN KEY (IdPet) REFERENCES Pet(Id);
 
@@ -40,7 +40,7 @@ ALTER TABLE Pet ADD CONSTRAINT fk_Pet_Training FOREIGN KEY (IdTraining) REFERENC
 
 ALTER TABLE Pet ADD CONSTRAINT fk_Pet_PetSize FOREIGN KEY (IdSize) REFERENCES PetSize(Id);
 
-ALTER TABLE Pet ADD CONSTRAINT fk_Pet_User FOREIGN KEY (IdOwner) REFERENCES User(Id);
+ALTER TABLE Pet ADD CONSTRAINT fk_Pet_Person FOREIGN KEY (IdOwner) REFERENCES Person(Id);
 
 ALTER TABLE Pet ADD CONSTRAINT fk_Pet_Veterinarian FOREIGN KEY (IdVeterinarian) REFERENCES Veterinarian(Id);
 
@@ -78,7 +78,7 @@ ALTER TABLE PetXPetIllness ADD CONSTRAINT fk_PetIllnessXPet FOREIGN KEY (IdPetIl
 
 ALTER TABLE FoundReport ADD CONSTRAINT fk_FoundReport_Pet FOREIGN KEY (IdPet) REFERENCES Pet(Id);
 
-ALTER TABLE FoundReport ADD CONSTRAINT fk_FoundReport_User FOREIGN KEY (IdUser) REFERENCES User(Id);
+ALTER TABLE FoundReport ADD CONSTRAINT fk_FoundReport_Person FOREIGN KEY (IdPerson) REFERENCES Person(Id);
 
 ALTER TABLE Match ADD CONSTRAINT fk_Match_LostReport FOREIGN KEY (IdLostReport) REFERENCES LostReport(Id);
 
@@ -90,12 +90,12 @@ ALTER TABLE LostReport ADD CONSTRAINT fk_LostReport_Currency FOREIGN KEY (IdCurr
 
 ALTER TABLE Adoption ADD CONSTRAINT fk_Adoption_Pet FOREIGN KEY (IdPet) REFERENCES Pet(Id);
 
-ALTER TABLE Adoption ADD CONSTRAINT fk_Adoption_AdopterUser FOREIGN KEY (IdAdopter) REFERENCES User(Id);
+ALTER TABLE Adoption ADD CONSTRAINT fk_Adoption_AdopterPerson FOREIGN KEY (IdAdopter) REFERENCES Person(Id);
 
-ALTER TABLE Adoption ADD CONSTRAINT fk_Adoption_OwnerUser FOREIGN KEY (IdOwner) REFERENCES User(Id);
+ALTER TABLE Adoption ADD CONSTRAINT fk_Adoption_OwnerPerson FOREIGN KEY (IdOwner) REFERENCES Person(Id);
 
 ALTER TABLE Rescued ADD CONSTRAINT fk_Rescued_Pet FOREIGN KEY (IdPet) REFERENCES Pet(Id);
 
-ALTER TABLE Rescued ADD CONSTRAINT fk_Rescued_Rescuer FOREIGN KEY (IdRescuer) REFERENCES Rescuer(Id); -- en el original estaba como user pero mejor lo lige a rescatista
+ALTER TABLE Rescued ADD CONSTRAINT fk_Rescued_Rescuer FOREIGN KEY (IdRescuer) REFERENCES Rescuer(Id); -- en el original estaba como Person pero mejor lo lige a rescatista
 
 ALTER TABLE Rescued ADD CONSTRAINT fk_Rescued_Severity FOREIGN KEY (IdSeverity) REFERENCES Severity(Id);
