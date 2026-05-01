@@ -1,0 +1,5 @@
+- Constraint (not null y otros)
+- jobs, triggers, Procedimientos, funciones, etc.
+- pruebas y correciones.
+- inserts
+- aplicacion (NET beans).
