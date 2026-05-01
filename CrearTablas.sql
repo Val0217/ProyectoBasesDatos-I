@@ -30,7 +30,7 @@ CREATE TABLE Medicine (
     Dose VARCHAR2(25)
 );
 
-CREATE TABLE Treatment (
+CREATE TABLE PetTreatment (
     Id NUMBER(8),
     Name VARCHAR2(25),
     Description VARCHAR(100)
@@ -43,7 +43,7 @@ CREATE TABLE PetTraining (
 
 CREATE TABLE PetPhoto (
     Id NUMBER(8),
-    Photo LONG,
+    Photo BLOB,
     IdPet Number(8)
 );
 
@@ -98,7 +98,7 @@ CREATE TABLE Pet (
     IdBreed NUMBER(8),
     IdDistrict NUMBER(8),
     IdSpace NUMBER(8),
-    IdTraining NUMBER(8),
+    IdPetTraining NUMBER(8),
     IdSize NUMBER(8),
     IdOwner NUMBER(8),
     IdVeterinarian NUMBER(8)
@@ -110,18 +110,19 @@ CREATE TABLE Veterinarian (
     FirstName VARCHAR2(25),
     LastName VARCHAR2(25),
     Location VARCHAR2(100), -- Agregar Distrito
+    IdDristrict NUMBER(8),
     Phone NUMBER(8),
     Name VARCHAR2(50)
 );
 
-CREATE TABLE SizeXFosterHome (
-    IdSize NUMBER(8),
+CREATE TABLE PetSizeXFosterHome (
+    IdPetSize NUMBER(8),
     IdFosterHome NUMBER(8)
 );
 
-CREATE TABLE PetXTreatment (
+CREATE TABLE PetXPetTreatment (
     IdPet NUMBER(8),
-    IdTreatment NUMBER(8)
+    IdPetTreatment NUMBER(8)
 );
 
 CREATE TABLE PetXPetIllness (
@@ -150,14 +151,15 @@ CREATE TABLE FoundReport (
     Place VARCHAR2(100), -- podria ligarse a district
     Description VARCHAR2(100),
     IdPet NUMBER(8),
+    IdDistrict NUMBER(8),
     IdPerson NUMBER(8)
 );
 
-CREATE TABLE Match (
+CREATE TABLE PetMatch (
     Id NUMBER(8),
     SimilarityPercentage NUMBER(3),
     MatchDate DATE,
-    Status VARCHAR2(25), -- Esto debe ser un campo definido y no me acuerdo porque esto tiene estado
+    --Status VARCHAR2(25), -- Esto debe ser un campo definido y no me acuerdo porque esto tiene estado
     IdLostRepost NUMBER(8),
     IdFoundReport NUMBER(8)
 );
@@ -170,6 +172,7 @@ CREATE TABLE LostReport (
     Reward NUMBER(8),
     State VARCHAR2(25), -- Esto debe ser un campo definido
     IdPet NUMBER(8),
+    IdDistrict NUMBER(8),
     IdCurrency NUMBER(8)
 );
 
@@ -189,12 +192,13 @@ CREATE TABLE Rescued (
     Id NUMBER(8),
     RescueDate DATE,  -- se cambio el nombre
     Place VARCHAR2(100), -- esto se podria ligar a distric
-    BeforePhoto LONG,
-    AfterPhoto LONG, -- no puede haber dos LONG es una tabla
+    BeforePhoto BLOB,
+    AfterPhoto BLOB,
     Description VARCHAR2(100),
     IdPet NUMBER(8),
+    IdDistrict NUMBER(8),
     IdRescuer NUMBER(8),
-    IdSeverity NUMBER(8)
+    IdPetSeverity NUMBER(8)
 );
 
 CREATE TABLE Donation (
@@ -216,7 +220,8 @@ CREATE TABLE Person (  -- se cambio el nombre
     FirstName VARCHAR2(25),
     LastName VARCHAR2(25),
     Password VARCHAR2(15),
-    Notes VARCHAR2(25) -- No se porque tiene Notas el usuario, quiza deberiamos meterles Distric
+    IdDistrict NUMBER(8)
+    --Notes VARCHAR2(25) -- No se porque tiene Notas el usuario, quiza deberiamos meterles Distric
     -- el modelo logico esta mal con lo que viene despues :p
 );
 
@@ -315,3 +320,5 @@ CREATE TABLE Bitacora ( -- Ojo
     CurrentValue VARCHAR2(50),
     FieldName VARCHAR2(25)
 );
+
+-- Tabla AdoptionPhoto 

@@ -34,9 +34,9 @@ ALTER TABLE Pet ADD CONSTRAINT fk_Pet_PetBreed FOREIGN KEY (IdBreed) REFERENCES 
 
 ALTER TABLE Pet ADD CONSTRAINT fk_Pet_District FOREIGN KEY (IdDistrict) REFERENCES District(Id);
 
-ALTER TABLE Pet ADD CONSTRAINT fk_Pet_SpaceRequiered FOREIGN KEY (IdSpace) REFERENCES SpaceRequiered(Id);
+ALTER TABLE Pet ADD CONSTRAINT fk_Pet_SpaceRequired FOREIGN KEY (IdSpace) REFERENCES SpaceRequired(Id);
 
-ALTER TABLE Pet ADD CONSTRAINT fk_Pet_Training FOREIGN KEY (IdTraining) REFERENCES Training(Id);
+ALTER TABLE Pet ADD CONSTRAINT fk_Pet_PetTraining FOREIGN KEY (IdPetTraining) REFERENCES PetTraining(Id);
 
 ALTER TABLE Pet ADD CONSTRAINT fk_Pet_PetSize FOREIGN KEY (IdSize) REFERENCES PetSize(Id);
 
@@ -54,9 +54,9 @@ ALTER TABLE PetLevelEnergyXFosterHome ADD CONSTRAINT fk_PetLevelEnergyXFosterHom
 
 ALTER TABLE PetLevelEnergyXFosterHome ADD CONSTRAINT fk_FosterHomeXPetLevelEnergy FOREIGN KEY (IdPetLevelEnergy) REFERENCES PetLevelEnergy(Id);
 
-ALTER TABLE SizeXFosterHome ADD CONSTRAINT fk_SizeXFosterHome FOREIGN KEY (IdFosterHome) REFERENCES FosterHome(Id);
+ALTER TABLE PetSizeXFosterHome ADD CONSTRAINT fk_PetSizeXFosterHome FOREIGN KEY (IdFosterHome) REFERENCES FosterHome(Id);
 
-ALTER TABLE SizeXFosterHome ADD CONSTRAINT fk_FosterHomeXSize FOREIGN KEY (IdSize) REFERENCES Size(Id);
+ALTER TABLE PetSizeXFosterHome ADD CONSTRAINT fk_FosterHomeXSize FOREIGN KEY (IdPetSize) REFERENCES PetSize(Id);
 
 ALTER TABLE SpaceRequiredXFosterHome ADD CONSTRAINT fk_SpaceRequiredXFosterHome FOREIGN KEY (IdFosterHome) REFERENCES FosterHome(Id);
 
