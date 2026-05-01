@@ -1,4 +1,4 @@
-ALTER TABLE PetLevelEnergy
+ALTER TABLE PetLevelEnergy-- test
 ADD
 CONSTRAINT pk_PetLevelEnergy PRIMARY KEY (Id)
 USING INDEX
