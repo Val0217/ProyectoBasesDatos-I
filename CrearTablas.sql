@@ -230,7 +230,7 @@ CREATE TABLE ReportList (
     Description VARCHAR2(250),
     IdPerson NUMBER(8),
     IdReporter NUMBER(8), -- estaria bien agregar a quien hizo el reporte
-    DateReport DATE -- estaria bien agregar la fecha del reporte
+    ReportDate DATE -- estaria bien agregar la fecha del reporte
 );
 
 CREATE TABLE Rescuer (
