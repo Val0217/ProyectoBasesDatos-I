@@ -1,5 +1,5 @@
 - Constraint (not null y otros)
-- jobs, triggers, Procedimientos, funciones, etc.
+- jobs, triggers, Procedimientos, funciones, etc. (Valeria)
 - pruebas y correciones.
 - inserts (Adrian)(Falta revisar)
-- aplicacion (NET beans)
+- aplicacion (NET beans) (Carlos)
