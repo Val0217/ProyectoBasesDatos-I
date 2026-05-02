@@ -1,4 +1,4 @@
-- Constraint (not null y otros)
+- Constraint (not null y otros) (Adrian) (Falta revisar)
 - jobs, triggers, Procedimientos, funciones, etc. (Valeria)
 - pruebas y correciones.
 - inserts (Adrian)(Falta revisar)
