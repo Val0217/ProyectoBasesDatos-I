@@ -136,7 +136,7 @@ CREATE TABLE PetXMedicine (
 );
 
 CREATE TABLE PetLevelEnergyXFosterHome (
-    IdEnergy NUMBER(8),
+    IdPetLevelEnergy NUMBER(8),
     IdFosterHome NUMBER(8)
 );
 
@@ -160,7 +160,7 @@ CREATE TABLE PetMatch (
     SimilarityPercentage NUMBER(3),
     MatchDate DATE,
     --Status VARCHAR2(25), -- Esto debe ser un campo definido y no me acuerdo porque esto tiene estado
-    IdLostRepost NUMBER(8),
+    IdLostReport NUMBER(8),
     IdFoundReport NUMBER(8)
 );
 

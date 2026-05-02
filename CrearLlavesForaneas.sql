@@ -80,7 +80,7 @@ ALTER TABLE FoundReport ADD CONSTRAINT fk_FoundReport_Pet FOREIGN KEY (IdPet) RE
 
 ALTER TABLE FoundReport ADD CONSTRAINT fk_FoundReport_Person FOREIGN KEY (IdPerson) REFERENCES Person(Id);
 
-ALTER TABLE Match ADD CONSTRAINT fk_Match_LostReport FOREIGN KEY (IdLostReport) REFERENCES LostReport(Id);
+ALTER TABLE PetMatch ADD CONSTRAINT fk_Match_LostReport FOREIGN KEY (IdLostReport) REFERENCES LostReport(Id);
 
 ALTER TABLE Match ADD CONSTRAINT fk_Match_FoundReport FOREIGN KEY (IdFoundReport) REFERENCES FoundReport(Id);
 
@@ -98,4 +98,4 @@ ALTER TABLE Rescued ADD CONSTRAINT fk_Rescued_Pet FOREIGN KEY (IdPet) REFERENCES
 
 ALTER TABLE Rescued ADD CONSTRAINT fk_Rescued_Rescuer FOREIGN KEY (IdRescuer) REFERENCES Rescuer(Id); -- en el original estaba como Person pero mejor lo lige a rescatista
 
-ALTER TABLE Rescued ADD CONSTRAINT fk_Rescued_Severity FOREIGN KEY (IdSeverity) REFERENCES Severity(Id);
+ALTER TABLE Rescued ADD CONSTRAINT fk_Rescued_Severity FOREIGN KEY (IdPetSeverity) REFERENCES Severity(Id);
