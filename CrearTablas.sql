@@ -220,6 +220,7 @@ CREATE TABLE Person (  -- se cambio el nombre
     FirstName VARCHAR2(25),
     LastName VARCHAR2(25),
     Password VARCHAR2(15),
+    UserName VARCHAR2(25),
     IdDistrict NUMBER(8)
     --Notes VARCHAR2(25) -- No se porque tiene Notas el usuario, quiza deberiamos meterles Distric
     -- el modelo logico esta mal con lo que viene despues :p
