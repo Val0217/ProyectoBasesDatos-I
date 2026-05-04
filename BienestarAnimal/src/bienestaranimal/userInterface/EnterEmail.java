@@ -38,13 +38,13 @@ public class EnterEmail extends javax.swing.JFrame {
 
         LabelSubTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         LabelSubTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LabelSubTitle.setText("Sign in or create account");
+        LabelSubTitle.setText("Sign in ");
 
         TextEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         TextEmail.addActionListener(this::TextEmailActionPerformed);
 
         LabelField.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        LabelField.setText("Enter your email");
+        LabelField.setText("Enter your User name");
 
         ButtonContinue.setBackground(new java.awt.Color(255, 216, 20));
         ButtonContinue.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

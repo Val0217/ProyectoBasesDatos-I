@@ -118,7 +118,7 @@
                   <Font name="Segoe UI" size="18" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Sign in or create account"/>
+                <Property name="text" type="java.lang.String" value="Sign in "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="TextEmail">
@@ -136,7 +136,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Enter your email"/>
+                <Property name="text" type="java.lang.String" value="Enter your User name"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="ButtonContinue">

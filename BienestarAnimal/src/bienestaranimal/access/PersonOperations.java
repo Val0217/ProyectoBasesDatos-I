@@ -14,14 +14,14 @@ import javax.swing.JOptionPane;
  * @author carlo
  */
 public class PersonOperations {
-    public void Insert(String Email,String FirstName, String LastName, String Password, int IdDistrict){
+    public void Insert(String Email,String FirstName, String LastName, String Password, String UserName, int IdDistrict, int PhoneNumber){
         try {
             Connection con = ConexionOracle.connect();
 
-            String SQL = "INSERT INTO Person (Id, FirstName, LastName, Password, IdDistrict) VALUES (s_Person.NEXTVAL, '"+FirstName+"',  '"+LastName+"', '"+Password+"', "+IdDistrict+")";
+            String SQL = "BEGIN insertPerson('"+FirstName+"','"+LastName+"','"+Email+"','"+Password+"','"+UserName+"',"+IdDistrict+","+PhoneNumber+"); END;";
             
             Statement cn = con.createStatement(); // esto es para poder ejecutar consultas
-            ResultSet res = cn.executeQuery(SQL); // ejecutamos el query
+            cn.execute(SQL); // ejecutamos el query
             
 
             cn.close();

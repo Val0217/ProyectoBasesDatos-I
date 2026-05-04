@@ -49,9 +49,9 @@ public class SignUp {
         view.fillDistrict(access.listDistrict(IdCanton));
     }
     
-    public void InsertPerson(String Email,String FirstName, String LastName, String Password, int IdDistrict){
+    public void InsertPerson(String Email,String FirstName, String LastName, String Password, String UserName, int IdDistrict, int PhoneNumber){
         PersonOperations personAccess = new PersonOperations();
-        personAccess.Insert(Email, FirstName, LastName, Password, IdDistrict);
+        personAccess.Insert(Email, FirstName, LastName, Password, UserName, IdDistrict, PhoneNumber);
     }
     
 }
