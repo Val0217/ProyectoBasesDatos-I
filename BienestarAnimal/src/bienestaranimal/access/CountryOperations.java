@@ -35,6 +35,8 @@ public class CountryOperations {
                     res.getString("Name")
                 ));
             }
+            
+            con.close();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage()); //lanzar mensaje de error, esperemos que no se lanze nunca
@@ -61,6 +63,8 @@ public class CountryOperations {
                     res.getString("Name")
                 ));
             }
+            
+            con.close();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage()); //lanzar mensaje de error, esperemos que no se lanze nunca
@@ -87,6 +91,8 @@ public class CountryOperations {
                     res.getString("Name")
                 ));
             }
+            
+            con.close();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage()); //lanzar mensaje de error, esperemos que no se lanze nunca
@@ -113,6 +119,8 @@ public class CountryOperations {
                     res.getString("Name")
                 ));
             }
+            
+            con.close();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage()); //lanzar mensaje de error, esperemos que no se lanze nunca
