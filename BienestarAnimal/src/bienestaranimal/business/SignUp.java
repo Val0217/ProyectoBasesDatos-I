@@ -5,6 +5,7 @@
 package bienestaranimal.business;
 // esto es lo que maneja
 import bienestaranimal.access.CountryOperations;
+import bienestaranimal.access.PersonOperations;
 import bienestaranimal.userInterface.SignUpForm;
 
 /**
@@ -46,6 +47,11 @@ public class SignUp {
         this.access = new CountryOperations();
 
         view.fillDistrict(access.listDistrict(IdCanton));
+    }
+    
+    public void InsertPerson(String Email,String FirstName, String LastName, String Password, int IdDistrict){
+        PersonOperations personAccess = new PersonOperations();
+        personAccess.Insert(Email, FirstName, LastName, Password, IdDistrict);
     }
     
 }

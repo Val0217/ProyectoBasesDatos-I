@@ -83,22 +83,31 @@
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="TextLastName" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="TextFirstName" alignment="0" max="32767" attributes="0"/>
                                       <Component id="TextEmail" alignment="0" max="32767" attributes="0"/>
                                       <Component id="ButtonCreateAccount" alignment="0" pref="378" max="32767" attributes="0"/>
                                       <Component id="ComboCountry" alignment="0" max="32767" attributes="0"/>
                                       <Component id="ComboProvince" alignment="0" max="32767" attributes="0"/>
                                       <Component id="ComboCanton" alignment="0" max="32767" attributes="0"/>
                                       <Component id="ComboDistrict" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="TextPassword" alignment="0" max="32767" attributes="0"/>
                                       <Component id="LabelDistrict" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="LabelCanton" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="LabelCountry" min="-2" max="-2" attributes="0"/>
-                                      <Component id="LabelField2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="LabelField1" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="LabelField" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="LabelProvince" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel1" min="-2" pref="67" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="TextFirstName" alignment="0" min="-2" pref="173" max="-2" attributes="0"/>
+                                              <Component id="LabelField1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="LabelField3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="LabelField2" min="-2" max="-2" attributes="0"/>
+                                              <Component id="TextLastName" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                                   <Component id="jLabel2" min="-2" pref="369" max="-2" attributes="0"/>
                               </Group>
@@ -119,13 +128,19 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="TextEmail" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="LabelField1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="LabelField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="TextFirstName" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="LabelField2" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="TextFirstName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="TextLastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <Component id="LabelField3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="TextLastName" min="-2" max="-2" attributes="0"/>
+                      <Component id="TextPassword" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -361,6 +376,24 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="_____________________________________________________"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="TextPassword">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextPasswordActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelField3">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Password"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -123,6 +123,8 @@ public class SignUpForm extends javax.swing.JFrame {
         LabelDistrict = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        TextPassword = new javax.swing.JTextField();
+        LabelField3 = new javax.swing.JLabel();
         LableTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -203,6 +205,12 @@ public class SignUpForm extends javax.swing.JFrame {
         jLabel2.setText("_____________________________________________________");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
+        TextPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TextPassword.addActionListener(this::TextPasswordActionPerformed);
+
+        LabelField3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelField3.setText("Password");
+
         javax.swing.GroupLayout PanelFormLayout = new javax.swing.GroupLayout(PanelForm);
         PanelForm.setLayout(PanelFormLayout);
         PanelFormLayout.setHorizontalGroup(
@@ -216,22 +224,28 @@ public class SignUpForm extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(TextLastName)
-                                .addComponent(TextFirstName)
                                 .addComponent(TextEmail)
                                 .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
                                 .addComponent(ComboCountry, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(ComboProvince, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(ComboCanton, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(ComboDistrict, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(TextPassword)
                                 .addComponent(LabelDistrict)
                                 .addComponent(LabelCanton)
                                 .addComponent(LabelCountry)
-                                .addComponent(LabelField2)
-                                .addComponent(LabelField1)
                                 .addComponent(LabelField)
                                 .addComponent(LabelProvince)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(PanelFormLayout.createSequentialGroup()
+                                    .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(TextFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(LabelField1)
+                                        .addComponent(LabelField3))
+                                    .addGap(27, 27, 27)
+                                    .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(LabelField2)
+                                        .addComponent(TextLastName))))
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 20, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -246,13 +260,17 @@ public class SignUpForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LabelField1)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelField1)
+                    .addComponent(LabelField2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TextFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TextFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LabelField2)
+                .addComponent(LabelField3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TextLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -325,7 +343,8 @@ public class SignUpForm extends javax.swing.JFrame {
     }//GEN-LAST:event_TextEmailActionPerformed
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
-        // TODO add your handling code here:
+        Location District = (Location) ComboDistrict.getSelectedItem();
+        controller.InsertPerson(TextEmail.getText(),TextFirstName.getText(),TextLastName.getText(),TextPassword.getText(),District.getId());
     }//GEN-LAST:event_ButtonCreateAccountActionPerformed
 
     private void TextFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFirstNameActionPerformed
@@ -374,6 +393,10 @@ public class SignUpForm extends javax.swing.JFrame {
         ComboDistrict.setEnabled(true);
     }//GEN-LAST:event_ComboCantonActionPerformed
 
+    private void TextPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextPasswordActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -411,6 +434,7 @@ public class SignUpForm extends javax.swing.JFrame {
     private javax.swing.JLabel LabelField;
     private javax.swing.JLabel LabelField1;
     private javax.swing.JLabel LabelField2;
+    private javax.swing.JLabel LabelField3;
     private javax.swing.JLabel LabelProvince;
     private javax.swing.JLabel LabelSubTitle;
     private javax.swing.JLabel LableTitle;
@@ -419,6 +443,7 @@ public class SignUpForm extends javax.swing.JFrame {
     private javax.swing.JTextField TextEmail;
     private javax.swing.JTextField TextFirstName;
     private javax.swing.JTextField TextLastName;
+    private javax.swing.JTextField TextPassword;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
