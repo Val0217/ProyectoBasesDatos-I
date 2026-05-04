@@ -3,9 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package bienestaranimal.userInterface;
+import bienestaranimal.access.Location;
+import bienestaranimal.business.SignUp;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
@@ -15,16 +18,53 @@ import javax.swing.ListCellRenderer;
  *
  * @author carlo
  */
-public class LoginForm extends javax.swing.JFrame {
+public class SignUpForm extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginForm.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SignUpForm.class.getName());
+    
+    // variables
+    private SignUp controller = null;
 
-    /**
-     * Creates new form LoginForm
-     * @param email
-     */
-    public LoginForm(String email) {
+    // procedimiento que rellena el combobox de Country
+    public void fillCountry(ArrayList<Location> listCountry) {
+        ComboCountry.removeAllItems();
+        ComboCountry.addItem(new Location(0,"-"));
+        for (Location c : listCountry) {
+            ComboCountry.addItem(c);
+        }
+    }
+    
+    // procedimiento que rellena el combobox de Country
+    public void fillProvince(ArrayList<Location> listCountry) {
+        ComboProvince.removeAllItems();
+        ComboProvince.addItem(new Location(0,"-"));
+        for (Location c : listCountry) {
+            ComboProvince.addItem(c);
+        }
+    }
+    
+    // procedimiento que rellena el combobox de Country
+    public void fillCanton(ArrayList<Location> listCountry) {
+        ComboCanton.removeAllItems();
+        ComboCanton.addItem(new Location(0,"-"));
+        for (Location c : listCountry) {
+            ComboCanton.addItem(c);
+        }
+    }
+    
+    // procedimiento que rellena el combobox de Country
+    public void fillDistrict(ArrayList<Location> listCountry) {
+        ComboDistrict.removeAllItems();
+        ComboDistrict.addItem(new Location(0,"-"));
+        for (Location c : listCountry) {
+            ComboDistrict.addItem(c);
+        }
+    }
+    
+    
+    public SignUpForm(String email) {
         initComponents();
+        controller = new SignUp(this);
         setLocationRelativeTo(null);
         TextEmail.setText(email);
         
@@ -47,9 +87,10 @@ public class LoginForm extends javax.swing.JFrame {
         
         setVisible(true);
     }
-            
+         
+    
 
-    private LoginForm() {
+    private SignUpForm() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -119,7 +160,6 @@ public class LoginForm extends javax.swing.JFrame {
         LabelField2.setText("Last name");
 
         ComboCountry.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ComboCountry.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Costa Rica", "México", "Estados Unidos", "España", "Argentina", "Colombia", "Chile", "Perú", "Canadá", "Brasil" }));
         ComboCountry.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboCountry.setOpaque(true);
         ComboCountry.setRequestFocusEnabled(false);
@@ -129,7 +169,6 @@ public class LoginForm extends javax.swing.JFrame {
         LabelCountry.setText("Country");
 
         ComboProvince.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ComboProvince.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "San José", "Alajuela", "Heredia", "Cartago", "Puntarenas", "Guanacaste", "Limón", "San Salvador", "Panamá", "Pichincha" }));
         ComboProvince.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboProvince.setOpaque(true);
         ComboProvince.setRequestFocusEnabled(false);
@@ -139,7 +178,6 @@ public class LoginForm extends javax.swing.JFrame {
         LabelProvince.setText("Province");
 
         ComboCanton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ComboCanton.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "San José", "Escazú", "Desamparados", "Alajuela", "San Ramón", "Grecia", "Heredia", "Barva", "Cartago", "Paraíso" }));
         ComboCanton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboCanton.setOpaque(true);
         ComboCanton.setRequestFocusEnabled(false);
@@ -149,7 +187,6 @@ public class LoginForm extends javax.swing.JFrame {
         LabelCanton.setText("Canton");
 
         ComboDistrict.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ComboDistrict.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Carmen", "Merced", "Hospital", "Catedral", "Zapote", "San Francisco", "San Antonio", "Guadalupe", "San Rafael", "San Pedro" }));
         ComboDistrict.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboDistrict.setOpaque(true);
         ComboDistrict.setRequestFocusEnabled(false);
@@ -282,6 +319,7 @@ public class LoginForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void TextEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextEmailActionPerformed
@@ -299,26 +337,40 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_TextLastNameActionPerformed
 
     private void ComboCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCountryActionPerformed
-        String country = ComboCountry.getSelectedItem().toString();
-        //ComboProvince.removeAllItems();
-        //ComboCanton.removeAllItems();
-        //ComboDistrict.removeAllItems();
+        // al seleccionar un pais, se llena el de province y se bloquea los siguientes.
+        if (controller == null) return;
+        Location country = (Location) ComboCountry.getSelectedItem();
+        if (country == null) return;
+        if (country.getId() == 0) return;
+        ComboCanton.removeAllItems();
+        ComboDistrict.removeAllItems();
         
+        controller.FillProvince(this, country.getId());
+        ComboCanton.setEnabled(false);
+        ComboDistrict.setEnabled(false);
         ComboProvince.setEnabled(true);
     }//GEN-LAST:event_ComboCountryActionPerformed
 
     private void ComboProvinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboProvinceActionPerformed
-        String province = ComboProvince.getSelectedItem().toString();
-        //ComboCanton.removeAllItems();
-        //ComboDistrict.removeAllItems();
+        // al seleccionar una provincia, se llena el de canton y se bloquea los siguientes.
+        Location province = (Location) ComboProvince.getSelectedItem();
+        if (province == null) return;
+        if (province.getId() == 0) return;
+        ComboDistrict.removeAllItems();
         
+        controller.FillCanton(this, province.getId());
+        ComboDistrict.setEnabled(false);
         ComboCanton.setEnabled(true);
     }//GEN-LAST:event_ComboProvinceActionPerformed
 
     private void ComboCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCantonActionPerformed
-        String canton = ComboCanton.getSelectedItem().toString();
-        //ComboDistrict.removeAllItems();
+        // al seleccionar un canton, se llena el de Distrito.
+        Location canton = (Location) ComboCanton.getSelectedItem();
+        if (canton == null) return;
+        if (canton.getId() == 0) return;
+        ComboDistrict.removeAllItems();
         
+        controller.FillDistrict(this, canton.getId());
         ComboDistrict.setEnabled(true);
     }//GEN-LAST:event_ComboCantonActionPerformed
 
@@ -344,15 +396,15 @@ public class LoginForm extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new LoginForm().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new SignUpForm().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonCreateAccount;
-    private javax.swing.JComboBox<String> ComboCanton;
-    private javax.swing.JComboBox<String> ComboCountry;
-    private javax.swing.JComboBox<String> ComboDistrict;
-    private javax.swing.JComboBox<String> ComboProvince;
+    private javax.swing.JComboBox<Location> ComboCanton;
+    private javax.swing.JComboBox<Location> ComboCountry;
+    private javax.swing.JComboBox<Location> ComboDistrict;
+    private javax.swing.JComboBox<Location> ComboProvince;
     private javax.swing.JLabel LabelCanton;
     private javax.swing.JLabel LabelCountry;
     private javax.swing.JLabel LabelDistrict;

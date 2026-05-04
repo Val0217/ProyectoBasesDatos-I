@@ -3,7 +3,6 @@ package bienestaranimal.userInterface;
 
 public class EnterEmail extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EnterEmail.class.getName());
 
     /**
      * Creates new form Login
@@ -129,7 +128,7 @@ public class EnterEmail extends javax.swing.JFrame {
     }//GEN-LAST:event_TextEmailActionPerformed
 
     private void ButtonContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonContinueActionPerformed
-        LoginForm window = new LoginForm(TextEmail.getText());
+        SignUpForm window = new SignUpForm(TextEmail.getText());
         dispose();
     }//GEN-LAST:event_ButtonContinueActionPerformed
 

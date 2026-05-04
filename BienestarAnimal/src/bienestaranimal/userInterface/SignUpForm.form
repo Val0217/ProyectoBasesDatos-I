@@ -242,19 +242,7 @@
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="11">
-                    <StringItem index="0" value="-"/>
-                    <StringItem index="1" value="Costa Rica"/>
-                    <StringItem index="2" value="M&#xe9;xico"/>
-                    <StringItem index="3" value="Estados Unidos"/>
-                    <StringItem index="4" value="Espa&#xf1;a"/>
-                    <StringItem index="5" value="Argentina"/>
-                    <StringItem index="6" value="Colombia"/>
-                    <StringItem index="7" value="Chile"/>
-                    <StringItem index="8" value="Per&#xfa;"/>
-                    <StringItem index="9" value="Canad&#xe1;"/>
-                    <StringItem index="10" value="Brasil"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
@@ -266,7 +254,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboCountryActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Location&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelCountry">
@@ -282,21 +270,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="11">
-                    <StringItem index="0" value="-"/>
-                    <StringItem index="1" value="San Jos&#xe9;"/>
-                    <StringItem index="2" value="Alajuela"/>
-                    <StringItem index="3" value="Heredia"/>
-                    <StringItem index="4" value="Cartago"/>
-                    <StringItem index="5" value="Puntarenas"/>
-                    <StringItem index="6" value="Guanacaste"/>
-                    <StringItem index="7" value="Lim&#xf3;n"/>
-                    <StringItem index="8" value="San Salvador"/>
-                    <StringItem index="9" value="Panam&#xe1;"/>
-                    <StringItem index="10" value="Pichincha"/>
-                  </StringArray>
-                </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
@@ -307,7 +280,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboProvinceActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Location&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelProvince">
@@ -323,21 +296,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="11">
-                    <StringItem index="0" value="-"/>
-                    <StringItem index="1" value="San Jos&#xe9;"/>
-                    <StringItem index="2" value="Escaz&#xfa;"/>
-                    <StringItem index="3" value="Desamparados"/>
-                    <StringItem index="4" value="Alajuela"/>
-                    <StringItem index="5" value="San Ram&#xf3;n"/>
-                    <StringItem index="6" value="Grecia"/>
-                    <StringItem index="7" value="Heredia"/>
-                    <StringItem index="8" value="Barva"/>
-                    <StringItem index="9" value="Cartago"/>
-                    <StringItem index="10" value="Para&#xed;so"/>
-                  </StringArray>
-                </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
@@ -348,7 +306,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboCantonActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Location&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelCanton">
@@ -364,21 +322,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="11">
-                    <StringItem index="0" value="-"/>
-                    <StringItem index="1" value="Carmen"/>
-                    <StringItem index="2" value="Merced"/>
-                    <StringItem index="3" value="Hospital"/>
-                    <StringItem index="4" value="Catedral"/>
-                    <StringItem index="5" value="Zapote"/>
-                    <StringItem index="6" value="San Francisco"/>
-                    <StringItem index="7" value="San Antonio"/>
-                    <StringItem index="8" value="Guadalupe"/>
-                    <StringItem index="9" value="San Rafael"/>
-                    <StringItem index="10" value="San Pedro"/>
-                  </StringArray>
-                </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
@@ -386,7 +329,7 @@
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Location&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelDistrict">
