@@ -164,7 +164,7 @@ public class EnterEmail extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonContinueActionPerformed
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
-        SignUpForm window = new SignUpForm(TextEmail.getText());
+        SignUpForm window = new SignUpForm();
         dispose();
     }//GEN-LAST:event_ButtonCreateAccountActionPerformed
 

@@ -62,11 +62,10 @@ public class SignUpForm extends javax.swing.JFrame {
     }
     
     
-    public SignUpForm(String email) {
+    public SignUpForm() {
         initComponents();
         controller = new SignUp(this);
         setLocationRelativeTo(null);
-        TextEmail.setText(email);
         
         ComboProvince.setEnabled(false);
         ComboCanton.setEnabled(false);
@@ -90,9 +89,6 @@ public class SignUpForm extends javax.swing.JFrame {
          
     
 
-    private SignUpForm() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

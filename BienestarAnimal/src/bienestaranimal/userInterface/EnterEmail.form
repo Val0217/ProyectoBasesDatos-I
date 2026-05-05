@@ -71,13 +71,11 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="LabelField3" min="-2" pref="438" max="-2" attributes="0"/>
                           <Component id="LabelField2" min="-2" pref="438" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="LabelField1" min="-2" max="-2" attributes="0"/>
-                              <Component id="LableTitle" min="-2" pref="262" max="-2" attributes="0"/>
-                              <Component id="LabelField" min="-2" max="-2" attributes="0"/>
-                              <Component id="TextEmail" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jPasswordField1" alignment="0" min="-2" pref="305" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="LabelField1" min="-2" max="-2" attributes="0"/>
+                          <Component id="LableTitle" min="-2" pref="262" max="-2" attributes="0"/>
+                          <Component id="LabelField" min="-2" max="-2" attributes="0"/>
+                          <Component id="TextEmail" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jPasswordField1" alignment="0" min="-2" pref="305" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="ButtonCreateAccount" min="-2" pref="170" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
