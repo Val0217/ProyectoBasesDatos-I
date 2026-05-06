@@ -94,7 +94,7 @@ ALTER TABLE Pet ADD CONSTRAINT chk_Pet_Age
 -- -------------------------------------------------------------
 
 ALTER TABLE PetPhoto MODIFY (
-    Photo BLOB        NOT NULL,
+    Photo             NOT NULL,
     IdPet NUMBER(8)   NOT NULL
 );
 
@@ -137,10 +137,6 @@ ALTER TABLE LostReport MODIFY (
 ALTER TABLE LostReport ADD CONSTRAINT chk_LostReport_Reward
     CHECK (Reward IS NULL OR Reward >= 0);
 
--- Estado debe ser valor conocido
-ALTER TABLE LostReport ADD CONSTRAINT chk_LostReport_State
-    CHECK (State IN ('Perdido', 'Encontrado', 'Cerrado'));
-
 -- -------------------------------------------------------------
 -- FOUND REPORT
 -- -------------------------------------------------------------
@@ -177,8 +173,9 @@ ALTER TABLE Adoption MODIFY (
     IdOwner      NUMBER(8) NOT NULL
 );
 
+-- Estado debe ser valor conocido
 ALTER TABLE Adoption ADD CONSTRAINT chk_Adoption_State
-    CHECK (State IN ('En Proceso', 'Adoptado', 'Cancelado'));
+    CHECK (State IN ('In progress', 'Adopted', 'Cancelled'));
 
 -- AvailableDate no puede ser posterior a AdoptionDate si ambas existen
 ALTER TABLE Adoption ADD CONSTRAINT chk_Adoption_Dates
@@ -253,7 +250,7 @@ ALTER TABLE ReportList MODIFY (
 );
 
 -- No puede reportarse a si mismo
-ALTER TABLE ReportList ADD CONSTRAINT chk_ReportList_NoSelfReport
+ALTER TABLE ReportList ADD CONSTRAINT chk_ReportList_SelfReport
     CHECK (IdPerson <> IdReporter);
 
 -- -------------------------------------------------------------

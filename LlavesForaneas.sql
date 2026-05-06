@@ -62,11 +62,9 @@ ALTER TABLE SpaceRequiredXFosterHome ADD CONSTRAINT fk_SpaceRequiredXFosterHome 
 
 ALTER TABLE SpaceRequiredXFosterHome ADD CONSTRAINT fk_FosterHomeXSpaceRequired FOREIGN KEY (IdSpaceRequired) REFERENCES SpaceRequired(Id);
 
-ALTER TABLE SpaceRequiredXFosterHome ADD CONSTRAINT fk_SpaceRequiredXFosterHome FOREIGN KEY (IdFosterHome) REFERENCES FosterHome(Id);
-
 ALTER TABLE PetXPetTreatment ADD CONSTRAINT fk_PetXPetTreatment FOREIGN KEY (IdPet) REFERENCES Pet(Id);
 
-ALTER TABLE PetXPetTreatment ADD CONSTRAINT fk_TreatmentXPet FOREIGN KEY (IdPetTreatment) REFERENCES PetTreatment(Id);
+ALTER TABLE PetXPetTreatment ADD CONSTRAINT fk_PetTreatmentXPet FOREIGN KEY (IdPetTreatment) REFERENCES PetTreatment(Id);
 
 ALTER TABLE PetXMedicine ADD CONSTRAINT fk_PetXMedicine FOREIGN KEY (IdPet) REFERENCES Pet(Id);
 
@@ -98,4 +96,4 @@ ALTER TABLE Rescued ADD CONSTRAINT fk_Rescued_Pet FOREIGN KEY (IdPet) REFERENCES
 
 ALTER TABLE Rescued ADD CONSTRAINT fk_Rescued_Rescuer FOREIGN KEY (IdRescuer) REFERENCES Rescuer(Id); -- en el original estaba como Person pero mejor lo lige a rescatista
 
-ALTER TABLE Rescued ADD CONSTRAINT fk_Rescued_Severity FOREIGN KEY (IdPetSeverity) REFERENCES PetSeverity(Id);
+ALTER TABLE Rescued ADD CONSTRAINT fk_Rescued_PetSeverity FOREIGN KEY (IdPetSeverity) REFERENCES PetSeverity(Id);
