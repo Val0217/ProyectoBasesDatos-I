@@ -219,7 +219,7 @@ CREATE TABLE Person (  -- se cambio el nombre
     Id NUMBER(8),
     FirstName VARCHAR2(25),
     LastName VARCHAR2(25),
-    Password VARCHAR2(15),
+    Password VARCHAR2(60), -- para que el password tenga un hash
     UserName VARCHAR2(25),
     IdDistrict NUMBER(8)
     --Notes VARCHAR2(25) -- No se porque tiene Notas el usuario, quiza deberiamos meterles Distric
