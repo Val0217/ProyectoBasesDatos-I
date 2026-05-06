@@ -16,43 +16,39 @@ import animalwelfare.security.Hash;
 public class SignUp {
     
     private CountryOperations access;
-    private SignUpForm view;
 
     // esto se ejecuta cuando lo creamos
     public SignUp(SignUpForm view) {
-        this.view = view;
         this.access = new CountryOperations();
 
         view.fillCountry(access.listCountry());
     }
     
-    // para entregar las Provincias
+    // para enviar las Provincias a la view
     public void FillProvince(SignUpForm view, int IdCountry) {
-        this.view = view;
         this.access = new CountryOperations();
 
         view.fillProvince(access.listProvince(IdCountry));
     }
     
-    // para entregar los cantones
+    // para enviar los Cantones a la view
     public void FillCanton(SignUpForm view, int IdProvince) {
-        this.view = view;
         this.access = new CountryOperations();
 
         view.fillCanton(access.listCanton(IdProvince));
     }
     
-    //para entregar los distritos
+    // para enviar los Distritos a la view
     public void FillDistrict(SignUpForm view, int IdCanton) {
-        this.view = view;
         this.access = new CountryOperations();
 
         view.fillDistrict(access.listDistrict(IdCanton));
     }
     
+    // Funcion que inserta los datos de una persona en la base de datos, ademas se comunica con seguridad para encryptar la contraseña.
     public void InsertPerson(String Email,String FirstName, String LastName, String Password, String UserName, int IdDistrict, int PhoneNumber){
         PersonOperations personAccess = new PersonOperations();
-        personAccess.Insert(Email, FirstName, LastName, Password, UserName, IdDistrict, PhoneNumber);
+        personAccess.Insert(Email, FirstName, LastName, Hash.EncryptPassword(Password), UserName, IdDistrict, PhoneNumber);
     }
     
 }

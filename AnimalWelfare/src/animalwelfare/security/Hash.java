@@ -10,7 +10,7 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class Hash {
     // Hash a password for the first time
-        public String EncryptPassword(String password) {
+        public static String EncryptPassword(String password) {
             String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
             // gensalt's log_rounds parameter determines the complexity
             // the work factor is 2**log_rounds, and the default is 10
@@ -20,7 +20,7 @@ public class Hash {
         
 	// Check that an unencrypted password matches one that has
 	// previously been hashed
-        public boolean ComparePassword(String password, String hashed) {
+        public static boolean ComparePassword(String password, String hashed) {
             return BCrypt.checkpw(password, hashed);
         }
     
