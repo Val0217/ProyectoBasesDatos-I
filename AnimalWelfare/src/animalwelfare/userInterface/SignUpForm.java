@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.ListCellRenderer;
 import javax.swing.text.AbstractDocument;
-import javax.swing.text.DocumentFilter;
 /**
  *
  * @author carlo
@@ -81,9 +80,13 @@ public class SignUpForm extends javax.swing.JFrame {
         ComboDistrict.setRenderer(new ListCellRendererProxy(oldRenderer));
         // Diseño de las combo box
         
-        // Limitar caracteres.
-        NumericFilter filter = new NumericFilter();
-        ((AbstractDocument) TextPhone.getDocument()).setDocumentFilter(filter);
+        // Restriciones y Filtros
+        NoSpaceFilter spaceFilter = new NoSpaceFilter();
+        ((AbstractDocument) TextPhone.getDocument()).setDocumentFilter(new NumericFilter());
+        ((AbstractDocument) TextEmail.getDocument()).setDocumentFilter(spaceFilter);
+        ((AbstractDocument) TextPassword.getDocument()).setDocumentFilter(spaceFilter);
+        ((AbstractDocument) TextPasswordRE.getDocument()).setDocumentFilter(spaceFilter);
+
         
         setVisible(true);
     }
