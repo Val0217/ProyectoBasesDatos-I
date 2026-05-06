@@ -80,9 +80,9 @@ ALTER TABLE FoundReport ADD CONSTRAINT fk_FoundReport_Pet FOREIGN KEY (IdPet) RE
 
 ALTER TABLE FoundReport ADD CONSTRAINT fk_FoundReport_Person FOREIGN KEY (IdPerson) REFERENCES Person(Id);
 
-ALTER TABLE PetMatch ADD CONSTRAINT fk_Match_LostReport FOREIGN KEY (IdLostReport) REFERENCES LostReport(Id);
+ALTER TABLE PetMatch ADD CONSTRAINT fk_PetMatch_LostReport FOREIGN KEY (IdLostReport) REFERENCES LostReport(Id);
 
-ALTER TABLE PetMatch ADD CONSTRAINT fk_Match_FoundReport FOREIGN KEY (IdFoundReport) REFERENCES FoundReport(Id);
+ALTER TABLE PetMatch ADD CONSTRAINT fk_PetMatch_FoundReport FOREIGN KEY (IdFoundReport) REFERENCES FoundReport(Id);
 
 ALTER TABLE LostReport ADD CONSTRAINT fk_LostReport_Pet FOREIGN KEY (IdPet) REFERENCES Pet(Id);
 

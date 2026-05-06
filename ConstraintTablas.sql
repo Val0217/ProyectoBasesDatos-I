@@ -46,6 +46,7 @@ ALTER TABLE Person MODIFY (
     FirstName  VARCHAR2(25) NOT NULL,
     LastName   VARCHAR2(25) NOT NULL,
     Password   VARCHAR2(15) NOT NULL,
+    UserName   VARCHAR2(25) NOT NULL,
     IdDistrict NUMBER(8)    NOT NULL
 );
 
