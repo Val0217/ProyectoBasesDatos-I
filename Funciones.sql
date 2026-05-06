@@ -186,7 +186,7 @@ CREATE OR REPLACE FUNCTION fn_pet_age_range (
 IS
 BEGIN
     IF p_age IS NULL THEN
-        RETURN 'withouth Age';
+        RETURN 'Without Age';
     ELSIF p_age >= 0 AND p_age < 1 THEN
         RETURN '0 to 1';
     ELSIF p_age >= 1 AND p_age < 5 THEN

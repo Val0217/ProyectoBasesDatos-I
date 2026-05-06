@@ -139,7 +139,6 @@ public class SignUpForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         PanelBackGround.setBackground(new java.awt.Color(204, 204, 204));
-        PanelBackGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabelSubTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         LabelSubTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -394,16 +393,35 @@ public class SignUpForm extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        PanelBackGround.add(PanelForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 66, -1, -1));
-
         LableTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LableTitle.setForeground(new java.awt.Color(255, 255, 255));
         LableTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LableTitle.setText("Animal Welfare");
-        PanelBackGround.add(LableTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 16, 586, -1));
 
         ImagenBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/backgroundForm.jpg"))); // NOI18N
-        PanelBackGround.add(ImagenBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, -4, 600, 690));
+
+        javax.swing.GroupLayout PanelBackGroundLayout = new javax.swing.GroupLayout(PanelBackGround);
+        PanelBackGround.setLayout(PanelBackGroundLayout);
+        PanelBackGroundLayout.setHorizontalGroup(
+            PanelBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelBackGroundLayout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addComponent(PanelForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(PanelBackGroundLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(LableTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(ImagenBackGround, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        PanelBackGroundLayout.setVerticalGroup(
+            PanelBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelBackGroundLayout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(PanelForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(PanelBackGroundLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(LableTitle))
+            .addComponent(ImagenBackGround, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
