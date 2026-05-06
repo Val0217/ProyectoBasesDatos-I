@@ -134,10 +134,12 @@ public class SignUpForm extends javax.swing.JFrame {
         TextPhone = new javax.swing.JTextField();
         LabelField6 = new javax.swing.JLabel();
         LableTitle = new javax.swing.JLabel();
+        ImagenBackGround = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         PanelBackGround.setBackground(new java.awt.Color(204, 204, 204));
+        PanelBackGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabelSubTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         LabelSubTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -392,38 +394,22 @@ public class SignUpForm extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
+        PanelBackGround.add(PanelForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 66, -1, -1));
+
         LableTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LableTitle.setForeground(new java.awt.Color(255, 255, 255));
         LableTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LableTitle.setText("Animal Welfare");
+        PanelBackGround.add(LableTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 16, 586, -1));
 
-        javax.swing.GroupLayout PanelBackGroundLayout = new javax.swing.GroupLayout(PanelBackGround);
-        PanelBackGround.setLayout(PanelBackGroundLayout);
-        PanelBackGroundLayout.setHorizontalGroup(
-            PanelBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBackGroundLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LableTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(PanelBackGroundLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(PanelForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
-        );
-        PanelBackGroundLayout.setVerticalGroup(
-            PanelBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelBackGroundLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(LableTitle)
-                .addGap(18, 18, 18)
-                .addComponent(PanelForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(25, 25, 25))
-        );
+        ImagenBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/backgroundForm_1.jpg"))); // NOI18N
+        PanelBackGround.add(ImagenBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, -4, 600, 680));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelBackGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(PanelBackGround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -535,6 +521,7 @@ public class SignUpForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<Location> ComboCountry;
     private javax.swing.JComboBox<Location> ComboDistrict;
     private javax.swing.JComboBox<Location> ComboProvince;
+    private javax.swing.JLabel ImagenBackGround;
     private javax.swing.JLabel LabelCanton;
     private javax.swing.JLabel LabelCountry;
     private javax.swing.JLabel LabelDistrict;
