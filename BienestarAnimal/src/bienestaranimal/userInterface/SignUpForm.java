@@ -6,13 +6,7 @@ package bienestaranimal.userInterface;
 import bienestaranimal.access.Location;
 import bienestaranimal.business.SignUp;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 /**
  *
