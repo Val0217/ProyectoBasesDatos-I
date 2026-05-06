@@ -9,44 +9,26 @@
 -- 1. PAIS / PROVINCIA / CANTON / DISTRITO
 -- -------------------------------------------------------------
 
-INSERT INTO Country (Id, Name) VALUES (s_Country.NEXTVAL, 'Costa Rica');
-INSERT INTO Country (Id, Name) VALUES (s_Country.NEXTVAL, 'Panama');
+INSERT INTO Country (Id, Name) VALUES (1, 'Costa Rica');
+INSERT INTO Country (Id, Name) VALUES (2, 'Panama');
 
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'San Jose',    9);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Heredia',     9);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Alajuela',    9);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Cartago',     9);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Guanacaste',  9);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (1, 'San Jose',    1);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (2, 'Heredia',     1);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (3, 'Alajuela',    1);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (4, 'Cartago',     1);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (5, 'Guanacaste',  1);
 
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'San Jose',     13);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Desamparados', 14);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Heredia',      15);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Alajuela',     16);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Cartago',      17);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (1, 'San Jose',     1);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (2, 'Desamparados', 1);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (3, 'Heredia',      2);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (4, 'Alajuela',     3);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (5, 'Cartago',      4);
 
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Carmen',        12);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Hatillo',       13);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Desamparados',  14);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Heredia Centro',15);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Alajuela Centro',16);
-
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Panama',        10);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Chiriqui',      10);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Colon',         10);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Veraguas',      10);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Los Santos',   10);
-
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Panama',       18);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'San Miguelito',18);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'David',        19);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Santiago',     20);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL,'Chitre',       21);
-
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL,  'Bella Vista',     17);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL,  'Calidonia',       18);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL,  'Belisario Porras',19);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL,  'David Centro',    20);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Santiago Centro', 21);
+INSERT INTO District (Id, Name, IdCanton) VALUES (1, 'Carmen',        1);
+INSERT INTO District (Id, Name, IdCanton) VALUES (2, 'Hatillo',       1);
+INSERT INTO District (Id, Name, IdCanton) VALUES (3, 'Desamparados',  2);
+INSERT INTO District (Id, Name, IdCanton) VALUES (4, 'Heredia Centro',3);
+INSERT INTO District (Id, Name, IdCanton) VALUES (5, 'Alajuela Centro',4);
 
 -- -------------------------------------------------------------
 -- 2. CATALOGOS DE MASCOTAS
