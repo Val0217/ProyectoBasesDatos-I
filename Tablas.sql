@@ -321,4 +321,3 @@ CREATE TABLE Bitacora ( -- Ojo
     FieldName VARCHAR2(25)
 );
 
--- Tabla AdoptionPhoto 

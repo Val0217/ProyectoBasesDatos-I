@@ -2,4 +2,4 @@
 - jobs, triggers, Procedimientos, funciones, etc. (Valeria)
 - pruebas y correciones.
 - inserts (Adrian)(Falta cambiar los pk por las secuencias)
-- aplicacion (NET beans) (Carlos)
+- aplicacion (NET beans) (Carlos)(En proceso)
