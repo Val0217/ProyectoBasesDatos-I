@@ -28,7 +28,6 @@ public class PersonOperations {
             cn.close();
             con.close();
             
-            JOptionPane.showMessageDialog(null, "User created successfully.");
             return true;
 
         } catch (SQLException e) {

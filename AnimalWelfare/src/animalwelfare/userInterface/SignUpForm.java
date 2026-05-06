@@ -8,6 +8,8 @@ import animalwelfare.business.SignUp;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.ListCellRenderer;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.DocumentFilter;
 /**
  *
  * @author carlo
@@ -78,6 +80,10 @@ public class SignUpForm extends javax.swing.JFrame {
         ComboCanton.setRenderer(new ListCellRendererProxy(oldRenderer));
         ComboDistrict.setRenderer(new ListCellRendererProxy(oldRenderer));
         // Diseño de las combo box
+        
+        // Limitar caracteres.
+        NumericFilter filter = new NumericFilter();
+        ((AbstractDocument) TextPhone.getDocument()).setDocumentFilter(filter);
         
         setVisible(true);
     }

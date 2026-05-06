@@ -8,6 +8,7 @@ import animalwelfare.access.CountryOperations;
 import animalwelfare.access.PersonOperations;
 import animalwelfare.userInterface.SignUpForm;
 import animalwelfare.security.Hash;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -60,7 +61,11 @@ public class SignUp {
             return false;
         }
         // se llama a la funcion de insertar persona, ademas se encrypta la contraseña antes de enviarla a la base de datos
-        return PersonOperations.Insert(Email, FirstName, LastName, Hash.EncryptPassword(Password), UserName, IdDistrict, Integer.parseInt(PhoneNumber));
+        if (PersonOperations.Insert(Email, FirstName, LastName, Hash.EncryptPassword(Password), UserName, IdDistrict, Integer.parseInt(PhoneNumber))){
+            JOptionPane.showMessageDialog(null, "User created successfully.");
+            return true;
+        }
+        return false;
     }
     
 }
