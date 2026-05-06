@@ -439,7 +439,8 @@ public class SignUpForm extends javax.swing.JFrame {
         // boton que envia los datos del formulario a la capa de access para que los inserten en la base de datos
         Location District = (Location) ComboDistrict.getSelectedItem();
         char[] passwordCharecters = TextPassword.getPassword();
-        boolean correct = controller.InsertPerson(TextEmail.getText(),TextFirstName.getText(),TextLastName.getText(),new String(passwordCharecters), TextUserName.getText(),District.getId(), TextPhone.getText());
+        char[] rePasswordCharecters = TextPasswordRE.getPassword();
+        boolean correct = controller.InsertPerson(TextEmail.getText(),TextFirstName.getText(),TextLastName.getText(),new String(passwordCharecters),new String(rePasswordCharecters), TextUserName.getText(),District, TextPhone.getText());
         if (correct){
             SignInForm window = new SignInForm();
             dispose();
