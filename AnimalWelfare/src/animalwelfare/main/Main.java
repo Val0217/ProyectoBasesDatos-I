@@ -1,11 +1,11 @@
 
 package animalwelfare.main;
 
-import animalwelfare.userInterface.EnterEmail;
+import animalwelfare.userInterface.SignInForm;
 
 public class Main {
 
     public static void main(String[] args) {
-        EnterEmail window = new EnterEmail();
+        SignInForm window = new SignInForm();
     }
 }

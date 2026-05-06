@@ -3,3 +3,4 @@
 - pruebas y correciones.
 - inserts (Adrian)(Falta cambiar los pk por las secuencias)
 - aplicacion (NET beans) (Carlos)(En proceso)
+-- hacer que los username sean Unicos.

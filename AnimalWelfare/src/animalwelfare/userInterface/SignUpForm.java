@@ -14,9 +14,10 @@ import javax.swing.ListCellRenderer;
  */
 public class SignUpForm extends javax.swing.JFrame {
     
+    // esto es para imprimir mensajes de depuracion.
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SignUpForm.class.getName());
     
-    // variables
+    // controlador
     private SignUp controller = null;
 
     // procedimiento que rellena el combobox de Country
@@ -429,9 +430,14 @@ public class SignUpForm extends javax.swing.JFrame {
     }//GEN-LAST:event_TextEmailActionPerformed
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
+        // boton que envia los datos del formulario a la capa de access para que los inserten en la base de datos
         Location District = (Location) ComboDistrict.getSelectedItem();
         char[] passwordCharecters = TextPassword.getPassword();
-        controller.InsertPerson(TextEmail.getText(),TextFirstName.getText(),TextLastName.getText(),new String(passwordCharecters), TextUserName.getText(),District.getId(), Integer.parseInt(TextPhone.getText()));
+        boolean correct = controller.InsertPerson(TextEmail.getText(),TextFirstName.getText(),TextLastName.getText(),new String(passwordCharecters), TextUserName.getText(),District.getId(), Integer.parseInt(TextPhone.getText()));
+        if (correct){
+            SignInForm window = new SignInForm();
+            dispose();
+        }
     }//GEN-LAST:event_ButtonCreateAccountActionPerformed
 
     private void TextFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFirstNameActionPerformed

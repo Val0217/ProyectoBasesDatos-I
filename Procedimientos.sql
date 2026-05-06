@@ -19,3 +19,21 @@ BEGIN --> aqui va el comando:
 
     COMMIT;
 END insertPerson;
+
+--> esta funcion es para obtener el password de un usuario dado su username, se usa en el Sign In
+--> en caso de que no exista el usuario, se devuelve NULL
+
+CREATE OR REPLACE FUNCTION getPersonPass(pUserName IN VARCHAR2)
+RETURN VARCHAR2
+IS
+    vcPass VARCHAR2(60);
+BEGIN --> aqui va el comando:
+    SELECT password
+    into vcPass
+    from Person
+    where UserName = pUserName;
+    return (vcPass);
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        return (NULL);
+END;

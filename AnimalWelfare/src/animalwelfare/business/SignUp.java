@@ -15,6 +15,7 @@ import animalwelfare.security.Hash;
  */
 public class SignUp {
     
+    // para obtener los datos de ubicacion
     private CountryOperations access;
 
     // esto se ejecuta cuando lo creamos
@@ -26,29 +27,22 @@ public class SignUp {
     
     // para enviar las Provincias a la view
     public void FillProvince(SignUpForm view, int IdCountry) {
-        this.access = new CountryOperations();
-
         view.fillProvince(access.listProvince(IdCountry));
     }
     
     // para enviar los Cantones a la view
     public void FillCanton(SignUpForm view, int IdProvince) {
-        this.access = new CountryOperations();
-
         view.fillCanton(access.listCanton(IdProvince));
     }
     
     // para enviar los Distritos a la view
     public void FillDistrict(SignUpForm view, int IdCanton) {
-        this.access = new CountryOperations();
-
         view.fillDistrict(access.listDistrict(IdCanton));
     }
     
     // Funcion que inserta los datos de una persona en la base de datos, ademas se comunica con seguridad para encryptar la contraseña.
-    public void InsertPerson(String Email,String FirstName, String LastName, String Password, String UserName, int IdDistrict, int PhoneNumber){
-        PersonOperations personAccess = new PersonOperations();
-        personAccess.Insert(Email, FirstName, LastName, Hash.EncryptPassword(Password), UserName, IdDistrict, PhoneNumber);
+    public boolean InsertPerson(String Email,String FirstName, String LastName, String Password, String UserName, int IdDistrict, int PhoneNumber){
+        return PersonOperations.Insert(Email, FirstName, LastName, Hash.EncryptPassword(Password), UserName, IdDistrict, PhoneNumber);
     }
     
 }

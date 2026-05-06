@@ -1,14 +1,20 @@
 package animalwelfare.userInterface;
 
+import animalwelfare.business.SignIn;
 
-public class EnterEmail extends javax.swing.JFrame {
+
+public class SignInForm extends javax.swing.JFrame {
     
 
-    /**
-     * Creates new form Login
-     */
-    public EnterEmail() {
+    // cotrolador
+    private SignIn controller = null;
+    
+    
+    
+    
+    public SignInForm() {
         initComponents();
+        controller = new SignIn();
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -30,7 +36,7 @@ public class EnterEmail extends javax.swing.JFrame {
         ButtonContinue = new javax.swing.JButton();
         LableTitle = new javax.swing.JLabel();
         LabelField1 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        TextPassword = new javax.swing.JPasswordField();
         LabelField2 = new javax.swing.JLabel();
         LabelField3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -63,9 +69,9 @@ public class EnterEmail extends javax.swing.JFrame {
         LabelField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelField1.setText("Enter your User Name");
 
-        jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPasswordField1.setToolTipText("");
-        jPasswordField1.setBorder(null);
+        TextPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TextPassword.setToolTipText("");
+        TextPassword.setBorder(null);
 
         LabelField2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelField2.setText("______________________________________________________________________________");
@@ -96,7 +102,7 @@ public class EnterEmail extends javax.swing.JFrame {
                     .addComponent(LableTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelField)
                     .addComponent(TextEmail)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelFormLayout.createSequentialGroup()
                         .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -118,7 +124,7 @@ public class EnterEmail extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(LabelField)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelField2, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
@@ -126,7 +132,7 @@ public class EnterEmail extends javax.swing.JFrame {
                     .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonContinue, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout PanelBackGroundLayout = new javax.swing.GroupLayout(PanelBackGround);
@@ -159,7 +165,10 @@ public class EnterEmail extends javax.swing.JFrame {
     }//GEN-LAST:event_TextEmailActionPerformed
 
     private void ButtonContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonContinueActionPerformed
-
+        String email = TextEmail.getText();
+        char[] passwordCharecters = TextPassword.getPassword();
+        String password = new String(passwordCharecters);
+        controller.CheckUser(email, password);
     }//GEN-LAST:event_ButtonContinueActionPerformed
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
@@ -185,7 +194,7 @@ public class EnterEmail extends javax.swing.JFrame {
     private javax.swing.JPanel PanelBackGround;
     private javax.swing.JPanel PanelForm;
     private javax.swing.JTextField TextEmail;
+    private javax.swing.JPasswordField TextPassword;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPasswordField jPasswordField1;
     // End of variables declaration//GEN-END:variables
 }
