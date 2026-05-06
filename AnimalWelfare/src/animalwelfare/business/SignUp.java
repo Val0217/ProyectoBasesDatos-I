@@ -41,8 +41,26 @@ public class SignUp {
     }
     
     // Funcion que inserta los datos de una persona en la base de datos, ademas se comunica con seguridad para encryptar la contraseña.
-    public boolean InsertPerson(String Email,String FirstName, String LastName, String Password, String UserName, int IdDistrict, int PhoneNumber){
-        return PersonOperations.Insert(Email, FirstName, LastName, Hash.EncryptPassword(Password), UserName, IdDistrict, PhoneNumber);
+    public boolean InsertPerson(String Email,String FirstName, String LastName, String Password, String UserName, int IdDistrict, String PhoneNumber){
+        // restricciones de validacion de datos
+        if(Email.isEmpty() || FirstName.isEmpty() || LastName.isEmpty() || Password.isEmpty() || UserName.isEmpty() || PhoneNumber.isEmpty()){
+            JOptionPane.showMessageDialog(null, "All fields are required.");
+            return false;
+        }
+        if (PhoneNumber.length() > 8 || PhoneNumber.length() < 8){
+            JOptionPane.showMessageDialog(null, "Phone number must have exactly 8 digits.");
+            return false;
+        }
+        if(!Email.contains("@")){
+            JOptionPane.showMessageDialog(null, "Invalid email format.");
+            return false;
+        }
+        if(PhoneNumber.matches(".*[a-zA-Z]+.*")){
+            JOptionPane.showMessageDialog(null, "Phone number must contain only digits.");
+            return false;
+        }
+        // se llama a la funcion de insertar persona, ademas se encrypta la contraseña antes de enviarla a la base de datos
+        return PersonOperations.Insert(Email, FirstName, LastName, Hash.EncryptPassword(Password), UserName, IdDistrict, Integer.parseInt(PhoneNumber));
     }
     
 }
