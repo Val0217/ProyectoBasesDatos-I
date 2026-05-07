@@ -8,6 +8,7 @@ package animalwelfare.business;
 import javax.swing.JOptionPane;
 import animalwelfare.access.PersonOperations;
 import animalwelfare.security.Hash;
+import animalwelfare.security.Session;
 
 /**
  *
@@ -36,6 +37,10 @@ public class SignIn {
 
         if (Hash.ComparePassword(password,hashedPassword)){
             JOptionPane.showMessageDialog(null, "Sign in successful.");
+            // Set the user ID and role in the session
+            Session session = Session.getInstance();
+            session.setUserId(PersonOperations.GetUserId(userName));
+            session.setRole(PersonOperations.GetUserRole(session.getUserId()));
             return true;
         }
         JOptionPane.showMessageDialog(null, "Incorrect username or password.");

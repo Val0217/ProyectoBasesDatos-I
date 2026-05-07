@@ -739,8 +739,54 @@ BEGIN
 END;
 /
 
+
+/* ------------------------------------------------------------
+   Procedimiento: pr_get_person_id
+   Descripcion:
+   Obtiene el Id de una persona dado su username.
+   En caso de que no exista, devuelve NULL.
+   ------------------------------------------------------------ */
+CREATE OR REPLACE FUNCTION pr_get_person_id(pUserName IN VARCHAR2)
+RETURN NUMBER
+IS
+    vcIdPerson NUMBER(8);
+BEGIN
+    SELECT Id
+    INTO vcIdPerson
+    FROM Person
+    WHERE UserName = pUserName;
+    RETURN vcIdPerson;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN NULL;
+END;
+/
+
+/* ------------------------------------------------------------
+   Procedimiento: pr_get_person_role
+   Descripcion:
+   Verifica si una persona tiene rol de admin.
+   Devuelve 1 si es admin, 0 si no lo es, NULL si no existe la persona.
+   ------------------------------------------------------------ */
+CREATE OR REPLACE FUNCTION pr_get_person_role(pIdPerson IN NUMBER)
+RETURN NUMBER
+IS
+    vcEXIST NUMBER(1);
+BEGIN
+    SELECT COUNT(1)
+    INTO vcEXIST
+    FROM Admin
+    WHERE IdPerson = pIdPerson;
+    RETURN vcEXIST;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN NULL;
+END;
+/
+
+
 /*Insert person de Carlos */
-CREATE OR REPLACE PROCEDURE insertPerson(pFirst_name IN VARCHAR2, pLast_name IN VARCHAR2, pEmail IN VARCHAR2, pPassword IN VARCHAR2, pUserName IN VARCHAR2, pIdDistrict IN NUMBER, pPhoneNumber IN NUMBER)
+CREATE OR REPLACE PROCEDURE pr_insert_person(pFirst_name IN VARCHAR2, pLast_name IN VARCHAR2, pEmail IN VARCHAR2, pPassword IN VARCHAR2, pUserName IN VARCHAR2, pIdDistrict IN NUMBER, pPhoneNumber IN NUMBER)
 AS 
     vcIdPerson NUMBER(8);
 BEGIN --> aqui va el comando:
@@ -765,12 +811,12 @@ BEGIN --> aqui va el comando:
     (s_Adopter.NEXTVAL, vcIdPerson);
 
     COMMIT;
-END insertPerson;
+END pr_insert_person;
 
 --> esta funcion es para obtener el password de un usuario dado su username, se usa en el Sign In
 --> en caso de que no exista el usuario, se devuelve NULL
 
-CREATE OR REPLACE FUNCTION getPersonPass(pUserName IN VARCHAR2)
+CREATE OR REPLACE FUNCTION pr_get_person_Pass(pUserName IN VARCHAR2)
 RETURN VARCHAR2
 IS
     vcPass VARCHAR2(60);
