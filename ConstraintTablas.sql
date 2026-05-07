@@ -7,7 +7,7 @@
 -- -------------------------------------------------------------
 -- TABLAS DE CATALOGOS (NOT NULL en Name)
 -- -------------------------------------------------------------
-
+-- prueba de repositorio
 ALTER TABLE PetLevelEnergy MODIFY (Name VARCHAR2(25) NOT NULL);
 ALTER TABLE PetBreed       MODIFY (Name VARCHAR2(25) NOT NULL);
 ALTER TABLE PetType        MODIFY (Name VARCHAR2(25) NOT NULL);
