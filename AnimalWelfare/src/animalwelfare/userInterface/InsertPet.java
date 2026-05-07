@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package animalwelfare.userInterface;
-
+import javax.swing.ImageIcon;
+import java.awt.Image;
 /**
  *
  * @author valer
@@ -15,9 +16,28 @@ public class InsertPet extends javax.swing.JFrame {
     /**
      * Creates new form InsertPet
      */
-    public InsertPet() {
-        initComponents();
+public InsertPet() {
+    initComponents();
+
+    java.net.URL imgURL = getClass().getResource("/animalwelfare/userInterface/images/Cat1.png");
+
+    if (imgURL == null) {
+        System.out.println("Image not found!");
+    } else {
+        System.out.println("Image found: " + imgURL);
+
+        ImageIcon icon = new ImageIcon(imgURL);
+        Image img = icon.getImage();
+
+        Image resizedImg = img.getScaledInstance(
+                jLabel3.getWidth(),
+                jLabel3.getHeight(),
+                Image.SCALE_SMOOTH
+        );
+
+        jLabel3.setIcon(new ImageIcon(resizedImg));
     }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,22 +48,478 @@ public class InsertPet extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PanelBackGround = new javax.swing.JPanel();
+        PanelForm = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        LabelSubTitle = new javax.swing.JLabel();
+        TextPetName = new javax.swing.JTextField();
+        LabelField = new javax.swing.JLabel();
+        ButtonCreateAccount = new javax.swing.JButton();
+        TextColorPet = new javax.swing.JTextField();
+        LabelField1 = new javax.swing.JLabel();
+        TextPetType = new javax.swing.JTextField();
+        LabelField2 = new javax.swing.JLabel();
+        ComboVeterinarianPet = new javax.swing.JComboBox<>();
+        LabelCountry = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        LabelField3 = new javax.swing.JLabel();
+        LabelField4 = new javax.swing.JLabel();
+        LabelField5 = new javax.swing.JLabel();
+        TextChipNumber = new javax.swing.JTextField();
+        LabelField6 = new javax.swing.JLabel();
+        ComboSizePet = new javax.swing.JComboBox<>();
+        ComboStatePet = new javax.swing.JComboBox<>();
+        TextSpacePet = new javax.swing.JTextField();
+        LabelField7 = new javax.swing.JLabel();
+        ComboEnergyPet = new javax.swing.JComboBox<>();
+        LabelField8 = new javax.swing.JLabel();
+        TextAgePet1 = new javax.swing.JTextField();
+        LabelCountry1 = new javax.swing.JLabel();
+        ComboCountry = new javax.swing.JComboBox<>();
+        LabelProvince = new javax.swing.JLabel();
+        ComboProvince = new javax.swing.JComboBox<>();
+        LabelCanton = new javax.swing.JLabel();
+        ComboCanton = new javax.swing.JComboBox<>();
+        LabelDistrict = new javax.swing.JLabel();
+        ComboDistrict = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        TextPetBreed = new javax.swing.JTextField();
+        LabelField9 = new javax.swing.JLabel();
+        LableTitle = new javax.swing.JLabel();
+        ImagenBackGround = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        PanelBackGround.setBackground(new java.awt.Color(204, 204, 204));
+        PanelBackGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel1.setText("Veterinarian information");
+
+        LabelSubTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        LabelSubTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelSubTitle.setText("Register Pet");
+
+        TextPetName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TextPetName.addActionListener(this::TextPetNameActionPerformed);
+
+        LabelField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField.setText("Pet Name");
+
+        ButtonCreateAccount.setBackground(new java.awt.Color(255, 216, 20));
+        ButtonCreateAccount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ButtonCreateAccount.setText("Register Pet");
+        ButtonCreateAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ButtonCreateAccount.addActionListener(this::ButtonCreateAccountActionPerformed);
+
+        TextColorPet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TextColorPet.setToolTipText("");
+        TextColorPet.addActionListener(this::TextColorPetActionPerformed);
+
+        LabelField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField1.setText("Color");
+
+        TextPetType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TextPetType.setToolTipText("");
+        TextPetType.addActionListener(this::TextPetTypeActionPerformed);
+
+        LabelField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField2.setText("Breed");
+
+        ComboVeterinarianPet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboVeterinarianPet.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ComboVeterinarianPet.setOpaque(true);
+        ComboVeterinarianPet.setRequestFocusEnabled(false);
+        ComboVeterinarianPet.addActionListener(this::ComboVeterinarianPetActionPerformed);
+
+        LabelCountry.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelCountry.setText("Select a Registered Veterinarian");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel2.setText("__________________________________________________________________________________________________________________________________________________");
+        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        LabelField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField3.setText("State");
+
+        LabelField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField4.setText("Age");
+
+        LabelField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField5.setText("Size");
+
+        TextChipNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TextChipNumber.addActionListener(this::TextChipNumberActionPerformed);
+
+        LabelField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField6.setText("Chip Number (Optional)");
+
+        ComboSizePet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Small", "Medium", "Large", " " }));
+        ComboSizePet.addActionListener(this::ComboSizePetActionPerformed);
+
+        ComboStatePet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Excellent", "Good", "Bad", "Critical" }));
+
+        TextSpacePet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TextSpacePet.addActionListener(this::TextSpacePetActionPerformed);
+
+        LabelField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField7.setText("Space Requiered");
+
+        ComboEnergyPet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "High", "Medium", "Low" }));
+        ComboEnergyPet.addActionListener(this::ComboEnergyPetActionPerformed);
+
+        LabelField8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField8.setText("Energy of the pet");
+
+        TextAgePet1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TextAgePet1.addActionListener(this::TextAgePet1ActionPerformed);
+
+        LabelCountry1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelCountry1.setText("Country");
+
+        ComboCountry.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboCountry.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ComboCountry.setOpaque(true);
+        ComboCountry.setRequestFocusEnabled(false);
+        ComboCountry.addActionListener(this::ComboCountryActionPerformed);
+
+        LabelProvince.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelProvince.setText("Province");
+
+        ComboProvince.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboProvince.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ComboProvince.setOpaque(true);
+        ComboProvince.setRequestFocusEnabled(false);
+        ComboProvince.addActionListener(this::ComboProvinceActionPerformed);
+
+        LabelCanton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelCanton.setText("Canton");
+
+        ComboCanton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboCanton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ComboCanton.setOpaque(true);
+        ComboCanton.setRequestFocusEnabled(false);
+        ComboCanton.addActionListener(this::ComboCantonActionPerformed);
+
+        LabelDistrict.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelDistrict.setText("District");
+
+        ComboDistrict.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboDistrict.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ComboDistrict.setOpaque(true);
+        ComboDistrict.setRequestFocusEnabled(false);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        TextPetBreed.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TextPetBreed.setToolTipText("");
+        TextPetBreed.addActionListener(this::TextPetBreedActionPerformed);
+
+        LabelField9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField9.setText("Breed(Optional)");
+
+        javax.swing.GroupLayout PanelFormLayout = new javax.swing.GroupLayout(PanelForm);
+        PanelForm.setLayout(PanelFormLayout);
+        PanelFormLayout.setHorizontalGroup(
+            PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFormLayout.createSequentialGroup()
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFormLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(LabelSubTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(PanelFormLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFormLayout.createSequentialGroup()
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ComboVeterinarianPet, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelFormLayout.createSequentialGroup()
+                                        .addComponent(LabelCountry)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(20, 20, 20))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LabelField7)
+                                    .addComponent(TextSpacePet, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LabelCanton)
+                                            .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LabelDistrict)
+                                            .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(LabelCountry1)
+                                            .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LabelProvince)
+                                            .addComponent(ComboProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(PanelFormLayout.createSequentialGroup()
+                                                    .addComponent(LabelField5)
+                                                    .addGap(191, 191, 191))
+                                                .addGroup(PanelFormLayout.createSequentialGroup()
+                                                    .addComponent(ComboSizePet, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addGap(18, 18, 18)))
+                                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                                .addComponent(LabelField4)
+                                                .addGap(190, 190, 190)))
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LabelField3)
+                                            .addComponent(LabelField8)))
+                                    .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(ComboStatePet, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelFormLayout.createSequentialGroup()
+                                            .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(LabelField1)
+                                                .addComponent(TextPetName, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                                .addComponent(TextColorPet))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(LabelField2)
+                                                .addComponent(TextPetType)
+                                                .addComponent(TextChipNumber)
+                                                .addComponent(LabelField6, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE))))
+                                    .addComponent(LabelField)
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addComponent(TextAgePet1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(ComboEnergyPet, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFormLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(42, 42, 42))
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LabelField9, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                                .addComponent(TextPetBreed, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                                                .addGap(20, 20, 20)))))))))
+                .addContainerGap())
+        );
+        PanelFormLayout.setVerticalGroup(
+            PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFormLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelSubTitle)
+                .addGap(18, 18, 18)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelField)
+                    .addComponent(LabelField6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelField9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TextPetName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextChipNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextPetBreed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelField1)
+                    .addComponent(LabelField2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelFormLayout.createSequentialGroup()
+                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TextPetType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextColorPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LabelField5)
+                            .addComponent(LabelField3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComboSizePet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboStatePet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16)
+                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LabelField8)
+                            .addComponent(LabelField4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComboEnergyPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextAgePet1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelFormLayout.createSequentialGroup()
+                        .addComponent(LabelField7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TextSpacePet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(LabelCountry))
+                    .addGroup(PanelFormLayout.createSequentialGroup()
+                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LabelProvince, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(LabelCountry1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(ComboProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                .addComponent(LabelCanton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                .addComponent(LabelDistrict)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ComboVeterinarianPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ButtonCreateAccount)
+                .addGap(92, 92, 92))
+        );
+
+        PanelBackGround.add(PanelForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 720, 590));
+
+        LableTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LableTitle.setForeground(new java.awt.Color(255, 255, 255));
+        LableTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LableTitle.setText("Animal Welfare");
+        PanelBackGround.add(LableTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 20, 586, -1));
+
+        ImagenBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/BackgroundCat.jpg"))); // NOI18N
+        PanelBackGround.add(ImagenBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 150));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(PanelBackGround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(PanelBackGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    private void TextPetNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPetNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextPetNameActionPerformed
+
+    private void TextColorPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextColorPetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextColorPetActionPerformed
+
+    private void TextPetTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPetTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextPetTypeActionPerformed
+
+    private void TextChipNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextChipNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextChipNumberActionPerformed
+
+    private void ComboSizePetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboSizePetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboSizePetActionPerformed
+
+    private void TextSpacePetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextSpacePetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextSpacePetActionPerformed
+
+    private void ComboEnergyPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboEnergyPetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboEnergyPetActionPerformed
+
+    private void TextAgePet1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextAgePet1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextAgePet1ActionPerformed
+
+    private void ComboVeterinarianPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboVeterinarianPetActionPerformed
+        // al seleccionar un pais, se llena el de province y se bloquea los siguientes.
+        if (controller == null) return;
+        Location country = (Location) ComboVeterinarianPet.getSelectedItem();
+        if (country == null) return;
+        if (country.getId() == 0) return;
+        ComboCanton.removeAllItems();
+        ComboDistrict.removeAllItems();
+
+        controller.FillProvince(this, country.getId());
+        ComboCanton.setEnabled(false);
+        ComboDistrict.setEnabled(false);
+        ComboProvince.setEnabled(true);
+    }//GEN-LAST:event_ComboVeterinarianPetActionPerformed
+
+    private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonCreateAccountActionPerformed
+
+    private void ComboCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCountryActionPerformed
+        // al seleccionar un pais, se llena el de province y se bloquea los siguientes.
+        if (controller == null) return;
+        Location country = (Location) ComboCountry.getSelectedItem();
+        if (country == null) return;
+        if (country.getId() == 0) return;
+        ComboCanton.removeAllItems();
+        ComboDistrict.removeAllItems();
+
+        controller.FillProvince(this, country.getId());
+        ComboCanton.setEnabled(false);
+        ComboDistrict.setEnabled(false);
+        ComboProvince.setEnabled(true);
+    }//GEN-LAST:event_ComboCountryActionPerformed
+
+    private void ComboProvinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboProvinceActionPerformed
+        // al seleccionar una provincia, se llena el de canton y se bloquea los siguientes.
+        Location province = (Location) ComboProvince.getSelectedItem();
+        if (province == null) return;
+        if (province.getId() == 0) return;
+        ComboDistrict.removeAllItems();
+
+        controller.FillCanton(this, province.getId());
+        ComboDistrict.setEnabled(false);
+        ComboCanton.setEnabled(true);
+    }//GEN-LAST:event_ComboProvinceActionPerformed
+
+    private void ComboCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCantonActionPerformed
+        // al seleccionar un canton, se llena el de Distrito.
+        Location canton = (Location) ComboCanton.getSelectedItem();
+        if (canton == null) return;
+        if (canton.getId() == 0) return;
+        ComboDistrict.removeAllItems();
+
+        controller.FillDistrict(this, canton.getId());
+        ComboDistrict.setEnabled(true);
+    }//GEN-LAST:event_ComboCantonActionPerformed
+
+    private void TextPetBreedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPetBreedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextPetBreedActionPerformed
+
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -70,5 +546,44 @@ public class InsertPet extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonCreateAccount;
+    private javax.swing.JComboBox<Location> ComboCanton;
+    private javax.swing.JComboBox<Location> ComboCountry;
+    private javax.swing.JComboBox<Location> ComboDistrict;
+    private javax.swing.JComboBox<String> ComboEnergyPet;
+    private javax.swing.JComboBox<Location> ComboProvince;
+    private javax.swing.JComboBox<String> ComboSizePet;
+    private javax.swing.JComboBox<String> ComboStatePet;
+    private javax.swing.JComboBox<Location> ComboVeterinarianPet;
+    private javax.swing.JLabel ImagenBackGround;
+    private javax.swing.JLabel LabelCanton;
+    private javax.swing.JLabel LabelCountry;
+    private javax.swing.JLabel LabelCountry1;
+    private javax.swing.JLabel LabelDistrict;
+    private javax.swing.JLabel LabelField;
+    private javax.swing.JLabel LabelField1;
+    private javax.swing.JLabel LabelField2;
+    private javax.swing.JLabel LabelField3;
+    private javax.swing.JLabel LabelField4;
+    private javax.swing.JLabel LabelField5;
+    private javax.swing.JLabel LabelField6;
+    private javax.swing.JLabel LabelField7;
+    private javax.swing.JLabel LabelField8;
+    private javax.swing.JLabel LabelField9;
+    private javax.swing.JLabel LabelProvince;
+    private javax.swing.JLabel LabelSubTitle;
+    private javax.swing.JLabel LableTitle;
+    private javax.swing.JPanel PanelBackGround;
+    private javax.swing.JPanel PanelForm;
+    private javax.swing.JTextField TextAgePet1;
+    private javax.swing.JTextField TextChipNumber;
+    private javax.swing.JTextField TextColorPet;
+    private javax.swing.JTextField TextPetBreed;
+    private javax.swing.JTextField TextPetName;
+    private javax.swing.JTextField TextPetType;
+    private javax.swing.JTextField TextSpacePet;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
