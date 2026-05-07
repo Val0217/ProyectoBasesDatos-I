@@ -35,7 +35,13 @@ public class Session {
     }
 
     public void setRole(String role) {
-        this.role = role;
+        if (role.equals(0)){
+            this.role = "User";
+        } else if (role.equals(1)){
+            this.role = "Admin";
+        } else {
+            this.role = "Unknown";
+        }
     }
 
     // Get the user ID for the current session

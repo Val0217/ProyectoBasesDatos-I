@@ -41,6 +41,7 @@ public class SignIn {
             Session session = Session.getInstance();
             session.setUserId(PersonOperations.GetUserId(userName));
             session.setRole(PersonOperations.GetUserRole(session.getUserId()));
+            JOptionPane.showMessageDialog(null, "User: " + session.getUserId() + " Role: " + session.getRole());
             return true;
         }
         JOptionPane.showMessageDialog(null, "Incorrect username or password.");

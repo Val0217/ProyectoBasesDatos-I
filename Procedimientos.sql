@@ -762,28 +762,6 @@ EXCEPTION
 END;
 /
 
-/* ------------------------------------------------------------
-   Procedimiento: pr_get_person_role
-   Descripcion:
-   Verifica si una persona tiene rol de admin.
-   Devuelve 1 si es admin, 0 si no lo es, NULL si no existe la persona.
-   ------------------------------------------------------------ */
-CREATE OR REPLACE FUNCTION pr_get_person_role(pIdPerson IN NUMBER)
-RETURN NUMBER
-IS
-    vcEXIST NUMBER(1);
-BEGIN
-    SELECT COUNT(1)
-    INTO vcEXIST
-    FROM Admin
-    WHERE IdPerson = pIdPerson;
-    RETURN vcEXIST;
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        RETURN NULL;
-END;
-/
-
 
 /*Insert person de Carlos */
 CREATE OR REPLACE PROCEDURE pr_insert_person(pFirst_name IN VARCHAR2, pLast_name IN VARCHAR2, pEmail IN VARCHAR2, pPassword IN VARCHAR2, pUserName IN VARCHAR2, pIdDistrict IN NUMBER, pPhoneNumber IN NUMBER)
@@ -813,24 +791,7 @@ BEGIN --> aqui va el comando:
     COMMIT;
 END pr_insert_person;
 
---> esta funcion es para obtener el password de un usuario dado su username, se usa en el Sign In
---> en caso de que no exista el usuario, se devuelve NULL
 
-CREATE OR REPLACE FUNCTION pr_get_person_Pass(pUserName IN VARCHAR2)
-RETURN VARCHAR2
-IS
-    vcPass VARCHAR2(60);
-BEGIN --> aqui va el comando:
-    SELECT password
-    into vcPass
-    from Person
-    where UserName = pUserName;
-    return (vcPass);
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        return (NULL);
-END;
-/
 
 
 /* ------------------------------------------------------------
