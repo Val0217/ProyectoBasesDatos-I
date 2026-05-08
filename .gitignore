@@ -21,3 +21,4 @@ dist/
 .DS_Store
 Thumbs.db
 /AnimalWelfare/nbproject/private
+AnimalWelfare/nbproject/private/private.properties

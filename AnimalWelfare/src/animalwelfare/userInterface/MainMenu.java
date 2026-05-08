@@ -4,6 +4,9 @@
  */
 package animalwelfare.userInterface;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 
 /**
  *
@@ -19,8 +22,13 @@ public class MainMenu extends javax.swing.JFrame {
     
     public MainMenu() {
         initComponents();
-
         setVisible(true);
+
+        ImageIcon icon = new ImageIcon(getClass().getResource("/images/icono_refugio.png"));
+        Image img = icon.getImage();
+        Image scaledImg = img.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        Image1.setIcon(new ImageIcon(scaledImg));
+
     }
 
     /**
