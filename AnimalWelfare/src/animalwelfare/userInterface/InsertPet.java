@@ -17,28 +17,6 @@ public class InsertPet extends javax.swing.JFrame {
     /**
      * Creates new form InsertPet
      */
-public InsertPet() {
-    initComponents();
-
-    java.net.URL imgURL = getClass().getResource("/animalwelfare/userInterface/images/Cat1.png");
-
-    if (imgURL == null) {
-        System.out.println("Image not found!");
-    } else {
-        System.out.println("Image found: " + imgURL);
-
-        ImageIcon icon = new ImageIcon(imgURL);
-        Image img = icon.getImage();
-
-        Image resizedImg = img.getScaledInstance(
-                jLabel3.getWidth(),
-                jLabel3.getHeight(),
-                Image.SCALE_SMOOTH
-        );
-
-        jLabel3.setIcon(new ImageIcon(resizedImg));
-    }
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
