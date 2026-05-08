@@ -169,6 +169,8 @@ public class SignInForm extends javax.swing.JFrame {
         char[] passwordCharecters = TextPassword.getPassword();
         String password = new String(passwordCharecters);
         controller.CheckUser(email, password);
+        MainMenu window = new MainMenu();
+        dispose();
     }//GEN-LAST:event_ButtonContinueActionPerformed
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
