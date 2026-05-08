@@ -35,9 +35,9 @@ public class Session {
     }
 
     public void setRole(String role) {
-        if (role.equals(0)){
+        if (role.trim().equals("0")){
             this.role = "User";
-        } else if (role.equals(1)){
+        } else if (role.trim().equals("1")){
             this.role = "Admin";
         } else {
             this.role = "Unknown";
