@@ -27,15 +27,22 @@ public class TableAdoption extends javax.swing.JFrame {
     
     JButton button = new JButton("Put on Adoption");
 
+    button.addActionListener(e -> {
+        controller.putSelectedPetUpForAdoption(jTable2, jTable1);
+    });
+
     jPanel2.setLayout(new BorderLayout());
 
-    jPanel2.remove(jScrollPane2); // remove it from the old layout
+    jPanel2.remove(jScrollPane2); 
     jPanel2.add(jScrollPane2, BorderLayout.CENTER);
     jPanel2.add(button, BorderLayout.SOUTH);
 
     jPanel2.revalidate();
     jPanel2.repaint();
 }
+    
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -58,8 +58,10 @@ public class TableAdoptionController {
             return;
         }
 
+        int modelRow = foundPetsTable.convertRowIndexToModel(selectedRow);
+
         int petId = Integer.parseInt(
-            foundPetsTable.getValueAt(selectedRow, 0).toString()
+            foundPetsTable.getModel().getValueAt(modelRow, 0).toString()
         );
 
         boolean updated = petOperations.putPetUpForAdoption(petId);
