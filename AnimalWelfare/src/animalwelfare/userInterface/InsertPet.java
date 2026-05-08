@@ -19,25 +19,6 @@ public class InsertPet extends javax.swing.JFrame {
      */
 public InsertPet() {
     initComponents();
-
-    java.net.URL imgURL = getClass().getResource("/animalwelfare/userInterface/images/Cat1.png");
-
-    if (imgURL == null) {
-        System.out.println("Image not found!");
-    } else {
-        System.out.println("Image found: " + imgURL);
-
-        ImageIcon icon = new ImageIcon(imgURL);
-        Image img = icon.getImage();
-
-        Image resizedImg = img.getScaledInstance(
-                jLabel3.getWidth(),
-                jLabel3.getHeight(),
-                Image.SCALE_SMOOTH
-        );
-
-        jLabel3.setIcon(new ImageIcon(resizedImg));
-    }
 }
 
     /**
@@ -254,10 +235,10 @@ public InsertPet() {
                                     .addComponent(LabelField))
                                 .addGap(18, 18, 18)
                                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LabelField9, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                                    .addComponent(LabelField9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(PanelFormLayout.createSequentialGroup()
                                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addGap(0, 34, Short.MAX_VALUE))))
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(PanelFormLayout.createSequentialGroup()
                                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package animalwelfare.userInterface;
-
+import animalwelfare.business.TableAdoptionController;
+import java.awt.BorderLayout;
+import javax.swing.JButton;
 /**
  *
  * @author valer
@@ -11,13 +13,29 @@ package animalwelfare.userInterface;
 public class TableAdoption extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TableAdoption.class.getName());
-
+    private TableAdoptionController controller;
     /**
      * Creates new form TableAdoption
      */
     public TableAdoption() {
-        initComponents();
-    }
+    initComponents();
+
+    controller = new TableAdoptionController();
+
+    controller.loadPetsUpForAdoption(jTable1);
+    controller.loadFoundPets(jTable2);
+    
+    JButton button = new JButton("Put on Adoption");
+
+    jPanel2.setLayout(new BorderLayout());
+
+    jPanel2.remove(jScrollPane2); // remove it from the old layout
+    jPanel2.add(jScrollPane2, BorderLayout.CENTER);
+    jPanel2.add(button, BorderLayout.SOUTH);
+
+    jPanel2.revalidate();
+    jPanel2.repaint();
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,7 +81,7 @@ public class TableAdoption extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,7 +107,7 @@ public class TableAdoption extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,7 +120,9 @@ public class TableAdoption extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
