@@ -153,7 +153,6 @@ public InsertPet() {
         LabelField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LabelField6.setText("Chip Number (Optional)");
 
-        ComboSizePet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Small", "Medium", "Large" }));
         ComboSizePet.addActionListener(this::ComboSizePetActionPerformed);
 
         ComboStatePet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Excellent", "Good", "Bad", "Critical" }));
