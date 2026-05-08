@@ -141,14 +141,14 @@ public class SignUpForm extends javax.swing.JFrame {
         PanelBackGround.setBackground(new java.awt.Color(204, 204, 204));
         PanelBackGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        LabelSubTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        LabelSubTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LabelSubTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelSubTitle.setText("Create account");
 
         TextEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         TextEmail.addActionListener(this::TextEmailActionPerformed);
 
-        LabelField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelField.setText("Enter your email");
 
         ButtonCreateAccount.setBackground(new java.awt.Color(255, 216, 20));
@@ -161,14 +161,14 @@ public class SignUpForm extends javax.swing.JFrame {
         TextFirstName.setToolTipText("");
         TextFirstName.addActionListener(this::TextFirstNameActionPerformed);
 
-        LabelField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelField1.setText("First name");
 
         TextLastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         TextLastName.setToolTipText("");
         TextLastName.addActionListener(this::TextLastNameActionPerformed);
 
-        LabelField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelField2.setText("Last name");
 
         ComboCountry.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -177,7 +177,7 @@ public class SignUpForm extends javax.swing.JFrame {
         ComboCountry.setRequestFocusEnabled(false);
         ComboCountry.addActionListener(this::ComboCountryActionPerformed);
 
-        LabelCountry.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelCountry.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelCountry.setText("Country");
 
         ComboProvince.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -186,7 +186,7 @@ public class SignUpForm extends javax.swing.JFrame {
         ComboProvince.setRequestFocusEnabled(false);
         ComboProvince.addActionListener(this::ComboProvinceActionPerformed);
 
-        LabelProvince.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelProvince.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelProvince.setText("Province");
 
         ComboCanton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -195,7 +195,7 @@ public class SignUpForm extends javax.swing.JFrame {
         ComboCanton.setRequestFocusEnabled(false);
         ComboCanton.addActionListener(this::ComboCantonActionPerformed);
 
-        LabelCanton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelCanton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelCanton.setText("Canton");
 
         ComboDistrict.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -203,7 +203,7 @@ public class SignUpForm extends javax.swing.JFrame {
         ComboDistrict.setOpaque(true);
         ComboDistrict.setRequestFocusEnabled(false);
 
-        LabelDistrict.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelDistrict.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelDistrict.setText("District");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -215,7 +215,7 @@ public class SignUpForm extends javax.swing.JFrame {
         jLabel2.setText("__________________________________________________________________________________________________________________________________________________");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        LabelField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelField3.setText("Password");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -230,7 +230,7 @@ public class SignUpForm extends javax.swing.JFrame {
         TextPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         TextPassword.setToolTipText("At least 6 characters.");
 
-        LabelField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelField4.setText("Re-enter password");
 
         TextPasswordRE.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -239,13 +239,13 @@ public class SignUpForm extends javax.swing.JFrame {
         TextUserName.setToolTipText("");
         TextUserName.addActionListener(this::TextUserNameActionPerformed);
 
-        LabelField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelField5.setText("User name");
 
         TextPhone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         TextPhone.addActionListener(this::TextPhoneActionPerformed);
 
-        LabelField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelField6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelField6.setText("Phone Number");
 
         javax.swing.GroupLayout PanelFormLayout = new javax.swing.GroupLayout(PanelForm);

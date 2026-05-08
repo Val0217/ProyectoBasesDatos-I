@@ -1,8 +1,23 @@
-/AnimalWelfare/nbproject/private/
-/AnimalWelfare/build/
-/AnimalWelfare/nbproject/private/
-/AnimalWelfare/nbproject/private-private.properties
-/AnimalWelfare/nbproject/private.xml
+AnimalWelfare/nbproject/private/
+AnimalWelfare/build/
+AnimalWelfare/nbproject/private/
+AnimalWelfare/nbproject/private-private.properties
+AnimalWelfare/nbproject/private.xml
 
 *.bak
 *.swp
+
+# NetBeans
+nbproject/private/
+build/
+dist/
+
+# Logs
+*.log
+
+# Archivos temporales
+*.class
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
