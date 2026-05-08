@@ -62,13 +62,11 @@ public InsertPet() {
         ComboVeterinarianPet = new javax.swing.JComboBox<>();
         LabelCountry = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        LabelField3 = new javax.swing.JLabel();
         LabelField4 = new javax.swing.JLabel();
         LabelField5 = new javax.swing.JLabel();
         TextChipNumber = new javax.swing.JTextField();
         LabelField6 = new javax.swing.JLabel();
         ComboSizePet = new javax.swing.JComboBox<>();
-        ComboStatePet = new javax.swing.JComboBox<>();
         LabelField7 = new javax.swing.JLabel();
         ComboEnergyPet = new javax.swing.JComboBox<>();
         LabelField8 = new javax.swing.JLabel();
@@ -80,7 +78,6 @@ public InsertPet() {
         ComboCanton = new javax.swing.JComboBox<>();
         LabelDistrict = new javax.swing.JLabel();
         ComboDistrict = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
         LabelField9 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -138,9 +135,6 @@ public InsertPet() {
         jLabel2.setText("___________________________________________________________________________________________________");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        LabelField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField3.setText("State");
-
         LabelField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LabelField4.setText("Age");
 
@@ -155,12 +149,9 @@ public InsertPet() {
 
         ComboSizePet.addActionListener(this::ComboSizePetActionPerformed);
 
-        ComboStatePet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Excellent", "Good", "Bad", "Critical" }));
-
         LabelField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LabelField7.setText("Space Requiered");
 
-        ComboEnergyPet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "High", "Medium", "Low" }));
         ComboEnergyPet.addActionListener(this::ComboEnergyPetActionPerformed);
 
         LabelField8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -200,8 +191,7 @@ public InsertPet() {
         ComboDistrict.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboDistrict.setOpaque(true);
         ComboDistrict.setRequestFocusEnabled(false);
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ComboDistrict.addActionListener(this::ComboDistrictActionPerformed);
 
         LabelField9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LabelField9.setText("Breed(Optional)");
@@ -247,63 +237,49 @@ public InsertPet() {
                                                 .addComponent(LabelField4)
                                                 .addGap(190, 190, 190)))
                                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LabelField3)
-                                            .addComponent(LabelField8)))
-                                    .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(ComboStatePet, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelFormLayout.createSequentialGroup()
-                                            .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(LabelField1)
-                                                .addComponent(TextPetName, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                                                .addComponent(TextColorPet))
-                                            .addGap(18, 18, 18)
-                                            .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(LabelField2)
-                                                .addComponent(TextChipNumber)
-                                                .addComponent(LabelField6, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                    .addComponent(LabelField)
+                                            .addComponent(LabelField8)
+                                            .addComponent(ComboEnergyPet, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(LabelCountry1)))
                                     .addGroup(PanelFormLayout.createSequentialGroup()
-                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(LabelField1)
+                                            .addComponent(TextPetName, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                            .addComponent(TextColorPet))
                                         .addGap(18, 18, 18)
-                                        .addComponent(ComboEnergyPet, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(LabelField2)
+                                            .addComponent(TextChipNumber)
+                                            .addComponent(LabelField6, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(LabelField))
+                                .addGap(18, 18, 18)
                                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFormLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(42, 42, 42))
+                                    .addComponent(LabelField9, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                                     .addGroup(PanelFormLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LabelField9, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(PanelFormLayout.createSequentialGroup()
                                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(LabelField7)
-                                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(LabelCanton)
-                                            .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LabelDistrict)
-                                            .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(PanelFormLayout.createSequentialGroup()
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(LabelCountry1)
-                                            .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LabelProvince)
-                                            .addComponent(ComboProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                            .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(24, 24, 24)
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ComboProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LabelDistrict)
+                                    .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LabelProvince))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         PanelFormLayout.setVerticalGroup(
@@ -325,62 +301,43 @@ public InsertPet() {
                     .addComponent(LabelField1)
                     .addComponent(LabelField2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelFormLayout.createSequentialGroup()
-                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TextColorPet)
-                            .addComponent(jComboBox1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LabelField5)
-                            .addComponent(LabelField3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ComboSizePet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboStatePet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16)
-                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LabelField8)
-                            .addComponent(LabelField4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ComboEnergyPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(TextColorPet)
+                    .addComponent(jComboBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelFormLayout.createSequentialGroup()
-                        .addComponent(LabelField7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(LabelCountry))
-                    .addGroup(PanelFormLayout.createSequentialGroup()
-                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LabelProvince, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(LabelCountry1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(ComboProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                .addComponent(LabelCanton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                .addComponent(LabelDistrict)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelField5)
+                    .addComponent(LabelField8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboSizePet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboEnergyPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelField4)
+                    .addComponent(LabelCountry1)
+                    .addComponent(LabelProvince))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelField7)
+                    .addComponent(LabelCanton)
+                    .addComponent(LabelDistrict))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(LabelCountry)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ComboVeterinarianPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -465,6 +422,10 @@ public InsertPet() {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
+    private void ComboDistrictActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboDistrictActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboDistrictActionPerformed
+
     
     
     
@@ -501,7 +462,6 @@ public InsertPet() {
     private javax.swing.JComboBox<String> ComboEnergyPet;
     private javax.swing.JComboBox<Location> ComboProvince;
     private javax.swing.JComboBox<String> ComboSizePet;
-    private javax.swing.JComboBox<String> ComboStatePet;
     private javax.swing.JComboBox<Location> ComboVeterinarianPet;
     private javax.swing.JLabel ImagenBackGround;
     private javax.swing.JLabel LabelCanton;
@@ -511,7 +471,6 @@ public InsertPet() {
     private javax.swing.JLabel LabelField;
     private javax.swing.JLabel LabelField1;
     private javax.swing.JLabel LabelField2;
-    private javax.swing.JLabel LabelField3;
     private javax.swing.JLabel LabelField4;
     private javax.swing.JLabel LabelField5;
     private javax.swing.JLabel LabelField6;
@@ -532,6 +491,5 @@ public InsertPet() {
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
