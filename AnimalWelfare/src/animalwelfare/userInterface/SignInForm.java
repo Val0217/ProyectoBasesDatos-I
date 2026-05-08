@@ -17,12 +17,12 @@ public class SignInForm extends javax.swing.JFrame {
         controller = new SignIn();
         setLocationRelativeTo(null);
         setVisible(true);
+        requestFocusInWindow();
 
         // Placeholder text for username and password fields
         TextUserName.setText("Enter your user");
         TextPassword.setText("********");
 
-        //
         TextUserName.addFocusListener(new java.awt.event.FocusAdapter() {
 
             @Override
@@ -243,9 +243,10 @@ public class SignInForm extends javax.swing.JFrame {
         String email = TextUserName.getText();
         char[] passwordCharecters = TextPassword.getPassword();
         String password = new String(passwordCharecters);
-        controller.CheckUser(email, password);
-        MainMenu window = new MainMenu();
-        dispose();
+        if(controller.CheckUser(email, password)){
+            MainMenu window = new MainMenu();
+            dispose();
+        }
     }//GEN-LAST:event_ButtonContinueActionPerformed
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
