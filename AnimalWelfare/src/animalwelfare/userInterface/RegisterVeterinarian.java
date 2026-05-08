@@ -4,6 +4,9 @@
  */
 package animalwelfare.userInterface;
 
+import animalwelfare.access.Location;
+
+
 /**
  *
  * @author valer
@@ -154,41 +157,15 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComboCountry3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCountry3ActionPerformed
-        // al seleccionar un pais, se llena el de province y se bloquea los siguientes.
-        if (controller == null) return;
-        Location country = (Location) ComboCountry.getSelectedItem();
-        if (country == null) return;
-        if (country.getId() == 0) return;
-        ComboCanton.removeAllItems();
-        ComboDistrict.removeAllItems();
 
-        controller.FillProvince(this, country.getId());
-        ComboCanton.setEnabled(false);
-        ComboDistrict.setEnabled(false);
-        ComboProvince.setEnabled(true);
     }//GEN-LAST:event_ComboCountry3ActionPerformed
 
     private void ComboProvince3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboProvince3ActionPerformed
-        // al seleccionar una provincia, se llena el de canton y se bloquea los siguientes.
-        Location province = (Location) ComboProvince.getSelectedItem();
-        if (province == null) return;
-        if (province.getId() == 0) return;
-        ComboDistrict.removeAllItems();
 
-        controller.FillCanton(this, province.getId());
-        ComboDistrict.setEnabled(false);
-        ComboCanton.setEnabled(true);
     }//GEN-LAST:event_ComboProvince3ActionPerformed
 
     private void ComboCanton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCanton3ActionPerformed
-        // al seleccionar un canton, se llena el de Distrito.
-        Location canton = (Location) ComboCanton.getSelectedItem();
-        if (canton == null) return;
-        if (canton.getId() == 0) return;
-        ComboDistrict.removeAllItems();
 
-        controller.FillDistrict(this, canton.getId());
-        ComboDistrict.setEnabled(true);
     }//GEN-LAST:event_ComboCanton3ActionPerformed
 
     private void TextVetLoctaionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextVetLoctaionActionPerformed

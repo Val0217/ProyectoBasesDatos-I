@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package animalwelfare.userInterface;
+import animalwelfare.access.Location;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 /**
@@ -138,7 +139,7 @@ public InsertPet() {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel2.setText("__________________________________________________________________________________________________________________________________________________");
+        jLabel2.setText("___________________________________________________________________________________________________");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         LabelField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -156,7 +157,7 @@ public InsertPet() {
         LabelField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LabelField6.setText("Chip Number (Optional)");
 
-        ComboSizePet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Small", "Medium", "Large", " " }));
+        ComboSizePet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Small", "Medium", "Large" }));
         ComboSizePet.addActionListener(this::ComboSizePetActionPerformed);
 
         ComboStatePet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Excellent", "Good", "Bad", "Critical" }));
@@ -240,30 +241,6 @@ public InsertPet() {
                                         .addComponent(LabelCountry)
                                         .addGap(0, 0, Short.MAX_VALUE)))
                                 .addGap(20, 20, 20))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(LabelField7)
-                                    .addComponent(TextSpacePet, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PanelFormLayout.createSequentialGroup()
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LabelCanton)
-                                            .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LabelDistrict)
-                                            .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(PanelFormLayout.createSequentialGroup()
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(LabelCountry1)
-                                            .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LabelProvince)
-                                            .addComponent(ComboProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(PanelFormLayout.createSequentialGroup()
                                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PanelFormLayout.createSequentialGroup()
@@ -307,10 +284,35 @@ public InsertPet() {
                                     .addGroup(PanelFormLayout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LabelField9, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                                            .addComponent(LabelField9, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                                             .addGroup(PanelFormLayout.createSequentialGroup()
-                                                .addComponent(TextPetBreed, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                                                .addGap(20, 20, 20)))))))))
+                                                .addComponent(TextPetBreed, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                                                .addGap(20, 20, 20))))))
+                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LabelField7)
+                                    .addComponent(TextSpacePet, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LabelCanton)
+                                            .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LabelDistrict)
+                                            .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(LabelCountry1)
+                                            .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LabelProvince)
+                                            .addComponent(ComboProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         PanelFormLayout.setVerticalGroup(
@@ -395,13 +397,13 @@ public InsertPet() {
                 .addGap(92, 92, 92))
         );
 
-        PanelBackGround.add(PanelForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 720, 590));
+        PanelBackGround.add(PanelForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 730, 590));
 
         LableTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LableTitle.setForeground(new java.awt.Color(255, 255, 255));
         LableTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LableTitle.setText("Animal Welfare");
-        PanelBackGround.add(LableTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 20, 586, -1));
+        PanelBackGround.add(LableTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 20, 730, -1));
 
         ImagenBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/BackgroundCat.jpg"))); // NOI18N
         PanelBackGround.add(ImagenBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 150));
@@ -457,18 +459,7 @@ public InsertPet() {
     }//GEN-LAST:event_TextAgePet1ActionPerformed
 
     private void ComboVeterinarianPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboVeterinarianPetActionPerformed
-        // al seleccionar un pais, se llena el de province y se bloquea los siguientes.
-        if (controller == null) return;
-        Location country = (Location) ComboVeterinarianPet.getSelectedItem();
-        if (country == null) return;
-        if (country.getId() == 0) return;
-        ComboCanton.removeAllItems();
-        ComboDistrict.removeAllItems();
 
-        controller.FillProvince(this, country.getId());
-        ComboCanton.setEnabled(false);
-        ComboDistrict.setEnabled(false);
-        ComboProvince.setEnabled(true);
     }//GEN-LAST:event_ComboVeterinarianPetActionPerformed
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
@@ -476,41 +467,15 @@ public InsertPet() {
     }//GEN-LAST:event_ButtonCreateAccountActionPerformed
 
     private void ComboCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCountryActionPerformed
-        // al seleccionar un pais, se llena el de province y se bloquea los siguientes.
-        if (controller == null) return;
-        Location country = (Location) ComboCountry.getSelectedItem();
-        if (country == null) return;
-        if (country.getId() == 0) return;
-        ComboCanton.removeAllItems();
-        ComboDistrict.removeAllItems();
 
-        controller.FillProvince(this, country.getId());
-        ComboCanton.setEnabled(false);
-        ComboDistrict.setEnabled(false);
-        ComboProvince.setEnabled(true);
     }//GEN-LAST:event_ComboCountryActionPerformed
 
     private void ComboProvinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboProvinceActionPerformed
-        // al seleccionar una provincia, se llena el de canton y se bloquea los siguientes.
-        Location province = (Location) ComboProvince.getSelectedItem();
-        if (province == null) return;
-        if (province.getId() == 0) return;
-        ComboDistrict.removeAllItems();
 
-        controller.FillCanton(this, province.getId());
-        ComboDistrict.setEnabled(false);
-        ComboCanton.setEnabled(true);
     }//GEN-LAST:event_ComboProvinceActionPerformed
 
     private void ComboCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCantonActionPerformed
-        // al seleccionar un canton, se llena el de Distrito.
-        Location canton = (Location) ComboCanton.getSelectedItem();
-        if (canton == null) return;
-        if (canton.getId() == 0) return;
-        ComboDistrict.removeAllItems();
 
-        controller.FillDistrict(this, canton.getId());
-        ComboDistrict.setEnabled(true);
     }//GEN-LAST:event_ComboCantonActionPerformed
 
     private void TextPetBreedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPetBreedActionPerformed
