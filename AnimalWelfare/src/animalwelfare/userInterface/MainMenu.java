@@ -59,6 +59,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(245, 176, 65));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("My pets");
 
@@ -91,6 +92,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(88, 214, 141));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Adoptions");
 
@@ -123,6 +125,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(93, 173, 226));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Rescues");
 
@@ -151,6 +154,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(236, 112, 99));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Stats");
 
@@ -183,6 +187,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(72, 201, 176));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("My account");
 
@@ -211,6 +216,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(165, 105, 189));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Donations");
 

@@ -1,6 +1,5 @@
 /AnimalWelfare/nbproject/private/
 /AnimalWelfare/build/
-/AnimalWelfare/nbproject/private/
 /AnimalWelfare/nbproject/private-private.properties
 /AnimalWelfare/nbproject/private.xml
 
@@ -21,3 +20,4 @@ dist/
 # Sistema operativo
 .DS_Store
 Thumbs.db
+/AnimalWelfare/nbproject/private

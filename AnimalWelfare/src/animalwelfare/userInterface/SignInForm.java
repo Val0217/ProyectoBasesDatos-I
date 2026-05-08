@@ -17,7 +17,54 @@ public class SignInForm extends javax.swing.JFrame {
         controller = new SignIn();
         setLocationRelativeTo(null);
         setVisible(true);
+
+        // Placeholder text for username and password fields
+        TextUserName.setText("Enter your user");
+        TextPassword.setText("********");
+
+        //
+        TextUserName.addFocusListener(new java.awt.event.FocusAdapter() {
+
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+
+                if (TextUserName.getText().equals("Enter your user")) {
+                    TextUserName.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+
+                if (TextUserName.getText().isEmpty()) {
+                    TextUserName.setText("Enter your user");
+                }
+            }
+        });
+
+        TextPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+
+                if (String.valueOf(TextPassword.getPassword()).equals("********")) {
+                    TextPassword.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+
+                if (String.valueOf(TextPassword.getPassword()).isEmpty()) {
+                    TextPassword.setText("********");
+                }
+            }
+        });
+
+        
     }
+    
+    
 
 
     /**
@@ -31,7 +78,7 @@ public class SignInForm extends javax.swing.JFrame {
 
         PanelBackGround = new javax.swing.JPanel();
         PanelForm = new javax.swing.JPanel();
-        TextEmail = new javax.swing.JTextField();
+        TextUserName = new javax.swing.JTextField();
         LabelField = new javax.swing.JLabel();
         ButtonContinue = new javax.swing.JButton();
         LableTitle = new javax.swing.JLabel();
@@ -51,12 +98,12 @@ public class SignInForm extends javax.swing.JFrame {
         PanelForm.setBackground(new java.awt.Color(0, 153, 153));
         PanelForm.setForeground(new java.awt.Color(255, 255, 255));
 
-        TextEmail.setBackground(new java.awt.Color(0, 153, 153));
-        TextEmail.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
-        TextEmail.setForeground(new java.awt.Color(204, 204, 204));
-        TextEmail.setText("Enter your username");
-        TextEmail.setBorder(null);
-        TextEmail.addActionListener(this::TextEmailActionPerformed);
+        TextUserName.setBackground(new java.awt.Color(0, 153, 153));
+        TextUserName.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        TextUserName.setForeground(new java.awt.Color(255, 255, 255));
+        TextUserName.setToolTipText("");
+        TextUserName.setBorder(null);
+        TextUserName.addActionListener(this::TextUserNameActionPerformed);
 
         LabelField.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         LabelField.setForeground(new java.awt.Color(255, 255, 255));
@@ -80,8 +127,7 @@ public class SignInForm extends javax.swing.JFrame {
 
         TextPassword.setBackground(new java.awt.Color(0, 153, 153));
         TextPassword.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
-        TextPassword.setForeground(new java.awt.Color(204, 204, 204));
-        TextPassword.setText("+++++++++++++++++"); // NOI18N
+        TextPassword.setForeground(new java.awt.Color(255, 255, 255));
         TextPassword.setToolTipText("");
         TextPassword.setBorder(null);
         TextPassword.addActionListener(this::TextPasswordActionPerformed);
@@ -93,7 +139,7 @@ public class SignInForm extends javax.swing.JFrame {
 
         LabelField3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelField3.setForeground(new java.awt.Color(255, 255, 255));
-        LabelField3.setText("______________________________________________________________________________");
+        LabelField3.setText("_________________________________________________________________________");
         LabelField3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/banner_image.jpg"))); // NOI18N
@@ -119,17 +165,17 @@ public class SignInForm extends javax.swing.JFrame {
                         .addContainerGap(31, Short.MAX_VALUE)
                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(LabelField3, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(LabelField2, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(LabelField1)
                                 .addComponent(LabelField)
-                                .addComponent(TextEmail)
+                                .addComponent(TextUserName)
                                 .addComponent(TextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(PanelFormLayout.createSequentialGroup()
                                     .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(28, 28, 28)
                                     .addComponent(ButtonContinue, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(LableTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(LableTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelField3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(PanelFormLayout.createSequentialGroup()
                         .addGap(155, 155, 155)
@@ -145,7 +191,7 @@ public class SignInForm extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addComponent(LabelField1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TextUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelField3, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -189,12 +235,12 @@ public class SignInForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TextEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextEmailActionPerformed
+    private void TextUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextUserNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TextEmailActionPerformed
+    }//GEN-LAST:event_TextUserNameActionPerformed
 
     private void ButtonContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonContinueActionPerformed
-        String email = TextEmail.getText();
+        String email = TextUserName.getText();
         char[] passwordCharecters = TextPassword.getPassword();
         String password = new String(passwordCharecters);
         controller.CheckUser(email, password);
@@ -228,8 +274,8 @@ public class SignInForm extends javax.swing.JFrame {
     private javax.swing.JLabel LableTitle;
     private javax.swing.JPanel PanelBackGround;
     private javax.swing.JPanel PanelForm;
-    private javax.swing.JTextField TextEmail;
     private javax.swing.JPasswordField TextPassword;
+    private javax.swing.JTextField TextUserName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
