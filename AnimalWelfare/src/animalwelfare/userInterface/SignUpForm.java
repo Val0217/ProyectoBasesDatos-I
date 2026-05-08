@@ -415,7 +415,7 @@ public class SignUpForm extends javax.swing.JFrame {
         LableTitle3.setFont(new java.awt.Font("Roboto Black", 1, 36)); // NOI18N
         LableTitle3.setForeground(new java.awt.Color(255, 255, 255));
         LableTitle3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LableTitle3.setText("SING UP ");
+        LableTitle3.setText("SIGN UP ");
         PanelBackGround.add(LableTitle3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
 
         ImagenBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/grass.jpg"))); // NOI18N
