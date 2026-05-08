@@ -58,7 +58,6 @@ public InsertPet() {
         ButtonCreateAccount = new javax.swing.JButton();
         TextColorPet = new javax.swing.JTextField();
         LabelField1 = new javax.swing.JLabel();
-        TextPetType = new javax.swing.JTextField();
         LabelField2 = new javax.swing.JLabel();
         ComboVeterinarianPet = new javax.swing.JComboBox<>();
         LabelCountry = new javax.swing.JLabel();
@@ -70,11 +69,9 @@ public InsertPet() {
         LabelField6 = new javax.swing.JLabel();
         ComboSizePet = new javax.swing.JComboBox<>();
         ComboStatePet = new javax.swing.JComboBox<>();
-        TextSpacePet = new javax.swing.JTextField();
         LabelField7 = new javax.swing.JLabel();
         ComboEnergyPet = new javax.swing.JComboBox<>();
         LabelField8 = new javax.swing.JLabel();
-        TextAgePet1 = new javax.swing.JTextField();
         LabelCountry1 = new javax.swing.JLabel();
         ComboCountry = new javax.swing.JComboBox<>();
         LabelProvince = new javax.swing.JLabel();
@@ -84,8 +81,11 @@ public InsertPet() {
         LabelDistrict = new javax.swing.JLabel();
         ComboDistrict = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        TextPetBreed = new javax.swing.JTextField();
         LabelField9 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox4 = new javax.swing.JComboBox<>();
         LableTitle = new javax.swing.JLabel();
         ImagenBackGround = new javax.swing.JLabel();
 
@@ -120,10 +120,6 @@ public InsertPet() {
 
         LabelField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LabelField1.setText("Color");
-
-        TextPetType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TextPetType.setToolTipText("");
-        TextPetType.addActionListener(this::TextPetTypeActionPerformed);
 
         LabelField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LabelField2.setText("Species");
@@ -162,9 +158,6 @@ public InsertPet() {
 
         ComboStatePet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Excellent", "Good", "Bad", "Critical" }));
 
-        TextSpacePet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TextSpacePet.addActionListener(this::TextSpacePetActionPerformed);
-
         LabelField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LabelField7.setText("Space Requiered");
 
@@ -173,9 +166,6 @@ public InsertPet() {
 
         LabelField8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LabelField8.setText("Energy of the pet");
-
-        TextAgePet1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TextAgePet1.addActionListener(this::TextAgePet1ActionPerformed);
 
         LabelCountry1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LabelCountry1.setText("Country");
@@ -214,12 +204,14 @@ public InsertPet() {
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        TextPetBreed.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TextPetBreed.setToolTipText("");
-        TextPetBreed.addActionListener(this::TextPetBreedActionPerformed);
-
         LabelField9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LabelField9.setText("Breed(Optional)");
+
+        jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", " " }));
+
+        jComboBox4.addActionListener(this::jComboBox4ActionPerformed);
 
         javax.swing.GroupLayout PanelFormLayout = new javax.swing.GroupLayout(PanelForm);
         PanelForm.setLayout(PanelFormLayout);
@@ -268,12 +260,12 @@ public InsertPet() {
                                             .addGap(18, 18, 18)
                                             .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addComponent(LabelField2)
-                                                .addComponent(TextPetType)
                                                 .addComponent(TextChipNumber)
-                                                .addComponent(LabelField6, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE))))
+                                                .addComponent(LabelField6, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                     .addComponent(LabelField)
                                     .addGroup(PanelFormLayout.createSequentialGroup()
-                                        .addComponent(TextAgePet1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(ComboEnergyPet, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,13 +278,13 @@ public InsertPet() {
                                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(LabelField9, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                                             .addGroup(PanelFormLayout.createSequentialGroup()
-                                                .addComponent(TextPetBreed, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                                                .addGap(20, 20, 20))))))
+                                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))))))
                             .addGroup(PanelFormLayout.createSequentialGroup()
                                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(LabelField7)
-                                    .addComponent(TextSpacePet, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PanelFormLayout.createSequentialGroup()
@@ -328,7 +320,7 @@ public InsertPet() {
                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextPetName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TextChipNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TextPetBreed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelField1)
@@ -336,9 +328,9 @@ public InsertPet() {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelFormLayout.createSequentialGroup()
-                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TextPetType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TextColorPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TextColorPet)
+                            .addComponent(jComboBox1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LabelField5)
@@ -354,15 +346,15 @@ public InsertPet() {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ComboEnergyPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TextAgePet1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelFormLayout.createSequentialGroup()
                         .addComponent(LabelField7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TextSpacePet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)
+                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -434,10 +426,6 @@ public InsertPet() {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextColorPetActionPerformed
 
-    private void TextPetTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPetTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextPetTypeActionPerformed
-
     private void TextChipNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextChipNumberActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextChipNumberActionPerformed
@@ -446,17 +434,9 @@ public InsertPet() {
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboSizePetActionPerformed
 
-    private void TextSpacePetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextSpacePetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextSpacePetActionPerformed
-
     private void ComboEnergyPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboEnergyPetActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboEnergyPetActionPerformed
-
-    private void TextAgePet1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextAgePet1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextAgePet1ActionPerformed
 
     private void ComboVeterinarianPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboVeterinarianPetActionPerformed
 
@@ -478,9 +458,13 @@ public InsertPet() {
 
     }//GEN-LAST:event_ComboCantonActionPerformed
 
-    private void TextPetBreedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPetBreedActionPerformed
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TextPetBreedActionPerformed
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox4ActionPerformed
 
     
     
@@ -540,13 +524,13 @@ public InsertPet() {
     private javax.swing.JLabel LableTitle;
     private javax.swing.JPanel PanelBackGround;
     private javax.swing.JPanel PanelForm;
-    private javax.swing.JTextField TextAgePet1;
     private javax.swing.JTextField TextChipNumber;
     private javax.swing.JTextField TextColorPet;
-    private javax.swing.JTextField TextPetBreed;
     private javax.swing.JTextField TextPetName;
-    private javax.swing.JTextField TextPetType;
-    private javax.swing.JTextField TextSpacePet;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
