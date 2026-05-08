@@ -335,7 +335,7 @@ public InsertPet() {
         PanelBackGround.add(LableTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 20, 730, -1));
 
         ImagenBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/BackgroundCat.jpg"))); // NOI18N
-        PanelBackGround.add(ImagenBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 150));
+        PanelBackGround.add(ImagenBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 150));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
