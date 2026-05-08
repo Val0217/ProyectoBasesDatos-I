@@ -1039,3 +1039,29 @@ BEGIN
 END pr_assign_foster_home_role;
 /
 
+/*Cambiar el estado de una mascota a el estado 4
+1 Up for adoption
+2 Adopted
+3 Lost
+4 Found
+*/
+CREATE OR REPLACE PROCEDURE put_pet_up_for_adoption (
+    p_pet_id IN Pet.Id%TYPE
+)
+AS
+BEGIN
+    UPDATE Pet
+    SET IdState = 1
+    WHERE Id = p_pet_id
+      AND IdState = 4;
+
+    IF SQL%ROWCOUNT = 0 THEN
+        RAISE_APPLICATION_ERROR(
+            -20001,
+            'Pet was not found or is not in Found state.'
+        );
+    END IF;
+
+    COMMIT;
+END;
+/

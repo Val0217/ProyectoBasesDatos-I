@@ -124,7 +124,6 @@ public class SignUpForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         LabelField3 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         TextPassword = new javax.swing.JPasswordField();
         LabelField4 = new javax.swing.JLabel();
@@ -133,27 +132,31 @@ public class SignUpForm extends javax.swing.JFrame {
         LabelField5 = new javax.swing.JLabel();
         TextPhone = new javax.swing.JTextField();
         LabelField6 = new javax.swing.JLabel();
-        LableTitle = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        LableTitle1 = new javax.swing.JLabel();
+        LableTitle3 = new javax.swing.JLabel();
         ImagenBackGround = new javax.swing.JLabel();
+        LableTitle2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         PanelBackGround.setBackground(new java.awt.Color(204, 204, 204));
         PanelBackGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        LabelSubTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        LabelSubTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LabelSubTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LabelSubTitle.setText("Create account");
 
         TextEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         TextEmail.addActionListener(this::TextEmailActionPerformed);
 
-        LabelField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField.setText("Enter your email");
+        LabelField.setFont(new java.awt.Font("Roboto Black", 0, 10)); // NOI18N
+        LabelField.setForeground(new java.awt.Color(0, 102, 102));
+        LabelField.setText("EMAIL");
 
-        ButtonCreateAccount.setBackground(new java.awt.Color(255, 216, 20));
-        ButtonCreateAccount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ButtonCreateAccount.setText("Create your account");
+        ButtonCreateAccount.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonCreateAccount.setFont(new java.awt.Font("Roboto SemiBold", 0, 14)); // NOI18N
+        ButtonCreateAccount.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonCreateAccount.setText("CREATE YOUR ACCOUNT");
         ButtonCreateAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ButtonCreateAccount.addActionListener(this::ButtonCreateAccountActionPerformed);
 
@@ -161,15 +164,17 @@ public class SignUpForm extends javax.swing.JFrame {
         TextFirstName.setToolTipText("");
         TextFirstName.addActionListener(this::TextFirstNameActionPerformed);
 
-        LabelField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField1.setText("First name");
+        LabelField1.setFont(new java.awt.Font("Roboto Black", 0, 10)); // NOI18N
+        LabelField1.setForeground(new java.awt.Color(0, 102, 102));
+        LabelField1.setText("FIRST NAME");
 
         TextLastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         TextLastName.setToolTipText("");
         TextLastName.addActionListener(this::TextLastNameActionPerformed);
 
-        LabelField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField2.setText("Last name");
+        LabelField2.setFont(new java.awt.Font("Roboto Black", 0, 10)); // NOI18N
+        LabelField2.setForeground(new java.awt.Color(0, 102, 102));
+        LabelField2.setText("LAST NAME");
 
         ComboCountry.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboCountry.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -177,8 +182,9 @@ public class SignUpForm extends javax.swing.JFrame {
         ComboCountry.setRequestFocusEnabled(false);
         ComboCountry.addActionListener(this::ComboCountryActionPerformed);
 
-        LabelCountry.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelCountry.setText("Country");
+        LabelCountry.setFont(new java.awt.Font("Roboto Black", 0, 10)); // NOI18N
+        LabelCountry.setForeground(new java.awt.Color(0, 102, 102));
+        LabelCountry.setText("COUNTRY");
 
         ComboProvince.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboProvince.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -186,8 +192,9 @@ public class SignUpForm extends javax.swing.JFrame {
         ComboProvince.setRequestFocusEnabled(false);
         ComboProvince.addActionListener(this::ComboProvinceActionPerformed);
 
-        LabelProvince.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelProvince.setText("Province");
+        LabelProvince.setFont(new java.awt.Font("Roboto Black", 0, 10)); // NOI18N
+        LabelProvince.setForeground(new java.awt.Color(0, 102, 102));
+        LabelProvince.setText("PROVINCE");
 
         ComboCanton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboCanton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -195,43 +202,42 @@ public class SignUpForm extends javax.swing.JFrame {
         ComboCanton.setRequestFocusEnabled(false);
         ComboCanton.addActionListener(this::ComboCantonActionPerformed);
 
-        LabelCanton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelCanton.setText("Canton");
+        LabelCanton.setFont(new java.awt.Font("Roboto Black", 0, 10)); // NOI18N
+        LabelCanton.setForeground(new java.awt.Color(0, 102, 102));
+        LabelCanton.setText("CANTON");
 
         ComboDistrict.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboDistrict.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboDistrict.setOpaque(true);
         ComboDistrict.setRequestFocusEnabled(false);
 
-        LabelDistrict.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelDistrict.setText("District");
+        LabelDistrict.setFont(new java.awt.Font("Roboto Black", 0, 10)); // NOI18N
+        LabelDistrict.setForeground(new java.awt.Color(0, 102, 102));
+        LabelDistrict.setText("DISTRICT");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Roboto Medium", 2, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel1.setText("Address");
+        jLabel1.setText("Address Information");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setText("__________________________________________________________________________________________________________________________________________________");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        LabelField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField3.setText("Password");
+        LabelField3.setFont(new java.awt.Font("Roboto Black", 0, 10)); // NOI18N
+        LabelField3.setForeground(new java.awt.Color(0, 102, 102));
+        LabelField3.setText("PASSWORD");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel3.setText("______________________________________________________________________________________________________________________________");
-        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Roboto Medium", 2, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel4.setText("User");
+        jLabel4.setText("User Information");
 
         TextPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         TextPassword.setToolTipText("At least 6 characters.");
 
-        LabelField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField4.setText("Re-enter password");
+        LabelField4.setFont(new java.awt.Font("Roboto Black", 0, 10)); // NOI18N
+        LabelField4.setForeground(new java.awt.Color(0, 102, 102));
+        LabelField4.setText("RE-ENTER PASSWORD");
 
         TextPasswordRE.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -239,14 +245,21 @@ public class SignUpForm extends javax.swing.JFrame {
         TextUserName.setToolTipText("");
         TextUserName.addActionListener(this::TextUserNameActionPerformed);
 
-        LabelField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField5.setText("User name");
+        LabelField5.setFont(new java.awt.Font("Roboto Black", 0, 10)); // NOI18N
+        LabelField5.setForeground(new java.awt.Color(0, 102, 102));
+        LabelField5.setText("USERNAME");
 
         TextPhone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         TextPhone.addActionListener(this::TextPhoneActionPerformed);
 
-        LabelField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField6.setText("Phone Number");
+        LabelField6.setFont(new java.awt.Font("Roboto Black", 0, 10)); // NOI18N
+        LabelField6.setForeground(new java.awt.Color(0, 102, 102));
+        LabelField6.setText("PHONE NUMBER");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel5.setText("__________________________________________________________________________________________________________________________________________________");
+        jLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout PanelFormLayout = new javax.swing.GroupLayout(PanelForm);
         PanelForm.setLayout(PanelFormLayout);
@@ -261,47 +274,42 @@ public class SignUpForm extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelFormLayout.createSequentialGroup()
-                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(LabelField1)
-                                    .addComponent(TextEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                                    .addComponent(TextFirstName))
-                                .addGap(18, 18, 18)
                                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PanelFormLayout.createSequentialGroup()
-                                        .addComponent(LabelField2)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFormLayout.createSequentialGroup()
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(TextPhone, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(TextLastName))
-                                        .addGap(20, 20, 20))))
-                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                    .addComponent(LabelField5)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LabelField)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFormLayout.createSequentialGroup()
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelFormLayout.createSequentialGroup()
                                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(PanelFormLayout.createSequentialGroup()
-                                                .addComponent(LabelCountry)
-                                                .addGap(164, 164, 164))
+                                                .addComponent(LabelCanton)
+                                                .addGap(157, 157, 157))
                                             .addGroup(PanelFormLayout.createSequentialGroup()
-                                                .addComponent(ComboCountry, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGap(18, 18, 18)))
+                                                .addComponent(ComboCanton, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(23, 23, 23)))
+                                        .addGap(8, 8, 8)
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                                .addComponent(LabelDistrict)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(ComboDistrict, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelFormLayout.createSequentialGroup()
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LabelCountry)
+                                            .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(23, 23, 23)
                                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(ComboProvince, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addGroup(PanelFormLayout.createSequentialGroup()
                                                 .addComponent(LabelProvince)
                                                 .addGap(0, 0, Short.MAX_VALUE))))
-                                    .addGroup(PanelFormLayout.createSequentialGroup()
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LabelCanton)
-                                            .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(ComboDistrict, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                                .addComponent(LabelDistrict)
-                                                .addGap(0, 0, Short.MAX_VALUE))))
-                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                    .addComponent(TextUserName, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelFormLayout.createSequentialGroup()
                                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(LabelField3)
                                             .addComponent(TextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -310,28 +318,37 @@ public class SignUpForm extends javax.swing.JFrame {
                                             .addComponent(TextPasswordRE, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(LabelField4))
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(TextUserName))
-                                .addGap(20, 20, 20))
-                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(LabelField5)
-                                    .addGroup(PanelFormLayout.createSequentialGroup()
-                                        .addComponent(LabelField)
-                                        .addGap(112, 112, 112)
-                                        .addComponent(LabelField6))
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelFormLayout.createSequentialGroup()
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(LabelField1)
+                                            .addComponent(TextEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                            .addComponent(TextFirstName))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(TextLastName)
+                                            .addComponent(TextPhone)
+                                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(LabelField6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(LabelField2))
+                                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(21, 21, 21)))))
                 .addContainerGap())
+            .addGroup(PanelFormLayout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelFormLayout.setVerticalGroup(
             PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelFormLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(LabelSubTitle)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelField)
                     .addComponent(LabelField6))
@@ -347,11 +364,7 @@ public class SignUpForm extends javax.swing.JFrame {
                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TextLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(21, 21, 21)
                 .addComponent(LabelField5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TextUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -364,22 +377,19 @@ public class SignUpForm extends javax.swing.JFrame {
                             .addComponent(LabelField4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelFormLayout.createSequentialGroup()
-                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LabelProvince, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(LabelCountry))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelFormLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(ComboProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelCountry)
+                    .addComponent(LabelProvince))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PanelFormLayout.createSequentialGroup()
                         .addComponent(LabelCanton)
@@ -389,21 +399,33 @@ public class SignUpForm extends javax.swing.JFrame {
                         .addComponent(LabelDistrict)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
-                .addComponent(ButtonCreateAccount)
-                .addGap(20, 20, 20))
+                .addGap(29, 29, 29)
+                .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         PanelBackGround.add(PanelForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 70, -1, -1));
 
-        LableTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        LableTitle.setForeground(new java.awt.Color(255, 255, 255));
-        LableTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LableTitle.setText("Animal Welfare");
-        PanelBackGround.add(LableTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 20, 586, -1));
+        LableTitle1.setFont(new java.awt.Font("Roboto Black", 1, 36)); // NOI18N
+        LableTitle1.setForeground(new java.awt.Color(255, 255, 0));
+        LableTitle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LableTitle1.setText("NOW!");
+        PanelBackGround.add(LableTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, -1));
 
-        ImagenBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/backgroundForm.jpg"))); // NOI18N
+        LableTitle3.setFont(new java.awt.Font("Roboto Black", 1, 36)); // NOI18N
+        LableTitle3.setForeground(new java.awt.Color(255, 255, 255));
+        LableTitle3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LableTitle3.setText("SIGN UP ");
+        PanelBackGround.add(LableTitle3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
+
+        ImagenBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/grass.jpg"))); // NOI18N
         PanelBackGround.add(ImagenBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 690));
+
+        LableTitle2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LableTitle2.setForeground(new java.awt.Color(255, 255, 255));
+        LableTitle2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LableTitle2.setText("CREATE ACCOUNT");
+        PanelBackGround.add(LableTitle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 20, 586, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -536,7 +558,9 @@ public class SignUpForm extends javax.swing.JFrame {
     private javax.swing.JLabel LabelField6;
     private javax.swing.JLabel LabelProvince;
     private javax.swing.JLabel LabelSubTitle;
-    private javax.swing.JLabel LableTitle;
+    private javax.swing.JLabel LableTitle1;
+    private javax.swing.JLabel LableTitle2;
+    private javax.swing.JLabel LableTitle3;
     private javax.swing.JPanel PanelBackGround;
     private javax.swing.JPanel PanelForm;
     private javax.swing.JTextField TextEmail;
@@ -548,7 +572,7 @@ public class SignUpForm extends javax.swing.JFrame {
     private javax.swing.JTextField TextUserName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

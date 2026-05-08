@@ -18,17 +18,17 @@ INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Alajuela
 INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Cartago',     9);
 INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Guanacaste',  9);
 
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'San Jose',     13);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Desamparados', 14);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Heredia',      15);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Alajuela',     16);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Cartago',      17);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'San Jose',     27);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Desamparados', 28);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Heredia',      29);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Alajuela',     30);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Cartago',      31);
 
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Carmen',        12);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Hatillo',       13);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Desamparados',  14);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Heredia Centro',15);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Alajuela Centro',16);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Carmen',        37);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Hatillo',       38);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Desamparados',  39);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Heredia Centro',40);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Alajuela Centro', 41);
 
 INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Panama',        10);
 INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Chiriqui',      10);
@@ -67,11 +67,12 @@ INSERT INTO PetBreed (Id, Name) VALUES (4, 'Siames');
 INSERT INTO PetBreed (Id, Name) VALUES (5, 'Persa');
 INSERT INTO PetBreed (Id, Name) VALUES (6, 'Raza Unica');   -- obligatorio segun requerimiento
 
+
 -- Estados de mascota
-INSERT INTO PetState (Id, Name) VALUES (1, 'Perdido');
-INSERT INTO PetState (Id, Name) VALUES (2, 'Encontrado');
-INSERT INTO PetState (Id, Name) VALUES (3, 'En Adopcion');
-INSERT INTO PetState (Id, Name) VALUES (4, 'Adoptado');
+INSERT INTO PetState (Id, Name) VALUES (1, 'En Adopcion');
+INSERT INTO PetState (Id, Name) VALUES (2, 'Adoptado');
+INSERT INTO PetState (Id, Name) VALUES (3, 'Perdido');
+INSERT INTO PetState (Id, Name) VALUES (4, 'Encontrado');
 INSERT INTO PetState (Id, Name) VALUES (5, 'En Casa Cuna');
 INSERT INTO PetState (Id, Name) VALUES (6, 'Fallecido');
 
@@ -215,6 +216,7 @@ INSERT INTO SpaceRequiredXFosterHome (IdSpaceRequired, IdFosterHome) VALUES (3, 
 -- -------------------------------------------------------------
 -- 8. MASCOTAS
 -- -------------------------------------------------------------
+
 
 INSERT INTO Pet (Id, Name, Color, Age, Description, Chip,
                  IdEnergy, IdState, IdType, IdBreed,
@@ -379,3 +381,323 @@ INSERT INTO Parameter (Id, Name, Value, Description)
 VALUES (4, 'MaxPhotosPerPet',     10, 'Maxima cantidad de fotos por mascota');
 
 COMMIT;
+
+
+
+
+
+-- ----------------------
+-- Inserts Valeria
+
+
+/* ------------------------------------------------------------
+   1. Location hierarchy needed by District foreign keys
+   ------------------------------------------------------------ */
+INSERT INTO Country (Id, Name)
+SELECT 1, 'Costa Rica' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Country WHERE Id = 1);
+
+INSERT INTO Province (Id, Name, IdCountry)
+SELECT 1, 'San Jose', 1 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Province WHERE Id = 1);
+
+INSERT INTO Canton (Id, Name, IdProvince)
+SELECT 1, 'San Jose', 1 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Canton WHERE Id = 1);
+
+INSERT INTO District (Id, Name, IdCanton)
+SELECT 1, 'Carmen', 1 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM District WHERE Id = 1);
+
+INSERT INTO District (Id, Name, IdCanton)
+SELECT 2, 'Hatillo', 1 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM District WHERE Id = 2);
+
+INSERT INTO District (Id, Name, IdCanton)
+SELECT 3, 'Escazu', 1 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM District WHERE Id = 3);
+
+/* ------------------------------------------------------------
+   2. Pet catalog rows needed by Pet foreign keys
+   ------------------------------------------------------------ */
+
+INSERT INTO PetState (Id, Name)
+SELECT 4, 'Encontrado' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetState WHERE Id = 4);
+
+INSERT INTO PetType (Id, Name)
+SELECT 1, 'Perro' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetType WHERE Id = 1);
+
+INSERT INTO PetType (Id, Name)
+SELECT 2, 'Gato' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetType WHERE Id = 2);
+
+INSERT INTO PetBreed (Id, Name)
+SELECT 1, 'Labrador' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 1);
+
+INSERT INTO PetBreed (Id, Name)
+SELECT 2, 'Poodle' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 2);
+
+INSERT INTO PetBreed (Id, Name)
+SELECT 3, 'Siames' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 3);
+
+INSERT INTO PetBreed (Id, Name)
+SELECT 4, 'Persa' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 4);
+
+INSERT INTO PetBreed (Id, Name)
+SELECT 5, 'Chihuahua' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 5);
+
+INSERT INTO PetBreed (Id, Name)
+SELECT 6, 'Raza Unica' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 6);
+
+INSERT INTO PetLevelEnergy (Id, Name)
+SELECT 1, 'Atletico' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetLevelEnergy WHERE Id = 1);
+
+INSERT INTO PetLevelEnergy (Id, Name)
+SELECT 2, 'Corredor' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetLevelEnergy WHERE Id = 2);
+
+INSERT INTO PetLevelEnergy (Id, Name)
+SELECT 3, 'Caminador' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetLevelEnergy WHERE Id = 3);
+
+INSERT INTO SpaceRequired (Id, Name)
+SELECT 1, 'Apartamento' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM SpaceRequired WHERE Id = 1);
+
+INSERT INTO SpaceRequired (Id, Name)
+SELECT 2, 'Casa sin patio' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM SpaceRequired WHERE Id = 2);
+
+INSERT INTO SpaceRequired (Id, Name)
+SELECT 3, 'Casa con patio' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM SpaceRequired WHERE Id = 3);
+
+INSERT INTO PetTraining (Id, Name)
+SELECT 1, 'Muy facil' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetTraining WHERE Id = 1);
+
+INSERT INTO PetTraining (Id, Name)
+SELECT 2, 'Facil' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetTraining WHERE Id = 2);
+
+INSERT INTO PetTraining (Id, Name)
+SELECT 3, 'Moderado' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetTraining WHERE Id = 3);
+
+INSERT INTO PetSize (Id, Name)
+SELECT 1, 'Pequeno' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetSize WHERE Id = 1);
+
+INSERT INTO PetSize (Id, Name)
+SELECT 2, 'Mediano' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetSize WHERE Id = 2);
+
+INSERT INTO PetSize (Id, Name)
+SELECT 3, 'Grande' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetSize WHERE Id = 3);
+
+/* ------------------------------------------------------------
+   3. Persons needed by Pet.IdOwner
+   ------------------------------------------------------------ */
+INSERT INTO Person (Id, FirstName, LastName, Password, UserName, IdDistrict)
+SELECT 1, 'Carlos', 'Gonzalez', 'pass1234', 'cgonzalez', 1 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Person WHERE Id = 1);
+
+INSERT INTO Person (Id, FirstName, LastName, Password, UserName, IdDistrict)
+SELECT 2, 'Maria', 'Rodriguez', 'pass5678', 'mrodriguez', 2 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Person WHERE Id = 2);
+
+INSERT INTO Person (Id, FirstName, LastName, Password, UserName, IdDistrict)
+SELECT 3, 'Jose', 'Vargas', 'pass9012', 'jvargas', 3 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Person WHERE Id = 3);
+
+INSERT INTO Email (Id, Email, IdPerson)
+SELECT 1, 'carlos@mail.com', 1 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Email WHERE Id = 1);
+
+INSERT INTO Email (Id, Email, IdPerson)
+SELECT 2, 'maria@mail.com', 2 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Email WHERE Id = 2);
+
+INSERT INTO Email (Id, Email, IdPerson)
+SELECT 3, 'jose@mail.com', 3 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Email WHERE Id = 3);
+
+INSERT INTO Phone (Id, Phone, IdPerson)
+SELECT 1, 88001111, 1 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Phone WHERE Id = 1);
+
+INSERT INTO Phone (Id, Phone, IdPerson)
+SELECT 2, 88002222, 2 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Phone WHERE Id = 2);
+
+INSERT INTO Phone (Id, Phone, IdPerson)
+SELECT 3, 88003333, 3 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Phone WHERE Id = 3);
+
+/* ------------------------------------------------------------
+   4. Veterinarians needed by Pet.IdVeterinarian
+   ------------------------------------------------------------ */
+INSERT INTO Veterinarian (Id, Email, FirstName, LastName, Location, IdDristrict, Phone, Name)
+SELECT 1, 'luis@vet.com', 'Luis', 'Mora', 'San Jose', 1, 22345678, 'Mascotas Felices' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Veterinarian WHERE Id = 1);
+
+INSERT INTO Veterinarian (Id, Email, FirstName, LastName, Location, IdDristrict, Phone, Name)
+SELECT 2, 'ana@vet.com', 'Ana', 'Jimenez', 'Hatillo', 2, 22876543, 'VetCenter' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Veterinarian WHERE Id = 2);
+
+/* ------------------------------------------------------------
+   5. Pets with IdState = 4 only
+   ------------------------------------------------------------ */
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 1, 'Brown', 3, 'Friendly medium-size dog', 'Luna', 'CHIP001',
+       1, 4, 1, 1, 1,
+       1, 1, 2, 1, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 1);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 2, 'Black', 2, 'Found near park', 'Max', 'CHIP002',
+       2, 4, 1, 2, 1,
+       1, 2, 2, 1, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 2);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 3, 'White', 1, 'Calm affectionate cat', 'Mia', 'CHIP003',
+       1, 4, 2, 3, 2,
+       2, 1, 1, 2, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 3);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 4, 'Gray', 4, 'Found with blue collar', 'Nala', 'CHIP004',
+       2, 4, 2, 4, 2,
+       2, 2, 1, 2, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 4);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 5, 'Golden', 5, 'Playful trained dog', 'Toby', 'CHIP005',
+       3, 4, 1, 5, 3,
+       3, 3, 3, 3, 2
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 5);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 6, 'Spotted', 2, 'Found close to avenue', 'Rocky', 'CHIP006',
+       3, 4, 1, 6, 3,
+       3, 2, 3, 3, 2
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 6);
+
+INSERT INTO PetState (Id, Name)
+SELECT 1, 'Up for adoption' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetState WHERE Id = 1);
+
+/* ------------------------------------------------------------
+   5. Pets with IdState = 1 only
+      Pet IDs use 101-106 to avoid conflicts if you already ran the state-4 script.
+   ------------------------------------------------------------ */
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 101, 'Brown', 3, 'Friendly medium-size dog', 'Luna', 'CHIP008',
+       1, 1, 1, 1, 1,
+       1, 1, 2, 1, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 101);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 102, 'Black', 2, 'Available for adoption, rescued near park', 'Max', 'CHIP009',
+       2, 1, 1, 2, 1,
+       1, 2, 2, 1, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 102);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 103, 'White', 1, 'Calm affectionate cat', 'Mia', 'CHIP013',
+       1, 1, 2, 3, 2,
+       2, 1, 1, 2, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 103);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 104, 'Gray', 4, 'Available for adoption, has blue collar', 'Nala', 'CHIP010',
+       2, 1, 2, 4, 2,
+       2, 2, 1, 2, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 104);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 105, 'Golden', 5, 'Playful trained dog', 'Toby', 'CHIP015',
+       3, 1, 1, 5, 3,
+       3, 3, 3, 3, 2
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 105);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 106, 'Spotted', 2, 'Available for adoption, rescued close to avenue', 'Rocky', 'CHIP01',
+       3, 1, 1, 6, 3,
+       3, 2, 3, 3, 2
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 106);
+
+COMMIT;
+
+
