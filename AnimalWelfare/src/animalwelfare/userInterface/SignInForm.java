@@ -49,6 +49,7 @@ public class SignInForm extends javax.swing.JFrame {
         PanelBackGround.setBackground(new java.awt.Color(204, 204, 204));
 
         PanelForm.setBackground(new java.awt.Color(0, 153, 153));
+        PanelForm.setForeground(new java.awt.Color(255, 255, 255));
 
         TextEmail.setBackground(new java.awt.Color(0, 153, 153));
         TextEmail.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
@@ -86,10 +87,12 @@ public class SignInForm extends javax.swing.JFrame {
         TextPassword.addActionListener(this::TextPasswordActionPerformed);
 
         LabelField2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelField2.setForeground(new java.awt.Color(255, 255, 255));
         LabelField2.setText("_________________________________________________________________________");
         LabelField2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         LabelField3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelField3.setForeground(new java.awt.Color(255, 255, 255));
         LabelField3.setText("______________________________________________________________________________");
         LabelField3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
@@ -130,7 +133,7 @@ public class SignInForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(PanelFormLayout.createSequentialGroup()
                         .addGap(155, 155, 155)
-                        .addComponent(jLabel2)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jLabel1))
         );
