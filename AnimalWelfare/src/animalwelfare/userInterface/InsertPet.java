@@ -125,7 +125,7 @@ public InsertPet() {
         TextPetType.addActionListener(this::TextPetTypeActionPerformed);
 
         LabelField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField2.setText("Breed");
+        LabelField2.setText("Species");
 
         ComboVeterinarianPet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboVeterinarianPet.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
