@@ -41,13 +41,13 @@ public class MainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         BackGround = new javax.swing.JPanel();
-        MyPetsButton = new javax.swing.JPanel();
+        PetsButton = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         Banner = new javax.swing.JPanel();
         LableTitle = new javax.swing.JLabel();
-        AdoptionsButton = new javax.swing.JPanel();
+        NewPetButton = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -68,46 +68,46 @@ public class MainMenu extends javax.swing.JFrame {
 
         BackGround.setBackground(new java.awt.Color(0, 153, 153));
 
-        MyPetsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        MyPetsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        PetsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        PetsButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MyPetsButtonMouseClicked(evt);
+                PetsButtonMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                MyPetsButtonMouseEntered(evt);
+                PetsButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                MyPetsButtonMouseExited(evt);
+                PetsButtonMouseExited(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("My pets");
+        jLabel1.setText("Pets");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 64)); // NOI18N
         jLabel2.setText("→");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        jLabel19.setText("Manage your pets and add new companions.");
+        jLabel19.setText("Manage your pets and discover pets in adoption and missing.");
 
-        javax.swing.GroupLayout MyPetsButtonLayout = new javax.swing.GroupLayout(MyPetsButton);
-        MyPetsButton.setLayout(MyPetsButtonLayout);
-        MyPetsButtonLayout.setHorizontalGroup(
-            MyPetsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MyPetsButtonLayout.createSequentialGroup()
+        javax.swing.GroupLayout PetsButtonLayout = new javax.swing.GroupLayout(PetsButton);
+        PetsButton.setLayout(PetsButtonLayout);
+        PetsButtonLayout.setHorizontalGroup(
+            PetsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PetsButtonLayout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addGroup(MyPetsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(PetsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        MyPetsButtonLayout.setVerticalGroup(
-            MyPetsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MyPetsButtonLayout.createSequentialGroup()
-                .addGroup(MyPetsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PetsButtonLayout.setVerticalGroup(
+            PetsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PetsButtonLayout.createSequentialGroup()
+                .addGroup(PetsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(MyPetsButtonLayout.createSequentialGroup()
+                    .addGroup(PetsButtonLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel19)))
@@ -136,43 +136,46 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(LableTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
         );
 
-        AdoptionsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        AdoptionsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        NewPetButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        NewPetButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NewPetButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                AdoptionsButtonMouseEntered(evt);
+                NewPetButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                AdoptionsButtonMouseExited(evt);
+                NewPetButtonMouseExited(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("Adoptions");
+        jLabel3.setText("New Pet");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 64)); // NOI18N
         jLabel4.setText("→");
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        jLabel20.setText("Find a loving companion or give a pet the opportunity to find a new home.");
+        jLabel20.setText("Add a rescued or adopted pet to the system");
 
-        javax.swing.GroupLayout AdoptionsButtonLayout = new javax.swing.GroupLayout(AdoptionsButton);
-        AdoptionsButton.setLayout(AdoptionsButtonLayout);
-        AdoptionsButtonLayout.setHorizontalGroup(
-            AdoptionsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdoptionsButtonLayout.createSequentialGroup()
+        javax.swing.GroupLayout NewPetButtonLayout = new javax.swing.GroupLayout(NewPetButton);
+        NewPetButton.setLayout(NewPetButtonLayout);
+        NewPetButtonLayout.setHorizontalGroup(
+            NewPetButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NewPetButtonLayout.createSequentialGroup()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addGroup(AdoptionsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(NewPetButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(314, Short.MAX_VALUE))
         );
-        AdoptionsButtonLayout.setVerticalGroup(
-            AdoptionsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AdoptionsButtonLayout.createSequentialGroup()
-                .addGroup(AdoptionsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        NewPetButtonLayout.setVerticalGroup(
+            NewPetButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NewPetButtonLayout.createSequentialGroup()
+                .addGroup(NewPetButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(AdoptionsButtonLayout.createSequentialGroup()
+                    .addGroup(NewPetButtonLayout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel20)))
@@ -319,8 +322,8 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(BackGroundLayout.createSequentialGroup()
                 .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(MyPetsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AdoptionsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PetsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(NewPetButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(RescuesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(DonationsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(StatsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -331,9 +334,9 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(BackGroundLayout.createSequentialGroup()
                 .addComponent(Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(MyPetsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PetsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(AdoptionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(NewPetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(RescuesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -361,21 +364,21 @@ public class MainMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MyPetsButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MyPetsButtonMouseEntered
-        MyPetsButton.setBackground(buttonHover);
-    }//GEN-LAST:event_MyPetsButtonMouseEntered
+    private void PetsButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PetsButtonMouseEntered
+        PetsButton.setBackground(buttonHover);
+    }//GEN-LAST:event_PetsButtonMouseEntered
 
-    private void MyPetsButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MyPetsButtonMouseExited
-        MyPetsButton.setBackground(buttonBase);
-    }//GEN-LAST:event_MyPetsButtonMouseExited
+    private void PetsButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PetsButtonMouseExited
+        PetsButton.setBackground(buttonBase);
+    }//GEN-LAST:event_PetsButtonMouseExited
 
-    private void AdoptionsButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdoptionsButtonMouseEntered
-        AdoptionsButton.setBackground(buttonHover);
-    }//GEN-LAST:event_AdoptionsButtonMouseEntered
+    private void NewPetButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewPetButtonMouseEntered
+        NewPetButton.setBackground(buttonHover);
+    }//GEN-LAST:event_NewPetButtonMouseEntered
 
-    private void AdoptionsButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdoptionsButtonMouseExited
-        AdoptionsButton.setBackground(buttonBase);
-    }//GEN-LAST:event_AdoptionsButtonMouseExited
+    private void NewPetButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewPetButtonMouseExited
+        NewPetButton.setBackground(buttonBase);
+    }//GEN-LAST:event_NewPetButtonMouseExited
 
     private void RescuesButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RescuesButtonMouseEntered
         RescuesButton.setBackground(buttonHover);
@@ -401,15 +404,20 @@ public class MainMenu extends javax.swing.JFrame {
         StatsButton.setBackground(buttonBase);
     }//GEN-LAST:event_StatsButtonMouseExited
 
-    private void MyPetsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MyPetsButtonMouseClicked
-        InsertPetForm window = new InsertPetForm();
+    private void PetsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PetsButtonMouseClicked
+        UserPetTable window = new UserPetTable();
         dispose();
-    }//GEN-LAST:event_MyPetsButtonMouseClicked
+    }//GEN-LAST:event_PetsButtonMouseClicked
 
     private void RescuesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RescuesButtonMouseClicked
         InsertPetForm window = new InsertPetForm();
         dispose();
     }//GEN-LAST:event_RescuesButtonMouseClicked
+
+    private void NewPetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewPetButtonMouseClicked
+        InsertPetForm window = new InsertPetForm();
+        dispose();
+    }//GEN-LAST:event_NewPetButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -437,12 +445,12 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel AdoptionsButton;
     private javax.swing.JPanel BackGround;
     private javax.swing.JPanel Banner;
     private javax.swing.JPanel DonationsButton;
     private javax.swing.JLabel LableTitle;
-    private javax.swing.JPanel MyPetsButton;
+    private javax.swing.JPanel NewPetButton;
+    private javax.swing.JPanel PetsButton;
     private javax.swing.JPanel RescuesButton;
     private javax.swing.JPanel StatsButton;
     private javax.swing.JLabel jLabel1;

@@ -53,8 +53,8 @@
               <Group type="102" attributes="0">
                   <EmptySpace pref="15" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="MyPetsButton" max="32767" attributes="0"/>
-                      <Component id="AdoptionsButton" max="32767" attributes="0"/>
+                      <Component id="PetsButton" max="32767" attributes="0"/>
+                      <Component id="NewPetButton" max="32767" attributes="0"/>
                       <Component id="RescuesButton" max="32767" attributes="0"/>
                       <Component id="DonationsButton" max="32767" attributes="0"/>
                       <Component id="StatsButton" max="32767" attributes="0"/>
@@ -68,9 +68,9 @@
               <Group type="102" attributes="0">
                   <Component id="Banner" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="MyPetsButton" min="-2" pref="70" max="-2" attributes="0"/>
+                  <Component id="PetsButton" min="-2" pref="70" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="AdoptionsButton" min="-2" pref="70" max="-2" attributes="0"/>
+                  <Component id="NewPetButton" min="-2" pref="70" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="RescuesButton" min="-2" pref="70" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -83,16 +83,16 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="MyPetsButton">
+        <Container class="javax.swing.JPanel" name="PetsButton">
           <Properties>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MyPetsButtonMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MyPetsButtonMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MyPetsButtonMouseExited"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PetsButtonMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PetsButtonMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PetsButtonMouseExited"/>
           </Events>
 
           <Layout>
@@ -131,7 +131,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="My pets"/>
+                <Property name="text" type="java.lang.String" value="Pets"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
@@ -145,7 +145,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel19">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Manage your pets and add new companions."/>
+                <Property name="text" type="java.lang.String" value="Manage your pets and discover pets in adoption and missing."/>
               </Properties>
             </Component>
           </SubComponents>
@@ -190,15 +190,16 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="AdoptionsButton">
+        <Container class="javax.swing.JPanel" name="NewPetButton">
           <Properties>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AdoptionsButtonMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AdoptionsButtonMouseExited"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="NewPetButtonMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="NewPetButtonMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="NewPetButtonMouseExited"/>
           </Events>
 
           <Layout>
@@ -211,7 +212,7 @@
                           <Component id="jLabel3" max="32767" attributes="0"/>
                           <Component id="jLabel20" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="152" max="32767" attributes="0"/>
+                      <EmptySpace pref="314" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -237,7 +238,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Adoptions"/>
+                <Property name="text" type="java.lang.String" value="New Pet"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -251,7 +252,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel20">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Find a loving companion or give a pet the opportunity to find a new home."/>
+                <Property name="text" type="java.lang.String" value="Add a rescued or adopted pet to the system"/>
               </Properties>
             </Component>
           </SubComponents>
