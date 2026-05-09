@@ -179,7 +179,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         LableTitle = new javax.swing.JLabel();
         ScrollPanelFirst = new javax.swing.JScrollPane();
         FormPanelInsertPet = new javax.swing.JPanel();
-        BasicInformationPanel3 = new javax.swing.JPanel();
+        BasicInformationPanel = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         TextName3 = new javax.swing.JTextField();
         TextColor3 = new javax.swing.JTextField();
@@ -190,8 +190,8 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel33 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         TextDescription3 = new javax.swing.JTextArea();
-        ImagePreview3 = new javax.swing.JLabel();
-        ButtonSelectImage3 = new javax.swing.JPanel();
+        ImagePreview = new javax.swing.JLabel();
+        ButtonSelectImage = new javax.swing.JPanel();
         LabelButtonSelectImage3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ListImages = new javax.swing.JList<>();
@@ -264,7 +264,7 @@ public class InsertPetForm extends javax.swing.JFrame {
 
         ScrollPanelFirst.setPreferredSize(new java.awt.Dimension(911, 510));
 
-        BasicInformationPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Basic Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(142, 142, 142))); // NOI18N
+        BasicInformationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Basic Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(142, 142, 142))); // NOI18N
 
         jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel29.setText("Name:");
@@ -294,27 +294,28 @@ public class InsertPetForm extends javax.swing.JFrame {
         TextDescription3.setRows(5);
         jScrollPane7.setViewportView(TextDescription3);
 
-        ImagePreview3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        ImagePreview3.setForeground(new java.awt.Color(142, 142, 142));
-        ImagePreview3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ImagePreview3.setText("Image");
-        ImagePreview3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        ImagePreview.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ImagePreview.setForeground(new java.awt.Color(142, 142, 142));
+        ImagePreview.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ImagePreview.setText("Image");
+        ImagePreview.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        ButtonSelectImage3.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonSelectImage.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonSelectImage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         LabelButtonSelectImage3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelButtonSelectImage3.setForeground(new java.awt.Color(255, 255, 255));
         LabelButtonSelectImage3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelButtonSelectImage3.setText("Select Image");
 
-        javax.swing.GroupLayout ButtonSelectImage3Layout = new javax.swing.GroupLayout(ButtonSelectImage3);
-        ButtonSelectImage3.setLayout(ButtonSelectImage3Layout);
-        ButtonSelectImage3Layout.setHorizontalGroup(
-            ButtonSelectImage3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout ButtonSelectImageLayout = new javax.swing.GroupLayout(ButtonSelectImage);
+        ButtonSelectImage.setLayout(ButtonSelectImageLayout);
+        ButtonSelectImageLayout.setHorizontalGroup(
+            ButtonSelectImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(LabelButtonSelectImage3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        ButtonSelectImage3Layout.setVerticalGroup(
-            ButtonSelectImage3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        ButtonSelectImageLayout.setVerticalGroup(
+            ButtonSelectImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(LabelButtonSelectImage3, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
@@ -325,67 +326,67 @@ public class InsertPetForm extends javax.swing.JFrame {
         jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99" }));
 
-        javax.swing.GroupLayout BasicInformationPanel3Layout = new javax.swing.GroupLayout(BasicInformationPanel3);
-        BasicInformationPanel3.setLayout(BasicInformationPanel3Layout);
-        BasicInformationPanel3Layout.setHorizontalGroup(
-            BasicInformationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BasicInformationPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout BasicInformationPanelLayout = new javax.swing.GroupLayout(BasicInformationPanel);
+        BasicInformationPanel.setLayout(BasicInformationPanelLayout);
+        BasicInformationPanelLayout.setHorizontalGroup(
+            BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BasicInformationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(BasicInformationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel33)
                     .addComponent(jLabel30)
                     .addComponent(jLabel29))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(BasicInformationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(BasicInformationPanel3Layout.createSequentialGroup()
-                        .addGroup(BasicInformationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(BasicInformationPanelLayout.createSequentialGroup()
+                        .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(TextName3, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
                             .addComponent(TextColor3))
                         .addGap(18, 18, 18)
-                        .addGroup(BasicInformationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BasicInformationPanel3Layout.createSequentialGroup()
+                        .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BasicInformationPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel31)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(BasicInformationPanel3Layout.createSequentialGroup()
+                            .addGroup(BasicInformationPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel32)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(TextChip3, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))))
                     .addComponent(jScrollPane7))
                 .addGap(18, 18, 18)
-                .addGroup(BasicInformationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ButtonSelectImage3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ImagePreview3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ButtonSelectImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ImagePreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        BasicInformationPanel3Layout.setVerticalGroup(
-            BasicInformationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BasicInformationPanel3Layout.createSequentialGroup()
+        BasicInformationPanelLayout.setVerticalGroup(
+            BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BasicInformationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(BasicInformationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(BasicInformationPanel3Layout.createSequentialGroup()
-                        .addGroup(BasicInformationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BasicInformationPanelLayout.createSequentialGroup()
+                        .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel29)
                             .addComponent(TextName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel31)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(BasicInformationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel30)
                             .addComponent(TextColor3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel32)
                             .addComponent(TextChip3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(BasicInformationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(BasicInformationPanel3Layout.createSequentialGroup()
+                        .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(BasicInformationPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel33)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jScrollPane7)))
-                    .addGroup(BasicInformationPanel3Layout.createSequentialGroup()
-                        .addComponent(ImagePreview3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(BasicInformationPanelLayout.createSequentialGroup()
+                        .addComponent(ImagePreview, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ButtonSelectImage3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ButtonSelectImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -400,6 +401,7 @@ public class InsertPetForm extends javax.swing.JFrame {
 
         ComboType.setBackground(new java.awt.Color(254, 255, 255));
         ComboType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboType.addActionListener(this::ComboTypeActionPerformed);
 
         ComboSpaceRequired.setBackground(new java.awt.Color(254, 255, 255));
         ComboSpaceRequired.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -620,11 +622,13 @@ public class InsertPetForm extends javax.swing.JFrame {
 
         ComboIllness.setBackground(new java.awt.Color(254, 255, 255));
         ComboIllness.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboIllness.setPreferredSize(new java.awt.Dimension(280, 26));
 
         ListPetMedicine.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane4.setViewportView(ListPetMedicine);
 
         ButtonAddIllness.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonAddIllness.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         LabelButtonAddIllness.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelButtonAddIllness.setForeground(new java.awt.Color(255, 255, 255));
@@ -635,7 +639,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         ButtonAddIllness.setLayout(ButtonAddIllnessLayout);
         ButtonAddIllnessLayout.setHorizontalGroup(
             ButtonAddIllnessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LabelButtonAddIllness, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+            .addComponent(LabelButtonAddIllness, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         ButtonAddIllnessLayout.setVerticalGroup(
             ButtonAddIllnessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -650,8 +654,10 @@ public class InsertPetForm extends javax.swing.JFrame {
 
         ComboMedicine.setBackground(new java.awt.Color(254, 255, 255));
         ComboMedicine.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboMedicine.setPreferredSize(new java.awt.Dimension(280, 26));
 
         ButtonAddMedicine.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonAddMedicine.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         LabelButtonAddMedicine.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelButtonAddMedicine.setForeground(new java.awt.Color(255, 255, 255));
@@ -680,8 +686,10 @@ public class InsertPetForm extends javax.swing.JFrame {
 
         ComboTreatment.setBackground(new java.awt.Color(254, 255, 255));
         ComboTreatment.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboTreatment.setPreferredSize(new java.awt.Dimension(280, 26));
 
         ButtonAddTreatment.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonAddTreatment.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         LabelButtonAddTreatment.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelButtonAddTreatment.setForeground(new java.awt.Color(255, 255, 255));
@@ -716,36 +724,37 @@ public class InsertPetForm extends javax.swing.JFrame {
                         .addGroup(PetHealthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PetHealthPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ComboIllness, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(35, 35, 35)
+                                .addComponent(ComboIllness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(PetHealthPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel17)
-                                .addGap(37, 37, 37)
-                                .addComponent(ComboMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ButtonAddMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ComboMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PetHealthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PetHealthPanelLayout.createSequentialGroup()
+                                .addGap(0, 2, Short.MAX_VALUE)
+                                .addComponent(ButtonAddMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ButtonAddIllness, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)))
                     .addComponent(jScrollPane5)
                     .addGroup(PetHealthPanelLayout.createSequentialGroup()
                         .addComponent(jLabel18)
-                        .addGap(31, 31, 31)
-                        .addComponent(ComboTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ComboTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ButtonAddTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
-            .addGroup(PetHealthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PetHealthPanelLayout.createSequentialGroup()
-                    .addGap(571, 571, 571)
-                    .addComponent(ButtonAddIllness, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
         PetHealthPanelLayout.setVerticalGroup(
             PetHealthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PetHealthPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PetHealthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(ComboIllness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(PetHealthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PetHealthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel16)
+                        .addComponent(ComboIllness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ButtonAddIllness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -758,21 +767,17 @@ public class InsertPetForm extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(PetHealthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel18)
-                    .addGroup(PetHealthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ButtonAddTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ComboTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(PetHealthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel18)
+                        .addComponent(ComboTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ButtonAddTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(PetHealthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PetHealthPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(ButtonAddIllness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(437, Short.MAX_VALUE)))
         );
 
         ButtonSubmitPet.setBackground(new java.awt.Color(255, 153, 51));
+        ButtonSubmitPet.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(255, 255, 255));
@@ -791,6 +796,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         );
 
         ButtonCancel.setBackground(new java.awt.Color(120, 120, 120));
+        ButtonCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(255, 255, 255));
@@ -836,7 +842,7 @@ public class InsertPetForm extends javax.swing.JFrame {
             .addGroup(FormPanelInsertPetLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(FormPanelInsertPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BasicInformationPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BasicInformationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PetDetailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(LocationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(VeterinarianPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -848,7 +854,7 @@ public class InsertPetForm extends javax.swing.JFrame {
             FormPanelInsertPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FormPanelInsertPetLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BasicInformationPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BasicInformationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(PetDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -924,6 +930,10 @@ public class InsertPetForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextNameActionPerformed
 
+    private void ComboTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboTypeActionPerformed
+
     
     
     
@@ -955,12 +965,12 @@ public class InsertPetForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel BasicInformationPanel3;
+    private javax.swing.JPanel BasicInformationPanel;
     private javax.swing.JPanel ButtonAddIllness;
     private javax.swing.JPanel ButtonAddMedicine;
     private javax.swing.JPanel ButtonAddTreatment;
     private javax.swing.JPanel ButtonCancel;
-    private javax.swing.JPanel ButtonSelectImage3;
+    private javax.swing.JPanel ButtonSelectImage;
     private javax.swing.JPanel ButtonSubmitPet;
     private javax.swing.JComboBox<DbObject> ComboBreed;
     private javax.swing.JComboBox<DbObject> ComboCanton;
@@ -977,7 +987,7 @@ public class InsertPetForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<DbObject> ComboType;
     private javax.swing.JPanel FinalPanel;
     private javax.swing.JPanel FormPanelInsertPet;
-    private javax.swing.JLabel ImagePreview3;
+    private javax.swing.JLabel ImagePreview;
     private javax.swing.JLabel LabelButtonAddIllness;
     private javax.swing.JLabel LabelButtonAddMedicine;
     private javax.swing.JLabel LabelButtonAddTreatment;
