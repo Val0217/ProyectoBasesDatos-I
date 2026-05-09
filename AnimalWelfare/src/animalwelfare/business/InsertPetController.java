@@ -16,6 +16,10 @@ import animalwelfare.userInterface.InsertPetFormForEdit;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import animalwelfare.access.PetEditData;
+import animalwelfare.access.PetIllnessOperations;
+import animalwelfare.access.PetMedicineOperations;
+import animalwelfare.access.PetTreatmentOperations;
+import java.util.ArrayList;
 
 public class InsertPetController {
     
@@ -47,9 +51,12 @@ public class InsertPetController {
         view.fillPetTraining(PetTrainingOperations.listPetTraining());
         view.fillPetSize(PetSizeOperations.listPetSize());
         view.fillVeterinarian(PetVeterinarianOperations.listPetVeterinarian());
+        view.fillIllness(PetIllnessOperations.listIllness());
+        view.fillTreatment(PetTreatmentOperations.listTreatment());
+        view.fillMedicine(PetMedicineOperations.listMedicine());
     }
     
-    public boolean InsertPet(String color, int age, String description, String petName, String chip, DbObject idEnergy, DbObject idState, DbObject idType, DbObject idBreed, DbObject idDistrict, DbObject idSpaceRequired, DbObject idPetTraining, DbObject idPetSize, DbObject idVeterinarian) throws SQLException{
+    public boolean InsertPet(String color, int age, String description, String petName, String chip, DbObject idEnergy, DbObject idType, DbObject idBreed, DbObject idDistrict, DbObject idSpaceRequired, DbObject idPetTraining, DbObject idPetSize, DbObject idVeterinarian, ArrayList<DbObject> idIllness, ArrayList<DbObject> idTreatment, ArrayList<DbObject> idMedicine) throws SQLException{
 
         // validaciones
         if (color == null || color.trim().isEmpty()) {
@@ -69,11 +76,6 @@ public class InsertPetController {
 
         if (idEnergy == null || idEnergy.getId() == 0) {
             JOptionPane.showMessageDialog(null, "Please select an energy level.");
-            return false;
-        }
-
-        if (idState == null || idState.getId() == 0) {
-            JOptionPane.showMessageDialog(null, "Please select a state.");
             return false;
         }
 
@@ -107,17 +109,31 @@ public class InsertPetController {
             return false;
         }
 
-        if (idVeterinarian == null || idVeterinarian.getId() == 0) {
-            JOptionPane.showMessageDialog(null, "Please select a veterinarian.");
-            return false;
-        }
-
         if (Session.getInstance().getUserId() == 0) {
             JOptionPane.showMessageDialog(null, "User must be logged in to insert a pet.");
             return false;
         }
 
-        if (PetOperations.InsertPet(color, age, description, petName, chip, idEnergy.getId(), idState.getId(), idType.getId(), idBreed.getId(), idDistrict.getId(), idSpaceRequired.getId(), idPetTraining.getId(), idPetSize.getId(), Session.getInstance().getUserId(), idVeterinarian.getId())) {
+
+        // Convertir las listas de DbObject a listas de IDs
+        ArrayList<Integer> illnessIds = new ArrayList<>();
+        for (DbObject illness : idIllness) {
+            illnessIds.add(illness.getId());
+        }
+        ArrayList<Integer> treatmentIds = new ArrayList<>();
+        for (DbObject treatment : idTreatment) {
+            treatmentIds.add(treatment.getId());
+        }
+        ArrayList<Integer> medicineIds = new ArrayList<>();
+        for (DbObject medicine : idMedicine) {
+            medicineIds.add(medicine.getId());
+        }
+
+        Integer[] dataIllness = illnessIds.toArray(new Integer[0]);
+        Integer[] dataTreatment = treatmentIds.toArray(new Integer[0]);
+        Integer[] dataMedicine = medicineIds.toArray(new Integer[0]);
+
+        if (PetOperations.InsertPet(color, age, description, petName, chip, idEnergy.getId(), 2, idType.getId(), idBreed.getId(), idDistrict.getId(), idSpaceRequired.getId(), idPetTraining.getId(), idPetSize.getId(), Session.getInstance().getUserId(), idVeterinarian.getId(), dataIllness, dataTreatment, dataMedicine)) {
             JOptionPane.showMessageDialog(null, "Pet inserted successfully.");
             return true;
         } else {

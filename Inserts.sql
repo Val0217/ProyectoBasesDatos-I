@@ -115,23 +115,24 @@ INSERT INTO Currency (Id, Name) VALUES (2, 'Dolares');
 -- 3. ENFERMEDADES, MEDICAMENTOS, TRATAMIENTOS
 -- -------------------------------------------------------------
 
-INSERT INTO PetIllness (Id, Name, Description) VALUES (1, 'Parvovirus',   'Enfermedad viral en perros');
-INSERT INTO PetIllness (Id, Name, Description) VALUES (2, 'Moquillo',     'Enfermedad respiratoria canina');
-INSERT INTO PetIllness (Id, Name, Description) VALUES (3, 'Toxoplasmosis','Parasito comun en gatos');
-INSERT INTO PetIllness (Id, Name, Description) VALUES (4, 'Sarna',        'Parasito externo');
-INSERT INTO PetIllness (Id, Name, Description) VALUES (5, 'Leucemia Felina','Virus en gatos');
+INSERT INTO PetIllness (Id, Name, Description) VALUES (s_PetIllness.nextval, 'Parvovirus',   'Enfermedad viral en perros');
+INSERT INTO PetIllness (Id, Name, Description) VALUES (s_PetIllness.nextval, 'Moquillo',     'Enfermedad respiratoria canina');
+INSERT INTO PetIllness (Id, Name, Description) VALUES (s_PetIllness.nextval, 'Toxoplasmosis','Parasito comun en gatos');
+INSERT INTO PetIllness (Id, Name, Description) VALUES (s_PetIllness.nextval, 'Sarna',        'Parasito externo');
+INSERT INTO PetIllness (Id, Name, Description) VALUES (s_PetIllness.nextval, 'Leucemia Felina','Virus en gatos');
 
-INSERT INTO Medicine (Id, Name, Dose) VALUES (1, 'Amoxicilina',  '250mg cada 8h');
-INSERT INTO Medicine (Id, Name, Dose) VALUES (2, 'Ivermectina',  '0.2mg/kg');
-INSERT INTO Medicine (Id, Name, Dose) VALUES (3, 'Metronidazol', '15mg/kg');
-INSERT INTO Medicine (Id, Name, Dose) VALUES (4, 'Prednisona',   '1mg/kg');
-INSERT INTO Medicine (Id, Name, Dose) VALUES (5, 'Vitamina B12', '1ml semanal');
+INSERT INTO Medicine (Id, Name, Dose) VALUES (s_Medicine.nextval, 'Amoxicilina',  '250mg cada 8h');
+INSERT INTO Medicine (Id, Name, Dose) VALUES (s_Medicine.nextval, 'Ivermectina',  '0.2mg/kg');
+INSERT INTO Medicine (Id, Name, Dose) VALUES (s_Medicine.nextval, 'Metronidazol', '15mg/kg');
+INSERT INTO Medicine (Id, Name, Dose) VALUES (s_Medicine.nextval, 'Prednisona',   '1mg/kg');
+INSERT INTO Medicine (Id, Name, Dose) VALUES (s_Medicine.nextval, 'Vitamina B12', '1ml semanal');
 
-INSERT INTO PetTreatment (Id, Name, Description) VALUES (1, 'Desparasitacion', 'Control de parasitos internos');
-INSERT INTO PetTreatment (Id, Name, Description) VALUES (2, 'Vacunacion',      'Esquema de vacunas basico');
-INSERT INTO PetTreatment (Id, Name, Description) VALUES (3, 'Bano medicado',   'Tratamiento de piel');
-INSERT INTO PetTreatment (Id, Name, Description) VALUES (4, 'Cirugia',         'Procedimiento quirurgico');
-INSERT INTO PetTreatment (Id, Name, Description) VALUES (5, 'Esterilizacion',  'Castración o esterilizacion');
+
+INSERT INTO PetTreatment (Id, Name, Description) VALUES (s_PetTreatment.nextval, 'Desparasitacion', 'Control de parasitos internos');
+INSERT INTO PetTreatment (Id, Name, Description) VALUES (s_PetTreatment.nextval, 'Vacunacion',      'Esquema de vacunas basico');
+INSERT INTO PetTreatment (Id, Name, Description) VALUES (s_PetTreatment.nextval, 'Bano medicado',   'Tratamiento de piel');
+INSERT INTO PetTreatment (Id, Name, Description) VALUES (s_PetTreatment.nextval, 'Cirugia',         'Procedimiento quirurgico');
+INSERT INTO PetTreatment (Id, Name, Description) VALUES (s_PetTreatment.nextval, 'Esterilizacion',  'Castración o esterilizacion');
 
 -- -------------------------------------------------------------
 -- 4. VETERINARIOS

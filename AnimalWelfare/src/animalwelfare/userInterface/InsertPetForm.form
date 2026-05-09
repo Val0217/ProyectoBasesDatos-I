@@ -148,20 +148,20 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="TextName3" pref="215" max="32767" attributes="0"/>
-                                          <Component id="TextColor3" max="32767" attributes="0"/>
+                                          <Component id="TextName" pref="215" max="32767" attributes="0"/>
+                                          <Component id="TextColor" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="jComboBox1" min="-2" pref="215" max="-2" attributes="0"/>
+                                              <Component id="ComboAge" min="-2" pref="215" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
                                               <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="TextChip3" pref="215" max="32767" attributes="0"/>
+                                              <Component id="TextChip" pref="215" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -185,16 +185,16 @@
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="TextName3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="TextName" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="ComboAge" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="TextColor3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="TextColor" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="TextChip3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="TextChip" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -228,7 +228,7 @@
                         <Property name="text" type="java.lang.String" value="Name:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="TextName3">
+                    <Component class="javax.swing.JTextField" name="TextName">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="14" style="0"/>
@@ -238,7 +238,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextNameActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="TextColor3">
+                    <Component class="javax.swing.JTextField" name="TextColor">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="14" style="0"/>
@@ -264,7 +264,7 @@
                         <Property name="text" type="java.lang.String" value="Age:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="TextChip3">
+                    <Component class="javax.swing.JTextField" name="TextChip">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="14" style="0"/>
@@ -297,7 +297,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTextArea" name="TextDescription3">
+                        <Component class="javax.swing.JTextArea" name="TextDescription">
                           <Properties>
                             <Property name="columns" type="int" value="20"/>
                             <Property name="rows" type="int" value="5"/>
@@ -379,7 +379,7 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JComboBox" name="jComboBox1">
+                    <Component class="javax.swing.JComboBox" name="ComboAge">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="fe" type="rgb"/>
@@ -589,7 +589,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="TextName3"/>
+                          <ComponentRef name="TextName"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Species:"/>
                       </Properties>
@@ -638,7 +638,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="TextName3"/>
+                          <ComponentRef name="TextName"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Space required:"/>
                       </Properties>
@@ -668,7 +668,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="TextName3"/>
+                          <ComponentRef name="TextName"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Breed:"/>
                       </Properties>
@@ -698,7 +698,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="TextName3"/>
+                          <ComponentRef name="TextName"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Energy:"/>
                       </Properties>
@@ -728,7 +728,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="TextName3"/>
+                          <ComponentRef name="TextName"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Ease of training:"/>
                       </Properties>
@@ -758,7 +758,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="TextName3"/>
+                          <ComponentRef name="TextName"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Size:"/>
                       </Properties>
@@ -837,7 +837,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="TextName3"/>
+                          <ComponentRef name="TextName"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Country:"/>
                       </Properties>
@@ -886,7 +886,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="TextName3"/>
+                          <ComponentRef name="TextName"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Canton:"/>
                       </Properties>
@@ -916,7 +916,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="TextName3"/>
+                          <ComponentRef name="TextName"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Province:"/>
                       </Properties>
@@ -946,7 +946,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="TextName3"/>
+                          <ComponentRef name="TextName"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="District:"/>
                       </Properties>
@@ -1004,7 +1004,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="TextName3"/>
+                          <ComponentRef name="TextName"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Select your pet&apos;s veterinarian:"/>
                       </Properties>
@@ -1036,6 +1036,9 @@
                             </Property>
                             <Property name="selectionMode" type="int" value="0"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="ListVeterinarianValueChanged"/>
+                          </Events>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DbObject&gt;"/>
                           </AuxValues>
@@ -1144,7 +1147,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="TextName3"/>
+                          <ComponentRef name="TextName"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Your pet suffers from some illness:"/>
                       </Properties>
@@ -1197,6 +1200,9 @@
                           <Color id="Hand Cursor"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButtonAddIllnessMouseClicked"/>
+                      </Events>
 
                       <Layout>
                         <DimensionLayout dim="0">
@@ -1234,7 +1240,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="TextName3"/>
+                          <ComponentRef name="TextName"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Your pet needs some medicine:"/>
                       </Properties>
@@ -1267,6 +1273,9 @@
                           <Color id="Hand Cursor"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButtonAddMedicineMouseClicked"/>
+                      </Events>
 
                       <Layout>
                         <DimensionLayout dim="0">
@@ -1324,7 +1333,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="TextName3"/>
+                          <ComponentRef name="TextName"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Your pet needs some treatment:"/>
                       </Properties>
@@ -1357,6 +1366,9 @@
                           <Color id="Hand Cursor"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButtonAddTreatmentMouseClicked"/>
+                      </Events>
 
                       <Layout>
                         <DimensionLayout dim="0">
@@ -1447,6 +1459,9 @@
                           <Color id="Hand Cursor"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButtonSubmitPetMouseClicked"/>
+                      </Events>
 
                       <Layout>
                         <DimensionLayout dim="0">

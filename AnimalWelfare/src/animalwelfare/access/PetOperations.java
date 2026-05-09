@@ -16,6 +16,8 @@ import oracle.jdbc.OracleTypes;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import java.sql.Types;
+import oracle.jdbc.OracleConnection;
+import oracle.jdbc.OracleTypeMetaData.Array;
 
 public class PetOperations {
     
@@ -124,14 +126,32 @@ public class PetOperations {
         }
     }
 
-    public static boolean InsertPet(String color, int age, String description, String petName, String chip, int idEnergy, int idState, int idType, int idBreed, int idDistrict, int idSpaceRequired, int idPetTraining, int idPetSize, int idPerson, int idVeterinarian) throws SQLException {
+    public static boolean InsertPet(String color, int age, String description, String petName, String chip, int idEnergy, int idState, int idType, int idBreed, int idDistrict, int idSpaceRequired, int idPetTraining, int idPetSize, int idPerson, int idVeterinarian, Integer[] illnessIds, Integer[] treatmentIds, Integer[] medicineIds) throws SQLException {
 
         try {
             Connection con = ConexionOracle.connect();
+            
+            
+            // Obtenemos la conexión de OracleConnection para poder crear los arreglos de SQL Array
+            OracleConnection oracleConnection = con.unwrap(OracleConnection.class);
+            // Convertimos las listas de IDs a arreglos de SQL Array
+            Array arrayIllness = (Array) oracleConnection.createOracleArray(
+                "NUMBERLIST",
+                illnessIds
+            );
+            Array arrayTreatment = (Array) oracleConnection.createOracleArray(
+                "NUMBERLIST",
+                treatmentIds
+            );
+            Array arrayMedicine = (Array) oracleConnection.createOracleArray(
+                "NUMBERLIST",
+                medicineIds
+            );
 
             // Creamos la consulta SQL para insertar una nueva persona utilizando el procedimiento insertPerson
-            String SQL = "BEGIN pr_insert_pet('"+color+"',"+age+",'"+description+"','"+petName+"','"+chip+"',"+idEnergy+","+idState+","+idType+","+idBreed+","+idDistrict+","+idSpaceRequired+","+idPetTraining+","+idPetSize+","+idPerson+","+idVeterinarian+"); END;";
+            String SQL = "BEGIN pr_insert_pet('"+color+"',"+age+",'"+description+"','"+petName+"','"+chip+"',"+idEnergy+","+idState+","+idType+","+idBreed+","+idDistrict+","+idSpaceRequired+","+idPetTraining+","+idPetSize+","+idPerson+","+idVeterinarian+","+arrayIllness+","+arrayTreatment+","+arrayMedicine+"); END;";
             
+
             Statement cn = con.createStatement(); // esto es para poder ejecutar consultas
             cn.execute(SQL); // ejecutamos el query
             

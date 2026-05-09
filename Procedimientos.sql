@@ -21,6 +21,10 @@ BEGIN
     RETURN v_result;
 END;
 /
+
+-- Tipos de datos para listas de IDs en procedimientos almacenados
+CREATE OR REPLACE TYPE NumberList AS TABLE OF NUMBER;
+
 /* ------------------------------------------------------------
    Procedimiento: FN_GET_CANTON_BY_PROVINCE
    Descripcion: 
@@ -1525,12 +1529,56 @@ END pr_insert_person;
    Descripcion:
    Inserta una nueva mascota en la base de datos.
    ------------------------------------------------------------ */
-CREATE OR REPLACE PROCEDURE pr_insert_pet(pColor IN VARCHAR2, pAge IN NUMBER, pDescription IN VARCHAR2, pPetName IN VARCHAR2, pChip IN VARCHAR2, pIdEnergy IN NUMBER, pIdState IN NUMBER, pIdType IN NUMBER, pIdBreed IN NUMBER, pIdDistrict IN NUMBER, pIdSpaceRequired IN NUMBER, pIdPetTraining IN NUMBER, pIdPetSize IN NUMBER, pIdPerson IN NUMBER, pIdVeterinarian IN NUMBER)
+CREATE OR REPLACE PROCEDURE pr_insert_pet(pColor IN VARCHAR2, pAge IN NUMBER, pDescription IN VARCHAR2, pPetName IN VARCHAR2, pChip IN VARCHAR2, pIdEnergy IN NUMBER, pIdState IN NUMBER, pIdType IN NUMBER, pIdBreed IN NUMBER, pIdDistrict IN NUMBER, pIdSpaceRequired IN NUMBER, pIdPetTraining IN NUMBER, pIdPetSize IN NUMBER, pIdPerson IN NUMBER, pIdVeterinarian IN NUMBER, pIllnessId IN NumberList, pTreatMentId IN NumberList, pMedicineId IN NumberList)
 AS 
+    vcIdPet NUMBER(8);
 BEGIN --> aqui va el comando:
+    vcIdPet := s_Pet.NEXTVAL;
     INSERT INTO Pet (id, Color, Age, Description, Name, Chip, IdEnergy, IdState, IdType, IdBreed, IdDistrict, IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian)
     VALUES 
-    (s_Pet.NEXTVAL, pColor, pAge, pDescription, pPetName, pChip, pIdEnergy, pIdState, pIdType, pIdBreed, pIdDistrict, pIdSpaceRequired, pIdPetTraining, pIdPetSize, pIdPerson, pIdVeterinarian);
+    (vcIdPet, pColor, pAge, pDescription, pPetName, pChip, pIdEnergy, pIdState, pIdType, pIdBreed, pIdDistrict, pIdSpaceRequired, pIdPetTraining, pIdPetSize, pIdPerson, pIdVeterinarian);
+    
+    --> Insertar enfermedades
+    FOR i IN 1 .. pIllnessId.COUNT LOOP
+
+        INSERT INTO PetXPetIllness (
+            IdPet,
+            IdPetIllness
+        )
+        VALUES (
+            vcIdPet,
+            pIllnessId(i)
+        );
+
+    END LOOP;
+    --> Insertar tratamientos
+    FOR i IN 1 .. pTreatMentId.COUNT LOOP
+
+        INSERT INTO PetXPetTreatment (
+            IdPet,
+            IdPetTreatment
+        )
+        VALUES (
+            vcIdPet,
+            pTreatMentId(i)
+        );
+
+    END LOOP;
+    
+     --> Insertar medicinas
+    FOR i IN 1 .. pMedicineId.COUNT LOOP
+
+        INSERT INTO PetXMedicine (
+            IdPet,
+            IdMedicine
+        )
+        VALUES (
+            vcIdPet,
+            pMedicineId(i)
+        );
+
+    END LOOP;
+
     COMMIT;
 END pr_insert_pet;
 
