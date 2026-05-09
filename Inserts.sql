@@ -437,9 +437,26 @@ INSERT INTO PetState (Id, Name)
 SELECT 4, 'Found' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetState WHERE Id = 4);
 
+INSERT INTO PetState (Id, Name)
+SELECT 2, 'Adoptado' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetState WHERE Id = 2);
+
+INSERT INTO PetState (Id, Name)
+SELECT 3, 'Perdido' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetState WHERE Id = 3);
+
+INSERT INTO PetState (Id, Name)
+SELECT 1, 'En Adopcion' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetState WHERE Id = 1);
+
 INSERT INTO PetType (Id, Name)
+<<<<<<< HEAD
 SELECT 1, 'Dog' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetType WHERE Id = 1);
+=======
+SELECT 1, 'Perro' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetType WHERE Id = 3);
+>>>>>>> 2045f04091160651bf5fba5839c625d82a61bf3b
 
 INSERT INTO PetType (Id, Name)
 SELECT 2, 'Cat' FROM dual
@@ -710,6 +727,160 @@ SELECT 106, 'Spotted', 2, 'Available for adoption, rescued close to avenue', 'Ro
 FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 106);
 
+
+
 COMMIT;
 
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 107, 'Cream', 1, 'Small shy puppy, recently rescued', 'Coco', 'CHIP016',
+       1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 107);
 
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 108, 'Orange', 3, 'Friendly cat that likes people', 'Simba', 'CHIP017',
+       2, 1, 2, 3, 2,
+       2, 2, 1, 2, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 108);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 109, 'Black and White', 4, 'Available for adoption, calm and obedient', 'Oreo', 'CHIP018',
+       1, 1, 1, 2, 1,
+       1, 3, 2, 1, 2
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 109);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 110, 'Brown and White', 2, 'Energetic young dog, loves running', 'Bruno', 'CHIP019',
+       3, 1, 1, 5, 3,
+       3, 2, 3, 3, 2
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 110);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 111, 'Gray and White', 6, 'Older cat, very calm and affectionate', 'Milo', 'CHIP020',
+       1, 1, 2, 4, 2,
+       2, 1, 1, 2, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 111);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 112, 'Tan', 2, 'Available for adoption, rescued from street', 'Bella', 'CHIP021',
+       2, 1, 1, 6, 3,
+       3, 2, 2, 3, 2
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 112);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 113, 'White and Brown', 1, 'Playful kitten, good with children', 'Lily', 'CHIP022',
+       2, 1, 2, 3, 2,
+       2, 1, 1, 2, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 113);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 114, 'Black', 5, 'Trained guard dog, loyal and calm', 'Zeus', 'CHIP023',
+       3, 1, 1, 5, 3,
+       3, 3, 3, 3, 2
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 114);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 115, 'Calico', 3, 'Available for adoption, quiet indoor cat', 'Cleo', 'CHIP024',
+       1, 1, 2, 4, 1,
+       1, 2, 1, 1, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 115);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 116, 'Golden and White', 4, 'Friendly family dog, medium energy', 'Buddy', 'CHIP025',
+       2, 1, 1, 1, 2,
+       2, 2, 2, 2, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 116);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 117, 'Dark Brown', 7, 'Senior dog, calm and well behaved', 'Rex', 'CHIP026',
+       1, 1, 1, 2, 3,
+       3, 3, 3, 3, 2
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 117);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 118, 'White', 2, 'Available for adoption, affectionate small cat', 'Snow', 'CHIP027',
+       1, 1, 2, 3, 1,
+       1, 1, 1, 1, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 118);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 119, 'Mixed Brown', 3, 'Very active dog, needs outdoor space', 'Thor', 'CHIP028',
+       3, 1, 1, 6, 3,
+       3, 2, 3, 3, 2
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 119);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+    IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+)
+SELECT 120, 'Gray', 1, 'Small kitten, playful and curious', 'Kira', 'CHIP029',
+       2, 1, 2, 4, 2,
+       2, 1, 1, 2, 1
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 120);
