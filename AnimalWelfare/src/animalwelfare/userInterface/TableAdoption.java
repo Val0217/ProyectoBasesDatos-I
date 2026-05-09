@@ -5,7 +5,16 @@
 package animalwelfare.userInterface;
 import animalwelfare.business.TableAdoptionController;
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 /**
  *
  * @author valer
@@ -18,32 +27,190 @@ public class TableAdoption extends javax.swing.JFrame {
      * Creates new form TableAdoption
      */
     public TableAdoption() {
-    initComponents();
+        initComponents();
 
-    controller = new TableAdoptionController();
+        controller = new TableAdoptionController();
 
-    controller.loadPetsUpForAdoption(jTable1);
-    controller.loadFoundPets(jTable2);
+        controller.loadPetsUpForAdoption(jTable1);
+        controller.loadFoundPets(jTable2);
+
+        JButton filterAdoptionButton = new JButton("Filter");
+        JButton clearAdoptionFiltersButton = new JButton("Clear Filters");
+
+        filterAdoptionButton.addActionListener(e -> {
+            Map<String, String> filters = showFilterDialog();
+
+            if (filters != null) {
+                controller.loadPetsUpForAdoption(jTable1, filters);
+            }
+        });
+
+        clearAdoptionFiltersButton.addActionListener(e -> {
+            controller.loadPetsUpForAdoption(jTable1);
+        });
+
+        JPanel adoptionButtonPanel = new JPanel();
+        adoptionButtonPanel.add(filterAdoptionButton);
+        adoptionButtonPanel.add(clearAdoptionFiltersButton);
+
+        jPanel1.setLayout(new BorderLayout());
+        jPanel1.remove(jScrollPane1);
+        jPanel1.add(jScrollPane1, BorderLayout.CENTER);
+        jPanel1.add(adoptionButtonPanel, BorderLayout.SOUTH);
+
+        JButton putOnAdoptionButton = new JButton("Put on Adoption");
+        JButton filterFoundButton = new JButton("Filter");
+        JButton clearFoundFiltersButton = new JButton("Clear Filters");
+
+        putOnAdoptionButton.addActionListener(e -> {
+            controller.putSelectedPetUpForAdoption(jTable2, jTable1);
+        });
+
+        filterFoundButton.addActionListener(e -> {
+            Map<String, String> filters = showFilterDialog();
+
+            if (filters != null) {
+                controller.loadFoundPets(jTable2, filters);
+            }
+        });
+
+        clearFoundFiltersButton.addActionListener(e -> {
+            controller.loadFoundPets(jTable2);
+        });
+
+        JPanel foundButtonPanel = new JPanel();
+        foundButtonPanel.add(putOnAdoptionButton);
+        foundButtonPanel.add(filterFoundButton);
+        foundButtonPanel.add(clearFoundFiltersButton);
+
+        jPanel2.setLayout(new BorderLayout());
+        jPanel2.remove(jScrollPane2);
+        jPanel2.add(jScrollPane2, BorderLayout.CENTER);
+        jPanel2.add(foundButtonPanel, BorderLayout.SOUTH);
+
+        jPanel1.revalidate();
+        jPanel1.repaint();
+
+        jPanel2.revalidate();
+        jPanel2.repaint();
+    }
     
-    JButton button = new JButton("Put on Adoption");
+private Map<String, String> showFilterDialog() {
+    Map<String, List<String>> options = controller.getFilterOptions();
 
-    button.addActionListener(e -> {
-        controller.putSelectedPetUpForAdoption(jTable2, jTable1);
-    });
+    JTextField colorField = new JTextField();
+    JTextField ageField = new JTextField();
+    JTextField nameField = new JTextField();
+    JTextField chipField = new JTextField();
 
-    jPanel2.setLayout(new BorderLayout());
+    JComboBox<String> energyComboBox = createComboBox(options.get("energy"));
+    JComboBox<String> typeComboBox = createComboBox(options.get("type"));
+    JComboBox<String> breedComboBox = createComboBox(options.get("breed"));
+    JComboBox<String> districtComboBox = createComboBox(options.get("district"));
+    JComboBox<String> spaceRequiredComboBox = createComboBox(options.get("spaceRequired"));
+    JComboBox<String> trainingComboBox = createComboBox(options.get("training"));
+    JComboBox<String> sizeComboBox = createComboBox(options.get("size"));
+    JComboBox<String> veterinarianComboBox = createComboBox(options.get("veterinarian"));
 
-    jPanel2.remove(jScrollPane2); 
-    jPanel2.add(jScrollPane2, BorderLayout.CENTER);
-    jPanel2.add(button, BorderLayout.SOUTH);
+    JPanel panel = new JPanel(new GridLayout(0, 2, 5, 5));
 
-    jPanel2.revalidate();
-    jPanel2.repaint();
+    panel.add(new JLabel("Color:"));
+    panel.add(colorField);
+
+    panel.add(new JLabel("Age:"));
+    panel.add(ageField);
+
+    panel.add(new JLabel("Name:"));
+    panel.add(nameField);
+
+    panel.add(new JLabel("Chip:"));
+    panel.add(chipField);
+
+    panel.add(new JLabel("Energy:"));
+    panel.add(energyComboBox);
+
+    panel.add(new JLabel("Type:"));
+    panel.add(typeComboBox);
+
+    panel.add(new JLabel("Breed:"));
+    panel.add(breedComboBox);
+
+    panel.add(new JLabel("District:"));
+    panel.add(districtComboBox);
+
+    panel.add(new JLabel("Space Required:"));
+    panel.add(spaceRequiredComboBox);
+
+    panel.add(new JLabel("Pet Training:"));
+    panel.add(trainingComboBox);
+
+    panel.add(new JLabel("Size:"));
+    panel.add(sizeComboBox);
+
+    panel.add(new JLabel("Veterinarian:"));
+    panel.add(veterinarianComboBox);
+
+    int result = JOptionPane.showConfirmDialog(
+        this,
+        panel,
+        "Filter Pets",
+        JOptionPane.OK_CANCEL_OPTION,
+        JOptionPane.PLAIN_MESSAGE
+    );
+
+    if (result != JOptionPane.OK_OPTION) {
+        return null;
+    }
+
+    Map<String, String> filters = new HashMap<>();
+
+    filters.put("color", colorField.getText());
+    filters.put("age", ageField.getText());
+    filters.put("name", nameField.getText());
+    filters.put("chip", chipField.getText());
+
+    filters.put("energy", getSelectedComboValue(energyComboBox));
+    filters.put("type", getSelectedComboValue(typeComboBox));
+    filters.put("breed", getSelectedComboValue(breedComboBox));
+    filters.put("district", getSelectedComboValue(districtComboBox));
+    filters.put("spaceRequired", getSelectedComboValue(spaceRequiredComboBox));
+    filters.put("training", getSelectedComboValue(trainingComboBox));
+    filters.put("size", getSelectedComboValue(sizeComboBox));
+    filters.put("veterinarian", getSelectedComboValue(veterinarianComboBox));
+
+    return filters;
 }
-    
 
+private JComboBox<String> createComboBox(List<String> values) {
+    JComboBox<String> comboBox = new JComboBox<>();
 
+    if (values == null || values.isEmpty()) {
+        comboBox.addItem("All");
+        return comboBox;
+    }
 
+    for (String value : values) {
+        comboBox.addItem(value);
+    }
+
+    return comboBox;
+}
+
+private String getSelectedComboValue(JComboBox<String> comboBox) {
+    Object selectedItem = comboBox.getSelectedItem();
+
+    if (selectedItem == null) {
+        return "";
+    }
+
+    String value = selectedItem.toString();
+
+    if (value.equals("All")) {
+        return "";
+    }
+
+    return value;
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

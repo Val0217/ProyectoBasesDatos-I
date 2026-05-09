@@ -1,5 +1,553 @@
 
 /* ------------------------------------------------------------
+   Procedimiento: pr_undo_pet_up_for_adoption
+   Descripcion: 
+   como dice el nombre cambia de estado a la pet
+   ------------------------------------------------------------ */
+CREATE OR REPLACE PROCEDURE pr_undo_pet_up_for_adoption (
+    p_pet_id   IN NUMBER,
+    p_owner_id IN NUMBER
+)
+IS
+BEGIN
+    UPDATE Pet
+    SET IdState = 2
+    WHERE Id = p_pet_id
+      AND IdOwner = p_owner_id
+      AND IdState = 1;
+
+    IF SQL%ROWCOUNT = 0 THEN
+        RAISE_APPLICATION_ERROR(
+            -20003,
+            'Pet was not found, does not belong to this user, or is not up for adoption.'
+        );
+    END IF;
+
+    COMMIT;
+END;
+/
+
+
+
+/* ------------------------------------------------------------
+   Procedimiento: Psquetes de procedures y functionsnd
+   Descripcion: 
+   cosas varias
+   ------------------------------------------------------------ */
+
+CREATE OR REPLACE PACKAGE PKG_PET_OPERATIONS AS
+
+    PROCEDURE SP_GET_PETS_BY_STATE(
+        P_ID_STATE       IN NUMBER,
+        P_COLOR          IN VARCHAR2 DEFAULT NULL,
+        P_AGE            IN NUMBER   DEFAULT NULL,
+        P_NAME           IN VARCHAR2 DEFAULT NULL,
+        P_CHIP           IN VARCHAR2 DEFAULT NULL,
+        P_ENERGY         IN VARCHAR2 DEFAULT NULL,
+        P_TYPE           IN VARCHAR2 DEFAULT NULL,
+        P_BREED          IN VARCHAR2 DEFAULT NULL,
+        P_DISTRICT       IN VARCHAR2 DEFAULT NULL,
+        P_SPACE_REQUIRED IN VARCHAR2 DEFAULT NULL,
+        P_TRAINING       IN VARCHAR2 DEFAULT NULL,
+        P_SIZE           IN VARCHAR2 DEFAULT NULL,
+        P_VETERINARIAN   IN VARCHAR2 DEFAULT NULL,
+        P_RESULT         OUT SYS_REFCURSOR
+    );
+
+    PROCEDURE SP_GET_PETS_UP_FOR_ADOPTION(
+        P_COLOR          IN VARCHAR2 DEFAULT NULL,
+        P_AGE            IN NUMBER   DEFAULT NULL,
+        P_NAME           IN VARCHAR2 DEFAULT NULL,
+        P_CHIP           IN VARCHAR2 DEFAULT NULL,
+        P_ENERGY         IN VARCHAR2 DEFAULT NULL,
+        P_TYPE           IN VARCHAR2 DEFAULT NULL,
+        P_BREED          IN VARCHAR2 DEFAULT NULL,
+        P_DISTRICT       IN VARCHAR2 DEFAULT NULL,
+        P_SPACE_REQUIRED IN VARCHAR2 DEFAULT NULL,
+        P_TRAINING       IN VARCHAR2 DEFAULT NULL,
+        P_SIZE           IN VARCHAR2 DEFAULT NULL,
+        P_VETERINARIAN   IN VARCHAR2 DEFAULT NULL,
+        P_RESULT         OUT SYS_REFCURSOR
+    );
+
+    PROCEDURE SP_GET_FOUND_PETS(
+        P_COLOR          IN VARCHAR2 DEFAULT NULL,
+        P_AGE            IN NUMBER   DEFAULT NULL,
+        P_NAME           IN VARCHAR2 DEFAULT NULL,
+        P_CHIP           IN VARCHAR2 DEFAULT NULL,
+        P_ENERGY         IN VARCHAR2 DEFAULT NULL,
+        P_TYPE           IN VARCHAR2 DEFAULT NULL,
+        P_BREED          IN VARCHAR2 DEFAULT NULL,
+        P_DISTRICT       IN VARCHAR2 DEFAULT NULL,
+        P_SPACE_REQUIRED IN VARCHAR2 DEFAULT NULL,
+        P_TRAINING       IN VARCHAR2 DEFAULT NULL,
+        P_SIZE           IN VARCHAR2 DEFAULT NULL,
+        P_VETERINARIAN   IN VARCHAR2 DEFAULT NULL,
+        P_RESULT         OUT SYS_REFCURSOR
+    );
+
+    FUNCTION FN_PUT_PET_UP_FOR_ADOPTION(
+        P_PET_ID IN NUMBER
+    ) RETURN NUMBER;
+
+    PROCEDURE SP_GET_ENERGY_OPTIONS(P_RESULT OUT SYS_REFCURSOR);
+    PROCEDURE SP_GET_TYPE_OPTIONS(P_RESULT OUT SYS_REFCURSOR);
+    PROCEDURE SP_GET_BREED_OPTIONS(P_RESULT OUT SYS_REFCURSOR);
+    PROCEDURE SP_GET_DISTRICT_OPTIONS(P_RESULT OUT SYS_REFCURSOR);
+    PROCEDURE SP_GET_SPACE_REQUIRED_OPTIONS(P_RESULT OUT SYS_REFCURSOR);
+    PROCEDURE SP_GET_TRAINING_OPTIONS(P_RESULT OUT SYS_REFCURSOR);
+    PROCEDURE SP_GET_SIZE_OPTIONS(P_RESULT OUT SYS_REFCURSOR);
+    PROCEDURE SP_GET_VETERINARIAN_OPTIONS(P_RESULT OUT SYS_REFCURSOR);
+
+END PKG_PET_OPERATIONS;
+/
+
+SHOW ERRORS PACKAGE PKG_PET_OPERATIONS;
+
+CREATE OR REPLACE PACKAGE BODY PKG_PET_OPERATIONS AS
+
+
+    PROCEDURE SP_GET_PETS_BY_STATE(
+        P_ID_STATE       IN NUMBER,
+        P_COLOR          IN VARCHAR2 DEFAULT NULL,
+        P_AGE            IN NUMBER   DEFAULT NULL,
+        P_NAME           IN VARCHAR2 DEFAULT NULL,
+        P_CHIP           IN VARCHAR2 DEFAULT NULL,
+        P_ENERGY         IN VARCHAR2 DEFAULT NULL,
+        P_TYPE           IN VARCHAR2 DEFAULT NULL,
+        P_BREED          IN VARCHAR2 DEFAULT NULL,
+        P_DISTRICT       IN VARCHAR2 DEFAULT NULL,
+        P_SPACE_REQUIRED IN VARCHAR2 DEFAULT NULL,
+        P_TRAINING       IN VARCHAR2 DEFAULT NULL,
+        P_SIZE           IN VARCHAR2 DEFAULT NULL,
+        P_VETERINARIAN   IN VARCHAR2 DEFAULT NULL,
+        P_RESULT         OUT SYS_REFCURSOR
+    )
+    IS
+    BEGIN
+        OPEN P_RESULT FOR
+            SELECT
+                PetId,
+                Color,
+                Age,
+                Description,
+                PetName,
+                Chip,
+                Energy,
+                PetState,
+                PetType,
+                Breed,
+                District,
+                SpaceRequired,
+                Training,
+                PetSize,
+                OwnerName,
+                VeterinarianName
+            FROM VW_TABLE_ADOPTION
+            WHERE IdState = P_ID_STATE
+              AND (P_COLOR IS NULL OR TRIM(P_COLOR) IS NULL OR UPPER(Color) LIKE '%' || UPPER(TRIM(P_COLOR)) || '%')
+              AND (P_AGE IS NULL OR Age = P_AGE)
+              AND (P_NAME IS NULL OR TRIM(P_NAME) IS NULL OR UPPER(PetName) LIKE '%' || UPPER(TRIM(P_NAME)) || '%')
+              AND (P_CHIP IS NULL OR TRIM(P_CHIP) IS NULL OR UPPER(Chip) LIKE '%' || UPPER(TRIM(P_CHIP)) || '%')
+              AND (P_ENERGY IS NULL OR TRIM(P_ENERGY) IS NULL OR UPPER(TRIM(P_ENERGY)) = 'ALL' OR UPPER(Energy) = UPPER(TRIM(P_ENERGY)))
+              AND (P_TYPE IS NULL OR TRIM(P_TYPE) IS NULL OR UPPER(TRIM(P_TYPE)) = 'ALL' OR UPPER(PetType) = UPPER(TRIM(P_TYPE)))
+              AND (P_BREED IS NULL OR TRIM(P_BREED) IS NULL OR UPPER(TRIM(P_BREED)) = 'ALL' OR UPPER(Breed) = UPPER(TRIM(P_BREED)))
+              AND (P_DISTRICT IS NULL OR TRIM(P_DISTRICT) IS NULL OR UPPER(TRIM(P_DISTRICT)) = 'ALL' OR UPPER(District) = UPPER(TRIM(P_DISTRICT)))
+              AND (P_SPACE_REQUIRED IS NULL OR TRIM(P_SPACE_REQUIRED) IS NULL OR UPPER(TRIM(P_SPACE_REQUIRED)) = 'ALL' OR UPPER(SpaceRequired) = UPPER(TRIM(P_SPACE_REQUIRED)))
+              AND (P_TRAINING IS NULL OR TRIM(P_TRAINING) IS NULL OR UPPER(TRIM(P_TRAINING)) = 'ALL' OR UPPER(Training) = UPPER(TRIM(P_TRAINING)))
+              AND (P_SIZE IS NULL OR TRIM(P_SIZE) IS NULL OR UPPER(TRIM(P_SIZE)) = 'ALL' OR UPPER(PetSize) = UPPER(TRIM(P_SIZE)))
+              AND (P_VETERINARIAN IS NULL OR TRIM(P_VETERINARIAN) IS NULL OR UPPER(TRIM(P_VETERINARIAN)) = 'ALL' OR UPPER(VeterinarianName) = UPPER(TRIM(P_VETERINARIAN)))
+            ORDER BY PetId;
+    END SP_GET_PETS_BY_STATE;
+
+    PROCEDURE SP_GET_PETS_UP_FOR_ADOPTION(
+        P_COLOR          IN VARCHAR2 DEFAULT NULL,
+        P_AGE            IN NUMBER   DEFAULT NULL,
+        P_NAME           IN VARCHAR2 DEFAULT NULL,
+        P_CHIP           IN VARCHAR2 DEFAULT NULL,
+        P_ENERGY         IN VARCHAR2 DEFAULT NULL,
+        P_TYPE           IN VARCHAR2 DEFAULT NULL,
+        P_BREED          IN VARCHAR2 DEFAULT NULL,
+        P_DISTRICT       IN VARCHAR2 DEFAULT NULL,
+        P_SPACE_REQUIRED IN VARCHAR2 DEFAULT NULL,
+        P_TRAINING       IN VARCHAR2 DEFAULT NULL,
+        P_SIZE           IN VARCHAR2 DEFAULT NULL,
+        P_VETERINARIAN   IN VARCHAR2 DEFAULT NULL,
+        P_RESULT         OUT SYS_REFCURSOR
+    )
+    IS
+    BEGIN
+        SP_GET_PETS_BY_STATE(
+            P_ID_STATE       => 1,
+            P_COLOR          => P_COLOR,
+            P_AGE            => P_AGE,
+            P_NAME           => P_NAME,
+            P_CHIP           => P_CHIP,
+            P_ENERGY         => P_ENERGY,
+            P_TYPE           => P_TYPE,
+            P_BREED          => P_BREED,
+            P_DISTRICT       => P_DISTRICT,
+            P_SPACE_REQUIRED => P_SPACE_REQUIRED,
+            P_TRAINING       => P_TRAINING,
+            P_SIZE           => P_SIZE,
+            P_VETERINARIAN   => P_VETERINARIAN,
+            P_RESULT         => P_RESULT
+        );
+    END SP_GET_PETS_UP_FOR_ADOPTION;
+
+    PROCEDURE SP_GET_FOUND_PETS(
+        P_COLOR          IN VARCHAR2 DEFAULT NULL,
+        P_AGE            IN NUMBER   DEFAULT NULL,
+        P_NAME           IN VARCHAR2 DEFAULT NULL,
+        P_CHIP           IN VARCHAR2 DEFAULT NULL,
+        P_ENERGY         IN VARCHAR2 DEFAULT NULL,
+        P_TYPE           IN VARCHAR2 DEFAULT NULL,
+        P_BREED          IN VARCHAR2 DEFAULT NULL,
+        P_DISTRICT       IN VARCHAR2 DEFAULT NULL,
+        P_SPACE_REQUIRED IN VARCHAR2 DEFAULT NULL,
+        P_TRAINING       IN VARCHAR2 DEFAULT NULL,
+        P_SIZE           IN VARCHAR2 DEFAULT NULL,
+        P_VETERINARIAN   IN VARCHAR2 DEFAULT NULL,
+        P_RESULT         OUT SYS_REFCURSOR
+    )
+    IS
+    BEGIN
+        SP_GET_PETS_BY_STATE(
+            P_ID_STATE       => 4,
+            P_COLOR          => P_COLOR,
+            P_AGE            => P_AGE,
+            P_NAME           => P_NAME,
+            P_CHIP           => P_CHIP,
+            P_ENERGY         => P_ENERGY,
+            P_TYPE           => P_TYPE,
+            P_BREED          => P_BREED,
+            P_DISTRICT       => P_DISTRICT,
+            P_SPACE_REQUIRED => P_SPACE_REQUIRED,
+            P_TRAINING       => P_TRAINING,
+            P_SIZE           => P_SIZE,
+            P_VETERINARIAN   => P_VETERINARIAN,
+            P_RESULT         => P_RESULT
+        );
+    END SP_GET_FOUND_PETS;
+
+    FUNCTION FN_PUT_PET_UP_FOR_ADOPTION(
+        P_PET_ID IN NUMBER
+    ) RETURN NUMBER
+    IS
+    BEGIN
+        UPDATE PET
+           SET IDSTATE = 1
+         WHERE ID = P_PET_ID
+           AND IDSTATE = 4;
+
+        IF SQL%ROWCOUNT > 0 THEN
+            RETURN 1;
+        END IF;
+
+        RETURN 0;
+    END FN_PUT_PET_UP_FOR_ADOPTION;
+
+    PROCEDURE SP_GET_ENERGY_OPTIONS(P_RESULT OUT SYS_REFCURSOR)
+    IS
+    BEGIN
+        OPEN P_RESULT FOR
+            SELECT 'All' AS Name, 0 AS SortOrder FROM dual
+            UNION ALL
+            SELECT Name, 1 AS SortOrder FROM PetLevelEnergy
+            ORDER BY SortOrder, Name;
+    END SP_GET_ENERGY_OPTIONS;
+
+    PROCEDURE SP_GET_TYPE_OPTIONS(P_RESULT OUT SYS_REFCURSOR)
+    IS
+    BEGIN
+        OPEN P_RESULT FOR
+            SELECT 'All' AS Name, 0 AS SortOrder FROM dual
+            UNION ALL
+            SELECT Name, 1 AS SortOrder FROM PetType
+            ORDER BY SortOrder, Name;
+    END SP_GET_TYPE_OPTIONS;
+
+    PROCEDURE SP_GET_BREED_OPTIONS(P_RESULT OUT SYS_REFCURSOR)
+    IS
+    BEGIN
+        OPEN P_RESULT FOR
+            SELECT 'All' AS Name, 0 AS SortOrder FROM dual
+            UNION ALL
+            SELECT Name, 1 AS SortOrder FROM PetBreed
+            ORDER BY SortOrder, Name;
+    END SP_GET_BREED_OPTIONS;
+
+    PROCEDURE SP_GET_DISTRICT_OPTIONS(P_RESULT OUT SYS_REFCURSOR)
+    IS
+    BEGIN
+        OPEN P_RESULT FOR
+            SELECT 'All' AS Name, 0 AS SortOrder FROM dual
+            UNION ALL
+            SELECT Name, 1 AS SortOrder FROM District
+            ORDER BY SortOrder, Name;
+    END SP_GET_DISTRICT_OPTIONS;
+
+    PROCEDURE SP_GET_SPACE_REQUIRED_OPTIONS(P_RESULT OUT SYS_REFCURSOR)
+    IS
+    BEGIN
+        OPEN P_RESULT FOR
+            SELECT 'All' AS Name, 0 AS SortOrder FROM dual
+            UNION ALL
+            SELECT Name, 1 AS SortOrder FROM SpaceRequired
+            ORDER BY SortOrder, Name;
+    END SP_GET_SPACE_REQUIRED_OPTIONS;
+
+    PROCEDURE SP_GET_TRAINING_OPTIONS(P_RESULT OUT SYS_REFCURSOR)
+    IS
+    BEGIN
+        OPEN P_RESULT FOR
+            SELECT 'All' AS Name, 0 AS SortOrder FROM dual
+            UNION ALL
+            SELECT Name, 1 AS SortOrder FROM PetTraining
+            ORDER BY SortOrder, Name;
+    END SP_GET_TRAINING_OPTIONS;
+
+    PROCEDURE SP_GET_SIZE_OPTIONS(P_RESULT OUT SYS_REFCURSOR)
+    IS
+    BEGIN
+        OPEN P_RESULT FOR
+            SELECT 'All' AS Name, 0 AS SortOrder FROM dual
+            UNION ALL
+            SELECT Name, 1 AS SortOrder FROM PetSize
+            ORDER BY SortOrder, Name;
+    END SP_GET_SIZE_OPTIONS;
+
+    PROCEDURE SP_GET_VETERINARIAN_OPTIONS(P_RESULT OUT SYS_REFCURSOR)
+    IS
+    BEGIN
+        OPEN P_RESULT FOR
+            SELECT 'All' AS VeterinarianName, 0 AS SortOrder FROM dual
+            UNION ALL
+            SELECT DISTINCT VeterinarianName, 1 AS SortOrder
+            FROM VW_TABLE_ADOPTION
+            WHERE VeterinarianName IS NOT NULL
+            ORDER BY SortOrder, VeterinarianName;
+    END SP_GET_VETERINARIAN_OPTIONS;
+
+END PKG_PET_OPERATIONS;
+/
+
+
+/* ------------------------------------------------------------
+   Procedimiento: pr_get_catalog
+   Descripcion: procedimiento para los combox de la ventana UserPetTable
+   
+   ------------------------------------------------------------ */
+CREATE OR REPLACE PROCEDURE pr_get_catalog (
+    p_catalog_name IN VARCHAR2,
+    p_result       OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    IF UPPER(p_catalog_name) = 'ENERGY' THEN
+        OPEN p_result FOR SELECT Id, Name FROM PetLevelEnergy ORDER BY Name;
+
+    ELSIF UPPER(p_catalog_name) = 'TYPE' THEN
+        OPEN p_result FOR SELECT Id, Name FROM PetType ORDER BY Name;
+
+    ELSIF UPPER(p_catalog_name) = 'BREED' THEN
+        OPEN p_result FOR SELECT Id, Name FROM PetBreed ORDER BY Name;
+
+    ELSIF UPPER(p_catalog_name) = 'DISTRICT' THEN
+        OPEN p_result FOR SELECT Id, Name FROM District ORDER BY Name;
+    ELSIF UPPER(p_catalog_name) = 'COUNTRY' THEN
+        OPEN p_result FOR
+            SELECT Id, Name
+            FROM Country
+            ORDER BY Name;
+    
+    ELSIF UPPER(p_catalog_name) = 'PROVINCE' THEN
+        OPEN p_result FOR
+            SELECT Id, Name
+            FROM Province
+            ORDER BY Name;
+    
+    ELSIF UPPER(p_catalog_name) = 'CANTON' THEN
+        OPEN p_result FOR
+            SELECT Id, Name
+            FROM Canton
+            ORDER BY Name;
+    ELSIF UPPER(p_catalog_name) = 'SPACE' THEN
+        OPEN p_result FOR SELECT Id, Name FROM SpaceRequired ORDER BY Name;
+
+    ELSIF UPPER(p_catalog_name) = 'TRAINING' THEN
+        OPEN p_result FOR SELECT Id, Name FROM PetTraining ORDER BY Name;
+
+    ELSIF UPPER(p_catalog_name) = 'SIZE' THEN
+        OPEN p_result FOR SELECT Id, Name FROM PetSize ORDER BY Name;
+
+    ELSIF UPPER(p_catalog_name) = 'VETERINARIAN' THEN
+        OPEN p_result FOR
+            SELECT
+                Id,
+                CASE
+                    WHEN Name IS NOT NULL THEN Name
+                    ELSE FirstName || ' ' || LastName
+                END AS Name
+            FROM Veterinarian
+            ORDER BY Name;
+
+    ELSE
+        RAISE_APPLICATION_ERROR(-20002, 'Invalid catalog name.');
+    END IF;
+END;
+/
+
+/* ------------------------------------------------------------
+   Procedimiento: pr_get_adoption_pet_table
+   Descripcion:
+   
+   ------------------------------------------------------------ */
+CREATE OR REPLACE PROCEDURE pr_get_adoption_pet_table (
+    p_id_energy       IN NUMBER DEFAULT NULL,
+    p_id_type         IN NUMBER DEFAULT NULL,
+    p_id_breed        IN NUMBER DEFAULT NULL,
+    p_id_district     IN NUMBER DEFAULT NULL,
+    p_id_country      IN NUMBER DEFAULT NULL,
+    p_id_province     IN NUMBER DEFAULT NULL,
+    p_id_canton       IN NUMBER DEFAULT NULL,
+    p_id_space        IN NUMBER DEFAULT NULL,
+    p_id_training     IN NUMBER DEFAULT NULL,
+    p_id_size         IN NUMBER DEFAULT NULL,
+    p_id_veterinarian IN NUMBER DEFAULT NULL,
+    p_color           IN VARCHAR2 DEFAULT NULL,
+    p_age             IN NUMBER DEFAULT NULL,
+    p_name            IN VARCHAR2 DEFAULT NULL,
+    p_chip            IN VARCHAR2 DEFAULT NULL,
+    p_result          OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_result FOR
+        SELECT
+            PetId,
+            PetName,
+            Color,
+            Age,
+            Chip,
+            Energy,
+            PetState,
+            PetType,
+            Breed,
+            District,
+            SpaceRequired,
+            Training,
+            PetSize,
+            VeterinarianName
+        FROM VW_USER_PET_TABLE
+        WHERE IdState = 1
+          AND (p_id_energy IS NULL OR IdEnergy = p_id_energy)
+          AND (p_id_type IS NULL OR IdType = p_id_type)
+          AND (p_id_breed IS NULL OR IdBreed = p_id_breed)
+          AND (p_id_district IS NULL OR IdDistrict = p_id_district)
+          AND (p_id_country IS NULL OR IdCountry = p_id_country)
+          AND (p_id_province IS NULL OR IdProvince = p_id_province)
+          AND (p_id_canton IS NULL OR IdCanton = p_id_canton)
+          AND (p_id_space IS NULL OR IdSpace = p_id_space)
+          AND (p_id_training IS NULL OR IdPetTraining = p_id_training)
+          AND (p_id_size IS NULL OR IdSize = p_id_size)
+          AND (p_id_veterinarian IS NULL OR IdVeterinarian = p_id_veterinarian)
+          AND (p_color IS NULL OR UPPER(Color) LIKE '%' || UPPER(p_color) || '%')
+          AND (p_age IS NULL OR Age = p_age)
+          AND (p_name IS NULL OR UPPER(PetName) LIKE '%' || UPPER(p_name) || '%')
+          AND (p_chip IS NULL OR UPPER(Chip) LIKE '%' || UPPER(p_chip) || '%')
+        ORDER BY PetName;
+END;
+/
+/* ------------------------------------------------------------
+   Procedimiento: pr_get_user_pet_table
+   Descripcion:
+   Get user pet/s
+   ------------------------------------------------------------ */
+CREATE OR REPLACE PROCEDURE pr_get_user_pet_table (
+    p_id_owner        IN NUMBER,
+    p_id_energy       IN NUMBER DEFAULT NULL,
+    p_id_type         IN NUMBER DEFAULT NULL,
+    p_id_breed        IN NUMBER DEFAULT NULL,
+    p_id_district     IN NUMBER DEFAULT NULL,
+    p_id_country      IN NUMBER DEFAULT NULL,
+    p_id_province     IN NUMBER DEFAULT NULL,
+    p_id_canton       IN NUMBER DEFAULT NULL,
+    p_id_space        IN NUMBER DEFAULT NULL,
+    p_id_training     IN NUMBER DEFAULT NULL,
+    p_id_size         IN NUMBER DEFAULT NULL,
+    p_id_veterinarian IN NUMBER DEFAULT NULL,
+    p_color           IN VARCHAR2 DEFAULT NULL,
+    p_age             IN NUMBER DEFAULT NULL,
+    p_name            IN VARCHAR2 DEFAULT NULL,
+    p_chip            IN VARCHAR2 DEFAULT NULL,
+    p_result          OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_result FOR
+        SELECT
+            PetId,
+            PetName,
+            Color,
+            Age,
+            Chip,
+            Energy,
+            PetState,
+            PetType,
+            Breed,
+            District,
+            SpaceRequired,
+            Training,
+            PetSize,
+            VeterinarianName
+        FROM VW_USER_PET_TABLE
+        WHERE IdOwner = p_id_owner
+          AND (p_id_energy IS NULL OR IdEnergy = p_id_energy)
+          AND (p_id_type IS NULL OR IdType = p_id_type)
+          AND (p_id_breed IS NULL OR IdBreed = p_id_breed)
+          AND (p_id_district IS NULL OR IdDistrict = p_id_district)
+          AND (p_id_country IS NULL OR IdCountry = p_id_country)
+          AND (p_id_province IS NULL OR IdProvince = p_id_province)
+          AND (p_id_canton IS NULL OR IdCanton = p_id_canton)
+          AND (p_id_space IS NULL OR IdSpace = p_id_space)
+          AND (p_id_training IS NULL OR IdPetTraining = p_id_training)
+          AND (p_id_size IS NULL OR IdSize = p_id_size)
+          AND (p_id_veterinarian IS NULL OR IdVeterinarian = p_id_veterinarian)
+          AND (p_color IS NULL OR UPPER(Color) LIKE '%' || UPPER(p_color) || '%')
+          AND (p_age IS NULL OR Age = p_age)
+          AND (p_name IS NULL OR UPPER(PetName) LIKE '%' || UPPER(p_name) || '%')
+          AND (p_chip IS NULL OR UPPER(Chip) LIKE '%' || UPPER(p_chip) || '%')
+        ORDER BY PetName;
+END;
+/
+/* ------------------------------------------------------------
+   Procedimiento: PR_PUT_PET_UP_FOR_ADOPTION
+   Descripcion:
+   Cambia de estado a una mascota para ponerla en adopcion
+   ------------------------------------------------------------ */
+CREATE OR REPLACE PROCEDURE PR_PUT_PET_UP_FOR_ADOPTION (
+    p_pet_id   IN Pet.Id%TYPE,
+    p_owner_id IN Pet.IdOwner%TYPE
+)
+AS
+BEGIN
+    UPDATE Pet
+    SET IdState = 1
+    WHERE Id = p_pet_id
+      AND IdOwner = p_owner_id;
+
+    IF SQL%ROWCOUNT = 0 THEN
+        RAISE_APPLICATION_ERROR(
+            -20001,
+            'Pet not found, or this pet does not belong to this user.'
+        );
+    END IF;
+
+    COMMIT;
+END;
+/
+/* ------------------------------------------------------------
    Procedimiento: pr_register_pet
    Descripcion:
    Registra una mascota.

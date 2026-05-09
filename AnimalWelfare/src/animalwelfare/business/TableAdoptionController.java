@@ -1,6 +1,8 @@
 package animalwelfare.business;
 
 import animalwelfare.access.PetOperations;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JTable;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,8 +16,12 @@ public class TableAdoptionController {
     }
 
     public void loadPetsUpForAdoption(JTable table) {
+        loadPetsUpForAdoption(table, null);
+    }
+
+    public void loadPetsUpForAdoption(JTable table, Map<String, String> filters) {
         try {
-            DefaultTableModel model = petOperations.getPetsUpForAdoptionTableModel();
+            DefaultTableModel model = petOperations.getPetsUpForAdoptionTableModel(filters);
             table.setModel(model);
             table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
@@ -30,8 +36,12 @@ public class TableAdoptionController {
     }
 
     public void loadFoundPets(JTable table) {
+        loadFoundPets(table, null);
+    }
+
+    public void loadFoundPets(JTable table, Map<String, String> filters) {
         try {
-            DefaultTableModel model = petOperations.getFoundPetsTableModel();
+            DefaultTableModel model = petOperations.getFoundPetsTableModel(filters);
             table.setModel(model);
             table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
@@ -43,6 +53,10 @@ public class TableAdoptionController {
                 JOptionPane.ERROR_MESSAGE
             );
         }
+    }
+
+    public Map<String, List<String>> getFilterOptions() {
+        return petOperations.getFilterOptions();
     }
 
     public void putSelectedPetUpForAdoption(JTable foundPetsTable, JTable adoptionPetsTable) {
