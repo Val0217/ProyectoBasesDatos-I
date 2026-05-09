@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 /**
  *
  * @author valer
@@ -20,16 +22,32 @@ public class InsertPetForm extends javax.swing.JFrame {
 
     // controlador del formulario
     private InsertPetController controller = null;
+    private DefaultListModel<DbObject> modelVeterinarian = null; // para guardar la lista de veterinarios para hace busqueda
+    private ArrayList<DbObject> allItemsVeterinarian = null;
 
     // procedimiento que rellena la lista de Veterinarian
     public void fillVeterinarian(ArrayList<DbObject> listVeterinarian) {
         ListVeterinarian.removeAll();
-        DefaultListModel<DbObject> model = new DefaultListModel<>();
+    
+        modelVeterinarian = new DefaultListModel<>();
+        allItemsVeterinarian = new ArrayList<DbObject>();
         for (DbObject c : listVeterinarian) {
-            model.addElement(c);
+            modelVeterinarian.addElement(c);
+            allItemsVeterinarian.add(c);
         }
-        ListVeterinarian.setModel(model);
+        ListVeterinarian.setModel(modelVeterinarian);
     }
+    
+    public void filterVeterian() {
+        String filter = TextVeterinarian.getText().toLowerCase();
+        modelVeterinarian.clear();
+        for (DbObject item : allItemsVeterinarian) {
+            if (item.getName().toLowerCase().contains(filter)) {
+                modelVeterinarian.addElement(item);
+            }
+        }
+    }
+    
 
     // procedimiento que rellena el combobox de Medicine
     public void fillMedicine(ArrayList<DbObject> listMedicine) {
@@ -162,6 +180,24 @@ public class InsertPetForm extends javax.swing.JFrame {
         
         // fix elementos visuales
         ScrollPanelFirst.getVerticalScrollBar().setBackground(new Color(240,240,240));
+        
+        //
+        TextVeterinarian.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterVeterian();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterVeterian();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterVeterian();
+            }
+        });
 
         setVisible(true); // Hacer visible el formulario
     }
@@ -508,6 +544,7 @@ public class InsertPetForm extends javax.swing.JFrame {
 
         ComboCountry.setBackground(new java.awt.Color(254, 255, 255));
         ComboCountry.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboCountry.addActionListener(this::ComboCountryActionPerformed);
 
         ComboCanton.setBackground(new java.awt.Color(254, 255, 255));
         ComboCanton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -583,6 +620,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel15.setText("Select your pet's veterinarian:");
 
         TextVeterinarian.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TextVeterinarian.addActionListener(this::TextVeterinarianActionPerformed);
 
         ListVeterinarian.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ListVeterinarian.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -735,7 +773,7 @@ public class InsertPetForm extends javax.swing.JFrame {
                             .addGroup(PetHealthPanelLayout.createSequentialGroup()
                                 .addGap(0, 2, Short.MAX_VALUE)
                                 .addComponent(ButtonAddMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(ButtonAddIllness, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)))
+                            .addComponent(ButtonAddIllness, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane5)
                     .addGroup(PetHealthPanelLayout.createSequentialGroup()
                         .addComponent(jLabel18)
@@ -891,11 +929,33 @@ public class InsertPetForm extends javax.swing.JFrame {
     }//GEN-LAST:event_ComboDistrictActionPerformed
 
     private void ComboProvinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboProvinceActionPerformed
-        // TODO add your handling code here:
+        // al seleccionar una provincia, se llena el de canton y se bloquea los siguientes.
+        DbObject province = (DbObject) ComboProvince.getSelectedItem();
+        if (province == null) return;
+        if (province.getId() == 0){
+            ComboDistrict.setEnabled(false);
+            ComboCanton.setEnabled(false);
+            return;
+        }
+        ComboDistrict.removeAllItems();
+        
+        controller.FillCanton(this, province.getId());
+        ComboDistrict.setEnabled(false);
+        ComboCanton.setEnabled(true);
     }//GEN-LAST:event_ComboProvinceActionPerformed
 
     private void ComboCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCantonActionPerformed
-        // TODO add your handling code here:
+        // al seleccionar un canton, se llena el de Distrito.
+        DbObject canton = (DbObject) ComboCanton.getSelectedItem();
+        if (canton == null) return;
+        if (canton.getId() == 0) {
+            ComboDistrict.setEnabled(false);
+            return;
+        }
+        ComboDistrict.removeAllItems();
+        
+        controller.FillDistrict(this, canton.getId());
+        ComboDistrict.setEnabled(true);
     }//GEN-LAST:event_ComboCantonActionPerformed
 
     private void ComboSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboSizeActionPerformed
@@ -931,8 +991,40 @@ public class InsertPetForm extends javax.swing.JFrame {
     }//GEN-LAST:event_TextNameActionPerformed
 
     private void ComboTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboTypeActionPerformed
-        // TODO add your handling code here:
+        // al seleccionar un tipo de mascota, se llena el combo de raza.
+        DbObject type = (DbObject) ComboType.getSelectedItem();
+        if (type == null) return;
+        if (type.getId() == 0) {
+            ComboBreed.setEnabled(false);
+            return;
+        }
+        //controller.FillBreed(this, type.getId());
+        ComboBreed.setEnabled(true);
     }//GEN-LAST:event_ComboTypeActionPerformed
+
+    private void ComboCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCountryActionPerformed
+        // al seleccionar un pais, se llena el de province y se bloquea los siguientes.
+        if (controller == null) return;
+        DbObject country = (DbObject) ComboCountry.getSelectedItem();
+        if (country == null) return;
+        if (country.getId() == 0) {
+            ComboProvince.setEnabled(false);
+            ComboCanton.setEnabled(false);
+            ComboDistrict.setEnabled(false);
+            return;
+        }
+        ComboCanton.removeAllItems();
+        ComboDistrict.removeAllItems();
+        
+        controller.FillProvince(this, country.getId());
+        ComboCanton.setEnabled(false);
+        ComboDistrict.setEnabled(false);
+        ComboProvince.setEnabled(true);
+    }//GEN-LAST:event_ComboCountryActionPerformed
+
+    private void TextVeterinarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextVeterinarianActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextVeterinarianActionPerformed
 
     
     

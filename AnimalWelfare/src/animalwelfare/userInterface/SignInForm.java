@@ -121,6 +121,7 @@ public class SignInForm extends javax.swing.JFrame {
         LabelField.setForeground(new java.awt.Color(255, 255, 255));
         LabelField.setText("PASSWORD");
 
+        ButtonContinue.setBackground(new java.awt.Color(254, 255, 255));
         ButtonContinue.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         ButtonContinue.setForeground(new java.awt.Color(0, 121, 121));
         ButtonContinue.setText("CONTINUE");
