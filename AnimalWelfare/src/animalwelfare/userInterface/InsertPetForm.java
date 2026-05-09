@@ -154,349 +154,82 @@ public class InsertPetForm extends javax.swing.JFrame {
     private void initComponents() {
 
         PanelBackGround = new javax.swing.JPanel();
-        PanelForm = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        LabelSubTitle = new javax.swing.JLabel();
-        TextPetName = new javax.swing.JTextField();
-        LabelField = new javax.swing.JLabel();
-        ButtonCreateAccount = new javax.swing.JButton();
-        TextColorPet = new javax.swing.JTextField();
-        LabelField1 = new javax.swing.JLabel();
-        LabelField2 = new javax.swing.JLabel();
-        ComboVeterinarianPet = new javax.swing.JComboBox<>();
-        LabelCountry = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        LabelField4 = new javax.swing.JLabel();
-        LabelField5 = new javax.swing.JLabel();
-        TextChipNumber = new javax.swing.JTextField();
-        LabelField6 = new javax.swing.JLabel();
-        ComboSizePet = new javax.swing.JComboBox<>();
-        LabelField7 = new javax.swing.JLabel();
-        ComboEnergyPet = new javax.swing.JComboBox<>();
-        LabelField8 = new javax.swing.JLabel();
-        LabelCountry1 = new javax.swing.JLabel();
-        ComboCountry = new javax.swing.JComboBox<>();
-        LabelProvince = new javax.swing.JLabel();
-        ComboProvince = new javax.swing.JComboBox<>();
-        LabelCanton = new javax.swing.JLabel();
-        ComboCanton = new javax.swing.JComboBox<>();
-        LabelDistrict = new javax.swing.JLabel();
-        ComboDistrict = new javax.swing.JComboBox<>();
-        LabelField9 = new javax.swing.JLabel();
-        ComboPetTraining = new javax.swing.JComboBox<>();
-        ComboBreedPet = new javax.swing.JComboBox<>();
-        ComboAgePet = new javax.swing.JComboBox<>();
-        ComboSpaceRequieredPet = new javax.swing.JComboBox<>();
-        ComboPetType = new javax.swing.JComboBox<>();
-        LabelField3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TextDescripcionPet = new javax.swing.JTextArea();
-        LabelCanton2 = new javax.swing.JLabel();
         LableTitle = new javax.swing.JLabel();
         ImagenBackGround = new javax.swing.JLabel();
+        ScrollPanel = new javax.swing.JScrollPane();
+        FormPanel = new javax.swing.JPanel();
+        BasicInformationPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        TextName = new javax.swing.JTextField();
+        TextColor = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        SpinnerAge = new javax.swing.JSpinner();
+        TextChip = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TextDescription = new javax.swing.JTextArea();
+        ImagePreview = new javax.swing.JLabel();
+        ButtonSelectImage = new javax.swing.JPanel();
+        LabelButtonSelectImage = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ListImages = new javax.swing.JList<>();
+        PetDetailsPanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        ComboType = new javax.swing.JComboBox<>();
+        ComboSpaceRequired = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        ComboBreed = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        ComboEnergy = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        ComboTraining = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        ComboSize = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        LocationPanel = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        ComboType1 = new javax.swing.JComboBox<>();
+        ComboSpaceRequired1 = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        ComboBreed1 = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        ComboEnergy1 = new javax.swing.JComboBox<>();
+        LabelDistrict = new javax.swing.JLabel();
+        VeterinarianPanel = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        TextVeterinarian = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        ListVeterinarian = new javax.swing.JList<>();
+        VeterinarianPanel1 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        ComboIllness = new javax.swing.JComboBox<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        ListPetMedicine = new javax.swing.JList<>();
+        ButtonAddIllness = new javax.swing.JPanel();
+        LabelButtonAddIllness = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        ComboMedicine = new javax.swing.JComboBox<>();
+        ButtonAddMedicine = new javax.swing.JPanel();
+        LabelButtonAddMedicine = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        ListPetIllness = new javax.swing.JList<>();
+        jLabel18 = new javax.swing.JLabel();
+        ComboTreatment = new javax.swing.JComboBox<>();
+        ButtonAddTreatment = new javax.swing.JPanel();
+        LabelButtonAddTreatment = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        ListPetTreatment = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(855, 500));
 
         PanelBackGround.setBackground(new java.awt.Color(204, 204, 204));
+        PanelBackGround.setMaximumSize(new java.awt.Dimension(855, 500));
+        PanelBackGround.setMinimumSize(new java.awt.Dimension(855, 500));
+        PanelBackGround.setPreferredSize(new java.awt.Dimension(900, 500));
         PanelBackGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel1.setText("Veterinarian information");
-
-        LabelSubTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        LabelSubTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LabelSubTitle.setText("Register Pet");
-
-        TextPetName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TextPetName.addActionListener(this::TextPetNameActionPerformed);
-
-        LabelField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField.setText("Pet Name");
-
-        ButtonCreateAccount.setBackground(new java.awt.Color(255, 216, 20));
-        ButtonCreateAccount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ButtonCreateAccount.setText("Register Pet");
-        ButtonCreateAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ButtonCreateAccount.addActionListener(this::ButtonCreateAccountActionPerformed);
-
-        TextColorPet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TextColorPet.setToolTipText("");
-        TextColorPet.addActionListener(this::TextColorPetActionPerformed);
-
-        LabelField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField1.setText("Color");
-
-        LabelField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField2.setText("Training level");
-
-        ComboVeterinarianPet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ComboVeterinarianPet.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ComboVeterinarianPet.setOpaque(true);
-        ComboVeterinarianPet.setRequestFocusEnabled(false);
-        ComboVeterinarianPet.addActionListener(this::ComboVeterinarianPetActionPerformed);
-
-        LabelCountry.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelCountry.setText("Select a Registered Veterinarian");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel2.setText("___________________________________________________________________________________________________");
-        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
-        LabelField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField4.setText("Age");
-
-        LabelField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField5.setText("Size");
-
-        TextChipNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TextChipNumber.addActionListener(this::TextChipNumberActionPerformed);
-
-        LabelField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField6.setText("Chip Number (Optional)");
-
-        ComboSizePet.setBackground(new java.awt.Color(254, 254, 254));
-        ComboSizePet.addActionListener(this::ComboSizePetActionPerformed);
-
-        LabelField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField7.setText("Space Requiered");
-
-        ComboEnergyPet.setBackground(new java.awt.Color(254, 254, 254));
-        ComboEnergyPet.addActionListener(this::ComboEnergyPetActionPerformed);
-
-        LabelField8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField8.setText("Energy of the pet");
-
-        LabelCountry1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelCountry1.setText("Country");
-
-        ComboCountry.setBackground(new java.awt.Color(254, 254, 254));
-        ComboCountry.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ComboCountry.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ComboCountry.setOpaque(true);
-        ComboCountry.setRequestFocusEnabled(false);
-        ComboCountry.addActionListener(this::ComboCountryActionPerformed);
-
-        LabelProvince.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelProvince.setText("Province");
-
-        ComboProvince.setBackground(new java.awt.Color(254, 254, 254));
-        ComboProvince.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ComboProvince.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ComboProvince.setOpaque(true);
-        ComboProvince.setRequestFocusEnabled(false);
-        ComboProvince.addActionListener(this::ComboProvinceActionPerformed);
-
-        LabelCanton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelCanton.setText("Canton");
-
-        ComboCanton.setBackground(new java.awt.Color(254, 254, 254));
-        ComboCanton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ComboCanton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ComboCanton.setOpaque(true);
-        ComboCanton.setRequestFocusEnabled(false);
-        ComboCanton.addActionListener(this::ComboCantonActionPerformed);
-
-        LabelDistrict.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelDistrict.setText("District");
-
-        ComboDistrict.setBackground(new java.awt.Color(254, 254, 254));
-        ComboDistrict.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ComboDistrict.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ComboDistrict.setOpaque(true);
-        ComboDistrict.setRequestFocusEnabled(false);
-        ComboDistrict.addActionListener(this::ComboDistrictActionPerformed);
-
-        LabelField9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField9.setText("Breed(Optional)");
-
-        ComboPetTraining.setBackground(new java.awt.Color(254, 254, 254));
-        ComboPetTraining.addActionListener(this::ComboPetTrainingActionPerformed);
-
-        ComboBreedPet.setBackground(new java.awt.Color(254, 254, 254));
-
-        ComboAgePet.setBackground(new java.awt.Color(254, 254, 254));
-        ComboAgePet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", " " }));
-
-        ComboSpaceRequieredPet.setBackground(new java.awt.Color(254, 254, 254));
-        ComboSpaceRequieredPet.addActionListener(this::ComboSpaceRequieredPetActionPerformed);
-
-        ComboPetType.setBackground(new java.awt.Color(254, 254, 254));
-        ComboPetType.addActionListener(this::ComboPetTypeActionPerformed);
-
-        LabelField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelField3.setText("Species");
-
-        TextDescripcionPet.setColumns(20);
-        TextDescripcionPet.setRows(5);
-        jScrollPane1.setViewportView(TextDescripcionPet);
-
-        LabelCanton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LabelCanton2.setText("Description");
-
-        javax.swing.GroupLayout PanelFormLayout = new javax.swing.GroupLayout(PanelForm);
-        PanelForm.setLayout(PanelFormLayout);
-        PanelFormLayout.setHorizontalGroup(
-            PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelFormLayout.createSequentialGroup()
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFormLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(LabelSubTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PanelFormLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFormLayout.createSequentialGroup()
-                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ComboVeterinarianPet, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelFormLayout.createSequentialGroup()
-                                        .addComponent(LabelCountry)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(20, 20, 20))
-                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PanelFormLayout.createSequentialGroup()
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(PanelFormLayout.createSequentialGroup()
-                                                    .addComponent(LabelField5)
-                                                    .addGap(191, 191, 191))
-                                                .addGroup(PanelFormLayout.createSequentialGroup()
-                                                    .addComponent(ComboSizePet, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addGap(18, 18, 18)))
-                                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                                .addComponent(LabelField4)
-                                                .addGap(190, 190, 190)))
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LabelField8)
-                                            .addComponent(ComboEnergyPet, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(LabelCountry1)))
-                                    .addGroup(PanelFormLayout.createSequentialGroup()
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(LabelField1)
-                                            .addComponent(TextPetName, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                                            .addComponent(TextColorPet))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(ComboPetType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(TextChipNumber)
-                                                        .addComponent(LabelField6, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE))
-                                                    .addComponent(LabelField3))
-                                                .addGap(0, 5, Short.MAX_VALUE))))
-                                    .addComponent(LabelField))
-                                .addGap(18, 18, 18)
-                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LabelField9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(PanelFormLayout.createSequentialGroup()
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(ComboBreedPet, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(ComboPetTraining, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(LabelField2))
-                                        .addGap(0, 31, Short.MAX_VALUE))))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(LabelCanton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(LabelField7)
-                                    .addGroup(PanelFormLayout.createSequentialGroup()
-                                        .addComponent(ComboSpaceRequieredPet, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(PanelFormLayout.createSequentialGroup()
-                                        .addComponent(ComboAgePet, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LabelCanton)
-                                            .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(24, 24, 24)
-                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ComboProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(LabelDistrict)
-                                    .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(LabelProvince))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
-        );
-        PanelFormLayout.setVerticalGroup(
-            PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelFormLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LabelSubTitle)
-                .addGap(18, 18, 18)
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelField)
-                    .addComponent(LabelField6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelField9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextPetName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TextChipNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboBreedPet, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelField1)
-                    .addComponent(LabelField2)
-                    .addComponent(LabelField3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextColorPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboPetType)
-                    .addComponent(ComboPetTraining, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelField5)
-                    .addComponent(LabelField8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboSizePet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboEnergyPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelField4)
-                    .addComponent(LabelCountry1)
-                    .addComponent(LabelProvince))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboAgePet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelField7)
-                    .addComponent(LabelCanton)
-                    .addComponent(LabelDistrict))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboSpaceRequieredPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelCanton2))
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(LabelCountry)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ComboVeterinarianPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ButtonCreateAccount)
-                .addGap(92, 92, 92))
-        );
-
-        PanelBackGround.add(PanelForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 730, 670));
 
         LableTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LableTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -505,151 +238,605 @@ public class InsertPetForm extends javax.swing.JFrame {
         PanelBackGround.add(LableTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 20, 730, -1));
 
         ImagenBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/BackgroundCat.jpg"))); // NOI18N
-        PanelBackGround.add(ImagenBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 150));
+        PanelBackGround.add(ImagenBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 90));
+
+        ScrollPanel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        ScrollPanel.setPreferredSize(new java.awt.Dimension(890, 500));
+
+        BasicInformationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Basic Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(142, 142, 142))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setLabelFor(TextName);
+        jLabel1.setText("Name:");
+
+        TextName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TextName.addActionListener(this::TextNameActionPerformed);
+
+        TextColor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TextColor.addActionListener(this::TextColorActionPerformed);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setLabelFor(TextColor);
+        jLabel2.setText("Color:");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setLabelFor(SpinnerAge);
+        jLabel3.setText("Age:");
+
+        SpinnerAge.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        TextChip.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TextChip.addActionListener(this::TextChipActionPerformed);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setLabelFor(TextChip);
+        jLabel4.setText("Chip:");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setLabelFor(TextDescription);
+        jLabel5.setText("Description:");
+
+        TextDescription.setColumns(20);
+        TextDescription.setRows(5);
+        jScrollPane1.setViewportView(TextDescription);
+
+        ImagePreview.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ImagePreview.setForeground(new java.awt.Color(142, 142, 142));
+        ImagePreview.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ImagePreview.setText("Image");
+        ImagePreview.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        ButtonSelectImage.setBackground(new java.awt.Color(0, 102, 102));
+
+        LabelButtonSelectImage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelButtonSelectImage.setForeground(new java.awt.Color(255, 255, 255));
+        LabelButtonSelectImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelButtonSelectImage.setText("Select Image");
+
+        javax.swing.GroupLayout ButtonSelectImageLayout = new javax.swing.GroupLayout(ButtonSelectImage);
+        ButtonSelectImage.setLayout(ButtonSelectImageLayout);
+        ButtonSelectImageLayout.setHorizontalGroup(
+            ButtonSelectImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelButtonSelectImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        ButtonSelectImageLayout.setVerticalGroup(
+            ButtonSelectImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelButtonSelectImage, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+        );
+
+        ListImages.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(ListImages);
+
+        javax.swing.GroupLayout BasicInformationPanelLayout = new javax.swing.GroupLayout(BasicInformationPanel);
+        BasicInformationPanel.setLayout(BasicInformationPanelLayout);
+        BasicInformationPanelLayout.setHorizontalGroup(
+            BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BasicInformationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(BasicInformationPanelLayout.createSequentialGroup()
+                        .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TextName, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                            .addComponent(TextColor))
+                        .addGap(18, 18, 18)
+                        .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BasicInformationPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(SpinnerAge, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(BasicInformationPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TextChip, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane1))
+                .addGap(18, 18, 18)
+                .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ButtonSelectImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ImagePreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        BasicInformationPanelLayout.setVerticalGroup(
+            BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BasicInformationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BasicInformationPanelLayout.createSequentialGroup()
+                        .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(TextName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(SpinnerAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(TextColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(TextChip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(BasicInformationPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1)))
+                    .addGroup(BasicInformationPanelLayout.createSequentialGroup()
+                        .addComponent(ImagePreview, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ButtonSelectImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        PetDetailsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pet Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(142, 142, 142))); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setLabelFor(TextName);
+        jLabel6.setText("Species:");
+
+        ComboType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        ComboSpaceRequired.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboSpaceRequired.addActionListener(this::ComboSpaceRequiredActionPerformed);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setLabelFor(TextName);
+        jLabel7.setText("Space required:");
+
+        ComboBreed.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboBreed.addActionListener(this::ComboBreedActionPerformed);
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setLabelFor(TextName);
+        jLabel8.setText("Breed:");
+
+        ComboEnergy.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboEnergy.addActionListener(this::ComboEnergyActionPerformed);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setLabelFor(TextName);
+        jLabel9.setText("Energy:");
+
+        ComboTraining.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboTraining.addActionListener(this::ComboTrainingActionPerformed);
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setLabelFor(TextName);
+        jLabel10.setText("Ease of training:");
+
+        ComboSize.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboSize.addActionListener(this::ComboSizeActionPerformed);
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setLabelFor(TextName);
+        jLabel11.setText("Size:");
+
+        javax.swing.GroupLayout PetDetailsPanelLayout = new javax.swing.GroupLayout(PetDetailsPanel);
+        PetDetailsPanel.setLayout(PetDetailsPanelLayout);
+        PetDetailsPanelLayout.setHorizontalGroup(
+            PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PetDetailsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ComboSpaceRequired, 0, 305, Short.MAX_VALUE)
+                    .addComponent(ComboTraining, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ComboType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(PetDetailsPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ComboBreed, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(PetDetailsPanelLayout.createSequentialGroup()
+                        .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ComboEnergy, 0, 304, Short.MAX_VALUE)
+                            .addComponent(ComboSize, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        PetDetailsPanelLayout.setVerticalGroup(
+            PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PetDetailsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(ComboType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(ComboBreed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(ComboSpaceRequired, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(ComboEnergy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(ComboSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(ComboTraining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        LocationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Location", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(142, 142, 142))); // NOI18N
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel12.setLabelFor(TextName);
+        jLabel12.setText("Country:");
+
+        ComboType1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        ComboSpaceRequired1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboSpaceRequired1.addActionListener(this::ComboSpaceRequired1ActionPerformed);
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel13.setLabelFor(TextName);
+        jLabel13.setText("Canton:");
+
+        ComboBreed1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboBreed1.addActionListener(this::ComboBreed1ActionPerformed);
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setLabelFor(TextName);
+        jLabel14.setText("Province:");
+
+        ComboEnergy1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboEnergy1.addActionListener(this::ComboEnergy1ActionPerformed);
+
+        LabelDistrict.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelDistrict.setLabelFor(TextName);
+        LabelDistrict.setText("District:");
+
+        javax.swing.GroupLayout LocationPanelLayout = new javax.swing.GroupLayout(LocationPanel);
+        LocationPanel.setLayout(LocationPanelLayout);
+        LocationPanelLayout.setHorizontalGroup(
+            LocationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LocationPanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(LocationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(LocationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ComboSpaceRequired1, 0, 322, Short.MAX_VALUE)
+                    .addComponent(ComboType1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(LocationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LocationPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ComboBreed1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(LocationPanelLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(LabelDistrict)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ComboEnergy1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        LocationPanelLayout.setVerticalGroup(
+            LocationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LocationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(LocationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(ComboType1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(ComboBreed1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(LocationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(ComboSpaceRequired1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelDistrict)
+                    .addComponent(ComboEnergy1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        VeterinarianPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Veterinarian", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(142, 142, 142))); // NOI18N
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setLabelFor(TextName);
+        jLabel15.setText("Select your pet's veterinarian:");
+
+        TextVeterinarian.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        ListVeterinarian.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ListVeterinarian.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane3.setViewportView(ListVeterinarian);
+
+        javax.swing.GroupLayout VeterinarianPanelLayout = new javax.swing.GroupLayout(VeterinarianPanel);
+        VeterinarianPanel.setLayout(VeterinarianPanelLayout);
+        VeterinarianPanelLayout.setHorizontalGroup(
+            VeterinarianPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VeterinarianPanelLayout.createSequentialGroup()
+                .addGroup(VeterinarianPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VeterinarianPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TextVeterinarian))
+                    .addComponent(jScrollPane3))
+                .addContainerGap())
+        );
+        VeterinarianPanelLayout.setVerticalGroup(
+            VeterinarianPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VeterinarianPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(VeterinarianPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(TextVeterinarian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        VeterinarianPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pet health", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(142, 142, 142))); // NOI18N
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel16.setLabelFor(TextName);
+        jLabel16.setText("Your pet suffers from some illness:");
+
+        ComboIllness.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        ListPetMedicine.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane4.setViewportView(ListPetMedicine);
+
+        ButtonAddIllness.setBackground(new java.awt.Color(0, 102, 102));
+
+        LabelButtonAddIllness.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelButtonAddIllness.setForeground(new java.awt.Color(255, 255, 255));
+        LabelButtonAddIllness.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelButtonAddIllness.setText("Add");
+
+        javax.swing.GroupLayout ButtonAddIllnessLayout = new javax.swing.GroupLayout(ButtonAddIllness);
+        ButtonAddIllness.setLayout(ButtonAddIllnessLayout);
+        ButtonAddIllnessLayout.setHorizontalGroup(
+            ButtonAddIllnessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelButtonAddIllness, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+        );
+        ButtonAddIllnessLayout.setVerticalGroup(
+            ButtonAddIllnessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ButtonAddIllnessLayout.createSequentialGroup()
+                .addComponent(LabelButtonAddIllness, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel17.setLabelFor(TextName);
+        jLabel17.setText("Your pet needs some medicine:");
+
+        ComboMedicine.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        ButtonAddMedicine.setBackground(new java.awt.Color(0, 102, 102));
+
+        LabelButtonAddMedicine.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelButtonAddMedicine.setForeground(new java.awt.Color(255, 255, 255));
+        LabelButtonAddMedicine.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelButtonAddMedicine.setText("Add");
+
+        javax.swing.GroupLayout ButtonAddMedicineLayout = new javax.swing.GroupLayout(ButtonAddMedicine);
+        ButtonAddMedicine.setLayout(ButtonAddMedicineLayout);
+        ButtonAddMedicineLayout.setHorizontalGroup(
+            ButtonAddMedicineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelButtonAddMedicine, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+        );
+        ButtonAddMedicineLayout.setVerticalGroup(
+            ButtonAddMedicineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ButtonAddMedicineLayout.createSequentialGroup()
+                .addComponent(LabelButtonAddMedicine, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        ListPetIllness.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane5.setViewportView(ListPetIllness);
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel18.setLabelFor(TextName);
+        jLabel18.setText("Your pet needs some treatment:");
+
+        ComboTreatment.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        ButtonAddTreatment.setBackground(new java.awt.Color(0, 102, 102));
+
+        LabelButtonAddTreatment.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelButtonAddTreatment.setForeground(new java.awt.Color(255, 255, 255));
+        LabelButtonAddTreatment.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelButtonAddTreatment.setText("Add");
+
+        javax.swing.GroupLayout ButtonAddTreatmentLayout = new javax.swing.GroupLayout(ButtonAddTreatment);
+        ButtonAddTreatment.setLayout(ButtonAddTreatmentLayout);
+        ButtonAddTreatmentLayout.setHorizontalGroup(
+            ButtonAddTreatmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelButtonAddTreatment, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+        );
+        ButtonAddTreatmentLayout.setVerticalGroup(
+            ButtonAddTreatmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ButtonAddTreatmentLayout.createSequentialGroup()
+                .addComponent(LabelButtonAddTreatment, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        ListPetTreatment.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane6.setViewportView(ListPetTreatment);
+
+        javax.swing.GroupLayout VeterinarianPanel1Layout = new javax.swing.GroupLayout(VeterinarianPanel1);
+        VeterinarianPanel1.setLayout(VeterinarianPanel1Layout);
+        VeterinarianPanel1Layout.setHorizontalGroup(
+            VeterinarianPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VeterinarianPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(VeterinarianPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4)
+                    .addGroup(VeterinarianPanel1Layout.createSequentialGroup()
+                        .addGroup(VeterinarianPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(VeterinarianPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ComboIllness, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(VeterinarianPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addGap(37, 37, 37)
+                                .addComponent(ComboMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ButtonAddMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5)
+                    .addGroup(VeterinarianPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addGap(31, 31, 31)
+                        .addComponent(ComboTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ButtonAddTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+            .addGroup(VeterinarianPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VeterinarianPanel1Layout.createSequentialGroup()
+                    .addGap(571, 571, 571)
+                    .addComponent(ButtonAddIllness, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        VeterinarianPanel1Layout.setVerticalGroup(
+            VeterinarianPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VeterinarianPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(VeterinarianPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(ComboIllness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(VeterinarianPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ButtonAddMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(VeterinarianPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ComboMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel17)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(VeterinarianPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel18)
+                    .addGroup(VeterinarianPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ButtonAddTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ComboTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(VeterinarianPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(VeterinarianPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(ButtonAddIllness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(437, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout FormPanelLayout = new javax.swing.GroupLayout(FormPanel);
+        FormPanel.setLayout(FormPanelLayout);
+        FormPanelLayout.setHorizontalGroup(
+            FormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FormPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(FormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BasicInformationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PetDetailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LocationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(VeterinarianPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(VeterinarianPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        FormPanelLayout.setVerticalGroup(
+            FormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FormPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BasicInformationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(PetDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(LocationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(VeterinarianPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(VeterinarianPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        ScrollPanel.setViewportView(FormPanel);
+
+        PanelBackGround.add(ScrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelBackGround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelBackGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(PanelBackGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+            .addComponent(PanelBackGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void TextNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextNameActionPerformed
+
+    private void TextColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextColorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextColorActionPerformed
+
+    private void TextChipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextChipActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextChipActionPerformed
+
+    private void ComboSpaceRequiredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboSpaceRequiredActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboSpaceRequiredActionPerformed
+
+    private void ComboBreedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBreedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBreedActionPerformed
+
+    private void ComboEnergyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboEnergyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboEnergyActionPerformed
+
+    private void ComboTrainingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboTrainingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboTrainingActionPerformed
+
+    private void ComboSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboSizeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboSizeActionPerformed
+
+    private void ComboSpaceRequired1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboSpaceRequired1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboSpaceRequired1ActionPerformed
+
+    private void ComboBreed1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBreed1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBreed1ActionPerformed
+
+    private void ComboEnergy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboEnergy1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboEnergy1ActionPerformed
+
     
     
-    private void TextPetNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPetNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextPetNameActionPerformed
-
-    private void TextColorPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextColorPetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextColorPetActionPerformed
-
-    private void TextChipNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextChipNumberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextChipNumberActionPerformed
-
-    private void ComboSizePetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboSizePetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboSizePetActionPerformed
-
-    private void ComboEnergyPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboEnergyPetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboEnergyPetActionPerformed
-
-    private void ComboVeterinarianPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboVeterinarianPetActionPerformed
-
-    }//GEN-LAST:event_ComboVeterinarianPetActionPerformed
-
-    private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
-        DbObject petType = (DbObject) ComboPetType.getSelectedItem();
-        DbObject petBreed = (DbObject) ComboBreedPet.getSelectedItem();
-        DbObject petSize = (DbObject) ComboSizePet.getSelectedItem();
-        DbObject petEnergy = (DbObject) ComboEnergyPet.getSelectedItem();
-        DbObject petSpaceRequired = (DbObject) ComboSpaceRequieredPet.getSelectedItem();
-        DbObject petTraining = (DbObject) ComboPetTraining.getSelectedItem();
-        DbObject District = (DbObject) ComboDistrict.getSelectedItem();
-        DbObject veterinarian = (DbObject) ComboVeterinarianPet.getSelectedItem();
-        String petName = TextPetName.getText();
-        String petDescription = TextDescripcionPet.getText();
-        String petColor = TextColorPet.getText();
-        String petChipNumber = TextChipNumber.getText();
-        int petAge = Integer.parseInt(ComboAgePet.getSelectedItem().toString());
-        boolean correct;
-        try {
-            correct = controller.InsertPet(petColor, petAge, petDescription, petName, petChipNumber, petEnergy, new DbObject(2, "Adopted"), petType, petBreed, District, petSpaceRequired, petTraining, petSize, veterinarian);
-            if (correct) {
-                MainMenu window = new MainMenu();
-                dispose();
-            }
-        } catch (SQLException ex) {
-            System.getLogger(InsertPetForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
-        
-    }//GEN-LAST:event_ButtonCreateAccountActionPerformed
-
-    private void ComboCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCountryActionPerformed
-        // al seleccionar un pais, se llena el de province y se bloquea los siguientes.
-        if (controller == null) return;
-        DbObject country = (DbObject) ComboCountry.getSelectedItem();
-        if (country == null) return;
-        if (country.getId() == 0) {
-            ComboProvince.setEnabled(false);
-            ComboCanton.setEnabled(false);
-            ComboDistrict.setEnabled(false);
-            return;
-        }
-        ComboCanton.removeAllItems();
-        ComboDistrict.removeAllItems();
-        
-        controller.FillProvince(this, country.getId());
-        ComboCanton.setEnabled(false);
-        ComboDistrict.setEnabled(false);
-        ComboProvince.setEnabled(true);
-    }//GEN-LAST:event_ComboCountryActionPerformed
-
-    private void ComboProvinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboProvinceActionPerformed
-        // al seleccionar una provincia, se llena el de canton y se bloquea los siguientes.
-        DbObject province = (DbObject) ComboProvince.getSelectedItem();
-        if (province == null) return;
-        if (province.getId() == 0) {
-            ComboCanton.setEnabled(false);
-            ComboDistrict.setEnabled(false);
-            return;
-        }
-        ComboDistrict.removeAllItems();
-        
-        controller.FillCanton(this, province.getId());
-        ComboDistrict.setEnabled(false);
-        ComboCanton.setEnabled(true);
-    }//GEN-LAST:event_ComboProvinceActionPerformed
-
-    private void ComboCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCantonActionPerformed
-        // al seleccionar un canton, se llena el de Distrito.
-        DbObject canton = (DbObject) ComboCanton.getSelectedItem();
-        if (canton == null) return;
-        if (canton.getId() == 0) {
-            ComboDistrict.setEnabled(false);
-            return;
-        }
-        ComboDistrict.removeAllItems();
-        
-        controller.FillDistrict(this, canton.getId());
-        ComboDistrict.setEnabled(true);
-    }//GEN-LAST:event_ComboCantonActionPerformed
-
-    private void ComboPetTrainingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPetTrainingActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboPetTrainingActionPerformed
-
-    private void ComboSpaceRequieredPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboSpaceRequieredPetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboSpaceRequieredPetActionPerformed
-
-    private void ComboDistrictActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboDistrictActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboDistrictActionPerformed
-
-    private void ComboPetTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPetTypeActionPerformed
-        if (controller == null) return;
-        DbObject petType = (DbObject) ComboPetType.getSelectedItem();
-        if (petType == null) return;
-        if (petType.getId() == 0) {
-            ComboBreedPet.setEnabled(false);
-            return;
-        }
-        controller.FillPetBreed(this, petType.getId());
-        ComboBreedPet.setEnabled(true);
-    }//GEN-LAST:event_ComboPetTypeActionPerformed
-
     
     
     
@@ -679,46 +866,73 @@ public class InsertPetForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ButtonCreateAccount;
-    private javax.swing.JComboBox<String> ComboAgePet;
-    private javax.swing.JComboBox<DbObject> ComboBreedPet;
-    private javax.swing.JComboBox<DbObject> ComboCanton;
-    private javax.swing.JComboBox<DbObject> ComboCountry;
-    private javax.swing.JComboBox<DbObject> ComboDistrict;
-    private javax.swing.JComboBox<DbObject> ComboEnergyPet;
-    private javax.swing.JComboBox<DbObject> ComboPetTraining;
-    private javax.swing.JComboBox<DbObject> ComboPetType;
-    private javax.swing.JComboBox<DbObject> ComboProvince;
-    private javax.swing.JComboBox<DbObject> ComboSizePet;
-    private javax.swing.JComboBox<DbObject> ComboSpaceRequieredPet;
-    private javax.swing.JComboBox<DbObject> ComboVeterinarianPet;
+    private javax.swing.JPanel BasicInformationPanel;
+    private javax.swing.JPanel ButtonAddIllness;
+    private javax.swing.JPanel ButtonAddMedicine;
+    private javax.swing.JPanel ButtonAddTreatment;
+    private javax.swing.JPanel ButtonSelectImage;
+    private javax.swing.JComboBox<String> ComboBreed;
+    private javax.swing.JComboBox<String> ComboBreed1;
+    private javax.swing.JComboBox<String> ComboEnergy;
+    private javax.swing.JComboBox<String> ComboEnergy1;
+    private javax.swing.JComboBox<String> ComboIllness;
+    private javax.swing.JComboBox<String> ComboMedicine;
+    private javax.swing.JComboBox<String> ComboSize;
+    private javax.swing.JComboBox<String> ComboSpaceRequired;
+    private javax.swing.JComboBox<String> ComboSpaceRequired1;
+    private javax.swing.JComboBox<String> ComboTraining;
+    private javax.swing.JComboBox<String> ComboTreatment;
+    private javax.swing.JComboBox<String> ComboType;
+    private javax.swing.JComboBox<String> ComboType1;
+    private javax.swing.JPanel FormPanel;
+    private javax.swing.JLabel ImagePreview;
     private javax.swing.JLabel ImagenBackGround;
-    private javax.swing.JLabel LabelCanton;
-    private javax.swing.JLabel LabelCanton2;
-    private javax.swing.JLabel LabelCountry;
-    private javax.swing.JLabel LabelCountry1;
+    private javax.swing.JLabel LabelButtonAddIllness;
+    private javax.swing.JLabel LabelButtonAddMedicine;
+    private javax.swing.JLabel LabelButtonAddTreatment;
+    private javax.swing.JLabel LabelButtonSelectImage;
     private javax.swing.JLabel LabelDistrict;
-    private javax.swing.JLabel LabelField;
-    private javax.swing.JLabel LabelField1;
-    private javax.swing.JLabel LabelField2;
-    private javax.swing.JLabel LabelField3;
-    private javax.swing.JLabel LabelField4;
-    private javax.swing.JLabel LabelField5;
-    private javax.swing.JLabel LabelField6;
-    private javax.swing.JLabel LabelField7;
-    private javax.swing.JLabel LabelField8;
-    private javax.swing.JLabel LabelField9;
-    private javax.swing.JLabel LabelProvince;
-    private javax.swing.JLabel LabelSubTitle;
     private javax.swing.JLabel LableTitle;
+    private javax.swing.JList<String> ListImages;
+    private javax.swing.JList<String> ListPetIllness;
+    private javax.swing.JList<String> ListPetMedicine;
+    private javax.swing.JList<String> ListPetTreatment;
+    private javax.swing.JList<String> ListVeterinarian;
+    private javax.swing.JPanel LocationPanel;
     private javax.swing.JPanel PanelBackGround;
-    private javax.swing.JPanel PanelForm;
-    private javax.swing.JTextField TextChipNumber;
-    private javax.swing.JTextField TextColorPet;
-    private javax.swing.JTextArea TextDescripcionPet;
-    private javax.swing.JTextField TextPetName;
+    private javax.swing.JPanel PetDetailsPanel;
+    private javax.swing.JScrollPane ScrollPanel;
+    private javax.swing.JSpinner SpinnerAge;
+    private javax.swing.JTextField TextChip;
+    private javax.swing.JTextField TextColor;
+    private javax.swing.JTextArea TextDescription;
+    private javax.swing.JTextField TextName;
+    private javax.swing.JTextField TextVeterinarian;
+    private javax.swing.JPanel VeterinarianPanel;
+    private javax.swing.JPanel VeterinarianPanel1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     // End of variables declaration//GEN-END:variables
 }
