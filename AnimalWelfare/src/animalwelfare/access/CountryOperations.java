@@ -7,9 +7,10 @@ package animalwelfare.access;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.CallableStatement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import oracle.jdbc.OracleTypes;
 
 
 /**
@@ -18,26 +19,29 @@ import javax.swing.JOptionPane;
  */
 public class CountryOperations {
     // funcion para traer todos los paises
-    public ArrayList<DbObject> listCountry() {
+    public static ArrayList<DbObject> listCountry() {
         ArrayList<DbObject> listCountry = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "SELECT Id, Name FROM Country"; // aqui va el query
-            Connection con = ConexionOracle.connect(); // nos conectamos a la base de datos
-            Statement cn = con.createStatement(); // esto es para poder ejecutar consultas
-            ResultSet res = cn.executeQuery(SQL); // ejecutamos el query
+            String SQL = "{ ? = call fn_get_country_all() }";
+            Connection con = ConexionOracle.connect();
+            CallableStatement cs = con.prepareCall(SQL);
 
-            // bucle para recorrer el resultado del query
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.execute();
+            ResultSet res = (ResultSet) cs.getObject(1);
+
             while (res.next()) {
-                // aqui guardamos los datos en un objeto llamado location en la lista de paises
+
                 listCountry.add(new DbObject(
                     res.getInt("Id"),
                     res.getString("Name")
                 ));
             }
-            
+
+            res.close();
+            cs.close();
             con.close();
-            cn.close();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage()); //lanzar mensaje de error, esperemos que no se lanze nunca
@@ -47,26 +51,30 @@ public class CountryOperations {
     }
     
     // funcion para traer las provincias asociadas a un Pais
-    public ArrayList<DbObject> listProvince(int IdCountry) {
+    public static ArrayList<DbObject> listProvince(int IdCountry) {
         ArrayList<DbObject> listProvince = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "SELECT Id, Name FROM Province WHERE IdCountry = " + IdCountry; // aqui va el query
-            Connection con = ConexionOracle.connect(); // nos conectamos a la base de datos
-            Statement cn = con.createStatement(); // esto es para poder ejecutar consultas
-            ResultSet res = cn.executeQuery(SQL); // ejecutamos el query
+            String SQL = "{ ? = call fn_get_province_by_country(?) }";
+            Connection con = ConexionOracle.connect();
+            CallableStatement cs = con.prepareCall(SQL);
 
-            // bucle para recorrer el resultado del query
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(2, IdCountry);
+            cs.execute();
+            ResultSet res = (ResultSet) cs.getObject(1);
+
             while (res.next()) {
-                // aqui guardamos los datos en un objeto llamado location en la lista de paises
+
                 listProvince.add(new DbObject(
                     res.getInt("Id"),
                     res.getString("Name")
                 ));
             }
-            
+
+            res.close();
+            cs.close();
             con.close();
-            cn.close();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage()); //lanzar mensaje de error, esperemos que no se lanze nunca
@@ -76,26 +84,30 @@ public class CountryOperations {
     }
     
     // funcion para traer los cantones asociados a una provincia
-    public ArrayList<DbObject> listCanton(int IdProvince) {
+    public static ArrayList<DbObject> listCanton(int IdProvince) {
         ArrayList<DbObject> listCanton = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "SELECT Id, Name FROM Canton WHERE IdProvince = " + IdProvince; // aqui va el query
-            Connection con = ConexionOracle.connect(); // nos conectamos a la base de datos
-            Statement cn = con.createStatement(); // esto es para poder ejecutar consultas
-            ResultSet res = cn.executeQuery(SQL); // ejecutamos el query
+            String SQL = "{ ? = call fn_get_canton_by_province(?) }";
+            Connection con = ConexionOracle.connect();
+            CallableStatement cs = con.prepareCall(SQL);
 
-            // bucle para recorrer el resultado del query
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(2, IdProvince);
+            cs.execute();
+            ResultSet res = (ResultSet) cs.getObject(1);
+
             while (res.next()) {
-                // aqui guardamos los datos en un objeto llamado location en la lista de paises
+
                 listCanton.add(new DbObject(
                     res.getInt("Id"),
                     res.getString("Name")
                 ));
             }
-            
+
+            res.close();
+            cs.close();
             con.close();
-            cn.close();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage()); //lanzar mensaje de error, esperemos que no se lanze nunca
@@ -105,26 +117,34 @@ public class CountryOperations {
     }
 
     // funcion para traer los distritos asociados a una canton
-    public ArrayList<DbObject> listDistrict(int IdCanton) {
+    public static ArrayList<DbObject> listDistrict(int IdCanton) {
         ArrayList<DbObject> listDistrict = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "SELECT Id, Name FROM District WHERE IdCanton = " + IdCanton; // aqui va el query
-            Connection con = ConexionOracle.connect(); // nos conectamos a la base de datos
-            Statement cn = con.createStatement(); // esto es para poder ejecutar consultas
-            ResultSet res = cn.executeQuery(SQL); // ejecutamos el query
+            String SQL = "{ ? = call fn_get_districts_by_canton(?) }";
 
-            // bucle para recorrer el resultado del query
+            Connection con = ConexionOracle.connect();
+
+            CallableStatement cs = con.prepareCall(SQL);
+
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(2, IdCanton);
+
+            cs.execute();
+
+            ResultSet res = (ResultSet) cs.getObject(1);
+
             while (res.next()) {
-                // aqui guardamos los datos en un objeto llamado location en la lista de paises
+
                 listDistrict.add(new DbObject(
                     res.getInt("Id"),
                     res.getString("Name")
                 ));
             }
-            
+
+            res.close();
+            cs.close();
             con.close();
-            cn.close();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage()); //lanzar mensaje de error, esperemos que no se lanze nunca

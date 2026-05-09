@@ -10,14 +10,14 @@ import java.awt.Image;
  *
  * @author valer
  */
-public class InsertPet extends javax.swing.JFrame {
+public class InsertPetForm extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InsertPet.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InsertPetForm.class.getName());
 
     /**
      * Creates new form InsertPet
      */
-public InsertPet() {
+public InsertPetForm() {
     initComponents();
 }
 
@@ -432,7 +432,7 @@ public InsertPet() {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new InsertPet().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new InsertPetForm().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
