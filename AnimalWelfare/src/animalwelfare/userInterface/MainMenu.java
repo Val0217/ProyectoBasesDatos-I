@@ -224,6 +224,9 @@ public class MainMenu extends javax.swing.JFrame {
 
         RescuesButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         RescuesButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RescuesButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 RescuesButtonMouseEntered(evt);
             }
@@ -402,6 +405,11 @@ public class MainMenu extends javax.swing.JFrame {
         InsertPetForm window = new InsertPetForm();
         dispose();
     }//GEN-LAST:event_MyPetsButtonMouseClicked
+
+    private void RescuesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RescuesButtonMouseClicked
+        InsertPetForm window = new InsertPetForm();
+        dispose();
+    }//GEN-LAST:event_RescuesButtonMouseClicked
 
     /**
      * @param args the command line arguments

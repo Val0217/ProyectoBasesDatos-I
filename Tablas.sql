@@ -182,7 +182,6 @@ CREATE TABLE Adoption (
     AdoptionDate DATE,
     AvailableDate DATE,
     Description VARCHAR2(100),
-    Amount NUMBER(8), -- no me acuerdo para que es esto
     State VARCHAR2(25), -- Esto debe ser un campo definido
     IdPet NUMBER(8),
     IdAdopter NUMBER(8),

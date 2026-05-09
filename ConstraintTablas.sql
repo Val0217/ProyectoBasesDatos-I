@@ -172,10 +172,10 @@ ALTER TABLE PetMatch ADD CONSTRAINT chk_PetMatch_Percentage
 -- -------------------------------------------------------------
 
 ALTER TABLE Adoption MODIFY (
-    AdoptionDate DATE      NOT NULL,
-    IdPet        NUMBER(8) NOT NULL,
-    IdAdopter    NUMBER(8) NOT NULL,
-    IdOwner      NUMBER(8) NOT NULL
+    AvailableDate DATE      NOT NULL,
+    IdPet         NUMBER(8) NOT NULL,
+    IdAdopter     NUMBER(8) NOT NULL,
+    IdOwner       NUMBER(8) NOT NULL
 );
 
 -- Estado debe ser valor conocido
@@ -186,9 +186,6 @@ ALTER TABLE Adoption ADD CONSTRAINT chk_Adoption_State
 ALTER TABLE Adoption ADD CONSTRAINT chk_Adoption_Dates
     CHECK (AvailableDate IS NULL OR AdoptionDate IS NULL OR AvailableDate <= AdoptionDate);
 
--- Amount no negativo (si se usa como costo de adopcion)
-ALTER TABLE Adoption ADD CONSTRAINT chk_Adoption_Amount
-    CHECK (Amount IS NULL OR Amount >= 0);
 
 -- -------------------------------------------------------------
 -- RESCUED
