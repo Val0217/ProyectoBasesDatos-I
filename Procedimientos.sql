@@ -792,6 +792,21 @@ BEGIN --> aqui va el comando:
 END pr_insert_person;
 
 
+/* ------------------------------------------------------------
+   Procedimiento: pr_insert_pet
+   Descripcion:
+   Inserta una nueva mascota en la base de datos.
+   ------------------------------------------------------------ */
+CREATE OR REPLACE PROCEDURE pr_insert_pet(pColor IN VARCHAR2, pAge IN NUMBER, pDescription IN VARCHAR2, pPetName IN VARCHAR2, pChip IN VARCHAR2, pIdEnergy IN NUMBER, pIdState IN NUMBER, pIdType IN NUMBER, pIdBreed IN NUMBER, pIdDistrict IN NUMBER, pIdSpaceRequired IN NUMBER, pIdPetTraining IN NUMBER, pIdPetSize IN NUMBER, pIdPerson IN NUMBER, pIdVeterinarian IN NUMBER)
+AS 
+BEGIN --> aqui va el comando:
+    INSERT INTO Pet (Color, Age, Description, Name, Chip, IdEnergy, IdState, IdType, IdBreed, IdDistrict, IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian)
+    VALUES 
+    (pColor, pAge, pDescription, pPetName, pChip, pIdEnergy, pIdState, pIdType, pIdBreed, pIdDistrict, pIdSpaceRequired, pIdPetTraining, pIdPetSize, pIdPerson, pIdVeterinarian);
+    COMMIT;
+END pr_insert_pet;
+
+
 
 
 /* ------------------------------------------------------------

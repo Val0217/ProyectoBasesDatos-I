@@ -1,10 +1,12 @@
 package animalwelfare.access;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 public class PetOperations {
 
@@ -123,6 +125,29 @@ public class PetOperations {
 
         } catch (SQLException | NullPointerException e) {
             System.out.println("Error updating pet state: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public static boolean InsertPet(String color, int age, String description, String petName, String chip, int idEnergy, int idState, int idType, int idBreed, int idDistrict, int idSpaceRequired, int idPetTraining, int idPetSize, int idPerson, int idVeterinarian) throws SQLException {
+
+        try {
+            Connection con = ConexionOracle.connect();
+
+            // Creamos la consulta SQL para insertar una nueva persona utilizando el procedimiento insertPerson
+            String SQL = "BEGIN pr_insert_pet('"+color+"',"+age+",'"+description+"','"+petName+"','"+chip+"',"+idEnergy+","+idState+","+idType+","+idBreed+","+idDistrict+","+idSpaceRequired+","+idPetTraining+","+idPetSize+","+idPerson+","+idVeterinarian+"); END;";
+            
+            Statement cn = con.createStatement(); // esto es para poder ejecutar consultas
+            cn.execute(SQL); // ejecutamos el query
+            
+
+            cn.close();
+            con.close();
+            
+            return true;
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
             return false;
         }
     }

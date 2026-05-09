@@ -14,7 +14,7 @@ import animalwelfare.security.Session;
  *
  * @author carlo
  */
-public class SignIn {
+public class SignInController {
    
     // revisamos las credenciales del usuario con respecto a la base de datos y si estan llenas
     public boolean CheckUser(String userName, String password){

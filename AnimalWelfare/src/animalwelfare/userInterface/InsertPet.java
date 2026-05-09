@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package animalwelfare.userInterface;
-import animalwelfare.access.Location;
+import animalwelfare.access.DbObject;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 /**
@@ -437,13 +437,13 @@ public InsertPet() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonCreateAccount;
-    private javax.swing.JComboBox<Location> ComboCanton;
-    private javax.swing.JComboBox<Location> ComboCountry;
-    private javax.swing.JComboBox<Location> ComboDistrict;
+    private javax.swing.JComboBox<DbObject> ComboCanton;
+    private javax.swing.JComboBox<DbObject> ComboCountry;
+    private javax.swing.JComboBox<DbObject> ComboDistrict;
     private javax.swing.JComboBox<String> ComboEnergyPet;
-    private javax.swing.JComboBox<Location> ComboProvince;
+    private javax.swing.JComboBox<DbObject> ComboProvince;
     private javax.swing.JComboBox<String> ComboSizePet;
-    private javax.swing.JComboBox<Location> ComboVeterinarianPet;
+    private javax.swing.JComboBox<DbObject> ComboVeterinarianPet;
     private javax.swing.JLabel ImagenBackGround;
     private javax.swing.JLabel LabelCanton;
     private javax.swing.JLabel LabelCountry;

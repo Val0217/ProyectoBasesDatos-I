@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package animalwelfare.userInterface;
-import animalwelfare.access.Location;
-import animalwelfare.business.SignUp;
+import animalwelfare.access.DbObject;
+import animalwelfare.business.SignUpController;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.ListCellRenderer;
@@ -19,40 +19,40 @@ public class SignUpForm extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SignUpForm.class.getName());
     
     // controlador
-    private SignUp controller = null;
+    private SignUpController controller = null;
 
     // procedimiento que rellena el combobox de Country
-    public void fillCountry(ArrayList<Location> listCountry) {
+    public void fillCountry(ArrayList<DbObject> listCountry) {
         ComboCountry.removeAllItems();
-        ComboCountry.addItem(new Location(0,"-"));
-        for (Location c : listCountry) {
+        ComboCountry.addItem(new DbObject(0,"-"));
+        for (DbObject c : listCountry) {
             ComboCountry.addItem(c);
         }
     }
     
     // procedimiento que rellena el combobox de Country
-    public void fillProvince(ArrayList<Location> listCountry) {
+    public void fillProvince(ArrayList<DbObject> listCountry) {
         ComboProvince.removeAllItems();
-        ComboProvince.addItem(new Location(0,"-"));
-        for (Location c : listCountry) {
+        ComboProvince.addItem(new DbObject(0,"-"));
+        for (DbObject c : listCountry) {
             ComboProvince.addItem(c);
         }
     }
     
     // procedimiento que rellena el combobox de Country
-    public void fillCanton(ArrayList<Location> listCountry) {
+    public void fillCanton(ArrayList<DbObject> listCountry) {
         ComboCanton.removeAllItems();
-        ComboCanton.addItem(new Location(0,"-"));
-        for (Location c : listCountry) {
+        ComboCanton.addItem(new DbObject(0,"-"));
+        for (DbObject c : listCountry) {
             ComboCanton.addItem(c);
         }
     }
     
     // procedimiento que rellena el combobox de Country
-    public void fillDistrict(ArrayList<Location> listCountry) {
+    public void fillDistrict(ArrayList<DbObject> listCountry) {
         ComboDistrict.removeAllItems();
-        ComboDistrict.addItem(new Location(0,"-"));
-        for (Location c : listCountry) {
+        ComboDistrict.addItem(new DbObject(0,"-"));
+        for (DbObject c : listCountry) {
             ComboDistrict.addItem(c);
         }
     }
@@ -60,7 +60,7 @@ public class SignUpForm extends javax.swing.JFrame {
     
     public SignUpForm() {
         initComponents();
-        controller = new SignUp(this);
+        controller = new SignUpController(this);
         setLocationRelativeTo(null);
         
         ComboProvince.setEnabled(false);
@@ -410,7 +410,7 @@ public class SignUpForm extends javax.swing.JFrame {
         LableTitle1.setForeground(new java.awt.Color(255, 255, 0));
         LableTitle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LableTitle1.setText("NOW!");
-        PanelBackGround.add(LableTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, -1));
+        PanelBackGround.add(LableTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
 
         LableTitle3.setFont(new java.awt.Font("Roboto Black", 1, 36)); // NOI18N
         LableTitle3.setForeground(new java.awt.Color(255, 255, 255));
@@ -450,7 +450,7 @@ public class SignUpForm extends javax.swing.JFrame {
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
         // boton que envia los datos del formulario a la capa de access para que los inserten en la base de datos
-        Location District = (Location) ComboDistrict.getSelectedItem();
+        DbObject District = (DbObject) ComboDistrict.getSelectedItem();
         char[] passwordCharecters = TextPassword.getPassword();
         char[] rePasswordCharecters = TextPasswordRE.getPassword();
         boolean correct = controller.InsertPerson(TextEmail.getText(),TextFirstName.getText(),TextLastName.getText(),new String(passwordCharecters),new String(rePasswordCharecters), TextUserName.getText(),District, TextPhone.getText());
@@ -471,7 +471,7 @@ public class SignUpForm extends javax.swing.JFrame {
     private void ComboCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCountryActionPerformed
         // al seleccionar un pais, se llena el de province y se bloquea los siguientes.
         if (controller == null) return;
-        Location country = (Location) ComboCountry.getSelectedItem();
+        DbObject country = (DbObject) ComboCountry.getSelectedItem();
         if (country == null) return;
         if (country.getId() == 0) return;
         ComboCanton.removeAllItems();
@@ -485,7 +485,7 @@ public class SignUpForm extends javax.swing.JFrame {
 
     private void ComboProvinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboProvinceActionPerformed
         // al seleccionar una provincia, se llena el de canton y se bloquea los siguientes.
-        Location province = (Location) ComboProvince.getSelectedItem();
+        DbObject province = (DbObject) ComboProvince.getSelectedItem();
         if (province == null) return;
         if (province.getId() == 0) return;
         ComboDistrict.removeAllItems();
@@ -497,7 +497,7 @@ public class SignUpForm extends javax.swing.JFrame {
 
     private void ComboCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCantonActionPerformed
         // al seleccionar un canton, se llena el de Distrito.
-        Location canton = (Location) ComboCanton.getSelectedItem();
+        DbObject canton = (DbObject) ComboCanton.getSelectedItem();
         if (canton == null) return;
         if (canton.getId() == 0) return;
         ComboDistrict.removeAllItems();
@@ -541,10 +541,10 @@ public class SignUpForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonCreateAccount;
-    private javax.swing.JComboBox<Location> ComboCanton;
-    private javax.swing.JComboBox<Location> ComboCountry;
-    private javax.swing.JComboBox<Location> ComboDistrict;
-    private javax.swing.JComboBox<Location> ComboProvince;
+    private javax.swing.JComboBox<DbObject> ComboCanton;
+    private javax.swing.JComboBox<DbObject> ComboCountry;
+    private javax.swing.JComboBox<DbObject> ComboDistrict;
+    private javax.swing.JComboBox<DbObject> ComboProvince;
     private javax.swing.JLabel ImagenBackGround;
     private javax.swing.JLabel LabelCanton;
     private javax.swing.JLabel LabelCountry;

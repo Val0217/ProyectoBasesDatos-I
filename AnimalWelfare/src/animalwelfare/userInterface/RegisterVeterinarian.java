@@ -4,7 +4,7 @@
  */
 package animalwelfare.userInterface;
 
-import animalwelfare.access.Location;
+import animalwelfare.access.DbObject;
 
 
 /**
@@ -198,93 +198,27 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<Location> ComboCanton;
-    private javax.swing.JComboBox<Location> ComboCanton1;
-    private javax.swing.JComboBox<Location> ComboCanton2;
-    private javax.swing.JComboBox<Location> ComboCanton3;
-    private javax.swing.JComboBox<Location> ComboCountry;
-    private javax.swing.JComboBox<Location> ComboCountry1;
-    private javax.swing.JComboBox<Location> ComboCountry2;
-    private javax.swing.JComboBox<Location> ComboCountry3;
-    private javax.swing.JComboBox<Location> ComboDistrict;
-    private javax.swing.JComboBox<Location> ComboDistrict1;
-    private javax.swing.JComboBox<Location> ComboDistrict2;
-    private javax.swing.JComboBox<Location> ComboDistrict3;
-    private javax.swing.JComboBox<Location> ComboProvince;
-    private javax.swing.JComboBox<Location> ComboProvince1;
-    private javax.swing.JComboBox<Location> ComboProvince2;
-    private javax.swing.JComboBox<Location> ComboProvince3;
-    private javax.swing.JLabel LabelCanton;
-    private javax.swing.JLabel LabelCanton1;
-    private javax.swing.JLabel LabelCanton2;
+    private javax.swing.JComboBox<DbObject> ComboCanton3;
+    private javax.swing.JComboBox<DbObject> ComboCountry3;
+    private javax.swing.JComboBox<DbObject> ComboDistrict3;
+    private javax.swing.JComboBox<DbObject> ComboProvince3;
     private javax.swing.JLabel LabelCanton3;
-    private javax.swing.JLabel LabelCountry;
-    private javax.swing.JLabel LabelCountry1;
-    private javax.swing.JLabel LabelCountry2;
     private javax.swing.JLabel LabelCountry3;
-    private javax.swing.JLabel LabelDistrict;
-    private javax.swing.JLabel LabelDistrict1;
-    private javax.swing.JLabel LabelDistrict2;
     private javax.swing.JLabel LabelDistrict3;
-    private javax.swing.JLabel LabelProvince;
-    private javax.swing.JLabel LabelProvince1;
-    private javax.swing.JLabel LabelProvince2;
     private javax.swing.JLabel LabelProvince3;
-    private javax.swing.JTextField TextFirstNameVet;
-    private javax.swing.JTextField TextFirstNameVet1;
-    private javax.swing.JTextField TextFirstNameVet2;
-    private javax.swing.JTextField TextLastNameVet;
-    private javax.swing.JTextField TextLastNameVet1;
-    private javax.swing.JTextField TextLastNameVet2;
     private javax.swing.JTextField TextPhoneVet;
     private javax.swing.JTextField TextVetClinicName;
-    private javax.swing.JTextField TextVetEmail;
-    private javax.swing.JTextField TextVetEmail1;
-    private javax.swing.JTextField TextVetEmail2;
     private javax.swing.JTextField TextVetFirstName;
     private javax.swing.JTextField TextVetLastName;
-    private javax.swing.JTextField TextVetLocation;
-    private javax.swing.JTextField TextVetLocation1;
-    private javax.swing.JTextField TextVetLocation2;
     private javax.swing.JTextField TextVetLoctaion;
-    private javax.swing.JTextField TextVetPhone;
-    private javax.swing.JTextField TextVetPhone1;
-    private javax.swing.JTextField TextVetPhone2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

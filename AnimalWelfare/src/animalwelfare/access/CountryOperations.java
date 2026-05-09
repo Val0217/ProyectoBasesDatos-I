@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class CountryOperations {
     // funcion para traer todos los paises
-    public ArrayList<Location> listCountry() {
-        ArrayList<Location> listCountry = new ArrayList(); //creamos una lista para guardar los resultados.
+    public ArrayList<DbObject> listCountry() {
+        ArrayList<DbObject> listCountry = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
             String SQL = "SELECT Id, Name FROM Country"; // aqui va el query
@@ -30,7 +30,7 @@ public class CountryOperations {
             // bucle para recorrer el resultado del query
             while (res.next()) {
                 // aqui guardamos los datos en un objeto llamado location en la lista de paises
-                listCountry.add(new Location(
+                listCountry.add(new DbObject(
                     res.getInt("Id"),
                     res.getString("Name")
                 ));
@@ -47,8 +47,8 @@ public class CountryOperations {
     }
     
     // funcion para traer las provincias asociadas a un Pais
-    public ArrayList<Location> listProvince(int IdCountry) {
-        ArrayList<Location> listProvince = new ArrayList(); //creamos una lista para guardar los resultados.
+    public ArrayList<DbObject> listProvince(int IdCountry) {
+        ArrayList<DbObject> listProvince = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
             String SQL = "SELECT Id, Name FROM Province WHERE IdCountry = " + IdCountry; // aqui va el query
@@ -59,7 +59,7 @@ public class CountryOperations {
             // bucle para recorrer el resultado del query
             while (res.next()) {
                 // aqui guardamos los datos en un objeto llamado location en la lista de paises
-                listProvince.add(new Location(
+                listProvince.add(new DbObject(
                     res.getInt("Id"),
                     res.getString("Name")
                 ));
@@ -76,8 +76,8 @@ public class CountryOperations {
     }
     
     // funcion para traer los cantones asociados a una provincia
-    public ArrayList<Location> listCanton(int IdProvince) {
-        ArrayList<Location> listCanton = new ArrayList(); //creamos una lista para guardar los resultados.
+    public ArrayList<DbObject> listCanton(int IdProvince) {
+        ArrayList<DbObject> listCanton = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
             String SQL = "SELECT Id, Name FROM Canton WHERE IdProvince = " + IdProvince; // aqui va el query
@@ -88,7 +88,7 @@ public class CountryOperations {
             // bucle para recorrer el resultado del query
             while (res.next()) {
                 // aqui guardamos los datos en un objeto llamado location en la lista de paises
-                listCanton.add(new Location(
+                listCanton.add(new DbObject(
                     res.getInt("Id"),
                     res.getString("Name")
                 ));
@@ -105,8 +105,8 @@ public class CountryOperations {
     }
 
     // funcion para traer los distritos asociados a una canton
-    public ArrayList<Location> listDistrict(int IdCanton) {
-        ArrayList<Location> listDistrict = new ArrayList(); //creamos una lista para guardar los resultados.
+    public ArrayList<DbObject> listDistrict(int IdCanton) {
+        ArrayList<DbObject> listDistrict = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
             String SQL = "SELECT Id, Name FROM District WHERE IdCanton = " + IdCanton; // aqui va el query
@@ -117,7 +117,7 @@ public class CountryOperations {
             // bucle para recorrer el resultado del query
             while (res.next()) {
                 // aqui guardamos los datos en un objeto llamado location en la lista de paises
-                listDistrict.add(new Location(
+                listDistrict.add(new DbObject(
                     res.getInt("Id"),
                     res.getString("Name")
                 ));

@@ -1,20 +1,20 @@
 package animalwelfare.userInterface;
 
-import animalwelfare.business.SignIn;
+import animalwelfare.business.SignInController;
 
 
 public class SignInForm extends javax.swing.JFrame {
     
 
     // cotrolador
-    private SignIn controller = null;
+    private SignInController controller = null;
     
     
     
     
     public SignInForm() {
         initComponents();
-        controller = new SignIn();
+        controller = new SignInController();
         setLocationRelativeTo(null);
         setVisible(true);
         requestFocusInWindow();
@@ -186,9 +186,9 @@ public class SignInForm extends javax.swing.JFrame {
         PanelFormLayout.setVerticalGroup(
             PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelFormLayout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(41, 41, 41)
                 .addComponent(LableTitle)
-                .addGap(37, 37, 37)
+                .addGap(57, 57, 57)
                 .addComponent(LabelField1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TextUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
