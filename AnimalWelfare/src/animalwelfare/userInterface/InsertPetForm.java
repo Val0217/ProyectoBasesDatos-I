@@ -185,7 +185,6 @@ public class InsertPetForm extends javax.swing.JFrame {
         TextColor3 = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        SpinnerAge3 = new javax.swing.JSpinner();
         TextChip3 = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
@@ -196,6 +195,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         LabelButtonSelectImage3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ListImages = new javax.swing.JList<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         PetDetailsPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         ComboType = new javax.swing.JComboBox<>();
@@ -281,8 +281,6 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel31.setText("Age:");
 
-        SpinnerAge3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         TextChip3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         TextChip3.addActionListener(this::TextChipActionPerformed);
 
@@ -323,6 +321,10 @@ public class InsertPetForm extends javax.swing.JFrame {
         ListImages.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(ListImages);
 
+        jComboBox1.setBackground(new java.awt.Color(254, 255, 255));
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99" }));
+
         javax.swing.GroupLayout BasicInformationPanel3Layout = new javax.swing.GroupLayout(BasicInformationPanel3);
         BasicInformationPanel3.setLayout(BasicInformationPanel3Layout);
         BasicInformationPanel3Layout.setHorizontalGroup(
@@ -344,7 +346,7 @@ public class InsertPetForm extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BasicInformationPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel31)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(SpinnerAge3, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(BasicInformationPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel32)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -367,7 +369,7 @@ public class InsertPetForm extends javax.swing.JFrame {
                             .addComponent(jLabel29)
                             .addComponent(TextName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel31)
-                            .addComponent(SpinnerAge3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(BasicInformationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel30)
@@ -396,8 +398,10 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel6.setLabelFor(TextName3);
         jLabel6.setText("Species:");
 
+        ComboType.setBackground(new java.awt.Color(254, 255, 255));
         ComboType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        ComboSpaceRequired.setBackground(new java.awt.Color(254, 255, 255));
         ComboSpaceRequired.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboSpaceRequired.addActionListener(this::ComboSpaceRequiredActionPerformed);
 
@@ -405,6 +409,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel7.setLabelFor(TextName3);
         jLabel7.setText("Space required:");
 
+        ComboBreed.setBackground(new java.awt.Color(254, 255, 255));
         ComboBreed.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboBreed.addActionListener(this::ComboBreedActionPerformed);
 
@@ -412,6 +417,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel8.setLabelFor(TextName3);
         jLabel8.setText("Breed:");
 
+        ComboEnergy.setBackground(new java.awt.Color(254, 255, 255));
         ComboEnergy.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboEnergy.addActionListener(this::ComboEnergyActionPerformed);
 
@@ -419,6 +425,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel9.setLabelFor(TextName3);
         jLabel9.setText("Energy:");
 
+        ComboTraining.setBackground(new java.awt.Color(254, 255, 255));
         ComboTraining.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboTraining.addActionListener(this::ComboTrainingActionPerformed);
 
@@ -426,6 +433,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel10.setLabelFor(TextName3);
         jLabel10.setText("Ease of training:");
 
+        ComboSize.setBackground(new java.awt.Color(254, 255, 255));
         ComboSize.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboSize.addActionListener(this::ComboSizeActionPerformed);
 
@@ -496,8 +504,10 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel12.setLabelFor(TextName3);
         jLabel12.setText("Country:");
 
+        ComboCountry.setBackground(new java.awt.Color(254, 255, 255));
         ComboCountry.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        ComboCanton.setBackground(new java.awt.Color(254, 255, 255));
         ComboCanton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboCanton.addActionListener(this::ComboCantonActionPerformed);
 
@@ -505,6 +515,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel13.setLabelFor(TextName3);
         jLabel13.setText("Canton:");
 
+        ComboProvince.setBackground(new java.awt.Color(254, 255, 255));
         ComboProvince.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboProvince.addActionListener(this::ComboProvinceActionPerformed);
 
@@ -512,6 +523,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel14.setLabelFor(TextName3);
         jLabel14.setText("Province:");
 
+        ComboDistrict.setBackground(new java.awt.Color(254, 255, 255));
         ComboDistrict.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboDistrict.addActionListener(this::ComboDistrictActionPerformed);
 
@@ -606,6 +618,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel16.setLabelFor(TextName3);
         jLabel16.setText("Your pet suffers from some illness:");
 
+        ComboIllness.setBackground(new java.awt.Color(254, 255, 255));
         ComboIllness.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         ListPetMedicine.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -635,6 +648,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel17.setLabelFor(TextName3);
         jLabel17.setText("Your pet needs some medicine:");
 
+        ComboMedicine.setBackground(new java.awt.Color(254, 255, 255));
         ComboMedicine.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         ButtonAddMedicine.setBackground(new java.awt.Color(0, 102, 102));
@@ -664,6 +678,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel18.setLabelFor(TextName3);
         jLabel18.setText("Your pet needs some treatment:");
 
+        ComboTreatment.setBackground(new java.awt.Color(254, 255, 255));
         ComboTreatment.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         ButtonAddTreatment.setBackground(new java.awt.Color(0, 102, 102));
@@ -979,13 +994,13 @@ public class InsertPetForm extends javax.swing.JFrame {
     private javax.swing.JPanel PetDetailsPanel;
     private javax.swing.JPanel PetHealthPanel;
     private javax.swing.JScrollPane ScrollPanelFirst;
-    private javax.swing.JSpinner SpinnerAge3;
     private javax.swing.JTextField TextChip3;
     private javax.swing.JTextField TextColor3;
     private javax.swing.JTextArea TextDescription3;
     private javax.swing.JTextField TextName3;
     private javax.swing.JTextField TextVeterinarian;
     private javax.swing.JPanel VeterinarianPanel;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
