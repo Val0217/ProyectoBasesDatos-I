@@ -17,6 +17,7 @@ import animalwelfare.userInterface.InsertPetFormForEdit;
 import animalwelfare.security.Hash;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import animalwelfare.access.PetEditData;
 
 public class InsertPetController {
     
@@ -56,6 +57,31 @@ public class InsertPetController {
         }
         return success;
     }
+    public void FillProvince(InsertPetFormForEdit view, int IdCountry) {
+        view.fillProvince(CountryOperations.listProvince(IdCountry));
+    }
+
+    public void FillCanton(InsertPetFormForEdit view, int IdProvince) {
+        view.fillCanton(CountryOperations.listCanton(IdProvince));
+    }
+
+    public void FillDistrict(InsertPetFormForEdit view, int IdCanton) {
+        view.fillDistrict(CountryOperations.listDistrict(IdCanton));
+    }
+    public void LoadPetForEdit(InsertPetFormForEdit view, int petId, int ownerId) throws SQLException {
+        PetEditData pet = PetOperations.GetPetForEdit(petId, ownerId);
+
+        if (pet == null) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Pet not found or this pet does not belong to the current owner."
+            );
+            view.dispose();
+            return;
+        }
+
+        view.loadPetData(pet);
+    }
     public InsertPetController(InsertPetFormForEdit view) {
         view.fillPetEnergy(PetEnergyOperations.listPetEnergy());
         view.fillPetType(PetTypeOperations.listPetType());
@@ -66,16 +92,53 @@ public class InsertPetController {
         view.fillPetSize(PetSizeOperations.listPetSize());
         view.fillVeterinarian(PetVeterinarianOperations.listPetVeterinarian());
     }
-    
-    public boolean InsertPet2(String color, int age, String description, String petName, String chip, int idEnergy, int idState, int idType, int idBreed, int idDistrict, int idSpaceRequired, int idPetTraining, int idPetSize, int idPerson, int idVeterinarian) throws SQLException{
+public boolean UpdatePetForOwner(
+            int petId,
+            int ownerId,
+            String color,
+            int age,
+            String description,
+            String petName,
+            String chip,
+            int idEnergy,
+            int idType,
+            Integer idBreed,
+            int idDistrict,
+            int idSpaceRequired,
+            int idPetTraining,
+            int idPetSize,
+            int idVeterinarian
+    ) throws SQLException {
 
-        boolean success = PetOperations.InsertPet(color, age, description, petName, chip, idEnergy, idState, idType, idBreed, idDistrict, idSpaceRequired, idPetTraining, idPetSize, idPerson, idVeterinarian);
+        boolean success = PetOperations.UpdatePetForOwner(
+                petId,
+                ownerId,
+                color,
+                age,
+                description,
+                petName,
+                chip,
+                idEnergy,
+                idType,
+                idBreed,
+                idDistrict,
+                idSpaceRequired,
+                idPetTraining,
+                idPetSize,
+                idVeterinarian
+        );
+
         if (success) {
-            JOptionPane.showMessageDialog(null, "Pet inserted successfully.");
+            JOptionPane.showMessageDialog(null, "Pet updated successfully.");
         } else {
-            JOptionPane.showMessageDialog(null, "Failed to insert pet.");
+            JOptionPane.showMessageDialog(
+                null,
+                "Pet was not updated. Check that the pet belongs to this owner."
+            );
         }
+
         return success;
-    }
+    }    
+
 }
 

@@ -8,6 +8,8 @@ import animalwelfare.business.InsertPetController;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.util.ArrayList;
+import animalwelfare.access.PetEditData;
+import javax.swing.JOptionPane;
 /**
  *
  * @author valer
@@ -15,7 +17,11 @@ import java.util.ArrayList;
 public class InsertPetFormForEdit extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InsertPetFormForEdit.class.getName());
-
+    private int petId;
+    private int ownerId;
+    private String originalDescription = "";
+    private boolean loadingPet = false;
+    private UserPetTable previousForm;
 
     // controlador del formulario
     private InsertPetController controller = null;
@@ -79,7 +85,7 @@ public class InsertPetFormForEdit extends javax.swing.JFrame {
         ComboPetTraining.removeAllItems();
         ComboPetTraining.addItem(new DbObject(0,"-"));
         for (DbObject c : listPetType) {
-            ComboPetTraining.addItem(c);
+            ComboPetType.addItem(c);
         }
     }
 
@@ -120,20 +126,147 @@ public class InsertPetFormForEdit extends javax.swing.JFrame {
             ComboDistrict.addItem(c);
         }
     }
+    private void goBackToUserPetTable() {
+        if (previousForm != null) {
+            previousForm.refreshAfterPetEdit();
+            previousForm.setVisible(true);
+            previousForm.toFront();
+            previousForm.requestFocus();
+        } else {
+            UserPetTable userPetTable = new UserPetTable(ownerId);
+            userPetTable.setVisible(true);
+        }
 
-    public InsertPetFormForEdit() {
-        initComponents(); // Inicializar los componentes del formulario
-        setLocationRelativeTo(null); // Centrar el formulario en la pantalla
+        dispose();
+    }
+public InsertPetFormForEdit() {
+    this(0, 0, null);
+}
 
-        controller = new InsertPetController(this);
+public InsertPetFormForEdit(int petId, int ownerId, UserPetTable previousForm) {
+    initComponents();
+    setLocationRelativeTo(null);
 
-        ComboProvince.setEnabled(false);
-        ComboCanton.setEnabled(false);
-        ComboDistrict.setEnabled(false);
+    this.petId = petId;
+    this.ownerId = ownerId;
+    this.previousForm = previousForm;
 
-        setVisible(true); // Hacer visible el formulario
+    controller = new InsertPetController(this);
+
+    ComboProvince.setEnabled(false);
+    ComboCanton.setEnabled(false);
+    ComboDistrict.setEnabled(false);
+
+    LabelSubTitle.setText("Edit Pet");
+    ButtonCreateAccount.setText("Save Changes");
+
+    if (petId > 0 && ownerId > 0) {
+        try {
+            controller.LoadPetForEdit(this, petId, ownerId);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(
+                this,
+                ex.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+            dispose();
+        }
+    }
+}
+public void loadPetData(PetEditData pet) {
+    loadingPet = true;
+
+    try {
+        TextPetName.setText(nullToEmpty(pet.petName));
+        TextColorPet.setText(nullToEmpty(pet.color));
+        TextChipNumber.setText(nullToEmpty(pet.chip));
+
+        originalDescription = nullToEmpty(pet.description);
+
+        ComboAgePet.setSelectedItem(String.valueOf(pet.age));
+
+        selectDbObjectById(ComboEnergyPet, pet.idEnergy);
+        selectDbObjectById(ComboPetType, pet.idType);
+
+        if (pet.idBreed != null) {
+            selectDbObjectById(ComboBreedPet, pet.idBreed);
+        }
+
+        selectDbObjectById(ComboSpaceRequieredPet, pet.idSpace);
+        selectDbObjectById(ComboPetTraining, pet.idPetTraining);
+        selectDbObjectById(ComboSizePet, pet.idSize);
+        selectDbObjectById(ComboVeterinarianPet, pet.idVeterinarian);
+
+        selectDbObjectById(ComboCountry, pet.idCountry);
+
+        ComboProvince.setEnabled(true);
+        controller.FillProvince(this, pet.idCountry);
+        selectDbObjectById(ComboProvince, pet.idProvince);
+
+        ComboCanton.setEnabled(true);
+        controller.FillCanton(this, pet.idProvince);
+        selectDbObjectById(ComboCanton, pet.idCanton);
+
+        ComboDistrict.setEnabled(true);
+        controller.FillDistrict(this, pet.idCanton);
+        selectDbObjectById(ComboDistrict, pet.idDistrict);
+
+    } finally {
+        loadingPet = false;
+    }
+}
+
+    private void selectDbObjectById(javax.swing.JComboBox<DbObject> combo, int id) {
+    for (int i = 0; i < combo.getItemCount(); i++) {
+        DbObject item = combo.getItemAt(i);
+
+        if (item != null && item.getId() == id) {
+            combo.setSelectedIndex(i);
+            return;
+        }
+    }
+}
+
+private int requireSelectedId(javax.swing.JComboBox<DbObject> combo, String fieldName) {
+    DbObject item = (DbObject) combo.getSelectedItem();
+
+    if (item == null || item.getId() == 0) {
+        throw new IllegalStateException("Select a valid " + fieldName + ".");
     }
 
+    return item.getId();
+}
+
+private Integer getOptionalSelectedId(javax.swing.JComboBox<DbObject> combo) {
+    DbObject item = (DbObject) combo.getSelectedItem();
+
+    if (item == null || item.getId() == 0) {
+        return null;
+    }
+
+    return item.getId();
+}
+
+private String cleanText(String text) {
+    if (text == null || text.trim().isEmpty()) {
+        return null;
+    }
+
+    return text.trim();
+}
+
+private String requiredText(String text, String fieldName) {
+    if (text == null || text.trim().isEmpty()) {
+        throw new IllegalStateException(fieldName + " is required.");
+    }
+
+    return text.trim();
+}
+
+private String nullToEmpty(String text) {
+    return text == null ? "" : text;
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -179,6 +312,7 @@ public class InsertPetFormForEdit extends javax.swing.JFrame {
         ComboSpaceRequieredPet = new javax.swing.JComboBox<>();
         ComboPetType = new javax.swing.JComboBox<>();
         LabelField3 = new javax.swing.JLabel();
+        jButtonGoBack = new javax.swing.JButton();
         LableTitle = new javax.swing.JLabel();
         ImagenBackGround = new javax.swing.JLabel();
 
@@ -203,7 +337,7 @@ public class InsertPetFormForEdit extends javax.swing.JFrame {
 
         ButtonCreateAccount.setBackground(new java.awt.Color(255, 216, 20));
         ButtonCreateAccount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ButtonCreateAccount.setText("Register Pet");
+        ButtonCreateAccount.setText("Edit Pet");
         ButtonCreateAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ButtonCreateAccount.addActionListener(this::ButtonCreateAccountActionPerformed);
 
@@ -303,6 +437,10 @@ public class InsertPetFormForEdit extends javax.swing.JFrame {
         LabelField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LabelField3.setText("Species");
 
+        jButtonGoBack.setBackground(new java.awt.Color(204, 255, 153));
+        jButtonGoBack.setText("Go back");
+        jButtonGoBack.addActionListener(this::jButtonGoBackActionPerformed);
+
         javax.swing.GroupLayout PanelFormLayout = new javax.swing.GroupLayout(PanelForm);
         PanelForm.setLayout(PanelFormLayout);
         PanelFormLayout.setHorizontalGroup(
@@ -355,7 +493,7 @@ public class InsertPetFormForEdit extends javax.swing.JFrame {
                                                         .addComponent(TextChipNumber)
                                                         .addComponent(LabelField6, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE))
                                                     .addComponent(LabelField3))
-                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                                .addGap(0, 1, Short.MAX_VALUE))))
                                     .addComponent(LabelField))
                                 .addGap(18, 18, 18)
                                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,11 +503,10 @@ public class InsertPetFormForEdit extends javax.swing.JFrame {
                                             .addComponent(ComboBreedPet, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(ComboPetTraining, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(LabelField2))
-                                        .addGap(0, 28, Short.MAX_VALUE))))
+                                        .addGap(0, 29, Short.MAX_VALUE))))
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(PanelFormLayout.createSequentialGroup()
                                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(LabelField7)
                                     .addGroup(PanelFormLayout.createSequentialGroup()
                                         .addComponent(ComboSpaceRequieredPet, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -387,7 +524,12 @@ public class InsertPetFormForEdit extends javax.swing.JFrame {
                                     .addComponent(LabelDistrict)
                                     .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(LabelProvince))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonGoBack, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))))
                 .addContainerGap())
         );
         PanelFormLayout.setVerticalGroup(
@@ -437,22 +579,28 @@ public class InsertPetFormForEdit extends javax.swing.JFrame {
                     .addComponent(LabelField7)
                     .addComponent(LabelCanton)
                     .addComponent(LabelDistrict))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboSpaceRequieredPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(81, 81, 81)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelFormLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComboSpaceRequieredPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFormLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonGoBack)
+                        .addGap(23, 23, 23)))
                 .addComponent(LabelCountry)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ComboVeterinarianPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ButtonCreateAccount)
-                .addGap(92, 92, 92))
+                .addGap(144, 144, 144))
         );
 
         PanelBackGround.add(PanelForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 730, 590));
@@ -509,19 +657,122 @@ public class InsertPetFormForEdit extends javax.swing.JFrame {
     }//GEN-LAST:event_ComboVeterinarianPetActionPerformed
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
-        // TODO add your handling code here:
+            try {
+                if (petId <= 0 || ownerId <= 0) {
+                    throw new IllegalStateException("Invalid pet or owner.");
+                }
+
+                String petName = requiredText(TextPetName.getText(), "Pet name");
+                String color = requiredText(TextColorPet.getText(), "Color");
+                String chip = cleanText(TextChipNumber.getText());
+
+                int age = Integer.parseInt(ComboAgePet.getSelectedItem().toString());
+
+                int idEnergy = requireSelectedId(ComboEnergyPet, "energy");
+                int idType = requireSelectedId(ComboPetType, "species");
+                Integer idBreed = getOptionalSelectedId(ComboBreedPet);
+                int idDistrict = requireSelectedId(ComboDistrict, "district");
+                int idSpace = requireSelectedId(ComboSpaceRequieredPet, "space required");
+                int idTraining = requireSelectedId(ComboPetTraining, "training level");
+                int idSize = requireSelectedId(ComboSizePet, "size");
+                int idVeterinarian = requireSelectedId(ComboVeterinarianPet, "veterinarian");
+
+                boolean success = controller.UpdatePetForOwner(
+                    petId,
+                    ownerId,
+                    color,
+                    age,
+                    originalDescription,
+                    petName,
+                    chip,
+                    idEnergy,
+                    idType,
+                    idBreed,
+                    idDistrict,
+                    idSpace,
+                    idTraining,
+                    idSize,
+                    idVeterinarian
+                );
+
+                if (success) {
+                    goBackToUserPetTable();
+                }
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            } 
     }//GEN-LAST:event_ButtonCreateAccountActionPerformed
 
     private void ComboCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCountryActionPerformed
+            if (loadingPet) {
+                return;
+            }
 
+            DbObject country = (DbObject) ComboCountry.getSelectedItem();
+
+            ComboProvince.setEnabled(false);
+            ComboCanton.setEnabled(false);
+            ComboDistrict.setEnabled(false);
+
+            ComboProvince.removeAllItems();
+            ComboProvince.addItem(new DbObject(0, "-"));
+
+            ComboCanton.removeAllItems();
+            ComboCanton.addItem(new DbObject(0, "-"));
+
+            ComboDistrict.removeAllItems();
+            ComboDistrict.addItem(new DbObject(0, "-"));
+
+            if (country != null && country.getId() != 0) {
+                ComboProvince.setEnabled(true);
+                controller.FillProvince(this, country.getId());
+            }
     }//GEN-LAST:event_ComboCountryActionPerformed
 
     private void ComboProvinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboProvinceActionPerformed
+            if (loadingPet) {
+                return;
+            }
 
+            DbObject province = (DbObject) ComboProvince.getSelectedItem();
+
+            ComboCanton.setEnabled(false);
+            ComboDistrict.setEnabled(false);
+
+            ComboCanton.removeAllItems();
+            ComboCanton.addItem(new DbObject(0, "-"));
+
+            ComboDistrict.removeAllItems();
+            ComboDistrict.addItem(new DbObject(0, "-"));
+
+            if (province != null && province.getId() != 0) {
+                ComboCanton.setEnabled(true);
+                controller.FillCanton(this, province.getId());
+            }
     }//GEN-LAST:event_ComboProvinceActionPerformed
 
     private void ComboCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCantonActionPerformed
+        if (loadingPet) {
+            return;
+        }
 
+        DbObject canton = (DbObject) ComboCanton.getSelectedItem();
+
+        ComboDistrict.setEnabled(false);
+
+        ComboDistrict.removeAllItems();
+        ComboDistrict.addItem(new DbObject(0, "-"));
+
+        if (canton != null && canton.getId() != 0) {
+            ComboDistrict.setEnabled(true);
+            controller.FillDistrict(this, canton.getId());
+        }
     }//GEN-LAST:event_ComboCantonActionPerformed
 
     private void ComboPetTrainingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPetTrainingActionPerformed
@@ -539,6 +790,10 @@ public class InsertPetFormForEdit extends javax.swing.JFrame {
     private void ComboPetTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPetTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboPetTypeActionPerformed
+
+    private void jButtonGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGoBackActionPerformed
+        goBackToUserPetTable();
+    }//GEN-LAST:event_jButtonGoBackActionPerformed
 
     
     
@@ -605,6 +860,7 @@ public class InsertPetFormForEdit extends javax.swing.JFrame {
     private javax.swing.JTextField TextChipNumber;
     private javax.swing.JTextField TextColorPet;
     private javax.swing.JTextField TextPetName;
+    private javax.swing.JButton jButtonGoBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

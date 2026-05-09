@@ -15,8 +15,10 @@ import javax.swing.table.DefaultTableModel;
 import oracle.jdbc.OracleTypes;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import java.sql.Types;
 
 public class PetOperations {
+    
 
     private final String[] columnNames = {
         "ID", "COLOR", "AGE", "DESCRIPTION", "NAME", "CHIP", "ENERGY", "STATE",
@@ -230,6 +232,121 @@ public class PetOperations {
             statement.setInt(index, Integer.parseInt(value.trim()));
         } catch (NumberFormatException e) {
             statement.setNull(index, java.sql.Types.NUMERIC);
+        }
+    }
+    public static PetEditData GetPetForEdit(int petId, int ownerId) throws SQLException {
+        String call = "{ call SP_GET_PET_FOR_EDIT(?, ?, ?) }";
+
+        try (
+            Connection connection = ConexionOracle.connect();
+            CallableStatement statement = connection.prepareCall(call)
+        ) {
+            statement.setInt(1, petId);
+            statement.setInt(2, ownerId);
+            statement.registerOutParameter(3, OracleTypes.CURSOR);
+
+            statement.execute();
+
+            try (ResultSet resultSet = (ResultSet) statement.getObject(3)) {
+                if (!resultSet.next()) {
+                    return null;
+                }
+
+                PetEditData pet = new PetEditData();
+
+                pet.idPet = resultSet.getInt("IdPet");
+                pet.idOwner = resultSet.getInt("IdOwner");
+
+                pet.color = resultSet.getString("Color");
+                pet.age = resultSet.getInt("Age");
+                pet.description = resultSet.getString("Description");
+                pet.petName = resultSet.getString("PetName");
+                pet.chip = resultSet.getString("Chip");
+
+                pet.idEnergy = resultSet.getInt("IdEnergy");
+                pet.idType = resultSet.getInt("IdType");
+
+                int breedId = resultSet.getInt("IdBreed");
+                if (resultSet.wasNull()) {
+                    pet.idBreed = null;
+                } else {
+                    pet.idBreed = breedId;
+                }
+
+                pet.idDistrict = resultSet.getInt("IdDistrict");
+                pet.idCanton = resultSet.getInt("IdCanton");
+                pet.idProvince = resultSet.getInt("IdProvince");
+                pet.idCountry = resultSet.getInt("IdCountry");
+
+                pet.idSpace = resultSet.getInt("IdSpace");
+                pet.idPetTraining = resultSet.getInt("IdPetTraining");
+                pet.idSize = resultSet.getInt("IdSize");
+                pet.idVeterinarian = resultSet.getInt("IdVeterinarian");
+
+                return pet;
+            }
+        }
+    }
+    public static boolean UpdatePetForOwner(
+            int petId,
+            int ownerId,
+            String color,
+            int age,
+            String description,
+            String petName,
+            String chip,
+            int idEnergy,
+            int idType,
+            Integer idBreed,
+            int idDistrict,
+            int idSpace,
+            int idPetTraining,
+            int idSize,
+            int idVeterinarian
+    ) throws SQLException {
+
+        String call = "{ call SP_UPDATE_PET_FOR_OWNER(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }";
+
+        try (
+            Connection connection = ConexionOracle.connect();
+            CallableStatement statement = connection.prepareCall(call)
+        ) {
+            statement.setInt(1, petId);
+            statement.setInt(2, ownerId);
+
+            statement.setString(3, color);
+            statement.setInt(4, age);
+            statement.setString(5, description);
+            statement.setString(6, petName);
+            statement.setString(7, chip);
+
+            statement.setInt(8, idEnergy);
+            statement.setInt(9, idType);
+
+            if (idBreed == null) {
+                statement.setNull(10, Types.NUMERIC);
+            } else {
+                statement.setInt(10, idBreed);
+            }
+
+            statement.setInt(11, idDistrict);
+            statement.setInt(12, idSpace);
+            statement.setInt(13, idPetTraining);
+            statement.setInt(14, idSize);
+            statement.setInt(15, idVeterinarian);
+
+            statement.registerOutParameter(16, Types.NUMERIC);
+
+            statement.execute();
+
+            int rowsUpdated = statement.getInt(16);
+
+            if (rowsUpdated > 0) {
+                
+                return true;
+            }
+
+            return false;
         }
     }
 }

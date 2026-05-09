@@ -1,4 +1,207 @@
+/* ------------------------------------------------------------
+   Procedimiento: FN_GET_DISTRICTS_BY_CANTON
+   Descripcion: 
+   
+   ------------------------------------------------------------ */
+CREATE OR REPLACE FUNCTION FN_GET_DISTRICTS_BY_CANTON (
+    pIdCanton IN NUMBER
+)
+RETURN SYS_REFCURSOR
+IS
+    v_result SYS_REFCURSOR;
+BEGIN
+    OPEN v_result FOR
+        SELECT
+            Id,
+            Name
+        FROM District
+        WHERE IdCanton = pIdCanton
+        ORDER BY Name;
 
+    RETURN v_result;
+END;
+/
+/* ------------------------------------------------------------
+   Procedimiento: FN_GET_CANTON_BY_PROVINCE
+   Descripcion: 
+   
+   ------------------------------------------------------------ */
+CREATE OR REPLACE FUNCTION FN_GET_CANTON_BY_PROVINCE (
+    pIdProvince IN NUMBER
+)
+RETURN SYS_REFCURSOR
+IS
+    v_result SYS_REFCURSOR;
+BEGIN
+    OPEN v_result FOR
+        SELECT
+            Id,
+            Name
+        FROM Canton
+        WHERE IdProvince = pIdProvince
+        ORDER BY Name;
+
+    RETURN v_result;
+END;
+/
+
+/* ------------------------------------------------------------
+   Procedimiento: FN_GET_PROVINCE_BY_COUNTRY
+   Descripcion: 
+   
+   ------------------------------------------------------------ */
+CREATE OR REPLACE FUNCTION FN_GET_PROVINCE_BY_COUNTRY (
+    pIdCountry IN NUMBER
+)
+RETURN SYS_REFCURSOR
+IS
+    v_result SYS_REFCURSOR;
+BEGIN
+    OPEN v_result FOR
+        SELECT
+            Id,
+            Name
+        FROM Province
+        WHERE IdCountry = pIdCountry
+        ORDER BY Name;
+
+    RETURN v_result;
+END;
+/
+
+/* ------------------------------------------------------------
+   Procedimiento: FN_GET_PET_VETERINARIAN_ALL
+   Descripcion: 
+   
+   ------------------------------------------------------------ */
+CREATE OR REPLACE FUNCTION FN_GET_PET_VETERINARIAN_ALL
+RETURN SYS_REFCURSOR
+AS
+    v_result SYS_REFCURSOR;
+BEGIN
+    OPEN v_result FOR
+        SELECT
+            Id AS Id,
+            Name AS Name
+        FROM Veterinarian
+        ORDER BY Name;
+
+    RETURN v_result;
+END;
+/
+/* ------------------------------------------------------------
+   Procedimiento: FN_GET_PET_SPACE_REQUIRED_ALL
+   Descripcion: 
+   
+   ------------------------------------------------------------ */
+CREATE OR REPLACE FUNCTION FN_GET_PET_SPACE_REQUIRED_ALL
+RETURN SYS_REFCURSOR
+AS
+    v_result SYS_REFCURSOR;
+BEGIN
+    OPEN v_result FOR
+        SELECT
+            Id AS Id,
+            Name AS Name
+        FROM SpaceRequired
+        ORDER BY Name;
+
+    RETURN v_result;
+END;
+/
+
+/* ------------------------------------------------------------
+   Procedimiento: SP_GET_PET_FOR_EDIT
+   Descripcion: 
+   
+   ------------------------------------------------------------ */
+CREATE OR REPLACE PROCEDURE SP_UPDATE_PET_FOR_OWNER (
+    p_pet_id            IN  NUMBER,
+    p_owner_id          IN  NUMBER,
+    p_color             IN  VARCHAR2,
+    p_age               IN  NUMBER,
+    p_description       IN  VARCHAR2,
+    p_name              IN  VARCHAR2,
+    p_chip              IN  VARCHAR2,
+    p_id_energy         IN  NUMBER,
+    p_id_type           IN  NUMBER,
+    p_id_breed          IN  NUMBER,
+    p_id_district       IN  NUMBER,
+    p_id_space          IN  NUMBER,
+    p_id_pet_training   IN  NUMBER,
+    p_id_size           IN  NUMBER,
+    p_id_veterinarian   IN  NUMBER,
+    p_rows_updated      OUT NUMBER
+)
+AS
+BEGIN
+    UPDATE Pet
+    SET
+        Color = p_color,
+        Age = p_age,
+        Description = p_description,
+        Name = p_name,
+        Chip = p_chip,
+        IdEnergy = p_id_energy,
+        IdType = p_id_type,
+        IdBreed = p_id_breed,
+        IdDistrict = p_id_district,
+        IdSpace = p_id_space,
+        IdPetTraining = p_id_pet_training,
+        IdSize = p_id_size,
+        IdVeterinarian = p_id_veterinarian
+    WHERE Id = p_pet_id
+      AND IdOwner = p_owner_id;
+
+    p_rows_updated := SQL%ROWCOUNT;
+END;
+/
+
+/* ------------------------------------------------------------
+   Procedimiento: SP_GET_PET_FOR_EDIT
+   Descripcion: 
+   
+   ------------------------------------------------------------ */
+CREATE OR REPLACE PROCEDURE SP_GET_PET_FOR_EDIT (
+    p_pet_id   IN  NUMBER,
+    p_owner_id IN  NUMBER,
+    p_result   OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    OPEN p_result FOR
+        SELECT
+            p.Id AS IdPet,
+            p.IdOwner,
+            p.Color,
+            p.Age,
+            p.Description,
+            p.Name AS PetName,
+            p.Chip,
+            p.IdEnergy,
+            p.IdType,
+            p.IdBreed,
+            p.IdDistrict,
+            ca.Id AS IdCanton,
+            pr.Id AS IdProvince,
+            co.Id AS IdCountry,
+            p.IdSpace,
+            p.IdPetTraining,
+            p.IdSize,
+            p.IdVeterinarian
+        FROM Pet p
+        INNER JOIN District d
+            ON d.Id = p.IdDistrict
+        INNER JOIN Canton ca
+            ON ca.Id = d.IdCanton
+        INNER JOIN Province pr
+            ON pr.Id = ca.IdProvince
+        INNER JOIN Country co
+            ON co.Id = pr.IdCountry
+        WHERE p.Id = p_pet_id
+          AND p.IdOwner = p_owner_id;
+END;
+/
 /* ------------------------------------------------------------
    Procedimiento: pr_undo_pet_up_for_adoption
    Descripcion: 

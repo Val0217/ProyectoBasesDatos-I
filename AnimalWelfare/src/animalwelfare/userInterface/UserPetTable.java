@@ -27,14 +27,20 @@ public class UserPetTable extends javax.swing.JFrame {
     private PetFilter filterPanel2 = new PetFilter();
 
     // OJOOOOO remplazar con el id del usuario de la aplicacion. ahorita esta en 1 por pruebas.
-    private int currentUserId = 1;
+    private int currentUserId;
     /**
      * Creates new form UserPetTable
      */
     public UserPetTable() {
+        this(1);
+    }
+
+    public UserPetTable(int currentUserId) {
         initComponents();
 
-        controller = new UserPetTableController(currentUserId);
+        this.currentUserId = currentUserId;
+
+        controller = new UserPetTableController(this.currentUserId);
 
         prepareTables();
         addTableSelectionListeners();
@@ -48,14 +54,65 @@ public class UserPetTable extends javax.swing.JFrame {
         jTable2.getTableHeader().setReorderingAllowed(false);
 
         jButtonAdopt.setEnabled(false); //Boton de adoptar no hace nada  
+        jButtonEditPet.setEnabled(false);
         jButtonUndoAdoption.setVisible(false);
     }
     private void addTableSelectionListeners() {
         jTable1.getSelectionModel().addListSelectionListener(event -> {
             if (!event.getValueIsAdjusting()) {
                 updateUndoAdoptionButtonVisibility();
+                updateEditPetButtonState();
             }
         });
+    }
+    private void updateEditPetButtonState() {
+        jButtonEditPet.setEnabled(jTable1.getSelectedRow() >= 0);
+    }
+    
+    public void refreshAfterPetEdit() {
+        loadTables();
+        jButtonEditPet.setEnabled(false);
+        jButtonUndoAdoption.setVisible(false);
+    }
+
+    private int getSelectedPetIdFromTable() {
+        int selectedRow = jTable1.getSelectedRow();
+
+        if (selectedRow < 0) {
+            throw new IllegalStateException("Select a pet first.");
+        }
+
+        int modelRow = jTable1.convertRowIndexToModel(selectedRow);
+
+        int idColumn = findModelColumn("ID");
+
+        if (idColumn < 0) {
+            idColumn = 0; // fallback: first column
+        }
+
+        Object value = jTable1.getModel().getValueAt(modelRow, idColumn);
+
+        if (value == null) {
+            throw new IllegalStateException("The selected row does not have a pet ID.");
+        }
+
+        if (value instanceof Number) {
+            return ((Number) value).intValue();
+        }
+
+        return Integer.parseInt(value.toString());
+    }
+
+    private int findModelColumn(String columnName) {
+        for (int i = 0; i < jTable1.getModel().getColumnCount(); i++) {
+            String currentName = jTable1.getModel().getColumnName(i);
+
+            if (currentName != null && currentName.equalsIgnoreCase(columnName)) {
+                return i;
+            }
+        }
+
+        return -1;
     }
     private void updateUndoAdoptionButtonVisibility() {
         int selectedRow = jTable1.getSelectedRow();
@@ -277,7 +334,7 @@ private String nullToEmpty(String text) {
         jButtonCleanFilter1 = new javax.swing.JButton();
         jButtonPutAdopt = new javax.swing.JButton();
         jButtonUndoAdoption = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonEditPet = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -314,8 +371,8 @@ private String nullToEmpty(String text) {
         jButtonUndoAdoption.setText("Undo Adoption");
         jButtonUndoAdoption.addActionListener(this::jButtonUndoAdoptionActionPerformed);
 
-        jButton2.setText("Edit Pet");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        jButtonEditPet.setText("Edit Pet");
+        jButtonEditPet.addActionListener(this::jButtonEditPetActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -332,7 +389,7 @@ private String nullToEmpty(String text) {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonUndoAdoption, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addComponent(jButtonEditPet, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -345,7 +402,7 @@ private String nullToEmpty(String text) {
                     .addComponent(jButtonCleanFilter1)
                     .addComponent(jButtonPutAdopt)
                     .addComponent(jButtonUndoAdoption)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonEditPet))
                 .addGap(0, 21, Short.MAX_VALUE))
         );
 
@@ -494,9 +551,23 @@ private String nullToEmpty(String text) {
             }
     }//GEN-LAST:event_jButtonUndoAdoptionActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jButtonEditPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditPetActionPerformed
+            try {
+                int petId = getSelectedPetIdFromTable();
+
+                InsertPetFormForEdit editForm = new InsertPetFormForEdit(
+                    petId,
+                    currentUserId,
+                    this
+                );
+
+                editForm.setVisible(true);
+                this.setVisible(false);
+
+            } catch (Exception ex) {
+                showError(ex);
+            }
+    }//GEN-LAST:event_jButtonEditPetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -524,10 +595,10 @@ private String nullToEmpty(String text) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAdopt;
     private javax.swing.JButton jButtonCleanFilter1;
     private javax.swing.JButton jButtonCleanFilter2;
+    private javax.swing.JButton jButtonEditPet;
     private javax.swing.JButton jButtonFilter1;
     private javax.swing.JButton jButtonFilter2;
     private javax.swing.JButton jButtonPutAdopt;
