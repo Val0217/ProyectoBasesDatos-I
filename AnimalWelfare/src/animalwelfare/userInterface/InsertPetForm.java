@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 /**
  *
  * @author valer
@@ -23,64 +24,65 @@ public class InsertPetForm extends javax.swing.JFrame {
 
     // procedimiento que rellena el combobox de Veterinarian
     public void fillVeterinarian(ArrayList<DbObject> listVeterinarian) {
-        ComboVeterinarianPet.removeAllItems();
-        ComboVeterinarianPet.addItem(new DbObject(0,"-"));
+        ListVeterinarian.removeAll();
+        DefaultListModel<DbObject> model = new DefaultListModel<>();
         for (DbObject c : listVeterinarian) {
-            ComboVeterinarianPet.addItem(c);
+            model.addElement(c);
         }
+        ListVeterinarian.setModel(model);
     }
 
     // procedimiento que rellena el combobox de Breed
     public void fillPetBreed(ArrayList<DbObject> listBreed) {
-        ComboBreedPet.removeAllItems();
-        ComboBreedPet.addItem(new DbObject(0,"-"));
+        ComboBreed.removeAllItems();
+        ComboBreed.addItem(new DbObject(0,"-"));
         for (DbObject c : listBreed) {
-            ComboBreedPet.addItem(c);
+            ComboBreed.addItem(c);
         }
     }
 
     // procedimiento que rellena el combobox de Size
     public void fillPetSize(ArrayList<DbObject> listSize) {
-        ComboSizePet.removeAllItems();
-        ComboSizePet.addItem(new DbObject(0,"-"));
+        ComboSize.removeAllItems();
+        ComboSize.addItem(new DbObject(0,"-"));
         for (DbObject c : listSize) {
-            ComboSizePet.addItem(c);
+            ComboSize.addItem(c);
         }
     }
 
     // procedimiento que rellena el combobox de Energy
     public void fillPetEnergy(ArrayList<DbObject> listEnergy) {
-        ComboEnergyPet.removeAllItems();
-        ComboEnergyPet.addItem(new DbObject(0,"-"));
+        ComboEnergy.removeAllItems();
+        ComboEnergy.addItem(new DbObject(0,"-"));
         for (DbObject c : listEnergy) {
-            ComboEnergyPet.addItem(c);
+            ComboEnergy.addItem(c);
         }
     }
 
     // procedimiento que rellena el combobox de Space Requiered
     public void fillPetSpaceRequired(ArrayList<DbObject> listSpaceRequiered) {
-        ComboSpaceRequieredPet.removeAllItems();
-        ComboSpaceRequieredPet.addItem(new DbObject(0,"-"));
+        ComboSpaceRequired.removeAllItems();
+        ComboSpaceRequired.addItem(new DbObject(0,"-"));
         for (DbObject c : listSpaceRequiered) {
-            ComboSpaceRequieredPet.addItem(c);
+            ComboSpaceRequired.addItem(c);
         }
     }
 
     // procedimiento que rellena el combobox de Pet trainig
     public void fillPetTraining(ArrayList<DbObject> listPetTraining) {
-        ComboPetTraining.removeAllItems();
-        ComboPetTraining.addItem(new DbObject(0,"-"));
+        ComboTraining.removeAllItems();
+        ComboTraining.addItem(new DbObject(0,"-"));
         for (DbObject c : listPetTraining) {
-            ComboPetTraining.addItem(c);
+            ComboTraining.addItem(c);
         }
     }
 
     // procedimiento que rellena el combobox de Pet Type
     public void fillPetType(ArrayList<DbObject> listPetType) {
-        ComboPetType.removeAllItems();
-        ComboPetType.addItem(new DbObject(0,"-"));
+        ComboType.removeAllItems();
+        ComboType.addItem(new DbObject(0,"-"));
         for (DbObject c : listPetType) {
-            ComboPetType.addItem(c);
+            ComboType.addItem(c);
         }
     }
 
@@ -122,15 +124,6 @@ public class InsertPetForm extends javax.swing.JFrame {
         }
     }
 
-    // procedimiento que rellena el combobox de Breed
-    public void fillBreed(ArrayList<DbObject> listBreed) {
-        ComboBreedPet.removeAllItems();
-        ComboBreedPet.addItem(new DbObject(0,"-"));
-        for (DbObject c : listBreed) {
-            ComboBreedPet.addItem(c);
-        }
-    }
-
     public InsertPetForm() {
         initComponents(); // Inicializar los componentes del formulario
         controller = new InsertPetController(this);
@@ -139,7 +132,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         ComboProvince.setEnabled(false);
         ComboCanton.setEnabled(false);
         ComboDistrict.setEnabled(false);
-        ComboBreedPet.setEnabled(false);
+        ComboBreed.setEnabled(false);
 
         setVisible(true); // Hacer visible el formulario
     }
@@ -189,12 +182,12 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         LocationPanel = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        ComboType1 = new javax.swing.JComboBox<>();
-        ComboSpaceRequired1 = new javax.swing.JComboBox<>();
+        ComboCountry = new javax.swing.JComboBox<>();
+        ComboCanton = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        ComboBreed1 = new javax.swing.JComboBox<>();
+        ComboProvince = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
-        ComboEnergy1 = new javax.swing.JComboBox<>();
+        ComboDistrict = new javax.swing.JComboBox<>();
         LabelDistrict = new javax.swing.JLabel();
         VeterinarianPanel = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -420,22 +413,22 @@ public class InsertPetForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ComboSpaceRequired, 0, 305, Short.MAX_VALUE)
-                    .addComponent(ComboTraining, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ComboType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(PetDetailsPanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel8)
+                    .addComponent(ComboType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ComboTraining, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PetDetailsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ComboBreed, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PetDetailsPanelLayout.createSequentialGroup()
+                        .addComponent(ComboSize, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PetDetailsPanelLayout.createSequentialGroup()
                         .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel11))
+                            .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PetDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ComboEnergy, 0, 304, Short.MAX_VALUE)
-                            .addComponent(ComboSize, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(ComboBreed, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ComboEnergy, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PetDetailsPanelLayout.setVerticalGroup(
@@ -470,24 +463,24 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel12.setLabelFor(TextName3);
         jLabel12.setText("Country:");
 
-        ComboType1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboCountry.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        ComboSpaceRequired1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ComboSpaceRequired1.addActionListener(this::ComboSpaceRequired1ActionPerformed);
+        ComboCanton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboCanton.addActionListener(this::ComboCantonActionPerformed);
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setLabelFor(TextName3);
         jLabel13.setText("Canton:");
 
-        ComboBreed1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ComboBreed1.addActionListener(this::ComboBreed1ActionPerformed);
+        ComboProvince.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboProvince.addActionListener(this::ComboProvinceActionPerformed);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setLabelFor(TextName3);
         jLabel14.setText("Province:");
 
-        ComboEnergy1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ComboEnergy1.addActionListener(this::ComboEnergy1ActionPerformed);
+        ComboDistrict.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboDistrict.addActionListener(this::ComboDistrictActionPerformed);
 
         LabelDistrict.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelDistrict.setLabelFor(TextName3);
@@ -504,18 +497,18 @@ public class InsertPetForm extends javax.swing.JFrame {
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(LocationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ComboSpaceRequired1, 0, 322, Short.MAX_VALUE)
-                    .addComponent(ComboType1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ComboCanton, 0, 322, Short.MAX_VALUE)
+                    .addComponent(ComboCountry, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(LocationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LocationPanelLayout.createSequentialGroup()
+                    .addGroup(LocationPanelLayout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ComboBreed1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(LocationPanelLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
+                        .addComponent(ComboProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LocationPanelLayout.createSequentialGroup()
                         .addComponent(LabelDistrict)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ComboEnergy1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         LocationPanelLayout.setVerticalGroup(
@@ -524,15 +517,15 @@ public class InsertPetForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(LocationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(ComboType1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
-                    .addComponent(ComboBreed1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(LocationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(ComboSpaceRequired1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelDistrict)
-                    .addComponent(ComboEnergy1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -681,7 +674,7 @@ public class InsertPetForm extends javax.swing.JFrame {
                                 .addComponent(jLabel17)
                                 .addGap(37, 37, 37)
                                 .addComponent(ComboMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 13, Short.MAX_VALUE)
                         .addComponent(ButtonAddMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane5)
                     .addGroup(PetHealthPanelLayout.createSequentialGroup()
@@ -825,17 +818,17 @@ public class InsertPetForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ComboEnergy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboEnergy1ActionPerformed
+    private void ComboDistrictActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboDistrictActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ComboEnergy1ActionPerformed
+    }//GEN-LAST:event_ComboDistrictActionPerformed
 
-    private void ComboBreed1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBreed1ActionPerformed
+    private void ComboProvinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboProvinceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ComboBreed1ActionPerformed
+    }//GEN-LAST:event_ComboProvinceActionPerformed
 
-    private void ComboSpaceRequired1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboSpaceRequired1ActionPerformed
+    private void ComboCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCantonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ComboSpaceRequired1ActionPerformed
+    }//GEN-LAST:event_ComboCantonActionPerformed
 
     private void ComboSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboSizeActionPerformed
         // TODO add your handling code here:
@@ -907,19 +900,19 @@ public class InsertPetForm extends javax.swing.JFrame {
     private javax.swing.JPanel ButtonCancel;
     private javax.swing.JPanel ButtonSelectImage3;
     private javax.swing.JPanel ButtonSubmitPet;
-    private javax.swing.JComboBox<String> ComboBreed;
-    private javax.swing.JComboBox<String> ComboBreed1;
-    private javax.swing.JComboBox<String> ComboEnergy;
-    private javax.swing.JComboBox<String> ComboEnergy1;
-    private javax.swing.JComboBox<String> ComboIllness;
-    private javax.swing.JComboBox<String> ComboMedicine;
-    private javax.swing.JComboBox<String> ComboSize;
-    private javax.swing.JComboBox<String> ComboSpaceRequired;
-    private javax.swing.JComboBox<String> ComboSpaceRequired1;
-    private javax.swing.JComboBox<String> ComboTraining;
-    private javax.swing.JComboBox<String> ComboTreatment;
-    private javax.swing.JComboBox<String> ComboType;
-    private javax.swing.JComboBox<String> ComboType1;
+    private javax.swing.JComboBox<DbObject> ComboBreed;
+    private javax.swing.JComboBox<DbObject> ComboCanton;
+    private javax.swing.JComboBox<DbObject> ComboCountry;
+    private javax.swing.JComboBox<DbObject> ComboDistrict;
+    private javax.swing.JComboBox<DbObject> ComboEnergy;
+    private javax.swing.JComboBox<DbObject> ComboIllness;
+    private javax.swing.JComboBox<DbObject> ComboMedicine;
+    private javax.swing.JComboBox<DbObject> ComboProvince;
+    private javax.swing.JComboBox<DbObject> ComboSize;
+    private javax.swing.JComboBox<DbObject> ComboSpaceRequired;
+    private javax.swing.JComboBox<DbObject> ComboTraining;
+    private javax.swing.JComboBox<DbObject> ComboTreatment;
+    private javax.swing.JComboBox<DbObject> ComboType;
     private javax.swing.JPanel FormPanelInsertPet;
     private javax.swing.JLabel ImagePreview3;
     private javax.swing.JLabel LabelButtonAddIllness;
@@ -928,11 +921,11 @@ public class InsertPetForm extends javax.swing.JFrame {
     private javax.swing.JLabel LabelButtonSelectImage3;
     private javax.swing.JLabel LabelDistrict;
     private javax.swing.JLabel LableTitle;
-    private javax.swing.JList<String> ListImages;
-    private javax.swing.JList<String> ListPetIllness;
-    private javax.swing.JList<String> ListPetMedicine;
-    private javax.swing.JList<String> ListPetTreatment;
-    private javax.swing.JList<String> ListVeterinarian;
+    private javax.swing.JList<DbObject> ListImages;
+    private javax.swing.JList<DbObject> ListPetIllness;
+    private javax.swing.JList<DbObject> ListPetMedicine;
+    private javax.swing.JList<DbObject> ListPetTreatment;
+    private javax.swing.JList<DbObject> ListVeterinarian;
     private javax.swing.JPanel LocationPanel;
     private javax.swing.JPanel PanelBackGround;
     private javax.swing.JPanel PetDetailsPanel;
