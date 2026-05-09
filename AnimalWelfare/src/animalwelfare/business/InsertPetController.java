@@ -133,7 +133,7 @@ public class InsertPetController {
         Integer[] dataTreatment = treatmentIds.toArray(new Integer[0]);
         Integer[] dataMedicine = medicineIds.toArray(new Integer[0]);
 
-        if (PetOperations.InsertPet(color, age, description, petName, chip, idEnergy.getId(), 2, idType.getId(), idBreed.getId(), idDistrict.getId(), idSpaceRequired.getId(), idPetTraining.getId(), idPetSize.getId(), Session.getInstance().getUserId(), idVeterinarian.getId(), dataIllness, dataTreatment, dataMedicine)) {
+        if (PetOperations.InsertPet(color, age, description, petName, chip, idEnergy.getId(), idType.getId(), idBreed.getId(), idDistrict.getId(), idSpaceRequired.getId(), idPetTraining.getId(), idPetSize.getId(), Session.getInstance().getUserId(), idVeterinarian.getId(), dataIllness, dataTreatment, dataMedicine)) {
             JOptionPane.showMessageDialog(null, "Pet inserted successfully.");
             return true;
         } else {

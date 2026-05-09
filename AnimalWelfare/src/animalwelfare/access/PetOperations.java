@@ -149,7 +149,7 @@ public class PetOperations {
             );
 
             // Creamos la consulta SQL para insertar una nueva persona utilizando el procedimiento insertPerson
-            String SQL = "BEGIN pr_insert_pet('"+color+"',"+age+",'"+description+"','"+petName+"','"+chip+"',"+idEnergy+","+idState+","+idType+","+idBreed+","+idDistrict+","+idSpaceRequired+","+idPetTraining+","+idPetSize+","+idPerson+","+idVeterinarian+","+arrayIllness+","+arrayTreatment+","+arrayMedicine+"); END;";
+            String SQL = "BEGIN pr_insert_pet('"+color+"',"+age+",'"+description+"','"+petName+"','"+chip+"',"+idEnergy+","+idType+","+idBreed+","+idDistrict+","+idSpaceRequired+","+idPetTraining+","+idPetSize+","+idPerson+","+idVeterinarian+","+arrayIllness+","+arrayTreatment+","+arrayMedicine+"); END;";
             
 
             Statement cn = con.createStatement(); // esto es para poder ejecutar consultas
