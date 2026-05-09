@@ -1,10 +1,7 @@
 package animalwelfare.access;
 
 import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -126,7 +123,7 @@ public class PetOperations {
         }
     }
 
-    public static boolean InsertPet(String color, int age, String description, String petName, String chip, int idEnergy, int idState, int idType, int idBreed, int idDistrict, int idSpaceRequired, int idPetTraining, int idPetSize, int idPerson, int idVeterinarian, Integer[] illnessIds, Integer[] treatmentIds, Integer[] medicineIds) throws SQLException {
+    public static boolean InsertPet(String color, int age, String description, String petName, String chip, int idEnergy, int idType, int idBreed, int idDistrict, int idSpaceRequired, int idPetTraining, int idPetSize, int idPerson, int idVeterinarian, Integer[] illnessIds, Integer[] treatmentIds, Integer[] medicineIds) throws SQLException {
 
         try {
             Connection con = ConexionOracle.connect();
