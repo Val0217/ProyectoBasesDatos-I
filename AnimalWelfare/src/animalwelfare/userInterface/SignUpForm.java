@@ -133,6 +133,12 @@ public class SignUpForm extends javax.swing.JFrame {
         TextPhone = new javax.swing.JTextField();
         LabelField6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        TextPhone1 = new javax.swing.JTextField();
+        TextPhone2 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
         LableTitle1 = new javax.swing.JLabel();
         LableTitle3 = new javax.swing.JLabel();
         ImagenBackGround = new javax.swing.JLabel();
@@ -151,7 +157,7 @@ public class SignUpForm extends javax.swing.JFrame {
 
         LabelField.setFont(new java.awt.Font("Roboto Black", 0, 10)); // NOI18N
         LabelField.setForeground(new java.awt.Color(0, 102, 102));
-        LabelField.setText("EMAIL");
+        LabelField.setText("EMAIL(S)");
 
         ButtonCreateAccount.setBackground(new java.awt.Color(0, 102, 102));
         ButtonCreateAccount.setFont(new java.awt.Font("Roboto SemiBold", 0, 14)); // NOI18N
@@ -255,12 +261,28 @@ public class SignUpForm extends javax.swing.JFrame {
 
         LabelField6.setFont(new java.awt.Font("Roboto Black", 0, 10)); // NOI18N
         LabelField6.setForeground(new java.awt.Color(0, 102, 102));
-        LabelField6.setText("PHONE NUMBER");
+        LabelField6.setText("PHONE NUMBER(S)");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(153, 153, 153));
         jLabel5.setText("__________________________________________________________________________________________________________________________________________________");
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        TextPhone1.setBackground(new java.awt.Color(0, 153, 153));
+        TextPhone1.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        TextPhone1.setForeground(new java.awt.Color(255, 255, 255));
+        TextPhone1.setText("+");
+        TextPhone1.addActionListener(this::TextPhone1ActionPerformed);
+
+        TextPhone2.setBackground(new java.awt.Color(0, 153, 153));
+        TextPhone2.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        TextPhone2.setForeground(new java.awt.Color(255, 255, 255));
+        TextPhone2.setText("+");
+        TextPhone2.addActionListener(this::TextPhone2ActionPerformed);
+
+        jScrollPane1.setViewportView(jList1);
+
+        jScrollPane2.setViewportView(jList2);
 
         javax.swing.GroupLayout PanelFormLayout = new javax.swing.GroupLayout(PanelForm);
         PanelForm.setLayout(PanelFormLayout);
@@ -272,71 +294,81 @@ public class SignUpForm extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(LabelSubTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(PanelFormLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(20, 20, 20)
                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TextUserName)
+                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addComponent(LabelCanton)
+                                        .addGap(157, 157, 157))
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addComponent(ComboCanton, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(23, 23, 23)))
+                                .addGap(8, 8, 8)
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addComponent(LabelDistrict)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(ComboDistrict, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(PanelFormLayout.createSequentialGroup()
                                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LabelField5)
+                                    .addComponent(LabelCountry)
+                                    .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(23, 23, 23)
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ComboProvince, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addComponent(LabelProvince)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(LabelField1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TextFirstName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TextLastName)
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addComponent(LabelField2)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(LabelField)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFormLayout.createSequentialGroup()
-                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelFormLayout.createSequentialGroup()
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                                .addComponent(LabelCanton)
-                                                .addGap(157, 157, 157))
-                                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                                .addComponent(ComboCanton, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGap(23, 23, 23)))
-                                        .addGap(8, 8, 8)
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                                .addComponent(LabelDistrict)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addComponent(ComboDistrict, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelFormLayout.createSequentialGroup()
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LabelCountry)
-                                            .addComponent(ComboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(23, 23, 23)
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(ComboProvince, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(PanelFormLayout.createSequentialGroup()
-                                                .addComponent(LabelProvince)
-                                                .addGap(0, 0, Short.MAX_VALUE))))
-                                    .addComponent(TextUserName, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelFormLayout.createSequentialGroup()
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LabelField5)
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
                                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(LabelField3)
                                             .addComponent(TextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
                                         .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(TextPasswordRE, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(LabelField4))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelFormLayout.createSequentialGroup()
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(LabelField1)
-                                            .addComponent(TextEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                                            .addComponent(TextFirstName))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(TextLastName)
-                                            .addComponent(TextPhone)
+                                            .addComponent(LabelField4))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(PanelFormLayout.createSequentialGroup()
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(LabelField)
+                                    .addGroup(PanelFormLayout.createSequentialGroup()
+                                        .addComponent(TextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TextPhone1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addGap(36, 36, 36)
+                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LabelField6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFormLayout.createSequentialGroup()
+                                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                             .addGroup(PanelFormLayout.createSequentialGroup()
-                                                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(LabelField6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(LabelField2))
-                                                .addGap(0, 0, Short.MAX_VALUE)))))
-                                .addGap(21, 21, 21)))))
-                .addContainerGap())
+                                                .addComponent(TextPhone)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(TextPhone2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(4, 4, 4)))))))
+                .addGap(63, 63, 63))
             .addGroup(PanelFormLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addGap(78, 78, 78)
                 .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -356,7 +388,13 @@ public class SignUpForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TextPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextPhone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextPhone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelField1)
@@ -378,11 +416,11 @@ public class SignUpForm extends javax.swing.JFrame {
                             .addComponent(LabelField4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelCountry)
                     .addComponent(LabelProvince))
@@ -400,18 +438,18 @@ public class SignUpForm extends javax.swing.JFrame {
                         .addComponent(LabelDistrict)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29)
+                .addGap(20, 20, 20)
                 .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addGap(27, 27, 27))
         );
 
-        PanelBackGround.add(PanelForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 70, -1, -1));
+        PanelBackGround.add(PanelForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 70, 450, 580));
 
         LableTitle1.setFont(new java.awt.Font("Roboto Black", 1, 36)); // NOI18N
         LableTitle1.setForeground(new java.awt.Color(255, 255, 0));
         LableTitle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LableTitle1.setText("NOW!");
-        PanelBackGround.add(LableTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
+        PanelBackGround.add(LableTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, -1));
 
         LableTitle3.setFont(new java.awt.Font("Roboto Black", 1, 36)); // NOI18N
         LableTitle3.setForeground(new java.awt.Color(255, 255, 255));
@@ -531,6 +569,14 @@ public class SignUpForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboDistrictActionPerformed
 
+    private void TextPhone1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPhone1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextPhone1ActionPerformed
+
+    private void TextPhone2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPhone2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextPhone2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -586,10 +632,16 @@ public class SignUpForm extends javax.swing.JFrame {
     private javax.swing.JPasswordField TextPassword;
     private javax.swing.JPasswordField TextPasswordRE;
     private javax.swing.JTextField TextPhone;
+    private javax.swing.JTextField TextPhone1;
+    private javax.swing.JTextField TextPhone2;
     private javax.swing.JTextField TextUserName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
