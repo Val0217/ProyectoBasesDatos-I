@@ -670,7 +670,7 @@ END;
 /
 
 /* VETERINARIAN */
-CREATE OR REPLACE FUNCTION fn_get_veterinarian_all
+CREATE OR REPLACE FUNCTION fn_get_pet_veterinarian_all
 RETURN SYS_REFCURSOR
 IS
 BEGIN
@@ -678,7 +678,7 @@ BEGIN
 END;
 
 /* SPACE REQUIRED */
-CREATE OR REPLACE FUNCTION fn_get_space_required_all
+CREATE OR REPLACE FUNCTION fn_get_pet_space_required_all
 RETURN SYS_REFCURSOR
 IS
 BEGIN
