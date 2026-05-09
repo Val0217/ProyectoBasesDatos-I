@@ -37,6 +37,7 @@ public class UserPetTable extends javax.swing.JFrame {
 
     public UserPetTable(int currentUserId) {
         initComponents();
+        setLocationRelativeTo(null);
 
         this.currentUserId = currentUserId;
 
@@ -45,6 +46,7 @@ public class UserPetTable extends javax.swing.JFrame {
         prepareTables();
         addTableSelectionListeners();
         loadTables();
+        setVisible(true);
     }
     private void prepareTables() {
         jTable1.setDefaultEditor(Object.class, null);
