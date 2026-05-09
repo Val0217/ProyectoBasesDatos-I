@@ -422,15 +422,27 @@ WHERE NOT EXISTS (SELECT 1 FROM District WHERE Id = 3);
    ------------------------------------------------------------ */
 
 INSERT INTO PetState (Id, Name)
-SELECT 4, 'Encontrado' FROM dual
+SELECT 1, 'up for adoption' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetState WHERE Id = 1);
+
+INSERT INTO PetState (Id, Name)
+SELECT 2, 'Adopted' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetState WHERE Id = 2);
+
+INSERT INTO PetState (Id, Name)
+SELECT 3, 'Lost' FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM PetState WHERE Id = 3);
+
+INSERT INTO PetState (Id, Name)
+SELECT 4, 'Found' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetState WHERE Id = 4);
 
 INSERT INTO PetType (Id, Name)
-SELECT 1, 'Perro' FROM dual
+SELECT 1, 'Dog' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetType WHERE Id = 1);
 
 INSERT INTO PetType (Id, Name)
-SELECT 2, 'Gato' FROM dual
+SELECT 2, 'Cat' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetType WHERE Id = 2);
 
 INSERT INTO PetBreed (Id, Name)
@@ -454,55 +466,55 @@ SELECT 5, 'Chihuahua' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 5);
 
 INSERT INTO PetBreed (Id, Name)
-SELECT 6, 'Raza Unica' FROM dual
+SELECT 6, 'Mixed Breed' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 6);
 
 INSERT INTO PetLevelEnergy (Id, Name)
-SELECT 1, 'Atletico' FROM dual
+SELECT 1, 'Athletic' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetLevelEnergy WHERE Id = 1);
 
 INSERT INTO PetLevelEnergy (Id, Name)
-SELECT 2, 'Corredor' FROM dual
+SELECT 2, 'Runner' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetLevelEnergy WHERE Id = 2);
 
 INSERT INTO PetLevelEnergy (Id, Name)
-SELECT 3, 'Caminador' FROM dual
+SELECT 3, 'Walker' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetLevelEnergy WHERE Id = 3);
 
 INSERT INTO SpaceRequired (Id, Name)
-SELECT 1, 'Apartamento' FROM dual
+SELECT 1, 'Apartment' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM SpaceRequired WHERE Id = 1);
 
 INSERT INTO SpaceRequired (Id, Name)
-SELECT 2, 'Casa sin patio' FROM dual
+SELECT 2, 'House Without Yard' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM SpaceRequired WHERE Id = 2);
 
 INSERT INTO SpaceRequired (Id, Name)
-SELECT 3, 'Casa con patio' FROM dual
+SELECT 3, 'House With Yard' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM SpaceRequired WHERE Id = 3);
 
 INSERT INTO PetTraining (Id, Name)
-SELECT 1, 'Muy facil' FROM dual
+SELECT 1, 'Very Easy' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetTraining WHERE Id = 1);
 
 INSERT INTO PetTraining (Id, Name)
-SELECT 2, 'Facil' FROM dual
+SELECT 2, 'Easy' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetTraining WHERE Id = 2);
 
 INSERT INTO PetTraining (Id, Name)
-SELECT 3, 'Moderado' FROM dual
+SELECT 3, 'Moderate' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetTraining WHERE Id = 3);
 
 INSERT INTO PetSize (Id, Name)
-SELECT 1, 'Pequeno' FROM dual
+SELECT 1, 'Small' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetSize WHERE Id = 1);
 
 INSERT INTO PetSize (Id, Name)
-SELECT 2, 'Mediano' FROM dual
+SELECT 2, 'Medium' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetSize WHERE Id = 2);
 
 INSERT INTO PetSize (Id, Name)
-SELECT 3, 'Grande' FROM dual
+SELECT 3, 'Large' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetSize WHERE Id = 3);
 
 /* ------------------------------------------------------------

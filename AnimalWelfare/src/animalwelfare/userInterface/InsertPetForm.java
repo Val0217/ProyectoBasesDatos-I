@@ -4,6 +4,7 @@
  */
 package animalwelfare.userInterface;
 import animalwelfare.access.DbObject;
+import animalwelfare.business.InsertPetController;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -15,6 +16,9 @@ public class InsertPetForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InsertPetForm.class.getName());
 
+
+    // controlador del formulario
+    private InsertPetController controller = null;
 
     // procedimiento que rellena el combobox de Veterinarian
     public void fillVeterinarian(ArrayList<DbObject> listVeterinarian) {
@@ -118,7 +122,16 @@ public class InsertPetForm extends javax.swing.JFrame {
     }
 
     public InsertPetForm() {
-        initComponents();
+        initComponents(); // Inicializar los componentes del formulario
+        setLocationRelativeTo(null); // Centrar el formulario en la pantalla
+
+        controller = new InsertPetController(this);
+
+        ComboProvince.setEnabled(false);
+        ComboCanton.setEnabled(false);
+        ComboDistrict.setEnabled(false);
+
+        setVisible(true); // Hacer visible el formulario
     }
 
     /**

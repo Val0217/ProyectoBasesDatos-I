@@ -70,6 +70,9 @@ public class MainMenu extends javax.swing.JFrame {
 
         MyPetsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         MyPetsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MyPetsButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 MyPetsButtonMouseEntered(evt);
             }
@@ -395,6 +398,11 @@ public class MainMenu extends javax.swing.JFrame {
         StatsButton.setBackground(buttonBase);
     }//GEN-LAST:event_StatsButtonMouseExited
 
+    private void MyPetsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MyPetsButtonMouseClicked
+        InsertPetForm window = new InsertPetForm();
+        dispose();
+    }//GEN-LAST:event_MyPetsButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -430,9 +438,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel RescuesButton;
     private javax.swing.JPanel StatsButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -447,14 +452,5 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     // End of variables declaration//GEN-END:variables
 }
