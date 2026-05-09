@@ -46,7 +46,7 @@ public class SignUpController {
             JOptionPane.showMessageDialog(null, "All fields are required.");
             return false;
         }
-        if (District == null){
+        if (District == null || District.getId() == 0) {
             JOptionPane.showMessageDialog(null, "Please select a district.");
             return false;
         }
