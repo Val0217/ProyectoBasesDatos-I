@@ -41,6 +41,7 @@ public class PetTypeOperations {
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage()); //lanzar mensaje de error, esperemos que no se lanze nunca
+            return listPetType;
         }
 
         return listPetType;

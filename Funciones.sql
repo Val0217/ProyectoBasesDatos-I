@@ -584,6 +584,20 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE FUNCTION fn_get_pet_breed_by_PetType (
+    p_id_pet_type IN NUMBER
+) RETURN SYS_REFCURSOR
+IS
+    v_result SYS_REFCURSOR;
+BEGIN
+    OPEN v_result FOR
+        SELECT Id,name FROM PetBreed WHERE IdType = p_id_pet_type;
+    RETURN v_result;
+END;
+/
+
+
+
 CREATE OR REPLACE FUNCTION fn_get_pet_breed_by_id (
     p_id IN NUMBER
 ) RETURN SYS_REFCURSOR

@@ -18,6 +18,18 @@ public class SignInForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         requestFocusInWindow();
+        
+        // button changes
+        // esto evita el diseño raro
+        ButtonCreateAccount.setFocusPainted(false);
+        ButtonCreateAccount.setBorderPainted(false);
+        ButtonCreateAccount.setContentAreaFilled(false);
+        ButtonCreateAccount.setOpaque(true);
+        
+        ButtonContinue.setFocusPainted(false);
+        ButtonContinue.setBorderPainted(false);
+        ButtonContinue.setContentAreaFilled(false);
+        ButtonContinue.setOpaque(true);
 
         // Placeholder text for username and password fields
         TextUserName.setText("Enter your user");
@@ -109,9 +121,8 @@ public class SignInForm extends javax.swing.JFrame {
         LabelField.setForeground(new java.awt.Color(255, 255, 255));
         LabelField.setText("PASSWORD");
 
-        ButtonContinue.setBackground(new java.awt.Color(153, 153, 153));
         ButtonContinue.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
-        ButtonContinue.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonContinue.setForeground(new java.awt.Color(0, 121, 121));
         ButtonContinue.setText("CONTINUE");
         ButtonContinue.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ButtonContinue.addActionListener(this::ButtonContinueActionPerformed);
@@ -144,9 +155,9 @@ public class SignInForm extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/banner_image.jpg"))); // NOI18N
 
-        ButtonCreateAccount.setBackground(new java.awt.Color(204, 204, 204));
+        ButtonCreateAccount.setBackground(new java.awt.Color(242, 242, 242));
         ButtonCreateAccount.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
-        ButtonCreateAccount.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonCreateAccount.setForeground(new java.awt.Color(0, 121, 121));
         ButtonCreateAccount.setText("CREATE");
         ButtonCreateAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ButtonCreateAccount.addActionListener(this::ButtonCreateAccountActionPerformed);

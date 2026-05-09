@@ -474,7 +474,12 @@ public class SignUpForm extends javax.swing.JFrame {
         if (controller == null) return;
         DbObject country = (DbObject) ComboCountry.getSelectedItem();
         if (country == null) return;
-        if (country.getId() == 0) return;
+        if (country.getId() == 0) {
+            ComboProvince.setEnabled(false);
+            ComboCanton.setEnabled(false);
+            ComboDistrict.setEnabled(false);
+            return;
+        }
         ComboCanton.removeAllItems();
         ComboDistrict.removeAllItems();
         
@@ -488,7 +493,11 @@ public class SignUpForm extends javax.swing.JFrame {
         // al seleccionar una provincia, se llena el de canton y se bloquea los siguientes.
         DbObject province = (DbObject) ComboProvince.getSelectedItem();
         if (province == null) return;
-        if (province.getId() == 0) return;
+        if (province.getId() == 0){
+            ComboDistrict.setEnabled(false);
+            ComboCanton.setEnabled(false);
+            return;
+        }
         ComboDistrict.removeAllItems();
         
         controller.FillCanton(this, province.getId());
@@ -500,7 +509,10 @@ public class SignUpForm extends javax.swing.JFrame {
         // al seleccionar un canton, se llena el de Distrito.
         DbObject canton = (DbObject) ComboCanton.getSelectedItem();
         if (canton == null) return;
-        if (canton.getId() == 0) return;
+        if (canton.getId() == 0) {
+            ComboDistrict.setEnabled(false);
+            return;
+        }
         ComboDistrict.removeAllItems();
         
         controller.FillDistrict(this, canton.getId());

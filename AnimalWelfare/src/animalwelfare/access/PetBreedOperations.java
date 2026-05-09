@@ -45,5 +45,38 @@ public class PetBreedOperations {
 
         return listPetBreed;
     }
+
+    public static ArrayList<DbObject> listPetBreedByPetType(int petTypeId) {
+        ArrayList<DbObject> listPetBreed = new ArrayList(); //creamos una lista para guardar los resultados.
+
+        try {
+            String SQL = "{ ? = call fn_get_pet_breed_by_PetType(?) }";
+            Connection con = ConexionOracle.connect();
+            CallableStatement cs = con.prepareCall(SQL);
+
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(2, petTypeId);
+            cs.execute();
+            ResultSet res = (ResultSet) cs.getObject(1);
+
+            while (res.next()) {
+
+                listPetBreed.add(new DbObject(
+                    res.getInt("Id"),
+                    res.getString("Name")
+                ));
+            }
+
+            res.close();
+            cs.close();
+            con.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage()); //lanzar mensaje de error, esperemos que no se lanze nunca
+        }
+
+        return listPetBreed;
+    }
     
 }
+

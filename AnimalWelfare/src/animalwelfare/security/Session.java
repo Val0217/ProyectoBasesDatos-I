@@ -13,7 +13,7 @@ public class Session {
     
     private static Session instance;
     // guards the user id of the logged in user
-    private int userId;
+    private int userId = 0;
     private String role;
 
     // Private constructor to prevent instantiation from outside the class

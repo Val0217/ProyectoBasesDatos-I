@@ -5,7 +5,8 @@ CREATE TABLE PetLevelEnergy (
 
 CREATE TABLE PetBreed (
     Id NUMBER(8),
-    Name VARCHAR2(25)
+    Name VARCHAR2(25),
+    IdType NUMBER(8)
 );
 
 CREATE TABLE PetType (
