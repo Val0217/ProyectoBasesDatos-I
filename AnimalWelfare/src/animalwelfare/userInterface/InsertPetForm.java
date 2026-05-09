@@ -227,22 +227,20 @@ public class InsertPetForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        PanelBackGround.setBackground(new java.awt.Color(204, 204, 204));
-        PanelBackGround.setMaximumSize(null);
+        PanelBackGround.setBackground(new java.awt.Color(0, 153, 153));
         PanelBackGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LableTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LableTitle.setForeground(new java.awt.Color(255, 255, 255));
         LableTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LableTitle.setText("Animal Welfare");
-        PanelBackGround.add(LableTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 20, 730, -1));
+        PanelBackGround.add(LableTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 830, -1));
 
         ScrollPanelFirst.setPreferredSize(new java.awt.Dimension(869, 500));
 
         BasicInformationPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Basic Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(142, 142, 142))); // NOI18N
 
         jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel29.setLabelFor(TextName);
         jLabel29.setText("Name:");
 
         TextName3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -252,11 +250,9 @@ public class InsertPetForm extends javax.swing.JFrame {
         TextColor3.addActionListener(this::TextColorActionPerformed);
 
         jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel30.setLabelFor(TextColor);
         jLabel30.setText("Color:");
 
         jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel31.setLabelFor(SpinnerAge);
         jLabel31.setText("Age:");
 
         SpinnerAge3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -265,11 +261,9 @@ public class InsertPetForm extends javax.swing.JFrame {
         TextChip3.addActionListener(this::TextChipActionPerformed);
 
         jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel32.setLabelFor(TextChip);
         jLabel32.setText("Chip:");
 
         jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel33.setLabelFor(TextDescription);
         jLabel33.setText("Description:");
 
         TextDescription3.setColumns(20);
@@ -815,7 +809,7 @@ public class InsertPetForm extends javax.swing.JFrame {
 
         ScrollPanelFirst.setViewportView(FormPanelInsertPet);
 
-        PanelBackGround.add(ScrollPanelFirst, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 90, -1, -1));
+        PanelBackGround.add(ScrollPanelFirst, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 60, -1, 530));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -906,17 +900,11 @@ public class InsertPetForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel BasicInformationPanel;
-    private javax.swing.JPanel BasicInformationPanel1;
-    private javax.swing.JPanel BasicInformationPanel2;
     private javax.swing.JPanel BasicInformationPanel3;
     private javax.swing.JPanel ButtonAddIllness;
     private javax.swing.JPanel ButtonAddMedicine;
     private javax.swing.JPanel ButtonAddTreatment;
     private javax.swing.JPanel ButtonCancel;
-    private javax.swing.JPanel ButtonSelectImage;
-    private javax.swing.JPanel ButtonSelectImage1;
-    private javax.swing.JPanel ButtonSelectImage2;
     private javax.swing.JPanel ButtonSelectImage3;
     private javax.swing.JPanel ButtonSubmitPet;
     private javax.swing.JComboBox<String> ComboBreed;
@@ -932,20 +920,11 @@ public class InsertPetForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ComboTreatment;
     private javax.swing.JComboBox<String> ComboType;
     private javax.swing.JComboBox<String> ComboType1;
-    private javax.swing.JPanel FormPanel;
-    private javax.swing.JPanel FormPanel1;
-    private javax.swing.JPanel FormPanel2;
     private javax.swing.JPanel FormPanelInsertPet;
-    private javax.swing.JLabel ImagePreview;
-    private javax.swing.JLabel ImagePreview1;
-    private javax.swing.JLabel ImagePreview2;
     private javax.swing.JLabel ImagePreview3;
     private javax.swing.JLabel LabelButtonAddIllness;
     private javax.swing.JLabel LabelButtonAddMedicine;
     private javax.swing.JLabel LabelButtonAddTreatment;
-    private javax.swing.JLabel LabelButtonSelectImage;
-    private javax.swing.JLabel LabelButtonSelectImage1;
-    private javax.swing.JLabel LabelButtonSelectImage2;
     private javax.swing.JLabel LabelButtonSelectImage3;
     private javax.swing.JLabel LabelDistrict;
     private javax.swing.JLabel LableTitle;
@@ -959,29 +938,13 @@ public class InsertPetForm extends javax.swing.JFrame {
     private javax.swing.JPanel PetDetailsPanel;
     private javax.swing.JPanel PetHealthPanel;
     private javax.swing.JScrollPane ScrollPanelFirst;
-    private javax.swing.JSpinner SpinnerAge;
-    private javax.swing.JSpinner SpinnerAge1;
-    private javax.swing.JSpinner SpinnerAge2;
     private javax.swing.JSpinner SpinnerAge3;
-    private javax.swing.JTextField TextChip;
-    private javax.swing.JTextField TextChip1;
-    private javax.swing.JTextField TextChip2;
     private javax.swing.JTextField TextChip3;
-    private javax.swing.JTextField TextColor;
-    private javax.swing.JTextField TextColor1;
-    private javax.swing.JTextField TextColor2;
     private javax.swing.JTextField TextColor3;
-    private javax.swing.JTextArea TextDescription;
-    private javax.swing.JTextArea TextDescription1;
-    private javax.swing.JTextArea TextDescription2;
     private javax.swing.JTextArea TextDescription3;
-    private javax.swing.JTextField TextName;
-    private javax.swing.JTextField TextName1;
-    private javax.swing.JTextField TextName2;
     private javax.swing.JTextField TextName3;
     private javax.swing.JTextField TextVeterinarian;
     private javax.swing.JPanel VeterinarianPanel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -991,39 +954,22 @@ public class InsertPetForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     // End of variables declaration//GEN-END:variables
 }
