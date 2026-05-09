@@ -12,9 +12,9 @@ import java.util.ArrayList;
  *
  * @author valer
  */
-public class InsertPetForm extends javax.swing.JFrame {
+public class InsertPetFormForEdit extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InsertPetForm.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InsertPetFormForEdit.class.getName());
 
 
     // controlador del formulario
@@ -76,10 +76,10 @@ public class InsertPetForm extends javax.swing.JFrame {
 
     // procedimiento que rellena el combobox de Pet Type
     public void fillPetType(ArrayList<DbObject> listPetType) {
-        ComboPetType.removeAllItems();
-        ComboPetType.addItem(new DbObject(0,"-"));
+        ComboPetTraining.removeAllItems();
+        ComboPetTraining.addItem(new DbObject(0,"-"));
         for (DbObject c : listPetType) {
-            ComboPetType.addItem(c);
+            ComboPetTraining.addItem(c);
         }
     }
 
@@ -121,7 +121,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         }
     }
 
-    public InsertPetForm() {
+    public InsertPetFormForEdit() {
         initComponents(); // Inicializar los componentes del formulario
         setLocationRelativeTo(null); // Centrar el formulario en la pantalla
 
@@ -513,41 +513,15 @@ public class InsertPetForm extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonCreateAccountActionPerformed
 
     private void ComboCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCountryActionPerformed
-        // al seleccionar un pais, se llena el de province y se bloquea los siguientes.
-        if (controller == null) return;
-        DbObject country = (DbObject) ComboCountry.getSelectedItem();
-        if (country == null) return;
-        if (country.getId() == 0) return;
-        ComboCanton.removeAllItems();
-        ComboDistrict.removeAllItems();
-        
-        controller.FillProvince(this, country.getId());
-        ComboCanton.setEnabled(false);
-        ComboDistrict.setEnabled(false);
-        ComboProvince.setEnabled(true);
+
     }//GEN-LAST:event_ComboCountryActionPerformed
 
     private void ComboProvinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboProvinceActionPerformed
-        // al seleccionar una provincia, se llena el de canton y se bloquea los siguientes.
-        DbObject province = (DbObject) ComboProvince.getSelectedItem();
-        if (province == null) return;
-        if (province.getId() == 0) return;
-        ComboDistrict.removeAllItems();
-        
-        controller.FillCanton(this, province.getId());
-        ComboDistrict.setEnabled(false);
-        ComboCanton.setEnabled(true);
+
     }//GEN-LAST:event_ComboProvinceActionPerformed
 
     private void ComboCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCantonActionPerformed
-        // al seleccionar un canton, se llena el de Distrito.
-        DbObject canton = (DbObject) ComboCanton.getSelectedItem();
-        if (canton == null) return;
-        if (canton.getId() == 0) return;
-        ComboDistrict.removeAllItems();
-        
-        controller.FillDistrict(this, canton.getId());
-        ComboDistrict.setEnabled(true);
+
     }//GEN-LAST:event_ComboCantonActionPerformed
 
     private void ComboPetTrainingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPetTrainingActionPerformed
@@ -591,7 +565,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new InsertPetForm().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new InsertPetFormForEdit().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
