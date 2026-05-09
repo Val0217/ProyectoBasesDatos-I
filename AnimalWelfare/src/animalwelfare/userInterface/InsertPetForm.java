@@ -5,9 +5,8 @@
 package animalwelfare.userInterface;
 import animalwelfare.access.DbObject;
 import animalwelfare.business.InsertPetController;
-import javax.swing.ImageIcon;
-import java.awt.Image;
-import java.sql.SQLException;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 /**
@@ -22,7 +21,7 @@ public class InsertPetForm extends javax.swing.JFrame {
     // controlador del formulario
     private InsertPetController controller = null;
 
-    // procedimiento que rellena el combobox de Veterinarian
+    // procedimiento que rellena la lista de Veterinarian
     public void fillVeterinarian(ArrayList<DbObject> listVeterinarian) {
         ListVeterinarian.removeAll();
         DefaultListModel<DbObject> model = new DefaultListModel<>();
@@ -30,6 +29,33 @@ public class InsertPetForm extends javax.swing.JFrame {
             model.addElement(c);
         }
         ListVeterinarian.setModel(model);
+    }
+
+    // procedimiento que rellena el combobox de Medicine
+    public void fillMedicine(ArrayList<DbObject> listMedicine) {
+        ComboMedicine.removeAllItems();
+        ComboMedicine.addItem(new DbObject(0,"-"));
+        for (DbObject c : listMedicine) {
+            ComboMedicine.addItem(c);
+        }
+    }
+
+    // procedimiento que rellena el combobox de Illness
+    public void fillIllness(ArrayList<DbObject> listIllness) {
+        ComboIllness.removeAllItems();
+        ComboIllness.addItem(new DbObject(0,"-"));
+        for (DbObject c : listIllness) {
+            ComboIllness.addItem(c);
+        }
+    }
+
+    // procedimiento que rellena el combobox de Treatment
+    public void fillTreatment(ArrayList<DbObject> listTreatment) {
+        ComboTreatment.removeAllItems();
+        ComboTreatment.addItem(new DbObject(0,"-"));
+        for (DbObject c : listTreatment) {
+            ComboTreatment.addItem(c);
+        }
     }
 
     // procedimiento que rellena el combobox de Breed
@@ -133,6 +159,9 @@ public class InsertPetForm extends javax.swing.JFrame {
         ComboCanton.setEnabled(false);
         ComboDistrict.setEnabled(false);
         ComboBreed.setEnabled(false);
+        
+        // fix elementos visuales
+        ScrollPanelFirst.getVerticalScrollBar().setBackground(new Color(240,240,240));
 
         setVisible(true); // Hacer visible el formulario
     }
@@ -213,23 +242,27 @@ public class InsertPetForm extends javax.swing.JFrame {
         LabelButtonAddTreatment = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         ListPetTreatment = new javax.swing.JList<>();
+        FinalPanel = new javax.swing.JPanel();
         ButtonSubmitPet = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         ButtonCancel = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(924, 590));
+        setResizable(false);
 
         PanelBackGround.setBackground(new java.awt.Color(0, 153, 153));
+        PanelBackGround.setPreferredSize(new java.awt.Dimension(913, 590));
         PanelBackGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LableTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LableTitle.setForeground(new java.awt.Color(255, 255, 255));
         LableTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LableTitle.setText("Animal Welfare");
-        PanelBackGround.add(LableTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 830, -1));
+        PanelBackGround.add(LableTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 910, -1));
 
-        ScrollPanelFirst.setPreferredSize(new java.awt.Dimension(869, 500));
+        ScrollPanelFirst.setPreferredSize(new java.awt.Dimension(911, 510));
 
         BasicInformationPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Basic Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(142, 142, 142))); // NOI18N
 
@@ -674,7 +707,7 @@ public class InsertPetForm extends javax.swing.JFrame {
                                 .addComponent(jLabel17)
                                 .addGap(37, 37, 37)
                                 .addComponent(ComboMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 13, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ButtonAddMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane5)
                     .addGroup(PetHealthPanelLayout.createSequentialGroup()
@@ -760,25 +793,41 @@ public class InsertPetForm extends javax.swing.JFrame {
             .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
         );
 
+        javax.swing.GroupLayout FinalPanelLayout = new javax.swing.GroupLayout(FinalPanel);
+        FinalPanel.setLayout(FinalPanelLayout);
+        FinalPanelLayout.setHorizontalGroup(
+            FinalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FinalPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ButtonSubmitPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        FinalPanelLayout.setVerticalGroup(
+            FinalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FinalPanelLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(FinalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonSubmitPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout FormPanelInsertPetLayout = new javax.swing.GroupLayout(FormPanelInsertPet);
         FormPanelInsertPet.setLayout(FormPanelInsertPetLayout);
         FormPanelInsertPetLayout.setHorizontalGroup(
             FormPanelInsertPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FormPanelInsertPetLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addGroup(FormPanelInsertPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BasicInformationPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PetDetailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(LocationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(VeterinarianPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PetHealthPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FormPanelInsertPetLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(ButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ButtonSubmitPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)))
-                .addContainerGap())
+                    .addComponent(FinalPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
         FormPanelInsertPetLayout.setVerticalGroup(
             FormPanelInsertPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -793,16 +842,14 @@ public class InsertPetForm extends javax.swing.JFrame {
                 .addComponent(VeterinarianPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(PetHealthPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(FormPanelInsertPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButtonSubmitPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(FinalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         ScrollPanelFirst.setViewportView(FormPanelInsertPet);
 
-        PanelBackGround.add(ScrollPanelFirst, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 60, -1, 530));
+        PanelBackGround.add(ScrollPanelFirst, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 60, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -913,6 +960,7 @@ public class InsertPetForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<DbObject> ComboTraining;
     private javax.swing.JComboBox<DbObject> ComboTreatment;
     private javax.swing.JComboBox<DbObject> ComboType;
+    private javax.swing.JPanel FinalPanel;
     private javax.swing.JPanel FormPanelInsertPet;
     private javax.swing.JLabel ImagePreview3;
     private javax.swing.JLabel LabelButtonAddIllness;
