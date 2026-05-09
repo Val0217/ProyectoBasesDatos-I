@@ -210,6 +210,7 @@ public class SignUpForm extends javax.swing.JFrame {
         ComboDistrict.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboDistrict.setOpaque(true);
         ComboDistrict.setRequestFocusEnabled(false);
+        ComboDistrict.addActionListener(this::ComboDistrictActionPerformed);
 
         LabelDistrict.setFont(new java.awt.Font("Roboto Black", 0, 10)); // NOI18N
         LabelDistrict.setForeground(new java.awt.Color(0, 102, 102));
@@ -513,6 +514,10 @@ public class SignUpForm extends javax.swing.JFrame {
     private void TextPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPhoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextPhoneActionPerformed
+
+    private void ComboDistrictActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboDistrictActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboDistrictActionPerformed
 
     /**
      * @param args the command line arguments

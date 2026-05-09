@@ -19,6 +19,20 @@ import javax.swing.JOptionPane;
 
 public class InsertPetController {
     
+        // para enviar las Provincias a la view
+    public void FillProvince(InsertPetForm view, int IdCountry) {
+        view.fillProvince(CountryOperations.listProvince(IdCountry));
+    }
+    
+    // para enviar los Cantones a la view
+    public void FillCanton(InsertPetForm view, int IdProvince) {
+        view.fillCanton(CountryOperations.listCanton(IdProvince));
+    }
+    
+    // para enviar los Distritos a la view
+    public void FillDistrict(InsertPetForm view, int IdCanton) {
+        view.fillDistrict(CountryOperations.listDistrict(IdCanton));
+    }
 
     public InsertPetController(InsertPetForm view) {
         view.fillPetEnergy(PetEnergyOperations.listPetEnergy());
