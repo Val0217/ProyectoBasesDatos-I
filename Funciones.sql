@@ -87,12 +87,34 @@ END;
 /
 
 /* ------------------------------------------------------------
-   Procedimiento: pr_get_person_role
+   Funcion: fn_get_person_id
+   Descripcion:
+   Obtiene el Id de una persona dado su username.
+   En caso de que no exista, devuelve NULL.
+   ------------------------------------------------------------ */
+CREATE OR REPLACE FUNCTION fn_get_person_id(pUserName IN VARCHAR2)
+RETURN NUMBER
+IS
+    vcIdPerson NUMBER(8);
+BEGIN
+    SELECT Id
+    INTO vcIdPerson
+    FROM Person
+    WHERE UserName = pUserName;
+    RETURN vcIdPerson;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN NULL;
+END;
+/
+
+/* ------------------------------------------------------------
+   Funcion: fn_get_person_role
    Descripcion:
    Verifica si una persona tiene rol de admin.
    Devuelve 1 si es admin, 0 si no lo es, NULL si no existe la persona.
    ------------------------------------------------------------ */
-CREATE OR REPLACE FUNCTION pr_get_person_role(pIdPerson IN NUMBER)
+CREATE OR REPLACE FUNCTION fn_get_person_role(pIdPerson IN NUMBER)
 RETURN NUMBER
 IS
     vcEXIST NUMBER(1);
@@ -105,10 +127,65 @@ BEGIN
 END;
 /
 
+
+/* ------------------------------------------------------------
+   Funcion: fn_get_districts_by_canton
+   Descripcion:
+   Retorna un cursor con todos los distritos de un canton dado su Id.
+   ------------------------------------------------------------ */
+CREATE OR REPLACE FUNCTION fn_get_districts_by_canton(pIdCanton IN NUMBER)
+RETURN SYS_REFCURSOR
+IS
+    v_result SYS_REFCURSOR;
+BEGIN
+    OPEN v_result FOR
+        SELECT Id, Name
+        FROM District
+        WHERE IdCanton = pIdCanton;
+    RETURN v_result;
+END;
+/
+
+/* ------------------------------------------------------------
+   Funcion: fn_get_canton_by_province
+   Descripcion:
+   Retorna un cursor con todos los cantones de una provincia dado su Id.
+   ------------------------------------------------------------ */
+CREATE OR REPLACE FUNCTION fn_get_canton_by_province(pIdProvince IN NUMBER)
+RETURN SYS_REFCURSOR
+IS
+    v_result SYS_REFCURSOR;
+BEGIN
+    OPEN v_result FOR
+        SELECT Id, Name
+        FROM Canton
+        WHERE IdProvince = pIdProvince;
+    RETURN v_result;
+END;
+/
+
+/* ------------------------------------------------------------
+   Funcion: fn_get_province_by_country
+   Descripcion:
+   Retorna un cursor con todas las provincias de un pais dado su Id.
+   ------------------------------------------------------------ */
+CREATE OR REPLACE FUNCTION fn_get_province_by_country(pIdCountry IN NUMBER)
+RETURN SYS_REFCURSOR
+IS
+    v_result SYS_REFCURSOR;
+BEGIN
+    OPEN v_result FOR
+        SELECT Id, Name
+        FROM Province
+        WHERE IdCountry = pIdCountry;
+    RETURN v_result;
+END;
+/
+
 --> esta funcion es para obtener el password de un usuario dado su username, se usa en el Sign In
 --> en caso de que no exista el usuario, se devuelve NULL
 
-CREATE OR REPLACE FUNCTION pr_get_person_Pass(pUserName IN VARCHAR2)
+CREATE OR REPLACE FUNCTION fn_get_person_password(pUserName IN VARCHAR2)
 RETURN VARCHAR2
 IS
     vcPass VARCHAR2(60);
@@ -123,6 +200,8 @@ EXCEPTION
         return (NULL);
 END;
 /
+
+CREATE OR REPLACE FUNCTION fn
 
 /* ------------------------------------------------------------
    Funcion: fn_person_average_rating

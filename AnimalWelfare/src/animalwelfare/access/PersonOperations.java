@@ -43,7 +43,7 @@ public class PersonOperations {
         String password = null;
 
         try {
-            try (Connection con = ConexionOracle.connect(); CallableStatement cs = con.prepareCall("{ ? = call pr_get_person_Pass(?) }")) {
+            try (Connection con = ConexionOracle.connect(); CallableStatement cs = con.prepareCall("{ ? = call fn_get_person_Pass(?) }")) {
                 
                 // Parámetro de retorno
                 cs.registerOutParameter(1, java.sql.Types.VARCHAR);
@@ -71,7 +71,7 @@ public class PersonOperations {
 
         try {
             // Conexión a la base de datos
-            try (Connection con = ConexionOracle.connect(); CallableStatement cs = con.prepareCall("{ ? = call pr_get_person_id(?) }")) {
+            try (Connection con = ConexionOracle.connect(); CallableStatement cs = con.prepareCall("{ ? = call fn_get_person_id(?) }")) {
                 
                 // Parámetro de retorno
                 cs.registerOutParameter(1, java.sql.Types.INTEGER);
@@ -99,7 +99,7 @@ public class PersonOperations {
 
         try {
             // Usamos un CallableStatement para llamar a la función almacenada en la base de datos que devuelve el rol del usuario
-            try (Connection con = ConexionOracle.connect(); CallableStatement cs = con.prepareCall("{ ? = call pr_get_person_role(?) }")) {
+            try (Connection con = ConexionOracle.connect(); CallableStatement cs = con.prepareCall("{ ? = call fn_get_person_role(?) }")) {
                 
                 // Parámetro de retorno
                 cs.registerOutParameter(1, java.sql.Types.VARCHAR);

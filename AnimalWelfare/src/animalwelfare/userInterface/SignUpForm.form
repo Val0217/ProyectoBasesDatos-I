@@ -351,7 +351,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboCountryActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Location&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DbObject&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelCountry">
@@ -380,7 +380,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboProvinceActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Location&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DbObject&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelProvince">
@@ -409,7 +409,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboCantonActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Location&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DbObject&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelCanton">
@@ -435,7 +435,7 @@
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Location&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DbObject&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelDistrict">
@@ -590,7 +590,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="320" y="20" width="-1" height="-1"/>
+              <AbsoluteConstraints x="330" y="20" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
