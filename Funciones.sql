@@ -669,6 +669,13 @@ BEGIN
 END;
 /
 
+/* VETERINARIAN */
+CREATE OR REPLACE FUNCTION fn_get_veterinarian_all
+RETURN SYS_REFCURSOR
+IS
+BEGIN
+    RETURN fn_get_all('Veterinarian');
+END;
 
 /* SPACE REQUIRED */
 CREATE OR REPLACE FUNCTION fn_get_space_required_all
