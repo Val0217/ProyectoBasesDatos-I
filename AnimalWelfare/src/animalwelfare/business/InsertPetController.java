@@ -14,24 +14,24 @@ import animalwelfare.access.PetTypeOperations;
 import animalwelfare.access.PetVeterinarianOperations;
 import animalwelfare.userInterface.InsertPetForm;
 import animalwelfare.security.Hash;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class InsertPetController {
     
 
     public InsertPetController(InsertPetForm view) {
-        view.fillEnergy(PetEnergyOperations.listEnergy());
-        view.fillState(PetStateOperations.listState());
-        view.fillType(PetTypeOperations.listType());
-        view.fillBreed(PetBreedOperations.listBreed());
+        view.fillPetEnergy(PetEnergyOperations.listPetEnergy());
+        view.fillPetType(PetTypeOperations.listPetType());
+        view.fillPetBreed(PetBreedOperations.listPetBreed());
         view.fillCountry(CountryOperations.listCountry());
-        view.fillSpaceRequired(PetSpaceRequiredOperations.listSpaceRequired());
+        view.fillPetSpaceRequired(PetSpaceRequiredOperations.listPetSpaceRequired());
         view.fillPetTraining(PetTrainingOperations.listPetTraining());
         view.fillPetSize(PetSizeOperations.listPetSize());
-        view.fillVeterinarian(PetVeterinarianOperations.listVeterinarian());
+        view.fillVeterinarian(PetVeterinarianOperations.listPetVeterinarian());
     }
     
-    public boolean InsertPet(String color, int age, String description, String petName, String chip, int idEnergy, int idState, int idType, int idBreed, int idDistrict, int idSpaceRequired, int idPetTraining, int idPetSize, int idPerson, int idVeterinarian){
+    public boolean InsertPet(String color, int age, String description, String petName, String chip, int idEnergy, int idState, int idType, int idBreed, int idDistrict, int idSpaceRequired, int idPetTraining, int idPetSize, int idPerson, int idVeterinarian) throws SQLException{
 
         boolean success = PetOperations.InsertPet(color, age, description, petName, chip, idEnergy, idState, idType, idBreed, idDistrict, idSpaceRequired, idPetTraining, idPetSize, idPerson, idVeterinarian);
         if (success) {
@@ -41,4 +41,5 @@ public class InsertPetController {
         }
         return success;
     }
+}
 

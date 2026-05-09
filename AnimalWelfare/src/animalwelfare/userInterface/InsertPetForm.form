@@ -109,11 +109,18 @@
                                                   <Component id="TextColorPet" alignment="0" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="LabelField2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="TextChipNumber" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="LabelField6" alignment="0" pref="218" max="32767" attributes="0"/>
-                                                  <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="ComboPetType" alignment="0" max="32767" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                              <Component id="TextChipNumber" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="LabelField6" alignment="0" pref="218" max="32767" attributes="0"/>
+                                                          </Group>
+                                                          <Component id="LabelField3" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                           <Component id="LabelField" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -122,8 +129,12 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="LabelField9" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
-                                              <Component id="jComboBox2" min="-2" pref="214" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="ComboBreedPet" min="-2" pref="214" max="-2" attributes="0"/>
+                                                  <Component id="ComboPetTraining" min="-2" pref="218" max="-2" attributes="0"/>
+                                                  <Component id="LabelField2" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="0" pref="28" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -133,12 +144,12 @@
                                           <Component id="jLabel1" alignment="0" min="-2" pref="177" max="-2" attributes="0"/>
                                           <Component id="LabelField7" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jComboBox4" min="-2" pref="196" max="-2" attributes="0"/>
+                                              <Component id="ComboSpaceRequieredPet" min="-2" pref="196" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Component id="ComboCanton" min="-2" pref="196" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jComboBox3" min="-2" pref="196" max="-2" attributes="0"/>
+                                              <Component id="ComboAgePet" min="-2" pref="196" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="LabelCanton" min="-2" max="-2" attributes="0"/>
@@ -176,17 +187,19 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="TextPetName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="TextChipNumber" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox2" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                          <Component id="ComboBreedPet" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="LabelField1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="LabelField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelField3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="TextColorPet" max="32767" attributes="0"/>
-                          <Component id="jComboBox1" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="TextColorPet" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ComboPetType" alignment="3" max="32767" attributes="0"/>
+                          <Component id="ComboPetTraining" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -206,7 +219,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jComboBox3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ComboAgePet" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ComboCountry" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ComboProvince" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -218,7 +231,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jComboBox4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ComboSpaceRequieredPet" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ComboCanton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ComboDistrict" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -317,7 +330,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Species"/>
+                <Property name="text" type="java.lang.String" value="Trainig level"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="ComboVeterinarianPet">
@@ -405,7 +418,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboSizePetActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DbObject&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelField7">
@@ -426,7 +439,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboEnergyPetActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DbObject&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelField8">
@@ -552,30 +565,30 @@
                 <Property name="text" type="java.lang.String" value="Breed(Optional)"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="ComboPetTraining">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboPetTrainingActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DbObject&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox2">
+            <Component class="javax.swing.JComboBox" name="ComboBreedPet">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DbObject&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox3">
+            <Component class="javax.swing.JComboBox" name="ComboAgePet">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="101">
@@ -687,18 +700,39 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox4">
+            <Component class="javax.swing.JComboBox" name="ComboSpaceRequieredPet">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox4ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboSpaceRequieredPetActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DbObject&gt;"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="ComboPetType">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboPetTypeActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DbObject&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelField3">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Species"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

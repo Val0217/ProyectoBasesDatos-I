@@ -30,29 +30,29 @@ public class SignUpForm extends javax.swing.JFrame {
         }
     }
     
-    // procedimiento que rellena el combobox de Country
-    public void fillProvince(ArrayList<DbObject> listCountry) {
+    // procedimiento que rellena el combobox de Province
+    public void fillProvince(ArrayList<DbObject> listProvince) {
         ComboProvince.removeAllItems();
         ComboProvince.addItem(new DbObject(0,"-"));
-        for (DbObject c : listCountry) {
+        for (DbObject c : listProvince) {
             ComboProvince.addItem(c);
         }
     }
     
-    // procedimiento que rellena el combobox de Country
-    public void fillCanton(ArrayList<DbObject> listCountry) {
+    // procedimiento que rellena el combobox de Canton
+    public void fillCanton(ArrayList<DbObject> listCanton) {
         ComboCanton.removeAllItems();
         ComboCanton.addItem(new DbObject(0,"-"));
-        for (DbObject c : listCountry) {
+        for (DbObject c : listCanton) {
             ComboCanton.addItem(c);
         }
     }
     
-    // procedimiento que rellena el combobox de Country
-    public void fillDistrict(ArrayList<DbObject> listCountry) {
+    // procedimiento que rellena el combobox de District
+    public void fillDistrict(ArrayList<DbObject> listDistrict) {
         ComboDistrict.removeAllItems();
         ComboDistrict.addItem(new DbObject(0,"-"));
-        for (DbObject c : listCountry) {
+        for (DbObject c : listDistrict) {
             ComboDistrict.addItem(c);
         }
     }
