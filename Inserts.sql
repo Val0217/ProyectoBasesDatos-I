@@ -391,6 +391,7 @@ COMMIT;
 -- Inserts Valeria
 
 
+
 /* ------------------------------------------------------------
    1. Location hierarchy needed by District foreign keys
    ------------------------------------------------------------ */
@@ -535,52 +536,6 @@ INSERT INTO PetSize (Id, Name)
 SELECT 3, 'Large' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetSize WHERE Id = 3);
 
-/* ------------------------------------------------------------
-   3. Persons needed by Pet.IdOwner
-   ------------------------------------------------------------ */
-INSERT INTO Person (Id, FirstName, LastName, Password, UserName, IdDistrict)
-SELECT 1, 'Carlos', 'Gonzalez', 'pass1234', 'cgonzalez', 1 FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM Person WHERE Id = 1);
-
-INSERT INTO Person (Id, FirstName, LastName, Password, UserName, IdDistrict)
-SELECT 2, 'Maria', 'Rodriguez', 'pass5678', 'mrodriguez', 2 FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM Person WHERE Id = 2);
-
-INSERT INTO Person (Id, FirstName, LastName, Password, UserName, IdDistrict)
-SELECT 3, 'Jose', 'Vargas', 'pass9012', 'jvargas', 3 FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM Person WHERE Id = 3);
-
-INSERT INTO Person (Id, FirstName, LastName, Password, UserName, IdDistrict)
-SELECT 4, 'Valeria', 'Duran', 'pass104', 'vduran', 4 FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM Person WHERE Id = 4);
-
-INSERT INTO Email (Id, Email, IdPerson)
-SELECT 1, 'carlos@mail.com', 1 FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM Email WHERE Id = 1);
-
-INSERT INTO Email (Id, Email, IdPerson)
-SELECT 2, 'maria@mail.com', 2 FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM Email WHERE Id = 2);
-
-INSERT INTO Email (Id, Email, IdPerson)
-SELECT 3, 'jose@mail.com', 3 FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM Email WHERE Id = 3);
-
-INSERT INTO Email (Id, Email, IdPerson)
-SELECT 4, 'vale@mail.com', 4 FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM Email WHERE Id = 4);
-
-INSERT INTO Phone (Id, Phone, IdPerson)
-SELECT 1, 88001111, 1 FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM Phone WHERE Id = 1);
-
-INSERT INTO Phone (Id, Phone, IdPerson)
-SELECT 2, 88002222, 2 FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM Phone WHERE Id = 2);
-
-INSERT INTO Phone (Id, Phone, IdPerson)
-SELECT 3, 88003333, 3 FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM Phone WHERE Id = 3);
 
 /* ------------------------------------------------------------
    4. Veterinarians needed by Pet.IdVeterinarian

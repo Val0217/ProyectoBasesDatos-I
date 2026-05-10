@@ -696,9 +696,9 @@ BEGIN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
         VALUES (seq_bitacora.NEXTVAL, 'VETERINARIAN', SYSDATE, SUBSTR(:OLD.Location, 1, 50), fn_audit_changed_by(), SUBSTR(:NEW.Location, 1, 50), 'LOCATION');
     END IF;
-    IF NVL(SUBSTR(TO_CHAR(:OLD.IdDristrict), 1, 50), '#NULL#') <> NVL(SUBSTR(TO_CHAR(:NEW.IdDristrict), 1, 50), '#NULL#') THEN
+    IF NVL(SUBSTR(TO_CHAR(:OLD.IdDistrict), 1, 50), '#NULL#') <> NVL(SUBSTR(TO_CHAR(:NEW.IdDistrict), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (seq_bitacora.NEXTVAL, 'VETERINARIAN', SYSDATE, SUBSTR(TO_CHAR(:OLD.IdDristrict), 1, 50), fn_audit_changed_by(), SUBSTR(TO_CHAR(:NEW.IdDristrict), 1, 50), 'IDDRISTRICT');
+        VALUES (seq_bitacora.NEXTVAL, 'VETERINARIAN', SYSDATE, SUBSTR(TO_CHAR(:OLD.IdDistrict), 1, 50), fn_audit_changed_by(), SUBSTR(TO_CHAR(:NEW.IdDistrict), 1, 50), 'IDDISTRICT');
     END IF;
     IF NVL(SUBSTR(TO_CHAR(:OLD.Phone), 1, 50), '#NULL#') <> NVL(SUBSTR(TO_CHAR(:NEW.Phone), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)

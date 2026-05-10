@@ -1,3 +1,5 @@
+
+
 CREATE OR REPLACE PROCEDURE pr_reject_adoption_request (
     p_adoption_id IN NUMBER,
     p_owner_id    IN NUMBER
@@ -310,8 +312,7 @@ BEGIN
 END;
 /
 
--- Tipos de datos para listas de IDs en procedimientos almacenados
-CREATE OR REPLACE TYPE NumberList AS TABLE OF NUMBER;
+
 
 /* ------------------------------------------------------------
    Procedimiento: FN_GET_CANTON_BY_PROVINCE
@@ -1404,39 +1405,6 @@ END;
 /
 
 
-/* ------------------------------------------------------------
-   Procedimiento: pr_register_adoption
-   Descripcion:
-   Registra una adopcion o una mascota en adopcion.
-   ------------------------------------------------------------ */
-CREATE OR REPLACE PROCEDURE pr_register_adoption (
-    p_adoption_date  IN DATE,
-    p_available_date IN DATE,
-    p_description    IN VARCHAR2,
-    p_amount         IN NUMBER,
-    p_state          IN VARCHAR2,
-    p_id_pet         IN NUMBER,
-    p_id_adopter     IN NUMBER,
-    p_id_owner       IN NUMBER,
-    p_new_id         OUT NUMBER
-)
-IS
-BEGIN
-    p_new_id := fn_next_id('Adoption');
-
-    INSERT INTO Adoption (
-        Id, AdoptionDate, AvailableDate, Description, Amount,
-        State, IdPet, IdAdopter, IdOwner
-    )
-    VALUES (
-        p_new_id, p_adoption_date, p_available_date, p_description, p_amount,
-        p_state, p_id_pet, p_id_adopter, p_id_owner
-    );
-
-    COMMIT;
-END;
-/
-
 
 /* ------------------------------------------------------------
    Procedimiento: pr_calificate_person
@@ -1489,31 +1457,6 @@ BEGIN
 END;
 /
 
-
-/* ------------------------------------------------------------
-   Procedimiento: pr_report_blocklist
-   Descripcion:
-   Reporte de lista negra con calificacion promedio.
-   ------------------------------------------------------------ */
-CREATE OR REPLACE PROCEDURE pr_report_blocklist (
-    p_result OUT SYS_REFCURSOR
-)
-IS
-BEGIN
-    OPEN p_result FOR
-        SELECT
-            bl.Id,
-            bl.BlockDate,
-            p.Id AS PersonId,
-            p.FirstName,
-            p.LastName,
-            fn_person_average_rating(p.Id) AS AverageRating,
-            fn_is_blacklisted(p.Id) AS IsBlacklisted
-        FROM BlockList bl
-        INNER JOIN Person p ON p.Id = bl.IdPerson
-        ORDER BY bl.BlockDate DESC;
-END;
-/
 
 
 /* ------------------------------------------------------------
@@ -1844,7 +1787,7 @@ BEGIN --> aqui va el comando:
     (s_petPhoto.nextval,pImage,pIdPet);
     COMMIT;
 END pr_insert_pet_image;
-
+/
 /* ------------------------------------------------------------
    Procedimiento: pr_insert_donation
    Descripcion:
@@ -1861,7 +1804,7 @@ BEGIN
     VALUES (s_Donation.NEXTVAL, p_amount, SYSDATE, p_idPerson, p_idCurrency, p_idAssociation);
     COMMIT;
 END pr_insert_donation;
-
+/
 /*Insert person de Carlos */
 CREATE OR REPLACE PROCEDURE pr_insert_person(pFirst_name IN VARCHAR2, pLast_name IN VARCHAR2, pEmail IN VARCHAR2, pPassword IN VARCHAR2, pUserName IN VARCHAR2, pIdDistrict IN NUMBER, pPhoneNumber IN NUMBER)
 AS 
@@ -1896,8 +1839,7 @@ END pr_insert_person;
    Descripcion:
    Inserta una nueva mascota en la base de datos.
    ------------------------------------------------------------ */
-   CREATE OR REPLACE TYPE VARCHAR2LIST AS TABLE OF VARCHAR2(255);
-   CREATE OR REPLACE TYPE NUMBERLIST AS TABLE OF NUMBER;
+
 CREATE OR REPLACE PROCEDURE pr_insert_pet(pColor IN VARCHAR2, pAge IN NUMBER, pDescription IN VARCHAR2, pPetName IN VARCHAR2, pChip IN VARCHAR2, pIdEnergy IN NUMBER, pIdType IN NUMBER, pIdBreed IN NUMBER, pIdDistrict IN NUMBER, pIdSpaceRequired IN NUMBER, pIdPetTraining IN NUMBER, pIdPetSize IN NUMBER, pIdPerson IN NUMBER, pIdVeterinarian IN NUMBER, pIllnessId IN NumberList, pTreatMentId IN NumberList, pMedicineId IN NumberList, pPhotoPath IN VARCHAR2LIST)
 AS 
     vcIdPet NUMBER(8);
@@ -1966,7 +1908,7 @@ BEGIN --> aqui va el comando:
 
     COMMIT;
 END pr_insert_pet;
-
+/
 
 
 
@@ -2241,3 +2183,6 @@ BEGIN
     COMMIT;
 END;
 /
+-- Tipos de datos para listas de IDs en procedimientos almacenados
+CREATE OR REPLACE TYPE VARCHAR2LIST AS TABLE OF VARCHAR2(255);
+CREATE OR REPLACE TYPE NUMBERLIST AS TABLE OF NUMBER;

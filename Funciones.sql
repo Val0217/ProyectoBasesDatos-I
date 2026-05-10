@@ -201,7 +201,6 @@ EXCEPTION
 END;
 /
 
-CREATE OR REPLACE FUNCTION fn
 
 /* ------------------------------------------------------------
    Funcion: fn_person_average_rating
@@ -690,7 +689,7 @@ IS
 BEGIN
     RETURN fn_get_all('Veterinarian');
 END;
-
+/
 /* SPACE REQUIRED */
 CREATE OR REPLACE FUNCTION fn_get_pet_space_required_all
 RETURN SYS_REFCURSOR
@@ -938,7 +937,7 @@ BEGIN
 
     RETURN pCursor;
 END;
-
+/
 
 /* CURRENCY */
 CREATE OR REPLACE FUNCTION fn_get_currency_all
