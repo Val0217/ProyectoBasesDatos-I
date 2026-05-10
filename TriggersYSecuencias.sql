@@ -1110,10 +1110,6 @@ BEGIN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
         VALUES (seq_bitacora.NEXTVAL, 'ADOPTION', SYSDATE, SUBSTR(:OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(:NEW.Description, 1, 50), 'DESCRIPTION');
     END IF;
-    IF NVL(SUBSTR(TO_CHAR(:OLD.Amount), 1, 50), '#NULL#') <> NVL(SUBSTR(TO_CHAR(:NEW.Amount), 1, 50), '#NULL#') THEN
-        INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (seq_bitacora.NEXTVAL, 'ADOPTION', SYSDATE, SUBSTR(TO_CHAR(:OLD.Amount), 1, 50), fn_audit_changed_by(), SUBSTR(TO_CHAR(:NEW.Amount), 1, 50), 'AMOUNT');
-    END IF;
     IF NVL(SUBSTR(:OLD.State, 1, 50), '#NULL#') <> NVL(SUBSTR(:NEW.State, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
         VALUES (seq_bitacora.NEXTVAL, 'ADOPTION', SYSDATE, SUBSTR(:OLD.State, 1, 50), fn_audit_changed_by(), SUBSTR(:NEW.State, 1, 50), 'STATE');

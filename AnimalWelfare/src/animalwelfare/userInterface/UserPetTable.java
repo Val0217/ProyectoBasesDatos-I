@@ -57,6 +57,7 @@ public class UserPetTable extends javax.swing.JFrame {
 
         jButtonAdopt.setEnabled(false); //Boton de adoptar no hace nada  
         jButtonEditPet.setEnabled(false);
+        jButtonReportMissing.setEnabled(false); // Report Missing button
         jButtonUndoAdoption.setVisible(false);
     }
     private void addTableSelectionListeners() {
@@ -64,13 +65,54 @@ public class UserPetTable extends javax.swing.JFrame {
             if (!event.getValueIsAdjusting()) {
                 updateUndoAdoptionButtonVisibility();
                 updateEditPetButtonState();
+                updateReportMissingButtonState();
             }
         });
     }
     private void updateEditPetButtonState() {
         jButtonEditPet.setEnabled(jTable1.getSelectedRow() >= 0);
     }
-    
+    private void updateReportMissingButtonState() {
+        if (jTable1.getSelectedRow() < 0) {
+            jButtonReportMissing.setEnabled(false);
+            return;
+        }
+
+        jButtonReportMissing.setEnabled(!isMissingState(getSelectedPetStateFromTable()));
+    } 
+    private String getSelectedPetStateFromTable() {
+        int selectedRow = jTable1.getSelectedRow();
+
+        if (selectedRow < 0) {
+            return null;
+        }
+
+        int modelRow = jTable1.convertRowIndexToModel(selectedRow);
+        int stateColumn = findModelColumn("State");
+
+        if (stateColumn < 0) {
+            stateColumn = 6;
+        }
+
+        if (stateColumn < 0 || stateColumn >= jTable1.getModel().getColumnCount()) {
+            return null;
+        }
+
+        Object value = jTable1.getModel().getValueAt(modelRow, stateColumn);
+        return value == null ? null : value.toString().trim();
+    }
+
+    private boolean isMissingState(String state) {
+        if (state == null) {
+            return false;
+        }
+
+        return state.equalsIgnoreCase("Lost")
+                || state.equalsIgnoreCase("Missing")
+                || state.equalsIgnoreCase("Perdido")
+                || state.equalsIgnoreCase("Perdida")
+                || state.equals("3");
+    }
     public void refreshAfterPetEdit() {
         loadTables();
         jButtonEditPet.setEnabled(false);
@@ -89,7 +131,7 @@ public class UserPetTable extends javax.swing.JFrame {
         int idColumn = findModelColumn("ID");
 
         if (idColumn < 0) {
-            idColumn = 0; // fallback: first column
+            idColumn = 0; 
         }
 
         Object value = jTable1.getModel().getValueAt(modelRow, idColumn);
@@ -137,7 +179,6 @@ public class UserPetTable extends javax.swing.JFrame {
 
         boolean isUpForAdoption =
                 state.equalsIgnoreCase("En Adopcion")
-                || state.equalsIgnoreCase("En Adopción")
                 || state.equalsIgnoreCase("Up for adoption")
                 || state.equals("1");
 
@@ -337,12 +378,26 @@ private String nullToEmpty(String text) {
         jButtonPutAdopt = new javax.swing.JButton();
         jButtonUndoAdoption = new javax.swing.JButton();
         jButtonEditPet = new javax.swing.JButton();
+        jButtonReportMissing = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButtonFilter2 = new javax.swing.JButton();
         jButtonCleanFilter2 = new javax.swing.JButton();
         jButtonAdopt = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable5 = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -376,6 +431,9 @@ private String nullToEmpty(String text) {
         jButtonEditPet.setText("Edit Pet");
         jButtonEditPet.addActionListener(this::jButtonEditPetActionPerformed);
 
+        jButtonReportMissing.setText("Report Missing");
+        jButtonReportMissing.addActionListener(this::jButtonReportMissingActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -383,15 +441,20 @@ private String nullToEmpty(String text) {
             .addComponent(jScrollPane1)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonFilter1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonCleanFilter1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonPutAdopt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonUndoAdoption, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonEditPet, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonFilter1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonCleanFilter1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonPutAdopt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonUndoAdoption, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonEditPet, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonReportMissing, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -405,7 +468,9 @@ private String nullToEmpty(String text) {
                     .addComponent(jButtonPutAdopt)
                     .addComponent(jButtonUndoAdoption)
                     .addComponent(jButtonEditPet))
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonReportMissing)
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("My Pets", jPanel1);
@@ -449,16 +514,130 @@ private String nullToEmpty(String text) {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFilter2)
                     .addComponent(jButtonCleanFilter2)
                     .addComponent(jButtonAdopt))
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         jTabbedPane1.addTab("Adoption List", jPanel2);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
+
+        jButton3.setText("Take back missing report");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 891, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addGap(23, 23, 23))
+        );
+
+        jTabbedPane1.addTab("Missing Pets", jPanel3);
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable4);
+
+        jButton2.setText("Claim as mine");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 891, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(0, 22, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Found Pets", jPanel4);
+
+        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable5);
+
+        jButton4.setText("Accept");
+
+        jButton5.setText("Reject");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 891, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jButton5))
+                .addGap(0, 32, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Adoption Aplications", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -468,7 +647,9 @@ private String nullToEmpty(String text) {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -514,6 +695,9 @@ private String nullToEmpty(String text) {
                 );
 
                 loadTables();
+                jButtonUndoAdoption.setVisible(false);
+                jButtonEditPet.setEnabled(false);
+                jButtonReportMissing.setEnabled(false);
 
             } catch (SQLException ex) {
                 showError(ex);
@@ -571,6 +755,36 @@ private String nullToEmpty(String text) {
             }
     }//GEN-LAST:event_jButtonEditPetActionPerformed
 
+    private void jButtonReportMissingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReportMissingActionPerformed
+                    try {
+                int option = JOptionPane.showConfirmDialog(
+                    this,
+                    "Do you want to report this pet as missing?",
+                    "Report missing pet",
+                    JOptionPane.YES_NO_OPTION
+                );
+
+                if (option != JOptionPane.YES_OPTION) {
+                    return;
+                }
+
+                controller.reportSelectedPetMissing(jTable1);
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Pet was reported as missing."
+                );
+
+                loadTables();
+                jButtonUndoAdoption.setVisible(false);
+                jButtonEditPet.setEnabled(false);
+                jButtonReportMissing.setEnabled(false);
+
+            } catch (SQLException ex) {
+                showError(ex);
+            }
+    }//GEN-LAST:event_jButtonReportMissingActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -597,6 +811,10 @@ private String nullToEmpty(String text) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonAdopt;
     private javax.swing.JButton jButtonCleanFilter1;
     private javax.swing.JButton jButtonCleanFilter2;
@@ -604,13 +822,23 @@ private String nullToEmpty(String text) {
     private javax.swing.JButton jButtonFilter1;
     private javax.swing.JButton jButtonFilter2;
     private javax.swing.JButton jButtonPutAdopt;
+    private javax.swing.JButton jButtonReportMissing;
     private javax.swing.JButton jButtonUndoAdoption;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
+    private javax.swing.JTable jTable5;
     // End of variables declaration//GEN-END:variables
 }

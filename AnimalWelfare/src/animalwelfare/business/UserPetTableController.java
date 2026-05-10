@@ -30,16 +30,13 @@ public class UserPetTableController {
     }
 
     public void putSelectedPetUpForAdoption(JTable table) throws SQLException {
-        int selectedRow = table.getSelectedRow();
-
-        if (selectedRow < 0) {
-            throw new SQLException("Select a pet first.");
-        }
-
-        int modelRow = table.convertRowIndexToModel(selectedRow);
-        int petId = Integer.parseInt(table.getModel().getValueAt(modelRow, 0).toString());
-
+        int petId = getSelectedPetId(table);
         operations.putPetUpForAdoption(petId, currentUserId);
+    }
+
+    public void reportSelectedPetMissing(JTable table) throws SQLException {
+        int petId = getSelectedPetId(table);
+        operations.reportPetMissing(petId, currentUserId);
     }
 
     public List<CatalogItem> getCatalog(String catalogName) throws SQLException {
@@ -61,6 +58,10 @@ public class UserPetTableController {
         }
     }
    public void undoSelectedPetUpForAdoption(JTable table) throws SQLException {
+        int petId = getSelectedPetId(table);
+        operations.undoPetUpForAdoption(petId, currentUserId);
+    }
+    private int getSelectedPetId(JTable table) throws SQLException {
         int selectedRow = table.getSelectedRow();
 
         if (selectedRow < 0) {
@@ -68,8 +69,16 @@ public class UserPetTableController {
         }
 
         int modelRow = table.convertRowIndexToModel(selectedRow);
-        int petId = Integer.parseInt(table.getModel().getValueAt(modelRow, 0).toString());
+        Object value = table.getModel().getValueAt(modelRow, 0);
 
-        operations.undoPetUpForAdoption(petId, currentUserId);
+        if (value == null) {
+            throw new SQLException("The selected row does not have a pet ID.");
+        }
+
+        if (value instanceof Number) {
+            return ((Number) value).intValue();
+        }
+
+        return Integer.parseInt(value.toString());
     }
 }

@@ -1,4 +1,51 @@
 /* ------------------------------------------------------------
+   Procedimiento: COSAS DE PONER EN ADOPCION Y MISSING STATE
+   Descripcion: 
+   
+   ------------------------------------------------------------ */
+
+UPDATE Adoption
+   SET State = CASE
+       WHEN UPPER(State) IN ('IN PROCESS', 'IN PROGRESS', 'EN ADOPCION') THEN 'In process'
+       WHEN UPPER(State) IN ('TO BE CONFIRMED') THEN 'To be confirmed'
+       WHEN UPPER(State) IN ('CANCELED', 'CANCELLED', 'CANCELADO') THEN 'Canceled'
+       WHEN UPPER(State) IN ('APPROVED', 'ADOPTED', 'ADOPTADO') THEN 'Approved'
+       ELSE State
+   END;
+COMMIT;
+
+ALTER TABLE Adoption ADD CONSTRAINT chk_Adoption_State
+    CHECK (State IN ('In process', 'To be confirmed', 'Canceled', 'Approved'));
+
+SHOW ERRORS PROCEDURE pr_report_pet_missing;
+
+CREATE OR REPLACE PROCEDURE pr_report_pet_missing (
+    p_pet_id   IN Pet.Id%TYPE,
+    p_owner_id IN Pet.IdOwner%TYPE
+)
+AS
+BEGIN
+    UPDATE Pet
+       SET IdState = 3
+     WHERE Id = p_pet_id
+       AND IdOwner = p_owner_id;
+
+    IF SQL%ROWCOUNT = 0 THEN
+        RAISE_APPLICATION_ERROR(
+            -20005,
+            'Pet not found, or this pet does not belong to this user.'
+        );
+    END IF;
+
+    UPDATE Adoption
+       SET State = 'Canceled'
+     WHERE IdPet = p_pet_id
+       AND State IN ('In process', 'To be confirmed');
+
+    COMMIT;
+END;
+/
+/* ------------------------------------------------------------
    Procedimiento: FN_GET_DISTRICTS_BY_CANTON
    Descripcion: 
    
@@ -214,25 +261,31 @@ END;
 CREATE OR REPLACE PROCEDURE pr_undo_pet_up_for_adoption (
     p_pet_id   IN NUMBER,
     p_owner_id IN NUMBER
-)
-IS
-BEGIN
-    UPDATE Pet
-    SET IdState = 2
-    WHERE Id = p_pet_id
-      AND IdOwner = p_owner_id
-      AND IdState = 1;
-
-    IF SQL%ROWCOUNT = 0 THEN
-        RAISE_APPLICATION_ERROR(
-            -20003,
-            'Pet was not found, does not belong to this user, or is not up for adoption.'
-        );
-    END IF;
-
-    COMMIT;
-END;
-/
+    )
+    IS
+    BEGIN
+        UPDATE Pet
+           SET IdState = 2
+         WHERE Id = p_pet_id
+           AND IdOwner = p_owner_id
+           AND IdState = 1;
+    
+        IF SQL%ROWCOUNT = 0 THEN
+            RAISE_APPLICATION_ERROR(
+                -20003,
+                'Pet was not found, does not belong to this user, or is not up for adoption.'
+            );
+        END IF;
+    
+        UPDATE Adoption
+           SET State = 'Canceled'
+         WHERE IdPet = p_pet_id
+           AND IdOwner = p_owner_id
+           AND State IN ('In process', 'To be confirmed');
+    
+        COMMIT;
+    END;
+    /
 
 
 
@@ -294,7 +347,8 @@ CREATE OR REPLACE PACKAGE PKG_PET_OPERATIONS AS
     );
 
     FUNCTION FN_PUT_PET_UP_FOR_ADOPTION(
-        P_PET_ID IN NUMBER
+        P_PET_ID   IN NUMBER,
+        P_OWNER_ID IN NUMBER
     ) RETURN NUMBER;
 
     PROCEDURE SP_GET_ENERGY_OPTIONS(P_RESULT OUT SYS_REFCURSOR);
@@ -437,21 +491,67 @@ CREATE OR REPLACE PACKAGE BODY PKG_PET_OPERATIONS AS
         );
     END SP_GET_FOUND_PETS;
 
-    FUNCTION FN_PUT_PET_UP_FOR_ADOPTION(
-        P_PET_ID IN NUMBER
+FUNCTION FN_PUT_PET_UP_FOR_ADOPTION(
+        P_PET_ID   IN NUMBER,
+        P_OWNER_ID IN NUMBER
     ) RETURN NUMBER
     IS
+        v_pet_count NUMBER;
     BEGIN
-        UPDATE PET
-           SET IDSTATE = 1
-         WHERE ID = P_PET_ID
-           AND IDSTATE = 4;
+        SELECT COUNT(*)
+          INTO v_pet_count
+          FROM Pet
+         WHERE Id = P_PET_ID
+           AND IdOwner = P_OWNER_ID;
 
-        IF SQL%ROWCOUNT > 0 THEN
-            RETURN 1;
+        IF v_pet_count = 0 THEN
+            RETURN 0;
         END IF;
 
-        RETURN 0;
+        UPDATE Pet
+           SET IdState = 1
+         WHERE Id = P_PET_ID
+           AND IdOwner = P_OWNER_ID;
+
+        UPDATE Adoption
+           SET AdoptionDate  = NULL,
+               AvailableDate = SYSDATE,
+               Description   = 'Pet put up for adoption by owner.',
+               State         = 'In process',
+               IdAdopter     = NULL,
+               IdOwner       = P_OWNER_ID
+         WHERE IdPet = P_PET_ID
+           AND State IN ('In process', 'To be confirmed');
+
+        IF SQL%ROWCOUNT = 0 THEN
+            INSERT INTO Adoption (
+                Id,
+                AdoptionDate,
+                AvailableDate,
+                Description,
+                State,
+                IdPet,
+                IdAdopter,
+                IdOwner
+            ) VALUES (
+                fn_next_id('Adoption'),
+                NULL,
+                SYSDATE,
+                'Pet put up for adoption by owner.',
+                'In process',
+                P_PET_ID,
+                NULL,
+                P_OWNER_ID
+            );
+        END IF;
+
+        COMMIT;
+        RETURN 1;
+
+    EXCEPTION
+        WHEN OTHERS THEN
+            ROLLBACK;
+            RAISE;
     END FN_PUT_PET_UP_FOR_ADOPTION;
 
     PROCEDURE SP_GET_ENERGY_OPTIONS(P_RESULT OUT SYS_REFCURSOR)
@@ -539,7 +639,7 @@ CREATE OR REPLACE PACKAGE BODY PKG_PET_OPERATIONS AS
 END PKG_PET_OPERATIONS;
 /
 
-
+SHOW ERRORS PACKAGE BODY PKG_PET_OPERATIONS;
 /* ------------------------------------------------------------
    Procedimiento: pr_get_catalog
    Descripcion: procedimiento para los combox de la ventana UserPetTable
@@ -632,40 +732,47 @@ IS
 BEGIN
     OPEN p_result FOR
         SELECT
-            PetId,
-            PetName,
-            Color,
-            Age,
-            Chip,
-            Energy,
-            PetState,
-            PetType,
-            Breed,
-            District,
-            SpaceRequired,
-            Training,
-            PetSize,
-            VeterinarianName
-        FROM VW_USER_PET_TABLE
-        WHERE IdState = 1
-          AND (p_id_energy IS NULL OR IdEnergy = p_id_energy)
-          AND (p_id_type IS NULL OR IdType = p_id_type)
-          AND (p_id_breed IS NULL OR IdBreed = p_id_breed)
-          AND (p_id_district IS NULL OR IdDistrict = p_id_district)
-          AND (p_id_country IS NULL OR IdCountry = p_id_country)
-          AND (p_id_province IS NULL OR IdProvince = p_id_province)
-          AND (p_id_canton IS NULL OR IdCanton = p_id_canton)
-          AND (p_id_space IS NULL OR IdSpace = p_id_space)
-          AND (p_id_training IS NULL OR IdPetTraining = p_id_training)
-          AND (p_id_size IS NULL OR IdSize = p_id_size)
-          AND (p_id_veterinarian IS NULL OR IdVeterinarian = p_id_veterinarian)
-          AND (p_color IS NULL OR UPPER(Color) LIKE '%' || UPPER(p_color) || '%')
-          AND (p_age IS NULL OR Age = p_age)
-          AND (p_name IS NULL OR UPPER(PetName) LIKE '%' || UPPER(p_name) || '%')
-          AND (p_chip IS NULL OR UPPER(Chip) LIKE '%' || UPPER(p_chip) || '%')
-        ORDER BY PetName;
+            v.PetId,
+            v.PetName,
+            v.Color,
+            v.Age,
+            v.Chip,
+            v.Energy,
+            v.PetState,
+            v.PetType,
+            v.Breed,
+            v.District,
+            v.SpaceRequired,
+            v.Training,
+            v.PetSize,
+            v.VeterinarianName
+        FROM VW_USER_PET_TABLE v
+        WHERE v.IdState = 1
+          AND EXISTS (
+              SELECT 1
+                FROM Adoption a
+               WHERE a.IdPet = v.PetId
+                 AND a.State = 'In process'
+          )
+          AND (p_id_energy IS NULL OR v.IdEnergy = p_id_energy)
+          AND (p_id_type IS NULL OR v.IdType = p_id_type)
+          AND (p_id_breed IS NULL OR v.IdBreed = p_id_breed)
+          AND (p_id_district IS NULL OR v.IdDistrict = p_id_district)
+          AND (p_id_country IS NULL OR v.IdCountry = p_id_country)
+          AND (p_id_province IS NULL OR v.IdProvince = p_id_province)
+          AND (p_id_canton IS NULL OR v.IdCanton = p_id_canton)
+          AND (p_id_space IS NULL OR v.IdSpace = p_id_space)
+          AND (p_id_training IS NULL OR v.IdPetTraining = p_id_training)
+          AND (p_id_size IS NULL OR v.IdSize = p_id_size)
+          AND (p_id_veterinarian IS NULL OR v.IdVeterinarian = p_id_veterinarian)
+          AND (p_color IS NULL OR UPPER(v.Color) LIKE '%' || UPPER(p_color) || '%')
+          AND (p_age IS NULL OR v.Age = p_age)
+          AND (p_name IS NULL OR UPPER(v.PetName) LIKE '%' || UPPER(p_name) || '%')
+          AND (p_chip IS NULL OR UPPER(v.Chip) LIKE '%' || UPPER(p_chip) || '%')
+        ORDER BY v.PetName;
 END;
 /
+SHOW ERRORS PROCEDURE pr_get_adoption_pet_table;
 /* ------------------------------------------------------------
    Procedimiento: pr_get_user_pet_table
    Descripcion:

@@ -121,14 +121,29 @@ public class UserPetOperations {
 
     public void putPetUpForAdoption(int petId, int ownerId) throws SQLException {
         try (Connection conn = ConexionOracle.connect();
-             CallableStatement cs = conn.prepareCall("{call pr_put_pet_up_for_adoption(?,?)}")) {
+             CallableStatement cs = conn.prepareCall(
+                 "{ ? = call PKG_PET_OPERATIONS.FN_PUT_PET_UP_FOR_ADOPTION(?, ?) }")) {
+
+            cs.registerOutParameter(1, Types.INTEGER);
+            cs.setInt(2, petId);
+            cs.setInt(3, ownerId);
+            cs.execute();
+
+            int result = cs.getInt(1);
+            if (result != 1) {
+                throw new SQLException("Pet not found, or this pet does not belong to this user.");
+            }
+        }
+    }
+    public void reportPetMissing(int petId, int ownerId) throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall("{call pr_report_pet_missing(?,?)}")) {
 
             cs.setInt(1, petId);
             cs.setInt(2, ownerId);
             cs.execute();
         }
     }
-
     public List<CatalogItem> getCatalog(String catalogName) throws SQLException {
         List<CatalogItem> items = new ArrayList<>();
         items.add(new CatalogItem(null, "Todos"));
