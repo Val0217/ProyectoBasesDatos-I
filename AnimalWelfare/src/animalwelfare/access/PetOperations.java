@@ -14,7 +14,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import java.sql.Types;
 import oracle.jdbc.OracleConnection;
-import oracle.jdbc.OracleTypeMetaData.Array;
+import java.sql.Array;
 
 public class PetOperations {
     
@@ -132,15 +132,15 @@ public class PetOperations {
             // Obtenemos la conexión de OracleConnection para poder crear los arreglos de SQL Array
             OracleConnection oracleConnection = con.unwrap(OracleConnection.class);
             // Convertimos las listas de IDs a arreglos de SQL Array
-            Array arrayIllness = (Array) oracleConnection.createOracleArray(
+            Array arrayIllness = oracleConnection.createOracleArray(
                 "NUMBERLIST",
                 illnessIds
             );
-            Array arrayTreatment = (Array) oracleConnection.createOracleArray(
+            Array arrayTreatment = oracleConnection.createOracleArray(
                 "NUMBERLIST",
                 treatmentIds
             );
-            Array arrayMedicine = (Array) oracleConnection.createOracleArray(
+            Array arrayMedicine = oracleConnection.createOracleArray(
                 "NUMBERLIST",
                 medicineIds
             );
