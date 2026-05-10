@@ -1909,7 +1909,7 @@ BEGIN --> aqui va el comando:
     COMMIT;
 END pr_insert_pet;
 /
-
+SHOW ERRORS PROCEDURE pr_insert_pet;
 
 
 /* ------------------------------------------------------------
