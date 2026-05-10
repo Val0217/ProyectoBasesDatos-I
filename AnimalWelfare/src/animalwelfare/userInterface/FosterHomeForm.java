@@ -2,9 +2,11 @@ package animalwelfare.userInterface;
 
 import animalwelfare.access.DbObject;
 import animalwelfare.access.FosterHomeOperations.FosterHomeData;
+import animalwelfare.access.PersonOperations;
 import animalwelfare.business.FosterHomeController;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -26,8 +28,7 @@ public class FosterHomeForm extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger =
         java.util.logging.Logger.getLogger(FosterHomeForm.class.getName());
 
-    // Controller — uncomment when BD is ready
-    // MOCK: private FosterHomeController controller;
+    private FosterHomeController controller = null;
 
     // -------------------------------------------------------------------------
     // Tab 1 — Register components
@@ -72,8 +73,9 @@ public class FosterHomeForm extends javax.swing.JFrame {
     // -------------------------------------------------------------------------
     public FosterHomeForm() {
         initComponents();
-        fillMockData();         // MOCK — replace with: controller = new FosterHomeController(this);
+        controller = new FosterHomeController(this);
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     // -------------------------------------------------------------------------
@@ -170,7 +172,7 @@ public class FosterHomeForm extends javax.swing.JFrame {
         btnContact = tealButton("CONTACT SELECTED");
         btnContact.addActionListener(e -> onContact());
         btnRefresh = grayButton("REFRESH");
-        btnRefresh.addActionListener(e -> loadFosterHomesMock()); // MOCK
+        btnRefresh.addActionListener(e -> loadFosterHomesRefresh()); // MOCK
 
         btnBar.add(btnContact);
         btnBar.add(btnRefresh);
@@ -281,20 +283,10 @@ public class FosterHomeForm extends javax.swing.JFrame {
         ArrayList<Integer> spaces  = getSelectedIds(checkSpaces);
         boolean needsDonation      = chkNeedsDonation.isSelected();
 
-        // MOCK — simulate registration
-        if (sizes.isEmpty() || energy.isEmpty() || spaces.isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                "Please select at least one option in each category.",
-                "Validation", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        JOptionPane.showMessageDialog(this,
-            "Foster home registered successfully! (MOCK)",
-            "Success", JOptionPane.INFORMATION_MESSAGE);
+        
         clearRegisterForm();
 
-        // REAL — replace with:
-        // controller.registerFosterHome(needsDonation, sizes, energy, spaces);
+        controller.registerFosterHome(needsDonation, sizes, energy, spaces);
     }
 
     private void onContact() {
@@ -305,12 +297,59 @@ public class FosterHomeForm extends javax.swing.JFrame {
                 "No Selection", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        // Get person name from column 1
-        String personName = tableFosterHomes.getValueAt(selectedRow, 1).toString();
-        JOptionPane.showMessageDialog(this,
-            "Contact information for: " + personName +
-            "\n\nIn the real version this would show their email and phone.",
-            "Contact Foster Home", JOptionPane.INFORMATION_MESSAGE);
+        // Get person name from column 2
+        String personName = tableFosterHomes.getValueAt(selectedRow, 2).toString();
+        String personId = tableFosterHomes.getValueAt(selectedRow, 1).toString();
+
+        ArrayList<String> phones = PersonOperations.getPersonPhones(Integer.parseInt(personId));
+        ArrayList<String> emails = PersonOperations.getPersonEmails(Integer.parseInt(personId));
+        
+        StringBuilder message =
+        new StringBuilder("<html>");
+
+        message.append("<h2>Contact Information</h2>");
+
+        message.append("<b>Person:</b> ").append(personName).append("<br><br>");
+
+        message.append("<b>Emails</b><br>");
+        if(emails.isEmpty()) {
+            message.append("No emails registered.<br>");
+
+        } else {
+
+            for(String email : emails) {
+
+                    message.append("• ")
+                    .append(email)
+                    .append("<br>");
+            }
+        }
+
+        message.append("<br>");
+
+        message.append("<b>Phones</b><br>");
+
+        if(phones.isEmpty()) {
+
+            message.append("No phones registered.<br>");
+
+        } else {
+
+            for(String phone : phones) {
+                message.append("• ")
+                .append(phone)
+                .append("<br>");
+            }
+        }
+
+        message.append("</html>");
+
+        JOptionPane.showMessageDialog(
+                this,
+                message.toString(),
+                "Contact Foster Home",
+                JOptionPane.INFORMATION_MESSAGE
+        );
     }
 
     private void onLoadMyFosterHome() {
@@ -331,47 +370,20 @@ public class FosterHomeForm extends javax.swing.JFrame {
             "Loaded", JOptionPane.INFORMATION_MESSAGE);
 
         // REAL — replace with:
-        // FosterHomeData data = controller.loadMyFosterHome();
-        // if (data != null) { loadEditForm(data); }
+        FosterHomeData data = controller.loadMyFosterHome();
+        if (data != null) { loadEditForm(data); }
     }
 
     private void onUpdate() {
-        ArrayList<Integer> sizes  = getSelectedIds(checkSizesEdit);
-        ArrayList<Integer> energy = getSelectedIds(checkEnergyEdit);
-        ArrayList<Integer> spaces = getSelectedIds(checkSpacesEdit);
-        boolean needsDonation     = chkNeedsDonationEdit.isSelected();
-
-        if (sizes.isEmpty() || energy.isEmpty() || spaces.isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                "Please select at least one option in each category.",
-                "Validation", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        // MOCK — simulate update
-        JOptionPane.showMessageDialog(this,
-            "Foster home updated successfully! (MOCK)",
-            "Success", JOptionPane.INFORMATION_MESSAGE);
-
-        // REAL — replace with:
-        // controller.updateFosterHome(currentFosterHomeId, needsDonation, sizes, energy, spaces);
+        ArrayList<Integer> sizes   = getSelectedIds(checkSizesEdit);
+        ArrayList<Integer> energy  = getSelectedIds(checkEnergyEdit);
+        ArrayList<Integer> spaces  = getSelectedIds(checkSpacesEdit);
+        boolean needsDonation      = chkNeedsDonationEdit.isSelected();
+        controller.updateFosterHome(currentFosterHomeId, needsDonation, sizes, energy, spaces);
     }
 
     private void onDelete() {
-        int confirm = JOptionPane.showConfirmDialog(this,
-            "Are you sure you want to remove yourself as a foster home?",
-            "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-
-        if (confirm != JOptionPane.YES_OPTION) return;
-
-        // MOCK — simulate delete
-        JOptionPane.showMessageDialog(this,
-            "Foster home removed successfully. (MOCK)",
-            "Success", JOptionPane.INFORMATION_MESSAGE);
-        clearEditForm();
-
-        // REAL — replace with:
-        // controller.deleteFosterHome(currentFosterHomeId);
+        controller.deleteFosterHome(currentFosterHomeId);
     }
 
     // -------------------------------------------------------------------------
@@ -401,6 +413,10 @@ public class FosterHomeForm extends javax.swing.JFrame {
             tableFosterHomes.getColumnModel().getColumn(0).setMinWidth(0);
             tableFosterHomes.getColumnModel().getColumn(0).setMaxWidth(0);
             tableFosterHomes.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+            tableFosterHomes.getColumnModel().getColumn(1).setMinWidth(0);
+            tableFosterHomes.getColumnModel().getColumn(1).setMaxWidth(0);
+            tableFosterHomes.getColumnModel().getColumn(1).setPreferredWidth(0);
         }
 
         labelCount.setText("Records: " + model.getRowCount());
@@ -425,55 +441,12 @@ public class FosterHomeForm extends javax.swing.JFrame {
         btnDelete.setEnabled(true);
     }
 
+
     // -------------------------------------------------------------------------
-    // MOCK data — replace when BD is ready
-    // -------------------------------------------------------------------------
+    // fill data
 
-    private void fillMockData() {
-        // Sizes
-        ArrayList<DbObject> sizes = new ArrayList<>();
-        sizes.add(new DbObject(1, "Small"));
-        sizes.add(new DbObject(2, "Medium"));
-        sizes.add(new DbObject(3, "Large"));
-        sizes.add(new DbObject(4, "Extra Large"));
-        fillSizes(sizes);
-
-        // Energy levels
-        ArrayList<DbObject> energy = new ArrayList<>();
-        energy.add(new DbObject(1, "Athletic"));
-        energy.add(new DbObject(2, "Runner"));
-        energy.add(new DbObject(3, "Walker"));
-        energy.add(new DbObject(4, "Couch potato"));
-        energy.add(new DbObject(5, "Not important"));
-        fillEnergyLevels(energy);
-
-        // Spaces
-        ArrayList<DbObject> spaces = new ArrayList<>();
-        spaces.add(new DbObject(1, "Apartment"));
-        spaces.add(new DbObject(2, "House without yard"));
-        spaces.add(new DbObject(3, "House with yard"));
-        spaces.add(new DbObject(4, "Farm"));
-        fillSpacesRequired(spaces);
-
-        // Table
-        loadFosterHomesMock();
-    }
-
-    private void loadFosterHomesMock() {
-        DefaultTableModel model = new DefaultTableModel(
-            new String[]{"ID", "Person", "Needs Donation",
-                         "Accepted Sizes", "Accepted Energy", "Accepted Spaces"}, 0
-        ) {
-            @Override
-            public boolean isCellEditable(int r, int c) { return false; }
-        };
-
-        model.addRow(new Object[]{1, "José Vargas",   "Yes", "Small, Medium",        "Walker, Couch potato", "Apartment"});
-        model.addRow(new Object[]{2, "Sofía Mena",    "No",  "Small, Medium, Large", "Athletic, Runner",     "House with yard"});
-        model.addRow(new Object[]{3, "Laura Pérez",   "Yes", "Small",                "Couch potato",         "House without yard"});
-        model.addRow(new Object[]{4, "Andrés Castro", "No",  "Large, Extra Large",   "Athletic",             "Farm"});
-
-        loadFosterHomes(model);
+    private void loadFosterHomesRefresh() {
+        controller.refreshTable();
     }
 
     // -------------------------------------------------------------------------

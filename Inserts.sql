@@ -195,8 +195,8 @@ INSERT INTO Adopter (Id, IdPerson) VALUES (2, 5);
 -- 7. CASAS CUNA
 -- -------------------------------------------------------------
 
-INSERT INTO FosterHome (Id, NeedsDonation, IdPerson) VALUES (1, 'Y', 3);
-INSERT INTO FosterHome (Id, NeedsDonation, IdPerson) VALUES (2, 'N', 6);
+INSERT INTO FosterHome (Id, NeedsDonation, IdPerson) VALUES (s_fosterhome.nextval, 'Y', 3);
+INSERT INTO FosterHome (Id, NeedsDonation, IdPerson) VALUES (s_fosterhome.nextval, 'N', 6);
 
 -- Tamaños aceptados por casa cuna
 INSERT INTO PetSizeXFosterHome (IdPetSize, IdFosterHome) VALUES (1, 1); -- pequeno
@@ -206,9 +206,9 @@ INSERT INTO PetSizeXFosterHome (IdPetSize, IdFosterHome) VALUES (2, 2);
 INSERT INTO PetSizeXFosterHome (IdPetSize, IdFosterHome) VALUES (3, 2);
 
 -- Nivel de energia aceptado por casa cuna
-INSERT INTO PetLevelEnergyXFosterHome (IdEnergy, IdFosterHome) VALUES (3, 1); -- caminador
-INSERT INTO PetLevelEnergyXFosterHome (IdEnergy, IdFosterHome) VALUES (4, 1); -- para ver TV
-INSERT INTO PetLevelEnergyXFosterHome (IdEnergy, IdFosterHome) VALUES (1, 2); -- atletico
+INSERT INTO PetLevelEnergyXFosterHome (IDPETLEVELENERGY, IdFosterHome) VALUES (3, 2); -- caminador
+INSERT INTO PetLevelEnergyXFosterHome (IDPETLEVELENERGY, IdFosterHome) VALUES (2, 2); -- para ver TV
+INSERT INTO PetLevelEnergyXFosterHome (IDPETLEVELENERGY, IdFosterHome) VALUES (1, 3); -- atletico
 
 -- Espacio requerido por casa cuna
 INSERT INTO SpaceRequiredXFosterHome (IdSpaceRequired, IdFosterHome) VALUES (2, 1);

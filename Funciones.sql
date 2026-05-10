@@ -1053,6 +1053,20 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE FUNCTION fn_get_email_by_person_id (
+    p_id_person IN NUMBER
+) RETURN SYS_REFCURSOR
+AS
+    pCursor SYS_REFCURSOR;
+BEGIN
+    OPEN pCursor FOR
+        SELECT Email
+        FROM Email
+        WHERE IdPerson = p_id_person;
+
+    RETURN pCursor;
+END;
+
 
 /* PHONE */
 CREATE OR REPLACE FUNCTION fn_get_phone_all
@@ -1069,6 +1083,26 @@ CREATE OR REPLACE FUNCTION fn_get_phone_by_id (
 IS
 BEGIN
     RETURN fn_get_by_id('Phone', p_id);
+END;
+/
+
+CREATE OR REPLACE FUNCTION fn_get_phone_by_person_id(
+    pIdPerson IN NUMBER
+)
+RETURN SYS_REFCURSOR
+IS
+    vCursor SYS_REFCURSOR;
+BEGIN
+
+    OPEN vCursor FOR
+        SELECT
+            Id,
+            Phone
+        FROM Phone
+        WHERE IdPerson = pIdPerson
+        ORDER BY Id;
+
+    RETURN vCursor;
 END;
 /
 

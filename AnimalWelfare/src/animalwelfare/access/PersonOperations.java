@@ -8,7 +8,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.CallableStatement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import oracle.jdbc.OracleTypes;
+import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import oracle.jdbc.OracleTypes;
 /**
  *
  * @author carlo
@@ -120,5 +127,59 @@ public class PersonOperations {
 
         return role;
     }
-    
+
+
+    public static ArrayList<String> getPersonPhones(int personId) {
+        ArrayList<String> phones = new ArrayList<>();
+
+        try (Connection con = ConexionOracle.connect();CallableStatement cs = con.prepareCall("{ ? = call fn_get_phone_by_person_id(?) }")) {
+
+            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+
+            cs.setInt(2, personId);
+
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
+
+                while (rs.next()) {
+                    phones.add(rs.getString("Phone"));
+                }
+
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
+
+        return phones;
+    }
+
+
+    public static ArrayList<String> getPersonEmails(int personId) {
+        ArrayList<String> emails = new ArrayList<>();
+
+        try (Connection con = ConexionOracle.connect();CallableStatement cs = con.prepareCall("{ ? = call fn_get_email_by_person_id(?) }")) {
+
+            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+
+            cs.setInt(2, personId);
+
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
+
+                while (rs.next()) {
+                    emails.add(rs.getString("Email"));
+                }
+
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
+
+            return emails;
+        }
+
 }

@@ -30,10 +30,7 @@ public class FosterHomeOperations {
      * @param spaceIds      Array of accepted SpaceRequired IDs
      * @return true if successful
      */
-    public static boolean insertFosterHome(int idPerson, String needsDonation,
-                                            Integer[] sizeIds,
-                                            Integer[] energyIds,
-                                            Integer[] spaceIds) {
+    public static boolean insertFosterHome(int idPerson, String needsDonation,Integer[] sizeIds,Integer[] energyIds, Integer[] spaceIds) {
         String call = "{ call pr_insert_foster_home(?, ?, ?, ?, ?) }";
 
         try (Connection con = ConexionOracle.connect();
@@ -84,6 +81,7 @@ public class FosterHomeOperations {
                 while (rs.next()) {
                     model.addRow(new Object[]{
                         rs.getInt("FosterHomeId"),
+                        rs.getInt("PersonId"),
                         rs.getString("PersonName"),
                         rs.getString("NeedsDonation").equals("Y") ? "Yes" : "No",
                         rs.getString("AcceptedSizes"),
@@ -146,11 +144,7 @@ public class FosterHomeOperations {
      * Updates the foster home of the given person.
      * Only the owner can update their own foster home.
      */
-    public static boolean updateFosterHome(int idFosterHome, int idPerson,
-                                            String needsDonation,
-                                            Integer[] sizeIds,
-                                            Integer[] energyIds,
-                                            Integer[] spaceIds) {
+    public static boolean updateFosterHome(int idFosterHome, int idPerson,String needsDonation,Integer[] sizeIds,Integer[] energyIds,Integer[] spaceIds) {
         String call = "{ call pr_update_foster_home(?, ?, ?, ?, ?, ?) }";
 
         try (Connection con = ConexionOracle.connect();

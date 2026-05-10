@@ -14,7 +14,7 @@ public class DonationOperations {
 
     // Column names for the donation query table
     private static final String[] COLUMNS = {
-        "ID", "Donor", "Association", "Amount", "Currency", "Date"
+        "ID", "PersonId", "Donor", "Association", "Amount", "Currency", "Date"
     };
 
     /**
@@ -80,6 +80,7 @@ public class DonationOperations {
                 while (rs.next()) {
                     model.addRow(new Object[]{
                         rs.getInt("Id"),
+                        rs.getInt("PersonId"),
                         rs.getString("DonorName"),
                         rs.getString("AssociationName"),
                         rs.getDouble("Amount"),

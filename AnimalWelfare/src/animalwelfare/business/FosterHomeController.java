@@ -3,6 +3,7 @@ package animalwelfare.business;
 import animalwelfare.access.DbObject;
 import animalwelfare.access.FosterHomeOperations;
 import animalwelfare.access.FosterHomeOperations.FosterHomeData;
+import animalwelfare.access.PersonOperations;
 import animalwelfare.security.Session;
 import animalwelfare.userInterface.FosterHomeForm;
 import java.util.ArrayList;
@@ -40,10 +41,7 @@ public class FosterHomeController {
      * @param spaceIds      selected space required IDs
      * @return true if successful
      */
-    public boolean registerFosterHome(boolean needsDonation,
-                                       ArrayList<Integer> sizeIds,
-                                       ArrayList<Integer> energyIds,
-                                       ArrayList<Integer> spaceIds) {
+    public boolean registerFosterHome(boolean needsDonation,ArrayList<Integer> sizeIds,ArrayList<Integer> energyIds,ArrayList<Integer> spaceIds) {
         int userId = Session.getInstance().getUserId();
 
         if (userId == 0) {
@@ -193,6 +191,17 @@ public class FosterHomeController {
         }
 
         return success;
+    }
+
+    // -------------------------------------------------------------------------
+    // EXTRA INFO (for contact details)
+    // -------------------------------------------------------------------------
+    public static ArrayList<String> getPersonEmails(int userId){
+        return (ArrayList<String>) PersonOperations.getPersonEmails(userId);
+    }
+
+    public static ArrayList<String> getPersonPhones(int userId){
+        return (ArrayList<String>) PersonOperations.getPersonPhones(userId);
     }
 
     // -------------------------------------------------------------------------

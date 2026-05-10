@@ -54,6 +54,7 @@ BEGIN
     OPEN p_cursor FOR
         SELECT
             fh.Id                                    AS FosterHomeId,
+            per.Id                                   AS PersonId,
             per.FirstName || ' ' || per.LastName     AS PersonName,
             fh.NeedsDonation,
             -- Accepted sizes as comma-separated string
