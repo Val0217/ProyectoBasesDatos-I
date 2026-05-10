@@ -1065,7 +1065,7 @@ BEGIN
 
     RETURN pCursor;
 END;
-
+/
 
 /* PHONE */
 CREATE OR REPLACE FUNCTION fn_get_phone_all
