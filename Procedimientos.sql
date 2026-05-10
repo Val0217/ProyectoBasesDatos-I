@@ -3,17 +3,28 @@
    Descripcion: 
    
    ------------------------------------------------------------ */
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE Adoption DROP CONSTRAINT chk_Adoption_State';
+EXCEPTION
+    WHEN OTHERS THEN
+        IF SQLCODE != -2443 THEN
+            RAISE;
+        END IF;
+END;
+/
 
 UPDATE Adoption
    SET State = CASE
-       WHEN UPPER(State) IN ('IN PROCESS', 'IN PROGRESS', 'EN ADOPCION') THEN 'In process'
-       WHEN UPPER(State) IN ('TO BE CONFIRMED') THEN 'To be confirmed'
-       WHEN UPPER(State) IN ('CANCELED', 'CANCELLED', 'CANCELADO') THEN 'Canceled'
-       WHEN UPPER(State) IN ('APPROVED', 'ADOPTED', 'ADOPTADO') THEN 'Approved'
+       WHEN UPPER(TRIM(State)) IN ('IN PROCESS', 'IN PROGRESS', 'EN ADOPCION', 'EN ADOPCIÓN') THEN 'In process'
+       WHEN UPPER(TRIM(State)) IN ('TO BE CONFIRMED', 'TO CONFIRM', 'PENDING CONFIRMATION') THEN 'To be confirmed'
+       WHEN UPPER(TRIM(State)) IN ('CANCELED', 'CANCELLED', 'CANCELADO', 'CANCELADA') THEN 'Canceled'
+       WHEN UPPER(TRIM(State)) IN ('APPROVED', 'ADOPTED', 'ADOPTADO', 'ADOPTADA') THEN 'Approved'
        ELSE State
    END;
+
 COMMIT;
 
+-- Crear el constraint correcto
 ALTER TABLE Adoption ADD CONSTRAINT chk_Adoption_State
     CHECK (State IN ('In process', 'To be confirmed', 'Canceled', 'Approved'));
 
@@ -732,44 +743,38 @@ IS
 BEGIN
     OPEN p_result FOR
         SELECT
-            v.PetId,
-            v.PetName,
-            v.Color,
-            v.Age,
-            v.Chip,
-            v.Energy,
-            v.PetState,
-            v.PetType,
-            v.Breed,
-            v.District,
-            v.SpaceRequired,
-            v.Training,
-            v.PetSize,
-            v.VeterinarianName
-        FROM VW_USER_PET_TABLE v
-        WHERE v.IdState = 1
-          AND EXISTS (
-              SELECT 1
-                FROM Adoption a
-               WHERE a.IdPet = v.PetId
-                 AND a.State = 'In process'
-          )
-          AND (p_id_energy IS NULL OR v.IdEnergy = p_id_energy)
-          AND (p_id_type IS NULL OR v.IdType = p_id_type)
-          AND (p_id_breed IS NULL OR v.IdBreed = p_id_breed)
-          AND (p_id_district IS NULL OR v.IdDistrict = p_id_district)
-          AND (p_id_country IS NULL OR v.IdCountry = p_id_country)
-          AND (p_id_province IS NULL OR v.IdProvince = p_id_province)
-          AND (p_id_canton IS NULL OR v.IdCanton = p_id_canton)
-          AND (p_id_space IS NULL OR v.IdSpace = p_id_space)
-          AND (p_id_training IS NULL OR v.IdPetTraining = p_id_training)
-          AND (p_id_size IS NULL OR v.IdSize = p_id_size)
-          AND (p_id_veterinarian IS NULL OR v.IdVeterinarian = p_id_veterinarian)
-          AND (p_color IS NULL OR UPPER(v.Color) LIKE '%' || UPPER(p_color) || '%')
-          AND (p_age IS NULL OR v.Age = p_age)
-          AND (p_name IS NULL OR UPPER(v.PetName) LIKE '%' || UPPER(p_name) || '%')
-          AND (p_chip IS NULL OR UPPER(v.Chip) LIKE '%' || UPPER(p_chip) || '%')
-        ORDER BY v.PetName;
+            PetId,
+            PetName,
+            Color,
+            Age,
+            Chip,
+            Energy,
+            PetState,
+            PetType,
+            Breed,
+            District,
+            SpaceRequired,
+            Training,
+            PetSize,
+            VeterinarianName
+        FROM VW_USER_PET_TABLE
+        WHERE IdState = 1
+          AND (p_id_energy IS NULL OR IdEnergy = p_id_energy)
+          AND (p_id_type IS NULL OR IdType = p_id_type)
+          AND (p_id_breed IS NULL OR IdBreed = p_id_breed)
+          AND (p_id_district IS NULL OR IdDistrict = p_id_district)
+          AND (p_id_country IS NULL OR IdCountry = p_id_country)
+          AND (p_id_province IS NULL OR IdProvince = p_id_province)
+          AND (p_id_canton IS NULL OR IdCanton = p_id_canton)
+          AND (p_id_space IS NULL OR IdSpace = p_id_space)
+          AND (p_id_training IS NULL OR IdPetTraining = p_id_training)
+          AND (p_id_size IS NULL OR IdSize = p_id_size)
+          AND (p_id_veterinarian IS NULL OR IdVeterinarian = p_id_veterinarian)
+          AND (p_color IS NULL OR UPPER(Color) LIKE '%' || UPPER(p_color) || '%')
+          AND (p_age IS NULL OR Age = p_age)
+          AND (p_name IS NULL OR UPPER(PetName) LIKE '%' || UPPER(p_name) || '%')
+          AND (p_chip IS NULL OR UPPER(Chip) LIKE '%' || UPPER(p_chip) || '%')
+        ORDER BY PetName;
 END;
 /
 SHOW ERRORS PROCEDURE pr_get_adoption_pet_table;

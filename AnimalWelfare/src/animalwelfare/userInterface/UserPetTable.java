@@ -756,33 +756,46 @@ private String nullToEmpty(String text) {
     }//GEN-LAST:event_jButtonEditPetActionPerformed
 
     private void jButtonReportMissingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReportMissingActionPerformed
-                    try {
-                int option = JOptionPane.showConfirmDialog(
-                    this,
-                    "Do you want to report this pet as missing?",
-                    "Report missing pet",
-                    JOptionPane.YES_NO_OPTION
-                );
-
-                if (option != JOptionPane.YES_OPTION) {
-                    return;
-                }
-
-                controller.reportSelectedPetMissing(jTable1);
-
+        try {
+            if (isMissingState(getSelectedPetStateFromTable())) {
                 JOptionPane.showMessageDialog(
                     this,
-                    "Pet was reported as missing."
+                    "This pet is already reported as missing."
                 );
-
-                loadTables();
-                jButtonUndoAdoption.setVisible(false);
-                jButtonEditPet.setEnabled(false);
                 jButtonReportMissing.setEnabled(false);
-
-            } catch (SQLException ex) {
-                showError(ex);
+                return;
             }
+
+            int option = JOptionPane.showConfirmDialog(
+                this,
+                "Do you want to report this pet as missing?",
+                "Report missing pet",
+                JOptionPane.YES_NO_OPTION
+            );
+
+            if (option != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            jButtonReportMissing.setEnabled(false);
+
+            controller.reportSelectedPetMissing(jTable1);
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Pet was reported as missing."
+            );
+
+            loadTables();
+            jTable1.clearSelection();
+            jButtonUndoAdoption.setVisible(false);
+            jButtonEditPet.setEnabled(false);
+            jButtonReportMissing.setEnabled(false);
+
+        } catch (SQLException ex) {
+            showError(ex);
+            updateReportMissingButtonState();
+        }
     }//GEN-LAST:event_jButtonReportMissingActionPerformed
 
     /**
