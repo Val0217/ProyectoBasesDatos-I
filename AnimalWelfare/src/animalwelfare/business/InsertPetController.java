@@ -184,23 +184,23 @@ public class InsertPetController {
         view.fillPetSize(PetSizeOperations.listPetSize());
         view.fillVeterinarian(PetVeterinarianOperations.listPetVeterinarian());
     }
-public boolean UpdatePetForOwner(
-            int petId,
-            int ownerId,
-            String color,
-            int age,
-            String description,
-            String petName,
-            String chip,
-            int idEnergy,
-            int idType,
-            Integer idBreed,
-            int idDistrict,
-            int idSpaceRequired,
-            int idPetTraining,
-            int idPetSize,
-            int idVeterinarian
-    ) throws SQLException {
+        public boolean UpdatePetForOwner(
+                int petId,
+                int ownerId,
+                String color,
+                int age,
+                String description,
+                String petName,
+                String chip,
+                int idEnergy,
+                int idType,
+                Integer idBreed,
+                int idDistrict,
+                int idSpaceRequired,
+                int idPetTraining,
+                int idPetSize,
+                int idVeterinarian
+        ) throws SQLException {
 
         boolean success = PetOperations.UpdatePetForOwner(
                 petId,

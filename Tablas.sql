@@ -111,7 +111,7 @@ CREATE TABLE Veterinarian (
     FirstName VARCHAR2(25),
     LastName VARCHAR2(25),
     Location VARCHAR2(100), -- Agregar Distrito
-    IdDristrict NUMBER(8),
+    IdDistrict NUMBER(8),
     Phone NUMBER(8),
     Name VARCHAR2(50)
 );

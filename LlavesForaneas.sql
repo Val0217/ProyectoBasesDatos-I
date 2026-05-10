@@ -44,6 +44,8 @@ ALTER TABLE Pet ADD CONSTRAINT fk_Pet_Person FOREIGN KEY (IdOwner) REFERENCES Pe
 
 ALTER TABLE Pet ADD CONSTRAINT fk_Pet_Veterinarian FOREIGN KEY (IdVeterinarian) REFERENCES Veterinarian(Id);
 
+ALTER TABLE Veterinarian ADD CONSTRAINT fk_Veterinarian_District FOREIGN KEY (IdDistrict) REFERENCES District(Id);
+
 ALTER TABLE PetBreed ADD CONSTRAINT fk_PetBreed_PetType FOREIGN KEY (IdType) REFERENCES PetType(Id);
 
 ALTER TABLE District ADD CONSTRAINT fk_District_Canton FOREIGN KEY (IdCanton) REFERENCES Canton(Id);
