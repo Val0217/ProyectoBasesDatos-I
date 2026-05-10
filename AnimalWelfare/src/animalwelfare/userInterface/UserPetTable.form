@@ -380,9 +380,9 @@
                   <Component id="jScrollPane5" alignment="0" pref="891" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton4" min="-2" pref="171" max="-2" attributes="0"/>
+                      <Component id="jButtonAcceptAdopt" min="-2" pref="171" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton5" min="-2" pref="158" max="-2" attributes="0"/>
+                      <Component id="jButtonRejectAdopt" min="-2" pref="158" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -393,8 +393,8 @@
                       <Component id="jScrollPane5" min="-2" pref="400" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonAcceptAdopt" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonRejectAdopt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="32" max="32767" attributes="0"/>
                   </Group>
@@ -420,15 +420,21 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButton4">
+            <Component class="javax.swing.JButton" name="jButtonAcceptAdopt">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Accept"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAcceptAdoptActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton5">
+            <Component class="javax.swing.JButton" name="jButtonRejectAdopt">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reject"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRejectAdoptActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

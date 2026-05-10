@@ -236,4 +236,111 @@ public class UserPetOperations {
             cs.execute();
         }
     }
+    
+public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall("{call pr_get_adoption_requests_owner(?,?)}")) {
+
+            cs.setInt(1, ownerId);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
+                return buildAdoptionRequestTableModel(rs);
+            }
+        }
+    }
+
+    public void createAdoptionRequest(int petId, int adopterId, String description) throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall("{call pr_create_adoption_request(?,?,?,?)}")) {
+
+            cs.setInt(1, petId);
+            cs.setInt(2, adopterId);
+            setNullableString(cs, 3, description);
+            cs.registerOutParameter(4, Types.NUMERIC);
+            cs.execute();
+        }
+    }
+
+    public void acceptAdoptionRequest(int adoptionId, int ownerId) throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall("{call pr_accept_adoption_request(?,?)}")) {
+
+            cs.setInt(1, adoptionId);
+            cs.setInt(2, ownerId);
+            cs.execute();
+        }
+    }
+
+    public void rejectAdoptionRequest(int adoptionId, int ownerId) throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall("{call pr_reject_adoption_request(?,?)}")) {
+
+            cs.setInt(1, adoptionId);
+            cs.setInt(2, ownerId);
+            cs.execute();
+        }
+    }
+
+    public void registerLostReportForOwner(int petId, int ownerId, java.sql.Date lostDate,
+                                           String place, String description,
+                                           java.math.BigDecimal reward, int currencyId) throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall("{call pr_register_lost_for_owner(?,?,?,?,?,?,?,?)}")) {
+
+            cs.setInt(1, petId);
+            cs.setInt(2, ownerId);
+            cs.setDate(3, lostDate);
+            setNullableString(cs, 4, place);
+            setNullableString(cs, 5, description);
+            if (reward == null) {
+                cs.setNull(6, Types.NUMERIC);
+            } else {
+                cs.setBigDecimal(6, reward);
+            }
+            cs.setInt(7, currencyId);
+            cs.registerOutParameter(8, Types.NUMERIC);
+            cs.execute();
+        }
+    }
+
+    private DefaultTableModel buildAdoptionRequestTableModel(ResultSet rs) throws SQLException {
+        String[] columns = {
+            "AdoptionId",
+            "PetId",
+            "AdopterId",
+            "Pet Name",
+            "Adoption Description",
+            "First Name",
+            "Last Name",
+            "Phone",
+            "Email",
+            "State"
+        };
+
+        DefaultTableModel model = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        while (rs.next()) {
+            model.addRow(new Object[] {
+                rs.getInt("AdoptionId"),
+                rs.getInt("PetId"),
+                rs.getInt("AdopterId"),
+                rs.getString("PetName"),
+                rs.getString("AdoptionDescription"),
+                rs.getString("FirstName"),
+                rs.getString("LastName"),
+                rs.getString("Phone"),
+                rs.getString("Email"),
+                rs.getString("AdoptionState")
+            });
+        }
+
+        return model;
+    }
 }

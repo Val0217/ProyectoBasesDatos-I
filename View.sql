@@ -1,3 +1,34 @@
+CREATE OR REPLACE VIEW vw_adoption_request_table AS
+    SELECT
+        a.Id AS AdoptionId,
+        a.IdPet AS PetId,
+        a.IdAdopter AS AdopterId,
+        p.Name AS PetName,
+        a.Description AS AdoptionDescription,
+        adopter.FirstName AS FirstName,
+        adopter.LastName AS LastName,
+        (
+            SELECT TO_CHAR(MIN(ph.Phone))
+              FROM Phone ph
+             WHERE ph.IdPerson = adopter.Id
+        ) AS Phone,
+        (
+            SELECT MIN(em.Email)
+              FROM Email em
+             WHERE em.IdPerson = adopter.Id
+        ) AS Email,
+        a.State AS AdoptionState,
+        a.IdOwner AS OwnerId
+    FROM Adoption a
+    INNER JOIN Pet p
+            ON p.Id = a.IdPet
+    INNER JOIN Person adopter
+            ON adopter.Id = a.IdAdopter;
+    /
+    SHOW ERRORS VIEW vw_adoption_request_table;
+    
+
+
 CREATE OR REPLACE VIEW VW_TABLE_ADOPTION AS
 SELECT
     p.Id AS PetId,

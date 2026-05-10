@@ -1,3 +1,233 @@
+CREATE OR REPLACE PROCEDURE pr_reject_adoption_request (
+    p_adoption_id IN NUMBER,
+    p_owner_id    IN NUMBER
+)
+IS
+BEGIN
+    UPDATE Adoption
+       SET State = 'Canceled'
+     WHERE Id = p_adoption_id
+       AND IdOwner = p_owner_id
+       AND State = 'To be confirmed';
+
+    IF SQL%ROWCOUNT = 0 THEN
+        RAISE_APPLICATION_ERROR(-20107, 'Pending adoption request not found for this owner.');
+    END IF;
+
+    COMMIT;
+END;
+/
+SHOW ERRORS PROCEDURE pr_reject_adoption_request;
+
+CREATE OR REPLACE PROCEDURE pr_register_lost_for_owner (
+    p_pet_id      IN NUMBER,
+    p_owner_id    IN NUMBER,
+    p_lost_date   IN DATE,
+    p_place       IN VARCHAR2,
+    p_description IN VARCHAR2,
+    p_reward      IN NUMBER,
+    p_currency_id IN NUMBER,
+    p_new_id      OUT NUMBER
+)
+IS
+    v_district_id Pet.IdDistrict%TYPE;
+BEGIN
+    SELECT IdDistrict
+      INTO v_district_id
+      FROM Pet
+     WHERE Id = p_pet_id
+       AND IdOwner = p_owner_id;
+
+    p_new_id := fn_next_id('LostReport');
+
+    INSERT INTO LostReport (
+        Id,
+        LostDate,
+        Place,
+        Description,
+        Reward,
+        State,
+        IdPet,
+        IdDistrict,
+        IdCurrency
+    ) VALUES (
+        p_new_id,
+        p_lost_date,
+        SUBSTR(p_place, 1, 100),
+        SUBSTR(p_description, 1, 100),
+        p_reward,
+        'Lost',
+        p_pet_id,
+        v_district_id,
+        p_currency_id
+    );
+
+    UPDATE Pet
+       SET IdState = 3
+     WHERE Id = p_pet_id
+       AND IdOwner = p_owner_id;
+
+    UPDATE Adoption
+       SET State = 'Canceled'
+     WHERE IdPet = p_pet_id
+       AND State IN ('In process', 'To be confirmed');
+
+    COMMIT;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RAISE_APPLICATION_ERROR(-20108, 'Pet not found, or this pet does not belong to this user.');
+END;
+/
+SHOW ERRORS PROCEDURE PR_REGISTER_LOST_FOR_OWNER;
+
+
+CREATE OR REPLACE PROCEDURE pr_accept_adoption_request (
+    p_adoption_id IN NUMBER,
+    p_owner_id    IN NUMBER
+)
+IS
+    v_pet_id     Adoption.IdPet%TYPE;
+    v_adopter_id Adoption.IdAdopter%TYPE;
+    v_role_count NUMBER;
+BEGIN
+    SELECT IdPet, IdAdopter
+      INTO v_pet_id, v_adopter_id
+      FROM Adoption
+     WHERE Id = p_adoption_id
+       AND IdOwner = p_owner_id
+       AND State = 'To be confirmed'
+     FOR UPDATE;
+
+    UPDATE Pet
+       SET IdOwner = v_adopter_id,
+           IdState = 2
+     WHERE Id = v_pet_id
+       AND IdOwner = p_owner_id;
+
+    IF SQL%ROWCOUNT = 0 THEN
+        RAISE_APPLICATION_ERROR(-20105, 'The pet was not found for this owner.');
+    END IF;
+
+    UPDATE Adoption
+       SET State = 'Approved',
+           AdoptionDate = SYSDATE
+     WHERE Id = p_adoption_id;
+
+    UPDATE Adoption
+       SET State = 'Canceled'
+     WHERE IdPet = v_pet_id
+       AND Id <> p_adoption_id
+       AND State = 'To be confirmed';
+
+    SELECT COUNT(*)
+      INTO v_role_count
+      FROM Adopter
+     WHERE IdPerson = v_adopter_id;
+
+    IF v_role_count = 0 THEN
+        INSERT INTO Adopter (Id, IdPerson)
+        VALUES (fn_next_id('Adopter'), v_adopter_id);
+    END IF;
+
+    COMMIT;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RAISE_APPLICATION_ERROR(-20106, 'Pending adoption request not found for this owner.');
+END;
+/
+SHOW ERRORS PROCEDURE pr_accept_adoption_request;
+
+CREATE OR REPLACE PROCEDURE pr_create_adoption_request (
+    p_pet_id      IN NUMBER,
+    p_adopter_id  IN NUMBER,
+    p_description IN VARCHAR2,
+    p_new_id      OUT NUMBER
+)
+IS
+    v_owner_id       Pet.IdOwner%TYPE;
+    v_state_id       Pet.IdState%TYPE;
+    v_existing_count NUMBER;
+BEGIN
+    SELECT IdOwner, IdState
+      INTO v_owner_id, v_state_id
+      FROM Pet
+     WHERE Id = p_pet_id;
+
+    IF v_owner_id = p_adopter_id THEN
+        RAISE_APPLICATION_ERROR(-20101, 'You cannot request to adopt your own pet.');
+    END IF;
+
+    IF v_state_id <> 1 THEN
+        RAISE_APPLICATION_ERROR(-20102, 'This pet is not available for adoption.');
+    END IF;
+
+    SELECT COUNT(*)
+      INTO v_existing_count
+      FROM Adoption
+     WHERE IdPet = p_pet_id
+       AND IdAdopter = p_adopter_id
+       AND State = 'To be confirmed';
+
+    IF v_existing_count > 0 THEN
+        RAISE_APPLICATION_ERROR(-20103, 'You already have a pending adoption request for this pet.');
+    END IF;
+
+    p_new_id := fn_next_id('Adoption');
+
+    INSERT INTO Adoption (
+        Id,
+        AdoptionDate,
+        AvailableDate,
+        Description,
+        State,
+        IdPet,
+        IdAdopter,
+        IdOwner
+    ) VALUES (
+        p_new_id,
+        NULL,
+        SYSDATE,
+        SUBSTR(p_description, 1, 100),
+        'To be confirmed',
+        p_pet_id,
+        p_adopter_id,
+        v_owner_id
+    );
+
+    COMMIT;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RAISE_APPLICATION_ERROR(-20104, 'Pet not found.');
+END;
+/
+SHOW ERRORS PROCEDURE pr_create_adoption_request;
+
+CREATE OR REPLACE PROCEDURE pr_get_adoption_requests_owner (
+    p_owner_id IN NUMBER,
+    p_result   OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_result FOR
+        SELECT
+            AdoptionId,
+            PetId,
+            AdopterId,
+            PetName,
+            AdoptionDescription,
+            FirstName,
+            LastName,
+            Phone,
+            Email,
+            AdoptionState
+        FROM vw_adoption_request_table
+        WHERE OwnerId = p_owner_id
+          AND AdoptionState = 'To be confirmed'
+        ORDER BY PetName, AdoptionId;
+END;
+/
+
+
 /* ------------------------------------------------------------
    Procedimiento: COSAS DE PONER EN ADOPCION Y MISSING STATE
    Descripcion: 
@@ -673,23 +903,16 @@ BEGIN
 
     ELSIF UPPER(p_catalog_name) = 'DISTRICT' THEN
         OPEN p_result FOR SELECT Id, Name FROM District ORDER BY Name;
+
     ELSIF UPPER(p_catalog_name) = 'COUNTRY' THEN
-        OPEN p_result FOR
-            SELECT Id, Name
-            FROM Country
-            ORDER BY Name;
-    
+        OPEN p_result FOR SELECT Id, Name FROM Country ORDER BY Name;
+
     ELSIF UPPER(p_catalog_name) = 'PROVINCE' THEN
-        OPEN p_result FOR
-            SELECT Id, Name
-            FROM Province
-            ORDER BY Name;
-    
+        OPEN p_result FOR SELECT Id, Name FROM Province ORDER BY Name;
+
     ELSIF UPPER(p_catalog_name) = 'CANTON' THEN
-        OPEN p_result FOR
-            SELECT Id, Name
-            FROM Canton
-            ORDER BY Name;
+        OPEN p_result FOR SELECT Id, Name FROM Canton ORDER BY Name;
+
     ELSIF UPPER(p_catalog_name) = 'SPACE' THEN
         OPEN p_result FOR SELECT Id, Name FROM SpaceRequired ORDER BY Name;
 
@@ -701,14 +924,13 @@ BEGIN
 
     ELSIF UPPER(p_catalog_name) = 'VETERINARIAN' THEN
         OPEN p_result FOR
-            SELECT
-                Id,
-                CASE
-                    WHEN Name IS NOT NULL THEN Name
-                    ELSE FirstName || ' ' || LastName
-                END AS Name
-            FROM Veterinarian
-            ORDER BY Name;
+            SELECT Id,
+                   CASE WHEN Name IS NOT NULL THEN Name ELSE FirstName || ' ' || LastName END AS Name
+              FROM Veterinarian
+             ORDER BY Name;
+
+    ELSIF UPPER(p_catalog_name) = 'CURRENCY' THEN
+        OPEN p_result FOR SELECT Id, Name FROM Currency ORDER BY Name;
 
     ELSE
         RAISE_APPLICATION_ERROR(-20002, 'Invalid catalog name.');

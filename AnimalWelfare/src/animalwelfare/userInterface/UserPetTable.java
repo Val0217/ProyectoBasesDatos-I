@@ -51,13 +51,17 @@ public class UserPetTable extends javax.swing.JFrame {
     private void prepareTables() {
         jTable1.setDefaultEditor(Object.class, null);
         jTable2.setDefaultEditor(Object.class, null);
+        jTable5.setDefaultEditor(Object.class, null);
 
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable2.getTableHeader().setReorderingAllowed(false);
+        jTable5.getTableHeader().setReorderingAllowed(false);
 
-        jButtonAdopt.setEnabled(false); //Boton de adoptar no hace nada  
+        jButtonAdopt.setEnabled(false);
         jButtonEditPet.setEnabled(false);
-        jButtonReportMissing.setEnabled(false); // Report Missing button
+        jButtonReportMissing.setEnabled(false);
+        jButtonAcceptAdopt.setEnabled(false);
+        jButtonRejectAdopt.setEnabled(false);
         jButtonUndoAdoption.setVisible(false);
     }
     private void addTableSelectionListeners() {
@@ -68,6 +72,27 @@ public class UserPetTable extends javax.swing.JFrame {
                 updateReportMissingButtonState();
             }
         });
+
+        jTable2.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting()) {
+                updateAdoptButtonState();
+            }
+        });
+
+        jTable5.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting()) {
+                updateAdoptionDecisionButtonsState();
+            }
+        });
+    }
+    private void updateAdoptButtonState() {
+        jButtonAdopt.setEnabled(jTable2.getSelectedRow() >= 0);
+    }
+
+    private void updateAdoptionDecisionButtonsState() {
+        boolean hasSelection = jTable5.getSelectedRow() >= 0;
+        jButtonAcceptAdopt.setEnabled(hasSelection);
+        jButtonRejectAdopt.setEnabled(hasSelection);
     }
     private void updateEditPetButtonState() {
         jButtonEditPet.setEnabled(jTable1.getSelectedRow() >= 0);
@@ -117,6 +142,22 @@ public class UserPetTable extends javax.swing.JFrame {
         loadTables();
         jButtonEditPet.setEnabled(false);
         jButtonUndoAdoption.setVisible(false);
+        jButtonAdopt.setEnabled(false);
+        updateAdoptionDecisionButtonsState();
+    }
+
+    public void refreshAfterAdoptionRequest() {
+        loadTables();
+        jTable2.clearSelection();
+        jButtonAdopt.setEnabled(false);
+    }
+
+    public void refreshAfterLostReport() {
+        loadTables();
+        jTable1.clearSelection();
+        jButtonUndoAdoption.setVisible(false);
+        jButtonEditPet.setEnabled(false);
+        jButtonReportMissing.setEnabled(false);
     }
 
     private int getSelectedPetIdFromTable() {
@@ -188,6 +229,7 @@ public class UserPetTable extends javax.swing.JFrame {
         try {
             controller.loadUserPets(jTable1, filterPanel1);
             controller.loadAdoptionPets(jTable2, filterPanel2);
+            controller.loadAdoptionRequests(jTable5);
         } catch (SQLException ex) {
             showError(ex);
         }
@@ -213,7 +255,7 @@ public class UserPetTable extends javax.swing.JFrame {
             "Error",
             JOptionPane.ERROR_MESSAGE
         );
-    }
+    }   
     
 //Combox Funcion para que salga un mini menu como estilo popup
 private PetFilter showFilterDialog(PetFilter currentFilter) throws SQLException {
@@ -396,8 +438,8 @@ private String nullToEmpty(String text) {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jButtonAcceptAdopt = new javax.swing.JButton();
+        jButtonRejectAdopt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -610,9 +652,11 @@ private String nullToEmpty(String text) {
         ));
         jScrollPane5.setViewportView(jTable5);
 
-        jButton4.setText("Accept");
+        jButtonAcceptAdopt.setText("Accept");
+        jButtonAcceptAdopt.addActionListener(this::jButtonAcceptAdoptActionPerformed);
 
-        jButton5.setText("Reject");
+        jButtonRejectAdopt.setText("Reject");
+        jButtonRejectAdopt.addActionListener(this::jButtonRejectAdoptActionPerformed);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -621,9 +665,9 @@ private String nullToEmpty(String text) {
             .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 891, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonAcceptAdopt, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonRejectAdopt, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -632,8 +676,8 @@ private String nullToEmpty(String text) {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(jButtonAcceptAdopt)
+                    .addComponent(jButtonRejectAdopt))
                 .addGap(0, 32, Short.MAX_VALUE))
         );
 
@@ -674,10 +718,13 @@ private String nullToEmpty(String text) {
     }//GEN-LAST:event_jButtonFilter2ActionPerformed
 
     private void jButtonAdoptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdoptActionPerformed
-            JOptionPane.showMessageDialog(
-                this,
-                "Adopt function is not available yet."
-            );
+        try {
+            int petId = controller.getSelectedPetIdFromTable(jTable2);
+            AdoptForm adoptForm = new AdoptForm(petId, currentUserId, this);
+            adoptForm.setVisible(true);
+        } catch (SQLException ex) {
+            showError(ex);
+        }
     }//GEN-LAST:event_jButtonAdoptActionPerformed
 
     private void jButtonCleanFilter1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanFilter1ActionPerformed
@@ -766,10 +813,22 @@ private String nullToEmpty(String text) {
                 return;
             }
 
+            int petId = getSelectedPetIdFromTable();
+            LostForm lostForm = new LostForm(petId, currentUserId, this);
+            lostForm.setVisible(true);
+
+        } catch (Exception ex) {
+            showError(ex);
+            updateReportMissingButtonState();
+        }
+    }//GEN-LAST:event_jButtonReportMissingActionPerformed
+
+    private void jButtonAcceptAdoptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcceptAdoptActionPerformed
+        try {
             int option = JOptionPane.showConfirmDialog(
                 this,
-                "Do you want to report this pet as missing?",
-                "Report missing pet",
+                "Do you want to accept this adoption request?",
+                "Accept adoption",
                 JOptionPane.YES_NO_OPTION
             );
 
@@ -777,26 +836,38 @@ private String nullToEmpty(String text) {
                 return;
             }
 
-            jButtonReportMissing.setEnabled(false);
-
-            controller.reportSelectedPetMissing(jTable1);
-
-            JOptionPane.showMessageDialog(
-                this,
-                "Pet was reported as missing."
-            );
-
+            controller.acceptSelectedAdoptionRequest(jTable5);
+            JOptionPane.showMessageDialog(this, "Adoption accepted. The pet ownership was transferred.");
             loadTables();
-            jTable1.clearSelection();
-            jButtonUndoAdoption.setVisible(false);
-            jButtonEditPet.setEnabled(false);
-            jButtonReportMissing.setEnabled(false);
-
+            jTable5.clearSelection();
+            updateAdoptionDecisionButtonsState();
         } catch (SQLException ex) {
             showError(ex);
-            updateReportMissingButtonState();
         }
-    }//GEN-LAST:event_jButtonReportMissingActionPerformed
+    }//GEN-LAST:event_jButtonAcceptAdoptActionPerformed
+
+    private void jButtonRejectAdoptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRejectAdoptActionPerformed
+        try {
+            int option = JOptionPane.showConfirmDialog(
+                this,
+                "Do you want to reject this adoption request?",
+                "Reject adoption",
+                JOptionPane.YES_NO_OPTION
+            );
+
+            if (option != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            controller.rejectSelectedAdoptionRequest(jTable5);
+            JOptionPane.showMessageDialog(this, "Adoption request rejected.");
+            loadTables();
+            jTable5.clearSelection();
+            updateAdoptionDecisionButtonsState();
+        } catch (SQLException ex) {
+            showError(ex);
+        }
+    }//GEN-LAST:event_jButtonRejectAdoptActionPerformed
 
     /**
      * @param args the command line arguments
@@ -826,8 +897,7 @@ private String nullToEmpty(String text) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonAcceptAdopt;
     private javax.swing.JButton jButtonAdopt;
     private javax.swing.JButton jButtonCleanFilter1;
     private javax.swing.JButton jButtonCleanFilter2;
@@ -835,6 +905,7 @@ private String nullToEmpty(String text) {
     private javax.swing.JButton jButtonFilter1;
     private javax.swing.JButton jButtonFilter2;
     private javax.swing.JButton jButtonPutAdopt;
+    private javax.swing.JButton jButtonRejectAdopt;
     private javax.swing.JButton jButtonReportMissing;
     private javax.swing.JButton jButtonUndoAdoption;
     private javax.swing.JPanel jPanel1;
