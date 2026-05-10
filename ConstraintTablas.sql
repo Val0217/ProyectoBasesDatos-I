@@ -99,8 +99,8 @@ ALTER TABLE Pet ADD CONSTRAINT chk_Pet_Age
 -- -------------------------------------------------------------
 
 ALTER TABLE PetPhoto MODIFY (
-    Photo             NOT NULL,
-    IdPet NUMBER(8)   NOT NULL
+    Photo VARCHAR2(255) NOT NULL,
+    IdPet NUMBER(8)     NOT NULL
 );
 
 -- -------------------------------------------------------------

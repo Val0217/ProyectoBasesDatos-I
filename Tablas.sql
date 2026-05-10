@@ -44,7 +44,7 @@ CREATE TABLE PetTraining (
 
 CREATE TABLE PetPhoto (
     Id NUMBER(8),
-    Photo BLOB,
+    Photo VARCHAR2(255),
     IdPet Number(8)
 );
 
@@ -111,7 +111,7 @@ CREATE TABLE Veterinarian (
     FirstName VARCHAR2(25),
     LastName VARCHAR2(25),
     Location VARCHAR2(100), -- Agregar Distrito
-    IdDristrict NUMBER(8),
+    IdDistrict NUMBER(8),
     Phone NUMBER(8),
     Name VARCHAR2(50)
 );
@@ -192,8 +192,8 @@ CREATE TABLE Rescued (
     Id NUMBER(8),
     RescueDate DATE,  -- se cambio el nombre
     Place VARCHAR2(100), -- esto se podria ligar a distric
-    BeforePhoto BLOB,
-    AfterPhoto BLOB,
+    BeforePhoto VARCHAR2(255),
+    AfterPhoto VARCHAR2(255),
     Description VARCHAR2(100),
     IdPet NUMBER(8),
     IdDistrict NUMBER(8),

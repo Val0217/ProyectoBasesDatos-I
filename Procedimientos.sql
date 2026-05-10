@@ -1829,6 +1829,16 @@ END;
 /
 
 
+CREATE OR REPLACE PROCEDURE pr_insert_pet_image(pImage IN VARCHAR2, pIdPet IN NUMBER)
+AS 
+BEGIN --> aqui va el comando:
+    INSERT INTO petPhoto (id,Photo,IdPet)
+    VALUES 
+    (s_petPhoto.nextval,pImage,pIdPet);
+    COMMIT;
+END pr_insert_pet_image;
+
+
 /*Insert person de Carlos */
 CREATE OR REPLACE PROCEDURE pr_insert_person(pFirst_name IN VARCHAR2, pLast_name IN VARCHAR2, pEmail IN VARCHAR2, pPassword IN VARCHAR2, pUserName IN VARCHAR2, pIdDistrict IN NUMBER, pPhoneNumber IN NUMBER)
 AS 
@@ -1863,7 +1873,9 @@ END pr_insert_person;
    Descripcion:
    Inserta una nueva mascota en la base de datos.
    ------------------------------------------------------------ */
-CREATE OR REPLACE PROCEDURE pr_insert_pet(pColor IN VARCHAR2, pAge IN NUMBER, pDescription IN VARCHAR2, pPetName IN VARCHAR2, pChip IN VARCHAR2, pIdEnergy IN NUMBER, pIdType IN NUMBER, pIdBreed IN NUMBER, pIdDistrict IN NUMBER, pIdSpaceRequired IN NUMBER, pIdPetTraining IN NUMBER, pIdPetSize IN NUMBER, pIdPerson IN NUMBER, pIdVeterinarian IN NUMBER, pIllnessId IN NumberList, pTreatMentId IN NumberList, pMedicineId IN NumberList)
+   CREATE OR REPLACE TYPE VARCHAR2LIST AS TABLE OF VARCHAR2(255);
+   CREATE OR REPLACE TYPE NUMBERLIST AS TABLE OF NUMBER;
+CREATE OR REPLACE PROCEDURE pr_insert_pet(pColor IN VARCHAR2, pAge IN NUMBER, pDescription IN VARCHAR2, pPetName IN VARCHAR2, pChip IN VARCHAR2, pIdEnergy IN NUMBER, pIdType IN NUMBER, pIdBreed IN NUMBER, pIdDistrict IN NUMBER, pIdSpaceRequired IN NUMBER, pIdPetTraining IN NUMBER, pIdPetSize IN NUMBER, pIdPerson IN NUMBER, pIdVeterinarian IN NUMBER, pIllnessId IN NumberList, pTreatMentId IN NumberList, pMedicineId IN NumberList, pPhotoPath IN VARCHAR2LIST)
 AS 
     vcIdPet NUMBER(8);
 BEGIN --> aqui va el comando:
@@ -1912,6 +1924,22 @@ BEGIN --> aqui va el comando:
         );
 
     END LOOP;
+
+    --> Insertar fotos de mascota (si se proporcionan)
+    IF pPhotoPath IS NOT NULL THEN
+        for i in 1 .. pPhotoPath.COUNT loop
+            INSERT INTO petPhoto (
+                Id,
+                Photo,
+                IdPet
+            )
+            VALUES (
+                s_petPhoto.NEXTVAL,
+                pPhotoPath(i),
+                vcIdPet
+            );
+        END LOOP;
+    END IF;
 
     COMMIT;
 END pr_insert_pet;
