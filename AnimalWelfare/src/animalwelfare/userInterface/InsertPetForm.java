@@ -25,13 +25,19 @@ public class InsertPetForm extends javax.swing.JFrame {
     private InsertPetController controller = null;
     private DefaultListModel<DbObject> modelVeterinarian = null; // para guardar la lista de veterinarios para hace busqueda
     private ArrayList<DbObject> allItemsVeterinarian = null;
+    private DefaultListModel<DbObject> modelIllness = null;
+    private DefaultListModel<DbObject> modelMedicine = null;
+    private DefaultListModel<DbObject> modelTreatment = null;
 
     // procedimiento que rellena la lista de Veterinarian
     public void fillVeterinarian(ArrayList<DbObject> listVeterinarian) {
         ListVeterinarian.removeAll();
     
         modelVeterinarian = new DefaultListModel<>();
-        allItemsVeterinarian = new ArrayList<DbObject>();
+        modelIllness = new DefaultListModel<>();
+        modelMedicine = new DefaultListModel<>();
+        modelTreatment = new DefaultListModel<>();
+        allItemsVeterinarian = new ArrayList<>();
         for (DbObject c : listVeterinarian) {
             modelVeterinarian.addElement(c);
             allItemsVeterinarian.add(c);
@@ -178,6 +184,12 @@ public class InsertPetForm extends javax.swing.JFrame {
         ComboCanton.setEnabled(false);
         ComboDistrict.setEnabled(false);
         ComboBreed.setEnabled(false);
+
+        // inicializar los modelos de las listas
+        ListPetIllness.setModel(modelIllness);
+        ListPetMedicine.setModel(modelMedicine);
+        ListPetTreatment.setModel(modelTreatment);
+
         
         // fix elementos visuales
         ScrollPanelFirst.getVerticalScrollBar().setBackground(new Color(240,240,240));
@@ -1097,15 +1109,72 @@ public class InsertPetForm extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonSubmitPetMouseClicked
 
     private void ButtonAddIllnessMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonAddIllnessMouseClicked
-        // TODO add your handling code here:
+        DbObject selected = (DbObject) ComboIllness.getSelectedItem();
+
+        if (selected != null && selected.getId() != 0) {
+
+            boolean exists = false;
+
+            for (int i = 0; i < modelIllness.size(); i++) {
+
+                DbObject item = modelIllness.get(i);
+
+                if (item.getId() == selected.getId()) {
+                    exists = true;
+                    break;
+                }
+            }
+
+            if (!exists) {
+                modelIllness.addElement(selected);
+            }
+        }
     }//GEN-LAST:event_ButtonAddIllnessMouseClicked
 
     private void ButtonAddMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonAddMedicineMouseClicked
-        // TODO add your handling code here:
+        DbObject selected = (DbObject) ComboMedicine.getSelectedItem();
+
+        if (selected.getId() == 0) return;{
+
+            boolean exists = false;
+
+            for (int i = 0; i < modelMedicine.size(); i++) {
+
+                DbObject item = modelMedicine.get(i);
+
+                if (item.getId() == selected.getId()) {
+                    exists = true;
+                    break;
+                }
+            }
+
+            if (!exists) {
+                modelMedicine.addElement(selected);
+            }
+        }
     }//GEN-LAST:event_ButtonAddMedicineMouseClicked
 
     private void ButtonAddTreatmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonAddTreatmentMouseClicked
-        // TODO add your handling code here:
+        DbObject selected = (DbObject) ComboTreatment.getSelectedItem();
+
+        if (selected != null && selected.getId() != 0) {
+
+            boolean exists = false;
+
+            for (int i = 0; i < modelTreatment.size(); i++) {
+
+                DbObject item = modelTreatment.get(i);
+
+                if (item.getId() == selected.getId()) {
+                    exists = true;
+                    break;
+                }
+            }
+
+            if (!exists) {
+                modelTreatment.addElement(selected);
+            }
+        }
     }//GEN-LAST:event_ButtonAddTreatmentMouseClicked
 
     
