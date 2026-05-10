@@ -6,6 +6,7 @@ package animalwelfare.userInterface;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 
 
@@ -29,6 +30,13 @@ public class MainMenu extends javax.swing.JFrame {
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
+    }
+    
+    private void LogOffButtonMouseEntered(java.awt.event.MouseEvent evt) {
+        LogOffButton.setBackground(buttonHover);
+    }
+    private void LogOffButtonMouseExited(java.awt.event.MouseEvent evt) {
+        LogOffButton.setBackground(buttonBase);
     }
 
     /**
@@ -60,6 +68,8 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         LableTitle = new javax.swing.JLabel();
+        LogOffButton = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -319,7 +329,7 @@ public class MainMenu extends javax.swing.JFrame {
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BackGroundLayout.createSequentialGroup()
                 .addComponent(Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE))
             .addGroup(BackGroundLayout.createSequentialGroup()
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BackGroundLayout.createSequentialGroup()
@@ -339,10 +349,6 @@ public class MainMenu extends javax.swing.JFrame {
                         .addGap(147, 147, 147)
                         .addComponent(LableTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackGroundLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(RescuesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(160, 160, 160))
         );
         BackGroundLayout.setVerticalGroup(
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,6 +475,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel Banner;
     private javax.swing.JPanel DonationsButton;
     private javax.swing.JLabel LableTitle;
+    private javax.swing.JPanel LogOffButton;
     private javax.swing.JPanel NewPetButton;
     private javax.swing.JPanel PetsButton;
     private javax.swing.JPanel RescuesButton;
@@ -477,6 +484,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
