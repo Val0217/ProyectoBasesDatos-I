@@ -183,6 +183,9 @@ public class MainMenu extends javax.swing.JFrame {
 
         DonationsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         DonationsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DonationsButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 DonationsButtonMouseEntered(evt);
             }
@@ -453,6 +456,11 @@ public class MainMenu extends javax.swing.JFrame {
         InsertPetForm window = new InsertPetForm();
         dispose();
     }//GEN-LAST:event_NewPetButtonMouseClicked
+
+    private void DonationsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DonationsButtonMouseClicked
+        DonationForm window = new DonationForm();
+        dispose();
+    }//GEN-LAST:event_DonationsButtonMouseClicked
 
     /**
      * @param args the command line arguments

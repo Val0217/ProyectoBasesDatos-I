@@ -2,6 +2,7 @@ package animalwelfare.access;
 
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import oracle.jdbc.OracleTypes;
 
@@ -39,7 +40,7 @@ public class DonationOperations {
             return true;
 
         } catch (SQLException e) {
-            System.out.println("Error inserting donation: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
             return false;
         }
     }
@@ -53,10 +54,7 @@ public class DonationOperations {
      * @param dateTo        Filter end date (nullable)
      * @return DefaultTableModel with donation data
      */
-    public static DefaultTableModel getDonations(Integer idPerson,
-                                                  Integer idAssociation,
-                                                  Date dateFrom,
-                                                  Date dateTo) {
+    public static DefaultTableModel getDonations() {
         DefaultTableModel model = new DefaultTableModel(COLUMNS, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -64,20 +62,16 @@ public class DonationOperations {
             }
         };
 
-        String call = "{ call pr_get_donations(?, ?, ?, ?, ?) }";
+        String call = "{ ? = call fn_get_donation_join() }";
 
         try (Connection con = ConexionOracle.connect();
              CallableStatement cs = con.prepareCall(call)) {
 
-            setNullableInt(cs, 1, idPerson);
-            setNullableInt(cs, 2, idAssociation);
-            setNullableDate(cs, 3, dateFrom);
-            setNullableDate(cs, 4, dateTo);
-            cs.registerOutParameter(5, OracleTypes.CURSOR);
 
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
             cs.execute();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(5)) {
+            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
                 while (rs.next()) {
                     model.addRow(new Object[]{
                         rs.getInt("Id"),
@@ -91,7 +85,7 @@ public class DonationOperations {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error getting donations: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
 
         return model;
@@ -121,7 +115,7 @@ public class DonationOperations {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error listing associations: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
 
         return list;
@@ -151,7 +145,7 @@ public class DonationOperations {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error listing currencies: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
 
         return list;

@@ -914,6 +914,31 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE FUNCTION fn_get_donation_join
+RETURN SYS_REFCURSOR
+AS
+    pCursor SYS_REFCURSOR;
+BEGIN
+    OPEN pCursor FOR
+        SELECT 
+            d.Id,
+            p.FirstName || ' ' || p.LastName AS DonorName,
+            a.Name AS AssociationName,
+            d.Amount,
+            c.Name AS Currency,
+            d.DonationDate
+        FROM Donation d
+        INNER JOIN Person p
+            ON d.IdPerson = p.Id
+        INNER JOIN Association a
+            ON d.IdAssociation = a.Id
+        INNER JOIN Currency c
+            ON d.IdCurrency = c.Id
+        ORDER BY d.DonationDate DESC;
+
+    RETURN pCursor;
+END;
+
 
 /* CURRENCY */
 CREATE OR REPLACE FUNCTION fn_get_currency_all
@@ -935,7 +960,7 @@ END;
 
 
 /* ASSOCIATION */
-CREATE OR REPLACE FUNCTION fn_get_association_all
+CREATE OR REPLACE FUNCTION fn_get_associations_all
 RETURN SYS_REFCURSOR
 IS
 BEGIN

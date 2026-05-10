@@ -245,7 +245,7 @@ END;
 
 UPDATE Adoption
    SET State = CASE
-       WHEN UPPER(TRIM(State)) IN ('IN PROCESS', 'IN PROGRESS', 'EN ADOPCION', 'EN ADOPCIÓN') THEN 'In process'
+       WHEN UPPER(TRIM(State)) IN ('IN PROCESS', 'IN PROGRESS', 'EN ADOPCION', 'EN ADOPCIï¿½N') THEN 'In process'
        WHEN UPPER(TRIM(State)) IN ('TO BE CONFIRMED', 'TO CONFIRM', 'PENDING CONFIRMATION') THEN 'To be confirmed'
        WHEN UPPER(TRIM(State)) IN ('CANCELED', 'CANCELLED', 'CANCELADO', 'CANCELADA') THEN 'Canceled'
        WHEN UPPER(TRIM(State)) IN ('APPROVED', 'ADOPTED', 'ADOPTADO', 'ADOPTADA') THEN 'Approved'
@@ -1829,6 +1829,11 @@ END;
 /
 
 
+/* ------------------------------------------------------------
+   Procedimiento: pr_insert_pet_image
+   Descripcion:
+   Inserta una foto para una mascota.
+   ------------------------------------------------------------ */
 CREATE OR REPLACE PROCEDURE pr_insert_pet_image(pImage IN VARCHAR2, pIdPet IN NUMBER)
 AS 
 BEGIN --> aqui va el comando:
@@ -1838,6 +1843,22 @@ BEGIN --> aqui va el comando:
     COMMIT;
 END pr_insert_pet_image;
 
+/* ------------------------------------------------------------
+   Procedimiento: pr_insert_donation
+   Descripcion:
+   Inserta una donacion.
+   ------------------------------------------------------------ */
+CREATE OR REPLACE PROCEDURE pr_insert_donation(
+    p_idPerson      IN NUMBER,
+    p_amount        IN NUMBER,
+    p_idCurrency    IN NUMBER,
+    p_idAssociation IN NUMBER
+) AS
+BEGIN
+    INSERT INTO Donation (Id, Amount, DonationDate, IdPerson, IdCurrency, IdAssociation)
+    VALUES (s_Donation.NEXTVAL, p_amount, SYSDATE, p_idPerson, p_idCurrency, p_idAssociation);
+    COMMIT;
+END pr_insert_donation;
 
 /*Insert person de Carlos */
 CREATE OR REPLACE PROCEDURE pr_insert_person(pFirst_name IN VARCHAR2, pLast_name IN VARCHAR2, pEmail IN VARCHAR2, pPassword IN VARCHAR2, pUserName IN VARCHAR2, pIdDistrict IN NUMBER, pPhoneNumber IN NUMBER)

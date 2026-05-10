@@ -1,11 +1,14 @@
 package animalwelfare.userInterface;
 
 import animalwelfare.access.DbObject;
+import animalwelfare.business.DonationController;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
 
 /**
  * Donation form with two tabs:
@@ -31,6 +34,13 @@ public class DonationForm extends javax.swing.JFrame {
     private JButton btnDonate;
     private JButton btnClearNew;
 
+
+    // controller is initialized in constructor after initComponents
+    private DonationController controller = null; // Initialize when BD is ready
+
+    // modelo de donaciones para cuando se usan filtros
+    private DefaultTableModel modelDonationsBase = null;
+
     // -------------------------------------------------------------------------
     // Tab 2 — Donation History components
     // -------------------------------------------------------------------------
@@ -48,9 +58,9 @@ public class DonationForm extends javax.swing.JFrame {
     // -------------------------------------------------------------------------
     public DonationForm() {
         initComponents();
-        fillCombosMock();       // MOCK — replace with fillCombos() when BD ready
-        loadDonationsMock();    // MOCK — replace with loadDonations(null, null, null)
+        controller = new DonationController(this); // Initialize controller (replace with real when BD ready)
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     // -------------------------------------------------------------------------
@@ -248,59 +258,57 @@ public class DonationForm extends javax.swing.JFrame {
         DbObject assoc    = (DbObject) comboAssociationNew.getSelectedItem();
         DbObject currency = (DbObject) comboCurrency.getSelectedItem();
 
-        if (amountStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Amount is required.",
-                "Validation", JOptionPane.WARNING_MESSAGE);
-            return;
+        boolean success = controller.insertDonation(amountStr, assoc, currency);
+        if (success) {
+                clearNewForm();
         }
-        double amount;
-        try {
-            amount = Double.parseDouble(amountStr);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Amount must be a valid number.",
-                "Validation", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if (amount <= 0) {
-            JOptionPane.showMessageDialog(this, "Amount must be greater than 0.",
-                "Validation", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if (assoc == null || assoc.getId() == 0) {
-            JOptionPane.showMessageDialog(this, "Please select an association.",
-                "Validation", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        // MOCK — simulate successful insert, add row to table
-        JOptionPane.showMessageDialog(this, "Donation registered successfully!",
-            "Success", JOptionPane.INFORMATION_MESSAGE);
-
-        DefaultTableModel model = (DefaultTableModel) tableDonations.getModel();
-        model.insertRow(0, new Object[]{
-            model.getRowCount() + 1,
-            "Current User",
-            assoc.toString(),
-            amount,
-            currency != null ? currency.toString() : "Colones",
-            new java.sql.Date(System.currentTimeMillis()).toString()
-        });
-        updateFooter(model);
-        clearNewForm();
     }
 
     private void onSearch() {
-        // MOCK — in real version would call loadDonations(idAssoc, dateFrom, dateTo)
-        JOptionPane.showMessageDialog(this, "Filtering... (mock: showing all)",
-            "Info", JOptionPane.INFORMATION_MESSAGE);
-        loadDonationsMock();
+        DbObject assoc = (DbObject) comboAssociationFilter.getSelectedItem();
+        java.util.Date dateFrom = (java.util.Date) spinnerDateFrom.getValue();
+        java.util.Date dateTo   = (java.util.Date) spinnerDateTo.getValue();
+
+        // MOCK — simulate search by filtering existing list
+        DefaultTableModel model = (DefaultTableModel) modelDonationsBase;
+        DefaultTableModel filteredModel = new DefaultTableModel(
+            new String[]{"ID", "Donor", "Association", "Amount", "Currency", "Date"}, 0
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int col) { return false; }
+        };
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            String assocName = model.getValueAt(i, 2).toString();
+            String dateStr   = model.getValueAt(i, 5).toString();
+            java.util.Date date = java.sql.Date.valueOf(dateStr);
+
+            boolean matchesAssoc = (assoc == null || assoc.getId() == 0)
+                || assocName.equals(assoc.toString());
+            boolean matchesDate  = (dateFrom == null || !date.before(dateFrom))
+                && (dateTo == null || !date.after(dateTo));
+
+            if (matchesAssoc && matchesDate) {
+                filteredModel.addRow(new Object[]{
+                    model.getValueAt(i, 0),
+                    model.getValueAt(i, 1),
+                    model.getValueAt(i, 2),
+                    model.getValueAt(i, 3),
+                    model.getValueAt(i, 4),
+                    model.getValueAt(i, 5)
+                });
+            }
+        }
+
+        tableDonations.setModel(filteredModel);
+        updateFooter(filteredModel);
     }
 
     private void clearFilter() {
         comboAssociationFilter.setSelectedIndex(0);
         spinnerDateFrom.setValue(getStartOfYear());
         spinnerDateTo.setValue(new java.util.Date());
-        loadDonationsMock(); // MOCK
+        loadDonations(modelDonationsBase);
     }
 
     private void clearNewForm() {
@@ -310,40 +318,30 @@ public class DonationForm extends javax.swing.JFrame {
     }
 
     // -------------------------------------------------------------------------
-    // MOCK methods — replace when BD is ready
+    // Metodos para rellenar los combos
     // -------------------------------------------------------------------------
 
-    /** MOCK — replace body with calls to DonationOperations */
-    private void fillCombosMock() {
-        comboAssociationNew.addItem(new DbObject(1, "Refugio Animal CR"));
-        comboAssociationNew.addItem(new DbObject(2, "Amigos Peludos"));
-        comboAssociationNew.addItem(new DbObject(3, "Patitas Felices"));
-
-        comboCurrency.addItem(new DbObject(1, "Colones"));
-        comboCurrency.addItem(new DbObject(2, "Dólares"));
-
-        comboAssociationFilter.addItem(new DbObject(0, "All"));
-        comboAssociationFilter.addItem(new DbObject(1, "Refugio Animal CR"));
-        comboAssociationFilter.addItem(new DbObject(2, "Amigos Peludos"));
-        comboAssociationFilter.addItem(new DbObject(3, "Patitas Felices"));
+    public void fillCombosAssociation(ArrayList<DbObject> listAssociation) {
+        comboAssociationNew.removeAllItems();
+        comboAssociationFilter.removeAllItems();
+        comboAssociationFilter.addItem(new DbObject(0,"All"));
+        for (DbObject c : listAssociation) {
+            comboAssociationNew.addItem(c);
+            comboAssociationFilter.addItem(c);
+        }
     }
 
-    /** MOCK — replace with loadDonations(null, null, null) */
-    private void loadDonationsMock() {
-        DefaultTableModel model = new DefaultTableModel(
-            new String[]{"ID", "Donor", "Association", "Amount", "Currency", "Date"}, 0
-        ) {
-            @Override
-            public boolean isCellEditable(int row, int col) { return false; }
-        };
+    public void fillCombosCurrency(ArrayList<DbObject> listCurrency) {
+        comboCurrency.removeAllItems();
+        for (DbObject c : listCurrency) {
+            comboCurrency.addItem(c);
+        }
+    }
 
-        model.addRow(new Object[]{1, "Carlos González", "Refugio Animal CR", 25000.0, "Colones", "2024-06-05"});
-        model.addRow(new Object[]{2, "María Rodríguez", "Amigos Peludos",       50.0, "Dólares", "2024-07-22"});
-        model.addRow(new Object[]{3, "Carlos González", "Patitas Felices",   10000.0, "Colones", "2024-08-01"});
-        model.addRow(new Object[]{4, "José Vargas",     "Refugio Animal CR",  5000.0, "Colones", "2024-09-10"});
-        model.addRow(new Object[]{5, "Luisa Campos",    "Amigos Peludos",       75.0, "Dólares", "2024-10-03"});
 
+    public void loadDonations(DefaultTableModel model) {
         tableDonations.setModel(model);
+        modelDonationsBase = model; // Guardar el modelo base para filtros posteriores
 
         // Hide ID column
         tableDonations.getColumnModel().getColumn(0).setMinWidth(0);

@@ -3,6 +3,7 @@ package animalwelfare.business;
 import animalwelfare.access.DbObject;
 import animalwelfare.access.DonationOperations;
 import animalwelfare.security.Session;
+import animalwelfare.userInterface.DonationForm;
 import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -15,23 +16,22 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DonationController {
 
+    private DonationForm view;
+
+    
+    public DonationController(DonationForm view) {
+        this.view = view;
+        view.fillCombosAssociation(DonationOperations.listAssociations());
+        view.fillCombosCurrency(DonationOperations.listCurrencies());
+        view.loadDonations(DonationOperations.getDonations());
+    }
+
     /**
      * Returns all associations to populate the combo box.
      * @return List of associations as DbObject
      */
     public ArrayList<DbObject> getAssociations() {
         return DonationOperations.listAssociations();
-    }
-    
-    // MOCK — borrar cuando se conecte la BD
-    public DefaultTableModel getDonationsMock() {
-        DefaultTableModel model = new DefaultTableModel(
-            new String[]{"ID", "Donor", "Association", "Amount", "Currency", "Date"}, 0
-        );
-        model.addRow(new Object[]{1, "Carlos González", "Refugio Animal CR", 25000.0, "Colones", "2024-06-05"});
-        model.addRow(new Object[]{2, "María Rodríguez", "Amigos Peludos",    50.0,    "Dólares", "2024-07-22"});
-        model.addRow(new Object[]{3, "Carlos González", "Patitas Felices",   10000.0, "Colones", "2024-08-01"});
-        return model;
     }
 
     /**
@@ -83,7 +83,8 @@ public class DonationController {
         int userId = Session.getInstance().getUserId();
 
         if (userId == 0) {
-            JOptionPane.showMessageDialog(null, "You must be logged in to donate.");
+            JOptionPane.showMessageDialog(null, "You must be logged in to donate.",
+                "Validation", JOptionPane.WARNING_MESSAGE);
             return false;
         }
 
@@ -93,9 +94,12 @@ public class DonationController {
         );
 
         if (success) {
-            JOptionPane.showMessageDialog(null, "Donation registered successfully!");
+                JOptionPane.showMessageDialog(null, "Donation registered successfully!",
+                "Success", JOptionPane.INFORMATION_MESSAGE);
+                view.loadDonations(DonationOperations.getDonations());
         } else {
-            JOptionPane.showMessageDialog(null, "Failed to register donation. Please try again.");
+            JOptionPane.showMessageDialog(null, "Failed to register donation. Please try again.",
+                "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         return success;
@@ -104,20 +108,10 @@ public class DonationController {
     /**
      * Retrieves donations applying the given optional filters.
      * Any null parameter means "no filter for that field".
-     * @param idAssociation Filter by association (nullable)
-     * @param dateFrom      Start date filter (nullable)
-     * @param dateTo        End date filter (nullable)
      * @return DefaultTableModel ready to assign to a JTable
      */
-    public DefaultTableModel getDonations(Integer idAssociation,
-                                           Date dateFrom,
-                                           Date dateTo) {
-        return DonationOperations.getDonations(
-            null,           // no filter by donor for now
-            idAssociation,
-            dateFrom,
-            dateTo
-        );
+    public DefaultTableModel getDonations() {
+        return DonationOperations.getDonations();
     }
 
     /**
