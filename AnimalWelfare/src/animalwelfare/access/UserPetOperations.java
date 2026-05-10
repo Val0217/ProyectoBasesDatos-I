@@ -85,39 +85,41 @@ public class UserPetOperations {
         }
     }
 
-    public DefaultTableModel getAdoptionPets(PetFilter filter) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
-             CallableStatement cs = conn.prepareCall(
-                 "{call pr_get_adoption_pet_table(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}")) {
+        public DefaultTableModel getAdoptionPets(int currentUserId, PetFilter filter) throws SQLException {
+            try (Connection conn = ConexionOracle.connect();
+                 CallableStatement cs = conn.prepareCall(
+                     "{call pr_get_adoption_pet_table(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}")) {
 
-            setNullableInt(cs, 1, filter.idEnergy);
-            setNullableInt(cs, 2, filter.idType);
-            setNullableInt(cs, 3, filter.idBreed);
+                cs.setInt(1, currentUserId);
 
-            setNullableInt(cs, 4, filter.idCountry);
-            setNullableInt(cs, 5, filter.idProvince);
-            setNullableInt(cs, 6, filter.idCanton);
-            setNullableInt(cs, 7, filter.idDistrict);
+                setNullableInt(cs, 2, filter.idEnergy);
+                setNullableInt(cs, 3, filter.idType);
+                setNullableInt(cs, 4, filter.idBreed);
 
-            setNullableInt(cs, 8, filter.idSpace);
-            setNullableInt(cs, 9, filter.idTraining);
-            setNullableInt(cs, 10, filter.idSize);
-            setNullableInt(cs, 11, filter.idVeterinarian);
+                setNullableInt(cs, 5, filter.idCountry);
+                setNullableInt(cs, 6, filter.idProvince);
+                setNullableInt(cs, 7, filter.idCanton);
+                setNullableInt(cs, 8, filter.idDistrict);
 
-            setNullableString(cs, 12, filter.color);
-            setNullableInt(cs, 13, filter.age);
-            setNullableString(cs, 14, filter.name);
-            setNullableString(cs, 15, filter.chip);
+                setNullableInt(cs, 9, filter.idSpace);
+                setNullableInt(cs, 10, filter.idTraining);
+                setNullableInt(cs, 11, filter.idSize);
+                setNullableInt(cs, 12, filter.idVeterinarian);
 
-            cs.registerOutParameter(16, OracleTypes.CURSOR);
+                setNullableString(cs, 13, filter.color);
+                setNullableInt(cs, 14, filter.age);
+                setNullableString(cs, 15, filter.name);
+                setNullableString(cs, 16, filter.chip);
 
-            cs.execute();
+                cs.registerOutParameter(17, OracleTypes.CURSOR);
 
-            try (ResultSet rs = (ResultSet) cs.getObject(16)) {
-                return buildPetTableModel(rs);
+                cs.execute();
+
+                try (ResultSet rs = (ResultSet) cs.getObject(17)) {
+                    return buildPetTableModel(rs);
+                }
             }
         }
-    }
 
     public void putPetUpForAdoption(int petId, int ownerId) throws SQLException {
         try (Connection conn = ConexionOracle.connect();

@@ -25,7 +25,7 @@ public class UserPetTableController {
     }
 
     public void loadAdoptionPets(JTable table, PetFilter filter) throws SQLException {
-        DefaultTableModel model = operations.getAdoptionPets(safeFilter(filter));
+        DefaultTableModel model = operations.getAdoptionPets(currentUserId, safeFilter(filter));
         table.setModel(model);
         protectTable(table);
     }

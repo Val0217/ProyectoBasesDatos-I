@@ -943,25 +943,26 @@ END;
    Descripcion:
    
    ------------------------------------------------------------ */
-CREATE OR REPLACE PROCEDURE pr_get_adoption_pet_table (
-    p_id_energy       IN NUMBER DEFAULT NULL,
-    p_id_type         IN NUMBER DEFAULT NULL,
-    p_id_breed        IN NUMBER DEFAULT NULL,
-    p_id_district     IN NUMBER DEFAULT NULL,
-    p_id_country      IN NUMBER DEFAULT NULL,
-    p_id_province     IN NUMBER DEFAULT NULL,
-    p_id_canton       IN NUMBER DEFAULT NULL,
-    p_id_space        IN NUMBER DEFAULT NULL,
-    p_id_training     IN NUMBER DEFAULT NULL,
-    p_id_size         IN NUMBER DEFAULT NULL,
-    p_id_veterinarian IN NUMBER DEFAULT NULL,
-    p_color           IN VARCHAR2 DEFAULT NULL,
-    p_age             IN NUMBER DEFAULT NULL,
-    p_name            IN VARCHAR2 DEFAULT NULL,
-    p_chip            IN VARCHAR2 DEFAULT NULL,
-    p_result          OUT SYS_REFCURSOR
+CREATE OR REPLACE PROCEDURE pr_get_adoption_pet_table(
+    p_current_user_id     IN NUMBER,
+    p_id_energy           IN NUMBER,
+    p_id_type             IN NUMBER,
+    p_id_breed            IN NUMBER,
+    p_id_country          IN NUMBER,
+    p_id_province         IN NUMBER,
+    p_id_canton           IN NUMBER,
+    p_id_district         IN NUMBER,
+    p_id_space            IN NUMBER,
+    p_id_training         IN NUMBER,
+    p_id_size             IN NUMBER,
+    p_id_veterinarian     IN NUMBER,
+    p_color               IN VARCHAR2,
+    p_age                 IN NUMBER,
+    p_name                IN VARCHAR2,
+    p_chip                IN VARCHAR2,
+    p_result              OUT SYS_REFCURSOR
 )
-IS
+AS
 BEGIN
     OPEN p_result FOR
         SELECT
@@ -981,21 +982,22 @@ BEGIN
             VeterinarianName
         FROM VW_USER_PET_TABLE
         WHERE IdState = 1
+          AND IdOwner <> p_current_user_id
           AND (p_id_energy IS NULL OR IdEnergy = p_id_energy)
           AND (p_id_type IS NULL OR IdType = p_id_type)
           AND (p_id_breed IS NULL OR IdBreed = p_id_breed)
-          AND (p_id_district IS NULL OR IdDistrict = p_id_district)
           AND (p_id_country IS NULL OR IdCountry = p_id_country)
           AND (p_id_province IS NULL OR IdProvince = p_id_province)
           AND (p_id_canton IS NULL OR IdCanton = p_id_canton)
+          AND (p_id_district IS NULL OR IdDistrict = p_id_district)
           AND (p_id_space IS NULL OR IdSpace = p_id_space)
           AND (p_id_training IS NULL OR IdPetTraining = p_id_training)
           AND (p_id_size IS NULL OR IdSize = p_id_size)
           AND (p_id_veterinarian IS NULL OR IdVeterinarian = p_id_veterinarian)
-          AND (p_color IS NULL OR UPPER(Color) LIKE '%' || UPPER(p_color) || '%')
+          AND (p_color IS NULL OR LOWER(Color) LIKE '%' || LOWER(p_color) || '%')
           AND (p_age IS NULL OR Age = p_age)
-          AND (p_name IS NULL OR UPPER(PetName) LIKE '%' || UPPER(p_name) || '%')
-          AND (p_chip IS NULL OR UPPER(Chip) LIKE '%' || UPPER(p_chip) || '%')
+          AND (p_name IS NULL OR LOWER(PetName) LIKE '%' || LOWER(p_name) || '%')
+          AND (p_chip IS NULL OR LOWER(Chip) LIKE '%' || LOWER(p_chip) || '%')
         ORDER BY PetName;
 END;
 /
