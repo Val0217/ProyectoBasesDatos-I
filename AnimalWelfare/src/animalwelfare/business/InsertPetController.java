@@ -114,6 +114,10 @@ public class InsertPetController {
             return false;
         }
 
+        if (idVeterinarian == null) {
+            idVeterinarian = new DbObject(0, "None");
+        }
+
 
         // Convertir las listas de DbObject a listas de IDs
         ArrayList<Integer> illnessIds = new ArrayList<>();
@@ -129,9 +133,12 @@ public class InsertPetController {
             medicineIds.add(medicine.getId());
         }
 
+
         Integer[] dataIllness = illnessIds.toArray(new Integer[0]);
         Integer[] dataTreatment = treatmentIds.toArray(new Integer[0]);
         Integer[] dataMedicine = medicineIds.toArray(new Integer[0]);
+        
+        
 
         if (PetOperations.InsertPet(color, age, description, petName, chip, idEnergy.getId(), idType.getId(), idBreed.getId(), idDistrict.getId(), idSpaceRequired.getId(), idPetTraining.getId(), idPetSize.getId(), Session.getInstance().getUserId(), idVeterinarian.getId(), dataIllness, dataTreatment, dataMedicine)) {
             JOptionPane.showMessageDialog(null, "Pet inserted successfully.");
