@@ -197,15 +197,7 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     }//GEN-LAST:event_TextVetLoctaionActionPerformed
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
-        // boton que envia los datos del formulario a la capa de access para que los inserten en la base de datos
-        DbObject District = (DbObject) ComboDistrict.getSelectedItem();
-        char[] passwordCharecters = TextPassword.getPassword();
-        char[] rePasswordCharecters = TextPasswordRE.getPassword();
-        boolean correct = controller.InsertPerson(TextEmail.getText(),TextFirstName.getText(),TextLastName.getText(),new String(passwordCharecters),new String(rePasswordCharecters), TextUserName.getText(),District, TextPhone.getText());
-        if (correct){
-            SignInForm window = new SignInForm();
-            dispose();
-        }
+
     }//GEN-LAST:event_ButtonCreateAccountActionPerformed
 
     /**
