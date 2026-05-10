@@ -32,6 +32,7 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         TextVetLoctaion = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
         ComboDistrict = new javax.swing.JComboBox<>();
@@ -58,6 +59,10 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel1.setText("_________________________________________________________________________");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, -1));
 
         TextVetLoctaion.addActionListener(this::TextVetLoctaionActionPerformed);
         jPanel2.add(TextVetLoctaion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, 450, 60));
@@ -152,7 +157,7 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel24.setText("REGISTER VETERINARIAN");
         jLabel24.setOpaque(true);
-        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 650, 40));
+        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 530, 40));
 
         jLabel9.setBackground(new java.awt.Color(204, 204, 0));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/istockphoto-1359095204-612x612.jpg"))); // NOI18N
@@ -241,6 +246,7 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     private javax.swing.JTextField TextVetFirstName;
     private javax.swing.JTextField TextVetLastName;
     private javax.swing.JTextField TextVetLoctaion;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;

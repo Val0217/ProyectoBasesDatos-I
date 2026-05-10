@@ -288,7 +288,7 @@ public class MainMenu extends javax.swing.JFrame {
         LableTitle.setFont(new java.awt.Font("Roboto SemiBold", 0, 36)); // NOI18N
         LableTitle.setForeground(new java.awt.Color(242, 242, 242));
         LableTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LableTitle.setText("MAIN MENU");
+        LableTitle.setText("WELCOME, XXXX!");
 
         LogOffButton.setBackground(new java.awt.Color(255, 204, 51));
         LogOffButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

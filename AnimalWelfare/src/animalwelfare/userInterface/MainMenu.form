@@ -464,7 +464,7 @@
               <Color blue="f2" green="f2" red="f2" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="MAIN MENU"/>
+            <Property name="text" type="java.lang.String" value="WELCOME, XXXX!"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="LogOffButton">
