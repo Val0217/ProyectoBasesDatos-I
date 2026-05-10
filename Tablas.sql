@@ -222,8 +222,6 @@ CREATE TABLE Person (  -- se cambio el nombre
     Password VARCHAR2(60), -- para que el password tenga un hash
     UserName VARCHAR2(25),
     IdDistrict NUMBER(8)
-    --Notes VARCHAR2(25) -- No se porque tiene Notas el usuario, quiza deberiamos meterles Distric
-    -- el modelo logico esta mal con lo que viene despues :p
 );
 
 CREATE TABLE ReportList (

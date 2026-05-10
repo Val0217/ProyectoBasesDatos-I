@@ -13,7 +13,7 @@ import oracle.jdbc.OracleTypes;
 public class FosterHomeOperations {
 
     private static final String[] COLUMNS = {
-        "ID", "Person", "Needs Donation", "Accepted Sizes",
+        "ID", "PersonID", "Person", "Needs Donation", "Accepted Sizes",
         "Accepted Energy Levels", "Accepted Spaces"
     };
 
@@ -30,10 +30,7 @@ public class FosterHomeOperations {
      * @param spaceIds      Array of accepted SpaceRequired IDs
      * @return true if successful
      */
-    public static boolean insertFosterHome(int idPerson, String needsDonation,
-                                            Integer[] sizeIds,
-                                            Integer[] energyIds,
-                                            Integer[] spaceIds) {
+    public static boolean insertFosterHome(int idPerson, String needsDonation,Integer[] sizeIds,Integer[] energyIds, Integer[] spaceIds) {
         String call = "{ call pr_insert_foster_home(?, ?, ?, ?, ?) }";
 
         try (Connection con = ConexionOracle.connect();
@@ -53,6 +50,9 @@ public class FosterHomeOperations {
             return true;
 
         } catch (SQLException e) {
+            if (e.getErrorCode() == 1) {
+                return false; // Duplicate entry (already has a foster home)
+            }
             JOptionPane.showMessageDialog(null, "Error inserting foster home: " + e.getMessage());
             return false;
         }
@@ -84,6 +84,7 @@ public class FosterHomeOperations {
                 while (rs.next()) {
                     model.addRow(new Object[]{
                         rs.getInt("FosterHomeId"),
+                        rs.getInt("PersonId"),
                         rs.getString("PersonName"),
                         rs.getString("NeedsDonation").equals("Y") ? "Yes" : "No",
                         rs.getString("AcceptedSizes"),
@@ -146,11 +147,7 @@ public class FosterHomeOperations {
      * Updates the foster home of the given person.
      * Only the owner can update their own foster home.
      */
-    public static boolean updateFosterHome(int idFosterHome, int idPerson,
-                                            String needsDonation,
-                                            Integer[] sizeIds,
-                                            Integer[] energyIds,
-                                            Integer[] spaceIds) {
+    public static boolean updateFosterHome(int idFosterHome, int idPerson,String needsDonation,Integer[] sizeIds,Integer[] energyIds,Integer[] spaceIds) {
         String call = "{ call pr_update_foster_home(?, ?, ?, ?, ?, ?) }";
 
         try (Connection con = ConexionOracle.connect();
