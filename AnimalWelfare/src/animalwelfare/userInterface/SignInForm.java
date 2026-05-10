@@ -1,7 +1,7 @@
 package animalwelfare.userInterface;
 
 import animalwelfare.business.SignInController;
-
+import animalwelfare.security.Session;
 
 public class SignInForm extends javax.swing.JFrame {
     
@@ -255,8 +255,11 @@ public class SignInForm extends javax.swing.JFrame {
         String email = TextUserName.getText();
         char[] passwordCharecters = TextPassword.getPassword();
         String password = new String(passwordCharecters);
-        if(controller.CheckUser(email, password)){
-            MainMenu window = new MainMenu();
+
+        if (controller.CheckUser(email, password)) {
+            int userId = Session.getInstance().getUserId();
+
+            MainMenu window = new MainMenu(userId);
             dispose();
         }
     }//GEN-LAST:event_ButtonContinueActionPerformed

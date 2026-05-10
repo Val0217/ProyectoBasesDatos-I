@@ -1866,7 +1866,7 @@ BEGIN --> aqui va el comando:
 
     COMMIT;
 END pr_insert_person;
-
+/
 
 /* ------------------------------------------------------------
    Procedimiento: pr_insert_pet

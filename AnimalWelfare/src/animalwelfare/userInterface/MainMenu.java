@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import animalwelfare.security.Session;
 
 
 /**
@@ -26,8 +27,16 @@ public class MainMenu extends javax.swing.JFrame {
     Color buttonBase = new Color(242, 242, 242);
     
     
+    private int currentUserId;
+
     public MainMenu() {
+        this(Session.getInstance().getUserId());
+    }
+
+    public MainMenu(int currentUserId) {
         initComponents();
+        this.currentUserId = currentUserId;
+
         setVisible(true);
         setLocationRelativeTo(null);
     }
@@ -431,7 +440,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_StatsButtonMouseExited
 
     private void PetsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PetsButtonMouseClicked
-        UserPetTable window = new UserPetTable();
+        UserPetTable window = new UserPetTable(currentUserId);
         dispose();
     }//GEN-LAST:event_PetsButtonMouseClicked
 

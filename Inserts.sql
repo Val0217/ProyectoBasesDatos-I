@@ -550,6 +550,10 @@ INSERT INTO Person (Id, FirstName, LastName, Password, UserName, IdDistrict)
 SELECT 3, 'Jose', 'Vargas', 'pass9012', 'jvargas', 3 FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM Person WHERE Id = 3);
 
+INSERT INTO Person (Id, FirstName, LastName, Password, UserName, IdDistrict)
+SELECT 4, 'Valeria', 'Duran', 'pass104', 'vduran', 4 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Person WHERE Id = 4);
+
 INSERT INTO Email (Id, Email, IdPerson)
 SELECT 1, 'carlos@mail.com', 1 FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM Email WHERE Id = 1);
@@ -561,6 +565,10 @@ WHERE NOT EXISTS (SELECT 1 FROM Email WHERE Id = 2);
 INSERT INTO Email (Id, Email, IdPerson)
 SELECT 3, 'jose@mail.com', 3 FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM Email WHERE Id = 3);
+
+INSERT INTO Email (Id, Email, IdPerson)
+SELECT 4, 'vale@mail.com', 4 FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM Email WHERE Id = 4);
 
 INSERT INTO Phone (Id, Phone, IdPerson)
 SELECT 1, 88001111, 1 FROM dual
