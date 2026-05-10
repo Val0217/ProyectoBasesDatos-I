@@ -418,7 +418,7 @@ public class SignUpForm extends javax.swing.JFrame {
                             .addComponent(LabelField4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -445,7 +445,7 @@ public class SignUpForm extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        PanelBackGround.add(PanelForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 70, 450, 590));
+        PanelBackGround.add(PanelForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 70, 450, 600));
 
         LableTitle1.setFont(new java.awt.Font("Roboto Black", 1, 36)); // NOI18N
         LableTitle1.setForeground(new java.awt.Color(255, 255, 0));
