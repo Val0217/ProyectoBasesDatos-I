@@ -1532,13 +1532,13 @@ END pr_insert_person;
 CREATE OR REPLACE PROCEDURE pr_insert_pet(pColor IN VARCHAR2, pAge IN NUMBER, pDescription IN VARCHAR2, pPetName IN VARCHAR2, pChip IN VARCHAR2, pIdEnergy IN NUMBER, pIdType IN NUMBER, pIdBreed IN NUMBER, pIdDistrict IN NUMBER, pIdSpaceRequired IN NUMBER, pIdPetTraining IN NUMBER, pIdPetSize IN NUMBER, pIdPerson IN NUMBER, pIdVeterinarian IN NUMBER, pIllnessId IN NumberList, pTreatMentId IN NumberList, pMedicineId IN NumberList)
 AS 
     vcIdPet NUMBER(8);
-BEGIN --> aqui va el comando:
+BEGIN
     vcIdPet := s_Pet.NEXTVAL;
     INSERT INTO Pet (id, Color, Age, Description, Name, Chip, IdEnergy, IdState, IdType, IdBreed, IdDistrict, IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian)
     VALUES 
     (vcIdPet, pColor, pAge, pDescription, pPetName, pChip, pIdEnergy, 2, pIdType, pIdBreed, pIdDistrict, pIdSpaceRequired, pIdPetTraining, pIdPetSize, pIdPerson, pIdVeterinarian);
     
-    --> Insertar enfermedades
+
     FOR i IN 1 .. pIllnessId.COUNT LOOP
 
         INSERT INTO PetXPetIllness (
@@ -1551,7 +1551,7 @@ BEGIN --> aqui va el comando:
         );
 
     END LOOP;
-    --> Insertar tratamientos
+
     FOR i IN 1 .. pTreatMentId.COUNT LOOP
 
         INSERT INTO PetXPetTreatment (
@@ -1565,7 +1565,6 @@ BEGIN --> aqui va el comando:
 
     END LOOP;
     
-     --> Insertar medicinas
     FOR i IN 1 .. pMedicineId.COUNT LOOP
 
         INSERT INTO PetXMedicine (
