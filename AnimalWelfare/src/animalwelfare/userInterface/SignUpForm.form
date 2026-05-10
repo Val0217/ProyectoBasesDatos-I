@@ -207,7 +207,6 @@
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jScrollPane1" min="-2" pref="54" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="54" max="-2" attributes="0"/>
@@ -266,7 +265,6 @@
                               <Component id="ComboCanton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Component id="ButtonCreateAccount" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
