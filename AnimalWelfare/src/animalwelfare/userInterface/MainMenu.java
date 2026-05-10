@@ -46,7 +46,7 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         Banner = new javax.swing.JPanel();
-        LableTitle = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         NewPetButton = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -63,10 +63,11 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        LableTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        BackGround.setBackground(new java.awt.Color(0, 153, 153));
+        BackGround.setBackground(new java.awt.Color(0, 102, 102));
 
         PetsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         PetsButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -81,13 +82,16 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Pets");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 64)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
         jLabel2.setText("→");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
+        jLabel19.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
         jLabel19.setText("Manage your pets and discover pets in adoption and missing.");
 
         javax.swing.GroupLayout PetsButtonLayout = new javax.swing.GroupLayout(PetsButton);
@@ -99,8 +103,8 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(PetsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         PetsButtonLayout.setVerticalGroup(
             PetsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,24 +120,19 @@ public class MainMenu extends javax.swing.JFrame {
 
         Banner.setBackground(new java.awt.Color(0, 121, 121));
 
-        LableTitle.setFont(new java.awt.Font("Roboto SemiBold", 0, 36)); // NOI18N
-        LableTitle.setForeground(new java.awt.Color(242, 242, 242));
-        LableTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LableTitle.setText("ANIMAL WELFARE");
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/istockphoto-2184260648-612x612.jpg"))); // NOI18N
 
         javax.swing.GroupLayout BannerLayout = new javax.swing.GroupLayout(Banner);
         Banner.setLayout(BannerLayout);
         BannerLayout.setHorizontalGroup(
             BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(LableTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE))
+            .addComponent(jLabel5)
         );
         BannerLayout.setVerticalGroup(
             BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
-            .addGroup(BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(LableTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+            .addGroup(BannerLayout.createSequentialGroup()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         NewPetButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -149,13 +148,16 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 102, 102));
         jLabel3.setText("New Pet");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 64)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setText("→");
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
+        jLabel20.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
         jLabel20.setText("Add a rescued or adopted pet to the system");
 
         javax.swing.GroupLayout NewPetButtonLayout = new javax.swing.GroupLayout(NewPetButton);
@@ -168,7 +170,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGroup(NewPetButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(314, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         NewPetButtonLayout.setVerticalGroup(
             NewPetButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,13 +194,16 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 102, 102));
         jLabel13.setText("Donations");
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 64)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 102, 102));
         jLabel14.setText("→");
         jLabel14.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
+        jLabel22.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
         jLabel22.setText("Support animal welfare by making secure donations to help pets in need.");
 
         javax.swing.GroupLayout DonationsButtonLayout = new javax.swing.GroupLayout(DonationsButton);
@@ -211,7 +216,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGroup(DonationsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         DonationsButtonLayout.setVerticalGroup(
             DonationsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,13 +243,16 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 102, 102));
         jLabel15.setText("Match");
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 64)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 102, 102));
         jLabel16.setText("→");
         jLabel16.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
+        jLabel21.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
         jLabel21.setText("Report rescue cases, follow ongoing rescues, and view recently rescued pets.");
 
         javax.swing.GroupLayout RescuesButtonLayout = new javax.swing.GroupLayout(RescuesButton);
@@ -281,13 +289,16 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 102, 102));
         jLabel17.setText("Stats");
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 64)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 102, 102));
         jLabel18.setText("→");
         jLabel18.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
+        jLabel23.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
         jLabel23.setText("Explore rescue statistics, adoption numbers, and overall community impact.");
 
         javax.swing.GroupLayout StatsButtonLayout = new javax.swing.GroupLayout(StatsButton);
@@ -314,45 +325,56 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        LableTitle.setFont(new java.awt.Font("Roboto SemiBold", 0, 36)); // NOI18N
+        LableTitle.setForeground(new java.awt.Color(242, 242, 242));
+        LableTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LableTitle.setText("MAIN MENU");
+
         javax.swing.GroupLayout BackGroundLayout = new javax.swing.GroupLayout(BackGround);
         BackGround.setLayout(BackGroundLayout);
         BackGroundLayout.setHorizontalGroup(
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(BackGroundLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PetsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(NewPetButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(RescuesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(DonationsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(StatsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(BackGroundLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LableTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(22, 22, 22))
+            .addGroup(BackGroundLayout.createSequentialGroup()
+                .addComponent(Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         BackGroundLayout.setVerticalGroup(
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BackGroundLayout.createSequentialGroup()
                 .addComponent(Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LableTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PetsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(39, 39, 39)
                 .addComponent(NewPetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(40, 40, 40)
                 .addComponent(RescuesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(40, 40, 40)
                 .addComponent(DonationsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(40, 40, 40)
                 .addComponent(StatsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(BackGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(BackGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,5 +490,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

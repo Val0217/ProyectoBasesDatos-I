@@ -50,107 +50,131 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         TextVetFirstName = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        ButtonCreateAccount = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TextVetLoctaion.addActionListener(this::TextVetLoctaionActionPerformed);
-        jPanel2.add(TextVetLoctaion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 600, 100));
+        jPanel2.add(TextVetLoctaion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, 450, 60));
 
-        jLabel29.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel29.setText("Location");
-        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 90, 30));
+        jLabel29.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel29.setText("Address");
+        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 90, 30));
 
         ComboDistrict3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboDistrict3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboDistrict3.setOpaque(true);
         ComboDistrict3.setRequestFocusEnabled(false);
-        jPanel2.add(ComboDistrict3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 180, -1));
+        jPanel2.add(ComboDistrict3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 180, -1));
 
-        LabelDistrict3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelDistrict3.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        LabelDistrict3.setForeground(new java.awt.Color(0, 153, 153));
         LabelDistrict3.setText("District");
-        jPanel2.add(LabelDistrict3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 60, -1));
+        jPanel2.add(LabelDistrict3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, 60, -1));
 
         ComboCanton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboCanton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboCanton3.setOpaque(true);
         ComboCanton3.setRequestFocusEnabled(false);
         ComboCanton3.addActionListener(this::ComboCanton3ActionPerformed);
-        jPanel2.add(ComboCanton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, 180, -1));
+        jPanel2.add(ComboCanton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, 180, -1));
 
-        LabelCanton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelCanton3.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        LabelCanton3.setForeground(new java.awt.Color(0, 153, 153));
         LabelCanton3.setText("Canton");
-        jPanel2.add(LabelCanton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, -1, -1));
+        jPanel2.add(LabelCanton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, -1, -1));
 
         ComboProvince3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboProvince3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboProvince3.setOpaque(true);
         ComboProvince3.setRequestFocusEnabled(false);
         ComboProvince3.addActionListener(this::ComboProvince3ActionPerformed);
-        jPanel2.add(ComboProvince3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 180, -1));
+        jPanel2.add(ComboProvince3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, 180, -1));
 
-        LabelProvince3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelProvince3.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        LabelProvince3.setForeground(new java.awt.Color(0, 153, 153));
         LabelProvince3.setText("Province");
-        jPanel2.add(LabelProvince3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
+        jPanel2.add(LabelProvince3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, -1, -1));
 
         ComboCountry3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboCountry3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboCountry3.setOpaque(true);
         ComboCountry3.setRequestFocusEnabled(false);
         ComboCountry3.addActionListener(this::ComboCountry3ActionPerformed);
-        jPanel2.add(ComboCountry3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 180, -1));
+        jPanel2.add(ComboCountry3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 180, -1));
 
-        LabelCountry3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LabelCountry3.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        LabelCountry3.setForeground(new java.awt.Color(0, 153, 153));
         LabelCountry3.setText("Country");
-        jPanel2.add(LabelCountry3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
-        jPanel2.add(TextPhoneVet, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 180, -1));
+        jPanel2.add(LabelCountry3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, -1));
+        jPanel2.add(TextPhoneVet, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 180, -1));
 
-        jLabel28.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel28.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(0, 153, 153));
         jLabel28.setText("Phone");
-        jPanel2.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 90, 30));
-        jPanel2.add(TextVetClinicName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 180, -1));
+        jPanel2.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 90, 30));
+        jPanel2.add(TextVetClinicName, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 180, -1));
 
-        jLabel27.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel27.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(0, 153, 153));
         jLabel27.setText("Clinic's Name");
-        jPanel2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 90, 30));
-        jPanel2.add(TextVetLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 180, -1));
+        jPanel2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 90, 30));
+        jPanel2.add(TextVetLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 180, -1));
 
-        jLabel26.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel26.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(0, 153, 153));
         jLabel26.setText("Last Name");
-        jPanel2.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 70, 30));
-        jPanel2.add(TextVetFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 180, -1));
+        jPanel2.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 70, 30));
+        jPanel2.add(TextVetFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 180, -1));
 
-        jLabel25.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel25.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(0, 153, 153));
         jLabel25.setText("First Name");
-        jPanel2.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 70, 30));
+        jPanel2.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 70, 30));
 
-        jLabel8.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel8.setOpaque(true);
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 630, 420));
+        ButtonCreateAccount.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonCreateAccount.setFont(new java.awt.Font("Roboto SemiBold", 0, 14)); // NOI18N
+        ButtonCreateAccount.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonCreateAccount.setText("REGISTER");
+        ButtonCreateAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ButtonCreateAccount.addActionListener(this::ButtonCreateAccountActionPerformed);
+        jPanel2.add(ButtonCreateAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, 120, 40));
 
-        jLabel24.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel24.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel24.setText("Register Veterinarian");
+        jLabel24.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel24.setFont(new java.awt.Font("Roboto SemiBold", 0, 36)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel24.setText("REGISTER VETERINARIAN");
         jLabel24.setOpaque(true);
-        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 230, 40));
+        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 430, 40));
 
         jLabel9.setBackground(new java.awt.Color(204, 204, 0));
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/Cat1.png"))); // NOI18N
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(-170, 0, 840, 560));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/istockphoto-1359095204-612x612.jpg"))); // NOI18N
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, -110, 410, 830));
+
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setOpaque(true);
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 610));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 612, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -171,6 +195,18 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     private void TextVetLoctaionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextVetLoctaionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextVetLoctaionActionPerformed
+
+    private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
+        // boton que envia los datos del formulario a la capa de access para que los inserten en la base de datos
+        DbObject District = (DbObject) ComboDistrict.getSelectedItem();
+        char[] passwordCharecters = TextPassword.getPassword();
+        char[] rePasswordCharecters = TextPasswordRE.getPassword();
+        boolean correct = controller.InsertPerson(TextEmail.getText(),TextFirstName.getText(),TextLastName.getText(),new String(passwordCharecters),new String(rePasswordCharecters), TextUserName.getText(),District, TextPhone.getText());
+        if (correct){
+            SignInForm window = new SignInForm();
+            dispose();
+        }
+    }//GEN-LAST:event_ButtonCreateAccountActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,6 +234,7 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonCreateAccount;
     private javax.swing.JComboBox<DbObject> ComboCanton3;
     private javax.swing.JComboBox<DbObject> ComboCountry3;
     private javax.swing.JComboBox<DbObject> ComboDistrict3;
