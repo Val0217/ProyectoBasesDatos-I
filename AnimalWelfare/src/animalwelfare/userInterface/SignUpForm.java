@@ -449,7 +449,7 @@ public class SignUpForm extends javax.swing.JFrame {
         LableTitle1.setForeground(new java.awt.Color(255, 255, 0));
         LableTitle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LableTitle1.setText("NOW!");
-        PanelBackGround.add(LableTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, -1));
+        PanelBackGround.add(LableTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
 
         LableTitle3.setFont(new java.awt.Font("Roboto Black", 1, 36)); // NOI18N
         LableTitle3.setForeground(new java.awt.Color(255, 255, 255));
