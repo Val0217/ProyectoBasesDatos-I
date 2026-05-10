@@ -56,7 +56,7 @@ public class InsertPetController {
         view.fillMedicine(PetMedicineOperations.listMedicine());
     }
     
-    public boolean InsertPet(String color, int age, String description, String petName, String chip, DbObject idEnergy, DbObject idType, DbObject idBreed, DbObject idDistrict, DbObject idSpaceRequired, DbObject idPetTraining, DbObject idPetSize, DbObject idVeterinarian, ArrayList<DbObject> idIllness, ArrayList<DbObject> idTreatment, ArrayList<DbObject> idMedicine) throws SQLException{
+    public boolean InsertPet(String color, int age, String description, String petName, String chip, DbObject idEnergy, DbObject idType, DbObject idBreed, DbObject idDistrict, DbObject idSpaceRequired, DbObject idPetTraining, DbObject idPetSize, DbObject idVeterinarian, ArrayList<DbObject> idIllness, ArrayList<DbObject> idTreatment, ArrayList<DbObject> idMedicine, ArrayList<String> imageFiles) throws SQLException{
 
         // validaciones
         if (color == null || color.trim().isEmpty()) {
@@ -137,10 +137,11 @@ public class InsertPetController {
         Integer[] dataIllness = illnessIds.toArray(new Integer[0]);
         Integer[] dataTreatment = treatmentIds.toArray(new Integer[0]);
         Integer[] dataMedicine = medicineIds.toArray(new Integer[0]);
+        String[] dataImageFiles = imageFiles.toArray(new String[0]);
         
         
 
-        if (PetOperations.InsertPet(color, age, description, petName, chip, idEnergy.getId(), idType.getId(), idBreed.getId(), idDistrict.getId(), idSpaceRequired.getId(), idPetTraining.getId(), idPetSize.getId(), Session.getInstance().getUserId(), idVeterinarian.getId(), dataIllness, dataTreatment, dataMedicine)) {
+        if (PetOperations.InsertPet(color, age, description, petName, chip, idEnergy.getId(), idType.getId(), idBreed.getId(), idDistrict.getId(), idSpaceRequired.getId(), idPetTraining.getId(), idPetSize.getId(), Session.getInstance().getUserId(), idVeterinarian.getId(), dataIllness, dataTreatment, dataMedicine, dataImageFiles)) {
             JOptionPane.showMessageDialog(null, "Pet inserted successfully.");
             return true;
         } else {

@@ -33,10 +33,7 @@ public class InsertPetForm extends javax.swing.JFrame {
     private DefaultListModel<DbObject> modelIllness = null;
     private DefaultListModel<DbObject> modelMedicine = null;
     private DefaultListModel<DbObject> modelTreatment = null;
-    private DefaultListModel<File> selectedImageFile = null;
-
-    // bandera
-    private boolean isImageSelected = false;
+    private DefaultListModel<String> selectedImageFile = null;
 
     // procedimiento que rellena la lista de Veterinarian
     public void fillVeterinarian(ArrayList<DbObject> listVeterinarian) {
@@ -309,7 +306,6 @@ public class InsertPetForm extends javax.swing.JFrame {
         jLabel35 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(930, 590));
         setResizable(false);
 
         PanelBackGround.setBackground(new java.awt.Color(0, 153, 153));
@@ -1134,9 +1130,14 @@ public class InsertPetForm extends javax.swing.JFrame {
             medicineList.add(ListPetMedicine.getModel().getElementAt(i));
         }
 
+        ArrayList<String> imageFiles = new ArrayList<>();
+        for (int i = 0; i < selectedImageFile.getSize(); i++) {
+            imageFiles.add(selectedImageFile.getElementAt(i));
+        }
+
         boolean correct;
         try {
-            correct = controller.InsertPet(color, age, description, petName, chip, Energy, Type, Breed, District, SpaceRequired, Training, Size, Veterinarian, illnessList, treatmentList, medicineList);
+            correct = controller.InsertPet(color, age, description, petName, chip, Energy, Type, Breed, District, SpaceRequired, Training, Size, Veterinarian, illnessList, treatmentList, medicineList, imageFiles);
             if (correct){
                 MainMenu window = new MainMenu();
                 dispose();
@@ -1216,14 +1217,7 @@ public class InsertPetForm extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonAddTreatmentMouseClicked
 
     private void ButtonSelectImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonSelectImageMouseClicked
-        if (isImageSelected == true) {
-            File selected = ListImages.getSelectedValue();
 
-            if (selected != null) {
-                selectedImageFile.removeElement(selected);
-            }
-            return;
-        }
         
         JFileChooser fileChooser = new JFileChooser();
         
@@ -1260,9 +1254,7 @@ public class InsertPetForm extends javax.swing.JFrame {
 
                 for (int i = 0; i < selectedImageFile.size(); i++) {
 
-                    if (selectedImageFile.getElementAt(i)
-                            .getAbsolutePath()
-                            .equals(file.getAbsolutePath())) {
+                    if (selectedImageFile.getElementAt(i).equals(file.getAbsolutePath())) {
 
                         exists = true;
                         break;
@@ -1270,7 +1262,7 @@ public class InsertPetForm extends javax.swing.JFrame {
                 }
 
                 if (!exists) {
-                    selectedImageFile.addElement(file);
+                    selectedImageFile.addElement(file.getAbsolutePath());
                 }
             }
         }
@@ -1337,7 +1329,7 @@ public class InsertPetForm extends javax.swing.JFrame {
     private javax.swing.JLabel LabelButtonSelectImage3;
     private javax.swing.JLabel LabelDistrict;
     private javax.swing.JLabel LableTitle;
-    private javax.swing.JList<File> ListImages;
+    private javax.swing.JList<String> ListImages;
     private javax.swing.JList<DbObject> ListPetIllness;
     private javax.swing.JList<DbObject> ListPetMedicine;
     private javax.swing.JList<DbObject> ListPetTreatment;

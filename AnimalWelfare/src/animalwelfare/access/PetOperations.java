@@ -123,37 +123,47 @@ public class PetOperations {
         }
     }
 
-    public static boolean InsertPet(String color, int age, String description, String petName, String chip, int idEnergy, int idType, int idBreed, int idDistrict, int idSpaceRequired, int idPetTraining, int idPetSize, int idPerson, int idVeterinarian, Integer[] illnessIds, Integer[] treatmentIds, Integer[] medicineIds) throws SQLException {
+    public static boolean InsertPet(String color, int age, String description, String petName, String chip, int idEnergy, int idType, int idBreed, int idDistrict, int idSpaceRequired, int idPetTraining, int idPetSize, int idPerson, int idVeterinarian, Integer[] illnessIds, Integer[] treatmentIds, Integer[] medicineIds, String[] imageFiles) throws SQLException {
 
         try {
             Connection con = ConexionOracle.connect();
-            
-            
-            // Obtenemos la conexión de OracleConnection para poder crear los arreglos de SQL Array
             OracleConnection oracleConnection = con.unwrap(OracleConnection.class);
-            // Convertimos las listas de IDs a arreglos de SQL Array
-            Array arrayIllness = oracleConnection.createOracleArray(
-                "NUMBERLIST",
-                illnessIds
-            );
-            Array arrayTreatment = oracleConnection.createOracleArray(
-                "NUMBERLIST",
-                treatmentIds
-            );
-            Array arrayMedicine = oracleConnection.createOracleArray(
-                "NUMBERLIST",
-                medicineIds
-            );
 
-            // Creamos la consulta SQL para insertar una nueva persona utilizando el procedimiento insertPerson
-            String SQL = "BEGIN pr_insert_pet('"+color+"',"+age+",'"+description+"','"+petName+"','"+chip+"',"+idEnergy+","+idType+","+idBreed+","+idDistrict+","+idSpaceRequired+","+idPetTraining+","+idPetSize+","+idPerson+","+idVeterinarian+","+arrayIllness+","+arrayTreatment+","+arrayMedicine+"); END;";
-            
+            // Arrays Oracle
+            Array arrayIllness = oracleConnection.createOracleArray("NUMBERLIST", illnessIds);
+            Array arrayTreatment = oracleConnection.createOracleArray("NUMBERLIST", treatmentIds);
+            Array arrayMedicine = oracleConnection.createOracleArray("NUMBERLIST", medicineIds);
+            Array arrayImageFiles = oracleConnection.createOracleArray("VARCHAR2LIST", imageFiles);
 
-            Statement cn = con.createStatement(); // esto es para poder ejecutar consultas
-            cn.execute(SQL); // ejecutamos el query
-            
+            // CallableStatement (NO Statement)
+            CallableStatement cs = con.prepareCall("{ call pr_insert_pet(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
 
-            cn.close();
+            // parámetros simples
+            cs.setString(1, color);
+            cs.setInt(2, age);
+            cs.setString(3, description);
+            cs.setString(4, petName);
+            cs.setString(5, chip);
+            cs.setInt(6, idEnergy);
+            cs.setInt(7, idType);
+            cs.setInt(8, idBreed);
+            cs.setInt(9, idDistrict);
+            cs.setInt(10, idSpaceRequired);
+            cs.setInt(11, idPetTraining);
+            cs.setInt(12, idPetSize);
+            cs.setInt(13, idPerson);
+            cs.setInt(14, idVeterinarian);
+
+            // arrays
+            cs.setArray(15, arrayIllness);
+            cs.setArray(16, arrayTreatment);
+            cs.setArray(17, arrayMedicine);
+            cs.setArray(18, arrayImageFiles);
+
+            // ejecutar
+            cs.execute();
+
+            cs.close();
             con.close();
             
             return true;
