@@ -304,7 +304,7 @@ public class SignUpForm extends javax.swing.JFrame {
                                         .addGap(157, 157, 157))
                                     .addGroup(PanelFormLayout.createSequentialGroup()
                                         .addComponent(ComboCanton, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(23, 23, 23)))
+                                        .addGap(16, 16, 16)))
                                 .addGap(8, 8, 8)
                                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PanelFormLayout.createSequentialGroup()
@@ -431,13 +431,13 @@ public class SignUpForm extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PanelFormLayout.createSequentialGroup()
-                        .addComponent(LabelCanton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelFormLayout.createSequentialGroup()
-                        .addComponent(LabelDistrict)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LabelCanton)
+                            .addComponent(LabelDistrict))
+                        .addGap(32, 32, 32))
+                    .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20)
                 .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
@@ -458,7 +458,7 @@ public class SignUpForm extends javax.swing.JFrame {
         PanelBackGround.add(LableTitle3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
 
         ImagenBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/grass.jpg"))); // NOI18N
-        PanelBackGround.add(ImagenBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 690));
+        PanelBackGround.add(ImagenBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 690));
 
         LableTitle2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LableTitle2.setForeground(new java.awt.Color(255, 255, 255));
