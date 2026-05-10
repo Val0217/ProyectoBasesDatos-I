@@ -60,12 +60,12 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TextVetLoctaion.addActionListener(this::TextVetLoctaionActionPerformed);
-        jPanel2.add(TextVetLoctaion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 450, 60));
+        jPanel2.add(TextVetLoctaion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, 450, 60));
 
         jLabel29.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(0, 153, 153));
         jLabel29.setText("Address");
-        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 90, 30));
+        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 90, 30));
 
         ComboDistrict3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboDistrict3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -147,11 +147,11 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         jPanel2.add(ButtonCreateAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, 120, 40));
 
         jLabel24.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel24.setFont(new java.awt.Font("Roboto Black", 1, 36)); // NOI18N
+        jLabel24.setFont(new java.awt.Font("Roboto SemiBold", 0, 36)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(0, 153, 153));
         jLabel24.setText("REGISTER VETERINARIAN");
         jLabel24.setOpaque(true);
-        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 460, 40));
+        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 430, 40));
 
         jLabel9.setBackground(new java.awt.Color(204, 204, 0));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animalwelfare/userInterface/images/istockphoto-1359095204-612x612.jpg"))); // NOI18N
