@@ -35,7 +35,7 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         TextVetLoctaion = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
-        ComboDistrict = new javax.swing.JComboBox<>();
+        ComboDistrict3 = new javax.swing.JComboBox<>();
         LabelDistrict3 = new javax.swing.JLabel();
         ComboCanton3 = new javax.swing.JComboBox<>();
         LabelCanton3 = new javax.swing.JLabel();
@@ -72,11 +72,11 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         jLabel29.setText("Address");
         jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 90, 30));
 
-        ComboDistrict.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ComboDistrict.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ComboDistrict.setOpaque(true);
-        ComboDistrict.setRequestFocusEnabled(false);
-        jPanel2.add(ComboDistrict, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 180, -1));
+        ComboDistrict3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboDistrict3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ComboDistrict3.setOpaque(true);
+        ComboDistrict3.setRequestFocusEnabled(false);
+        jPanel2.add(ComboDistrict3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 180, -1));
 
         LabelDistrict3.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         LabelDistrict3.setForeground(new java.awt.Color(0, 153, 153));
@@ -154,7 +154,6 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         jLabel24.setBackground(new java.awt.Color(255, 255, 255));
         jLabel24.setFont(new java.awt.Font("Roboto SemiBold", 0, 36)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(0, 153, 153));
-        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel24.setText("REGISTER VETERINARIAN");
         jLabel24.setOpaque(true);
         jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 530, 40));
@@ -203,7 +202,7 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     }//GEN-LAST:event_TextVetLoctaionActionPerformed
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
-           // espera
+
     }//GEN-LAST:event_ButtonCreateAccountActionPerformed
 
     /**
@@ -235,7 +234,7 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     private javax.swing.JButton ButtonCreateAccount;
     private javax.swing.JComboBox<DbObject> ComboCanton3;
     private javax.swing.JComboBox<DbObject> ComboCountry3;
-    private javax.swing.JComboBox<DbObject> ComboDistrict;
+    private javax.swing.JComboBox<DbObject> ComboDistrict3;
     private javax.swing.JComboBox<DbObject> ComboProvince3;
     private javax.swing.JLabel LabelCanton3;
     private javax.swing.JLabel LabelCountry3;
