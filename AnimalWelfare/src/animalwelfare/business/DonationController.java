@@ -23,7 +23,7 @@ public class DonationController {
         this.view = view;
         view.fillCombosAssociation(DonationOperations.listAssociations());
         view.fillCombosCurrency(DonationOperations.listCurrencies());
-        view.loadDonations(DonationOperations.getDonations());
+        view.loadDonations(DonationOperations.getDonations(null, null, null, null));
     }
 
     /**
@@ -96,7 +96,7 @@ public class DonationController {
         if (success) {
                 JOptionPane.showMessageDialog(null, "Donation registered successfully!",
                 "Success", JOptionPane.INFORMATION_MESSAGE);
-                view.loadDonations(DonationOperations.getDonations());
+                view.loadDonations(DonationOperations.getDonations(null, null, null, null));
         } else {
             JOptionPane.showMessageDialog(null, "Failed to register donation. Please try again.",
                 "Error", JOptionPane.ERROR_MESSAGE);
@@ -105,13 +105,10 @@ public class DonationController {
         return success;
     }
 
-    /**
-     * Retrieves donations applying the given optional filters.
-     * Any null parameter means "no filter for that field".
-     * @return DefaultTableModel ready to assign to a JTable
-     */
-    public DefaultTableModel getDonations() {
-        return DonationOperations.getDonations();
+
+    public DefaultTableModel getDonations(Integer idPerson, Integer idAssociation, Date dateFrom, Date dateTo) {
+        if (idAssociation == 0) idAssociation = null;
+        return DonationOperations.getDonations(idPerson, idAssociation, dateFrom, dateTo);
     }
 
     /**

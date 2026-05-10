@@ -267,48 +267,23 @@ public class DonationForm extends javax.swing.JFrame {
     private void onSearch() {
         DbObject assoc = (DbObject) comboAssociationFilter.getSelectedItem();
         java.util.Date dateFrom = (java.util.Date) spinnerDateFrom.getValue();
-        java.util.Date dateTo   = (java.util.Date) spinnerDateTo.getValue();
+        java.util.Date dateTo = (java.util.Date) spinnerDateTo.getValue();
+        
+        java.sql.Date sqldateFrom =new java.sql.Date(dateFrom.getTime());
+        java.sql.Date sqldateTo =new java.sql.Date(dateTo.getTime());
 
         // MOCK — simulate search by filtering existing list
-        DefaultTableModel model = (DefaultTableModel) modelDonationsBase;
-        DefaultTableModel filteredModel = new DefaultTableModel(
-            new String[]{"ID", "Donor", "Association", "Amount", "Currency", "Date"}, 0
-        ) {
-            @Override
-            public boolean isCellEditable(int row, int col) { return false; }
-        };
+        DefaultTableModel model = controller.getDonations(null, assoc != null ? assoc.getId() : null, sqldateFrom, sqldateTo);
 
-        for (int i = 0; i < model.getRowCount(); i++) {
-            String assocName = model.getValueAt(i, 2).toString();
-            String dateStr   = model.getValueAt(i, 5).toString();
-            java.util.Date date = java.sql.Date.valueOf(dateStr);
-
-            boolean matchesAssoc = (assoc == null || assoc.getId() == 0)
-                || assocName.equals(assoc.toString());
-            boolean matchesDate  = (dateFrom == null || !date.before(dateFrom))
-                && (dateTo == null || !date.after(dateTo));
-
-            if (matchesAssoc && matchesDate) {
-                filteredModel.addRow(new Object[]{
-                    model.getValueAt(i, 0),
-                    model.getValueAt(i, 1),
-                    model.getValueAt(i, 2),
-                    model.getValueAt(i, 3),
-                    model.getValueAt(i, 4),
-                    model.getValueAt(i, 5)
-                });
-            }
-        }
-
-        tableDonations.setModel(filteredModel);
-        updateFooter(filteredModel);
+        tableDonations.setModel(model);
+        updateFooter(model);
     }
 
     private void clearFilter() {
         comboAssociationFilter.setSelectedIndex(0);
         spinnerDateFrom.setValue(getStartOfYear());
         spinnerDateTo.setValue(new java.util.Date());
-        loadDonations(modelDonationsBase);
+        loadDonations(controller.getDonations(null, null, null, null));
     }
 
     private void clearNewForm() {

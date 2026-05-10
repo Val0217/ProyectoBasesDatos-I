@@ -54,7 +54,7 @@ public class DonationOperations {
      * @param dateTo        Filter end date (nullable)
      * @return DefaultTableModel with donation data
      */
-    public static DefaultTableModel getDonations() {
+    public static DefaultTableModel getDonations(Integer idPerson, Integer idAssociation, Date dateFrom, Date dateTo) {
         DefaultTableModel model = new DefaultTableModel(COLUMNS, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -62,16 +62,21 @@ public class DonationOperations {
             }
         };
 
-        String call = "{ ? = call fn_get_donation_join() }";
+        String call = "{ call pr_get_donations(?, ?, ?, ?, ?) }";
 
         try (Connection con = ConexionOracle.connect();
              CallableStatement cs = con.prepareCall(call)) {
 
+            // Set input parameters (or null if not specified)
+            setNullableInt(cs, 1, idPerson);
+            setNullableInt(cs, 2, idAssociation);
+            setNullableDate(cs, 3, dateFrom);
+            setNullableDate(cs, 4, dateTo);
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.registerOutParameter(5, OracleTypes.CURSOR);
             cs.execute();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
+            try (ResultSet rs = (ResultSet) cs.getObject(5)) {
                 while (rs.next()) {
                     model.addRow(new Object[]{
                         rs.getInt("Id"),
