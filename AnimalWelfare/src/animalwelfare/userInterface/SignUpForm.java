@@ -149,6 +149,8 @@ public class SignUpForm extends javax.swing.JFrame {
         PanelBackGround.setBackground(new java.awt.Color(204, 204, 204));
         PanelBackGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        PanelForm.setBackground(new java.awt.Color(255, 255, 255));
+
         LabelSubTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LabelSubTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -377,7 +379,7 @@ public class SignUpForm extends javax.swing.JFrame {
             .addGroup(PanelFormLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(LabelSubTitle)
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -438,12 +440,12 @@ public class SignUpForm extends javax.swing.JFrame {
                     .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20)
+                .addGap(27, 27, 27)
                 .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addGap(20, 20, 20))
         );
 
-        PanelBackGround.add(PanelForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 70, 450, 580));
+        PanelBackGround.add(PanelForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 70, 450, 590));
 
         LableTitle1.setFont(new java.awt.Font("Roboto Black", 1, 36)); // NOI18N
         LableTitle1.setForeground(new java.awt.Color(255, 255, 0));
