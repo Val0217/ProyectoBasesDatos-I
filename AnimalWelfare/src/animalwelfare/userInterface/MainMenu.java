@@ -239,7 +239,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel15.setText("Rescues");
+        jLabel15.setText("Match");
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 64)); // NOI18N
         jLabel16.setText("→");
