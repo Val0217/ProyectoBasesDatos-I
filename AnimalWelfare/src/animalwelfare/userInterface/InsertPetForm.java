@@ -7,11 +7,16 @@ import animalwelfare.access.DbObject;
 import animalwelfare.business.InsertPetController;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author valer
@@ -28,6 +33,10 @@ public class InsertPetForm extends javax.swing.JFrame {
     private DefaultListModel<DbObject> modelIllness = null;
     private DefaultListModel<DbObject> modelMedicine = null;
     private DefaultListModel<DbObject> modelTreatment = null;
+    private DefaultListModel<File> selectedImageFile = null;
+
+    // bandera
+    private boolean isImageSelected = false;
 
     // procedimiento que rellena la lista de Veterinarian
     public void fillVeterinarian(ArrayList<DbObject> listVeterinarian) {
@@ -37,12 +46,14 @@ public class InsertPetForm extends javax.swing.JFrame {
         modelIllness = new DefaultListModel<>();
         modelMedicine = new DefaultListModel<>();
         modelTreatment = new DefaultListModel<>();
+        selectedImageFile = new DefaultListModel<>();
         allItemsVeterinarian = new ArrayList<>();
         for (DbObject c : listVeterinarian) {
             modelVeterinarian.addElement(c);
             allItemsVeterinarian.add(c);
         }
         ListVeterinarian.setModel(modelVeterinarian);
+        ListImages.setModel(selectedImageFile);
     }
     
     public void filterVeterian() {
@@ -358,9 +369,17 @@ public class InsertPetForm extends javax.swing.JFrame {
         ImagePreview.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ImagePreview.setText("Image");
         ImagePreview.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        ImagePreview.setMaximumSize(new java.awt.Dimension(216, 200));
+        ImagePreview.setMinimumSize(new java.awt.Dimension(216, 200));
+        ImagePreview.setPreferredSize(new java.awt.Dimension(216, 200));
 
         ButtonSelectImage.setBackground(new java.awt.Color(0, 102, 102));
         ButtonSelectImage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ButtonSelectImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonSelectImageMouseClicked(evt);
+            }
+        });
 
         LabelButtonSelectImage3.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         LabelButtonSelectImage3.setForeground(new java.awt.Color(255, 255, 255));
@@ -371,7 +390,10 @@ public class InsertPetForm extends javax.swing.JFrame {
         ButtonSelectImage.setLayout(ButtonSelectImageLayout);
         ButtonSelectImageLayout.setHorizontalGroup(
             ButtonSelectImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LabelButtonSelectImage3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ButtonSelectImageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelButtonSelectImage3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         ButtonSelectImageLayout.setVerticalGroup(
             ButtonSelectImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,8 +437,8 @@ public class InsertPetForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(BasicInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ButtonSelectImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ImagePreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(ImagePreview, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         BasicInformationPanelLayout.setVerticalGroup(
@@ -443,7 +465,7 @@ public class InsertPetForm extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jScrollPane7)))
                     .addGroup(BasicInformationPanelLayout.createSequentialGroup()
-                        .addComponent(ImagePreview, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ImagePreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ButtonSelectImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1214,6 +1236,67 @@ public class InsertPetForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ButtonAddTreatmentMouseClicked
 
+    private void ButtonSelectImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonSelectImageMouseClicked
+        if (isImageSelected == true) {
+            File selected = ListImages.getSelectedValue();
+
+            if (selected != null) {
+                selectedImageFile.removeElement(selected);
+            }
+            return;
+        }
+        
+        JFileChooser fileChooser = new JFileChooser();
+        
+        FileNameExtensionFilter filter =
+        new FileNameExtensionFilter(
+            "Images",
+            "jpg",
+            "png",
+            "jpeg"
+        );
+
+        fileChooser.setFileFilter(filter);
+        fileChooser.setMultiSelectionEnabled(true);
+
+        int result = fileChooser.showOpenDialog(null);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+
+            File selectedFile = fileChooser.getSelectedFile();
+
+            ImageIcon icon = new ImageIcon(selectedFile.getAbsolutePath());
+
+            Image image = icon.getImage().getScaledInstance(
+                ImagePreview.getWidth(),
+                ImagePreview.getHeight(),
+                Image.SCALE_SMOOTH
+            );
+
+            ImagePreview.setIcon(new ImageIcon(image));
+            
+            File[] files = fileChooser.getSelectedFiles();
+            for (File file : files) {
+                boolean exists = false;
+
+                for (int i = 0; i < selectedImageFile.size(); i++) {
+
+                    if (selectedImageFile.getElementAt(i)
+                            .getAbsolutePath()
+                            .equals(file.getAbsolutePath())) {
+
+                        exists = true;
+                        break;
+                    }
+                }
+
+                if (!exists) {
+                    selectedImageFile.addElement(file);
+                }
+            }
+        }
+    }//GEN-LAST:event_ButtonSelectImageMouseClicked
+
     
     
     
@@ -1275,7 +1358,7 @@ public class InsertPetForm extends javax.swing.JFrame {
     private javax.swing.JLabel LabelButtonSelectImage3;
     private javax.swing.JLabel LabelDistrict;
     private javax.swing.JLabel LableTitle;
-    private javax.swing.JList<DbObject> ListImages;
+    private javax.swing.JList<File> ListImages;
     private javax.swing.JList<DbObject> ListPetIllness;
     private javax.swing.JList<DbObject> ListPetMedicine;
     private javax.swing.JList<DbObject> ListPetTreatment;
