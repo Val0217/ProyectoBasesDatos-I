@@ -41,6 +41,15 @@ BEGIN
     END LOOP;
 
     COMMIT;
+    
+EXCEPTION
+    WHEN DUP_VAL_ON_INDEX THEN
+        ROLLBACK;
+        p_success := 0;
+
+    WHEN OTHERS THEN
+        ROLLBACK;
+        p_success := 0;
 END pr_insert_foster_home;
 /
 

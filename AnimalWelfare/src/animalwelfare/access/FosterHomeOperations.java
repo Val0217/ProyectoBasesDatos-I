@@ -13,7 +13,7 @@ import oracle.jdbc.OracleTypes;
 public class FosterHomeOperations {
 
     private static final String[] COLUMNS = {
-        "ID", "Person", "Needs Donation", "Accepted Sizes",
+        "ID", "PersonID", "Person", "Needs Donation", "Accepted Sizes",
         "Accepted Energy Levels", "Accepted Spaces"
     };
 
@@ -50,6 +50,9 @@ public class FosterHomeOperations {
             return true;
 
         } catch (SQLException e) {
+            if (e.getErrorCode() == 1) {
+                return false; // Duplicate entry (already has a foster home)
+            }
             JOptionPane.showMessageDialog(null, "Error inserting foster home: " + e.getMessage());
             return false;
         }

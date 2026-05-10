@@ -353,23 +353,6 @@ public class FosterHomeForm extends javax.swing.JFrame {
     }
 
     private void onLoadMyFosterHome() {
-        // MOCK — load fake data into edit form
-        chkNeedsDonationEdit.setSelected(true);
-
-        // Pre-check first checkboxes as example
-        if (!checkSizesEdit.isEmpty())  checkSizesEdit.get(0).setSelected(true);
-        if (!checkEnergyEdit.isEmpty()) checkEnergyEdit.get(1).setSelected(true);
-        if (!checkSpacesEdit.isEmpty()) checkSpacesEdit.get(0).setSelected(true);
-
-        currentFosterHomeId = 1; // MOCK ID
-        btnUpdate.setEnabled(true);
-        btnDelete.setEnabled(true);
-
-        JOptionPane.showMessageDialog(this,
-            "Foster home data loaded. (MOCK)",
-            "Loaded", JOptionPane.INFORMATION_MESSAGE);
-
-        // REAL — replace with:
         FosterHomeData data = controller.loadMyFosterHome();
         if (data != null) { loadEditForm(data); }
     }
@@ -383,7 +366,8 @@ public class FosterHomeForm extends javax.swing.JFrame {
     }
 
     private void onDelete() {
-        controller.deleteFosterHome(currentFosterHomeId);
+        boolean success = controller.deleteFosterHome(currentFosterHomeId);
+        if (success) clearEditForm();
     }
 
     // -------------------------------------------------------------------------

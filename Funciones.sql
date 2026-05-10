@@ -938,6 +938,7 @@ BEGIN
 
     RETURN pCursor;
 END;
+/
 
 
 /* CURRENCY */
