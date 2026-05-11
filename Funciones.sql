@@ -26,6 +26,35 @@ END;
 
 
 /* ------------------------------------------------------------
+   Funcion: fn_is_admin
+   Descripcion:
+   Verifica si una persona tiene rol de admin.
+   Devuelve 1 si es admin, 0 si no lo es.
+   ------------------------------------------------------------ */
+CREATE OR REPLACE FUNCTION fn_is_admin(
+    p_idPerson IN NUMBER
+)
+RETURN NUMBER
+AS
+    v_count NUMBER;
+BEGIN
+
+    SELECT COUNT(*)
+    INTO v_count
+    FROM Admin
+    WHERE IdPerson = p_idPerson;
+
+    IF v_count > 0 THEN
+        RETURN 1;
+    ELSE
+        RETURN 0;
+    END IF;
+
+END fn_is_admin;
+/
+
+
+/* ------------------------------------------------------------
    Funcion: fn_get_parameter_value
    Descripcion:
    Obtiene el valor numerico de un parametro del sistema.

@@ -84,6 +84,123 @@ public class UserPetOperations {
             }
         }
     }
+    public DefaultTableModel getFoundPets() throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall("{call pr_get_found_pet_table(?)}")) {
+
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
+                return buildFoundPetTableModel(rs);
+            }
+        }
+    }
+    private DefaultTableModel buildFoundPetTableModel(ResultSet rs) throws SQLException {
+        String[] columns = {
+            "PetId",
+            "OwnerId",
+            "First Name",
+            "Last Name",
+            "Emails",
+            "Phones",
+            "Pet Name",
+            "Color",
+            "Chip",
+            "Type",
+            "Breed",
+            "Size"
+        };
+
+        DefaultTableModel model = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        while (rs.next()) {
+            model.addRow(new Object[] {
+                rs.getInt("PetId"),
+                rs.getInt("OwnerId"),
+                rs.getString("FirstName"),
+                rs.getString("LastName"),
+                rs.getString("Emails"),
+                rs.getString("Phones"),
+                rs.getString("PetName"),
+                rs.getString("Color"),
+                rs.getString("Chip"),
+                rs.getString("PetType"),
+                rs.getString("Breed"),
+                rs.getString("PetSize")
+            });
+        }
+
+        return model;
+    }
+    public List<String> getOwnerEmails(int ownerId) throws SQLException {
+        List<String> emails = new ArrayList<>();
+
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall("{call pr_get_owner_emails(?,?)}")) {
+
+            cs.setInt(1, ownerId);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
+                while (rs.next()) {
+                    emails.add(rs.getString(1));
+                }
+            }
+        }
+
+        return emails;
+    }
+    public List<String> getOwnerPhones(int ownerId) throws SQLException {
+        List<String> phones = new ArrayList<>();
+
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall("{call pr_get_owner_phones(?,?)}")) {
+
+            cs.setInt(1, ownerId);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
+                while (rs.next()) {
+                    phones.add(rs.getString(1));
+                }
+            }
+        }
+
+        return phones;
+    }
+    public DefaultTableModel getUserMissingPets(int ownerId) throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall(
+                 "{call pr_get_user_missing_pet_table(?,?)}")) {
+
+            cs.setInt(1, ownerId);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
+                return buildPetTableModel(rs);
+            }
+        }
+    }
+    public void takeBackMissingReport(int petId, int ownerId) throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall(
+                 "{call pr_take_back_missing_report(?,?)}")) {
+
+            cs.setInt(1, petId);
+            cs.setInt(2, ownerId);
+            cs.execute();
+        }
+    }
 
         public DefaultTableModel getAdoptionPets(int currentUserId, PetFilter filter) throws SQLException {
             try (Connection conn = ConexionOracle.connect();
@@ -132,9 +249,14 @@ public class UserPetOperations {
             cs.execute();
 
             int result = cs.getInt(1);
-            if (result != 1) {
-                throw new SQLException("Pet not found, or this pet does not belong to this user.");
-            }
+
+    if (result == -2) {
+        throw new SQLException("This pet is reported as missing and cannot be put up for adoption.");
+    }
+
+    if (result != 1) {
+        throw new SQLException("Pet not found, or this pet does not belong to this user.");
+    }
         }
     }
     public void reportPetMissing(int petId, int ownerId) throws SQLException {

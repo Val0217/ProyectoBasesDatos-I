@@ -38,7 +38,7 @@ END pr_stat_pets_by_type_state;
 -- -------------------------------------------------------------
 -- B. Total de donaciones por asociación por rango de fecha
 -- -------------------------------------------------------------
-CREATE OR REPLACE PROCEDURE pr_stat_donations_by_association(
+CREATE OR REPLACE PROCEDURE pr_stat_donation_by_asso(
     p_dateFrom DATE,
     p_dateTo   DATE,
     p_cursor   OUT SYS_REFCURSOR
@@ -57,7 +57,7 @@ BEGIN
           AND (p_dateTo   IS NULL OR d.DonationDate <= p_dateTo)
         GROUP BY a.Name, c.Name
         ORDER BY a.Name, c.Name;
-END pr_stat_donations_by_association;
+END pr_stat_donation_by_asso;
 /
 
 -- -------------------------------------------------------------

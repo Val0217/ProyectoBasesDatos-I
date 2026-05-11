@@ -53,19 +53,62 @@ INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Santiago 
 -- -------------------------------------------------------------
 
 -- Tipos de mascota
-INSERT INTO PetType (Id, Name) VALUES (1, 'Perro');
-INSERT INTO PetType (Id, Name) VALUES (2, 'Gato');
-INSERT INTO PetType (Id, Name) VALUES (3, 'Conejo');
-INSERT INTO PetType (Id, Name) VALUES (4, 'Ave');
-INSERT INTO PetType (Id, Name) VALUES (5, 'Otro');
+INSERT INTO PetType (Id, Name) VALUES (s_PetType.NEXTVAL, 'Perro');
+INSERT INTO PetType (Id, Name) VALUES (s_PetType.NEXTVAL, 'Gato');
+INSERT INTO PetType (Id, Name) VALUES (s_PetType.NEXTVAL, 'Conejo');
+INSERT INTO PetType (Id, Name) VALUES (s_PetType.NEXTVAL, 'Ave');
+INSERT INTO PetType (Id, Name) VALUES (s_PetType.NEXTVAL, 'Otro');
 
 -- Razas
-INSERT INTO PetBreed (Id, Name) VALUES (1, 'Labrador');
-INSERT INTO PetBreed (Id, Name) VALUES (2, 'Poodle');
-INSERT INTO PetBreed (Id, Name) VALUES (3, 'Chihuahua');
-INSERT INTO PetBreed (Id, Name) VALUES (4, 'Siames');
-INSERT INTO PetBreed (Id, Name) VALUES (5, 'Persa');
-INSERT INTO PetBreed (Id, Name) VALUES (6, 'Raza Unica');   -- obligatorio segun requerimiento
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Labrador Retriever', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Golden Retriever', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Pastor Alemán', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Bulldog', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Poodle', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Beagle', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Rottweiler', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Chihuahua', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Husky Siberiano', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Dálmata', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Boxer', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Doberman', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Shih Tzu', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Pug', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Border Collie', 1);
+
+-- Gatos
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Persa', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Siamés', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Maine Coon', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Bengalí', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Ragdoll', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'British Shorthair', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Sphynx', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Azul Ruso', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Abisinio', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Scottish Fold', 2);
+
+-- Conejos
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Mini Lop', 3);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Holandés', 3);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Lionhead', 3);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Rex', 3);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Angora', 3);
+
+-- Aves
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Periquito', 4);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Canario', 4);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Cacatúa', 4);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Loro Amazónico', 4);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Agapornis', 4);
+
+-- Otros
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Hámster Sirio', 5);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Cobaya', 5);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Erizo', 5);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Tortuga', 5);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Hurón', 5);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Raza Unica', 5);   -- obligatorio segun requerimiento
 
 
 -- Estados de mascota
@@ -219,40 +262,49 @@ INSERT INTO SpaceRequiredXFosterHome (IdSpaceRequired, IdFosterHome) VALUES (3, 
 -- -------------------------------------------------------------
 
 
-INSERT INTO Pet (Id, Name, Color, Age, Description, Chip,
-                 IdEnergy, IdState, IdType, IdBreed,
-                 IdDistrict, IdSpace, IdPetTraining, IdSize,
-                 IdOwner, IdVeterinarian)
-VALUES (1, 'Luna', 'Blanco', 3, 'Perra amigable, vacunada',
-        'CHIP001', 2, 1, 1, 1, 1, 3, 2, 2, 2, 1);
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Negro', 2, 'Perro amigable y activo', 'Max', 'CH001', 1, 1, 1, 1, 12, 1, 1, 2, 1, 1);
 
-INSERT INTO Pet (Id, Name, Color, Age, Description, Chip,
-                 IdEnergy, IdState, IdType, IdBreed,
-                 IdDistrict, IdSpace, IdPetTraining, IdSize,
-                 IdOwner, IdVeterinarian)
-VALUES (2, 'Michi', 'Negro', 2, 'Gato tranquilo, castrado',
-        'CHIP002', 4, 3, 2, 4, 2, 1, 1, 1, 3, 2);
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Blanco', 1, 'Gato tranquilo y cariñoso', 'Luna', 'CH002', 2, 1, 2, 16, 13, 1, 2, 1, 2, 1);
 
-INSERT INTO Pet (Id, Name, Color, Age, Description, Chip,
-                 IdEnergy, IdState, IdType, IdBreed,
-                 IdDistrict, IdSpace, IdPetTraining, IdSize,
-                 IdOwner, IdVeterinarian)
-VALUES (3, 'Rocky', 'Cafe', 5, 'Perro activo, necesita espacio',
-        NULL, 1, 2, 1, 6, 3, 4, 3, 3, NULL, 1);
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Marrón', 3, 'Conejo pequeño y juguetón', 'Coco', 'CH003', 1, 1, 3, 26, 14, 1, 1, 1, 3, 1);
 
-INSERT INTO Pet (Id, Name, Color, Age, Description, Chip,
-                 IdEnergy, IdState, IdType, IdBreed,
-                 IdDistrict, IdSpace, IdPetTraining, IdSize,
-                 IdOwner, IdVeterinarian)
-VALUES (4, 'Nala', 'Dorado', 1, 'Cachorra rescatada',
-        NULL, 1, 3, 1, 2, 1, 3, 4, 1, NULL, 1);
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Gris', 4, 'Ave muy sociable', 'Kiwi', 'CH004', 2, 1, 4, 31, 15, 1, 2, 1, 6, 1);
 
-INSERT INTO Pet (Id, Name, Color, Age, Description, Chip,
-                 IdEnergy, IdState, IdType, IdBreed,
-                 IdDistrict, IdSpace, IdPetTraining, IdSize,
-                 IdOwner, IdVeterinarian)
-VALUES (5, 'Simba', 'Naranja', 4, 'Gato persa, requiere cuidados',
-        'CHIP005', 3, 1, 2, 5, 4, 2, 2, 2, 4, 2);
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Dorado', 5, 'Perro protector y leal', 'Rocky', 'CH005', 3, 1, 1, 3, 16, 2, 2, 3, 7, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Blanco y negro', 2, 'Gato curioso', 'Milo', 'CH006', 1, 1, 2, 17, 17, 1, 1, 1, 1, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Beige', 1, 'Conejo muy tranquilo', 'Nube', 'CH007', 1, 1, 3, 27, 18, 1, 1, 1, 2, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Verde', 2, 'Ave parlanchina', 'Paco', 'CH008', 2, 1, 4, 34, 19, 1, 2, 1, 3, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Negro y café', 6, 'Perro muy energético', 'Thor', 'CH009', 3, 1, 1, 9, 20, 3, 2, 3, 6, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Naranja', 3, 'Gato dormilón', 'Simba', 'CH010', 1, 1, 2, 18, 21, 1, 1, 2, 7, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Blanco', 2, 'Conejo amigable', 'Pelusa', 'CH011', 1, 1, 3, 28, 12, 1, 1, 1, 1, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Azul', 1, 'Ave pequeña y rápida', 'Sky', 'CH012', 2, 1, 4, 32, 13, 1, 2, 1, 2, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Café', 7, 'Perro obediente', 'Bruno', 'CH013', 2, 1, 1, 7, 14, 2, 2, 3, 3, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Gris oscuro', 4, 'Gato independiente', 'Shadow', 'CH014', 2, 1, 2, 21, 15, 1, 1, 2, 6, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Marrón claro', 1, 'Conejo curioso', 'Bunny', 'CH015', 1, 1, 3, 29, 16, 1, 1, 1, 7, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Amarillo', 2, 'Ave muy activa', 'Sunny', 'CH016', 3, 1, 4, 35, 17, 1, 2, 1, 1, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Negro', 5, 'Perro tranquilo', 'Zeus', 'CH017', 2, 1, 1, 11, 18, 2, 2, 3, 2, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Blanco', 2, 'Gato amigable', 'Michi', 'CH018', 1, 1, 2, 25, 19, 1, 1, 1, 3, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Café oscuro', 3, 'Perro juguetón', 'Toby', 'CH019', 3, 1, 1, 6, 20, 2, 2, 2, 6, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Gris y blanco', 1, 'Gato pequeño y curioso', 'Nina', 'CH020', 1, 1, 2, 20, 21, 1, 1, 1, 7, 1);
+COMMIT;
+
+
+
 
 -- Relaciones de mascota con enfermedades, medicamentos, tratamientos
 INSERT INTO PetXPetIllness (IdPet, IdPetIllness) VALUES (1, 4); -- Luna con sarna
@@ -459,29 +511,10 @@ INSERT INTO PetType (Id, Name)
 SELECT 2, 'Cat' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetType WHERE Id = 2);
 
-INSERT INTO PetBreed (Id, Name)
-SELECT 1, 'Labrador' FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 1);
-
-INSERT INTO PetBreed (Id, Name)
-SELECT 2, 'Poodle' FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 2);
-
-INSERT INTO PetBreed (Id, Name)
-SELECT 3, 'Siames' FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 3);
-
-INSERT INTO PetBreed (Id, Name)
-SELECT 4, 'Persa' FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 4);
-
-INSERT INTO PetBreed (Id, Name)
-SELECT 5, 'Chihuahua' FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 5);
-
-INSERT INTO PetBreed (Id, Name)
-SELECT 6, 'Mixed Breed' FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 6);
+INSERT INTO PetBreed (ID, NAME, IDTYPE) VALUES (1, 'Labrador Retriever', 1);
+INSERT INTO PetBreed (ID, NAME, IDTYPE) VALUES (2, 'German Shepherd', 1);
+INSERT INTO PetBreed (ID, NAME, IDTYPE) VALUES (3, 'Persian', 2);
+INSERT INTO PetBreed (ID, NAME, IDTYPE) VALUES (4, 'Siamese', 2);
 
 INSERT INTO PetLevelEnergy (Id, Name)
 SELECT 1, 'Athletic' FROM dual
@@ -843,3 +876,95 @@ SELECT 120, 'Gray', 1, 'Small kitten, playful and curious', 'Kira', 'CHIP029',
        2, 1, 1, 2, 1
 FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM Pet WHERE Id = 120);
+
+
+----------------------------------------------------------------------------------
+INSERT ALL
+INTO Pet (Id, Color, Age, Description, Name, Chip, IdEnergy, IdState, IdType, IdBreed, IdDistrict, IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian)
+VALUES (2, 'Black', 2, 'Friendly and playful pet', 'Luna', 'CHIP0002', 1, 1, 1, 1, 1, 1, 1, 1, 3, 1)
+
+INTO Pet (Id, Color, Age, Description, Name, Chip, IdEnergy, IdState, IdType, IdBreed, IdDistrict, IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian)
+VALUES (3, 'White', 3, 'Calm and affectionate pet', 'Max', 'CHIP0003', 2, 2, 2, 2, 2, 2, 2, 2, 4, 2)
+
+INTO Pet (Id, Color, Age, Description, Name, Chip, IdEnergy, IdState, IdType, IdBreed, IdDistrict, IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian)
+VALUES (4, 'Brown', 1, 'Active and curious pet', 'Rocky', 'CHIP0004', 3, 3, 1, 3, 3, 3, 3, 3, 3, 1)
+
+INTO Pet (Id, Color, Age, Description, Name, Chip, IdEnergy, IdState, IdType, IdBreed, IdDistrict, IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian)
+VALUES (5, 'Gray', 4, 'Loyal and obedient pet', 'Bella', 'CHIP0005', 1, 4, 2, 4, 1, 1, 1, 1, 4, 2)
+
+INTO Pet (Id, Color, Age, Description, Name, Chip, IdEnergy, IdState, IdType, IdBreed, IdDistrict, IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian)
+VALUES (6, 'Golden', 5, 'Gentle and sociable pet', 'Charlie', 'CHIP0006', 2, 1, 1, 5, 2, 2, 2, 2, 3, 1)
+
+INTO Pet (Id, Color, Age, Description, Name, Chip, IdEnergy, IdState, IdType, IdBreed, IdDistrict, IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian)
+VALUES (7, 'Cream', 2, 'Sweet and quiet pet', 'Milo', 'CHIP0007', 3, 2, 2, 6, 3, 3, 3, 3, 4, 2)
+
+INTO Pet VALUES (8, 'Black and White', 6, 'Smart and energetic pet', 'Nala', 'CHIP0008', 1, 3, 1, 1, 1, 1, 1, 1, 3, 1)
+INTO Pet VALUES (9, 'Orange', 1, 'Young and playful pet', 'Simba', 'CHIP0009', 2, 4, 2, 2, 2, 2, 2, 2, 4, 2)
+INTO Pet VALUES (10, 'Brown and White', 3, 'Well behaved and friendly pet', 'Toby', 'CHIP0010', 3, 1, 1, 3, 3, 3, 3, 3, 3, 1)
+INTO Pet VALUES (11, 'Black', 4, 'Protective and calm pet', 'Coco', 'CHIP0011', 1, 2, 2, 4, 1, 1, 1, 1, 4, 2)
+INTO Pet VALUES (12, 'White', 2, 'Cheerful and active pet', 'Daisy', 'CHIP0012', 2, 3, 1, 5, 2, 2, 2, 2, 3, 1)
+INTO Pet VALUES (13, 'Gray', 7, 'Relaxed and affectionate pet', 'Oscar', 'CHIP0013', 3, 4, 2, 6, 3, 3, 3, 3, 4, 2)
+INTO Pet VALUES (14, 'Brown', 5, 'Healthy and playful pet', 'Molly', 'CHIP0014', 1, 1, 1, 1, 1, 1, 1, 1, 3, 1)
+INTO Pet VALUES (15, 'Golden', 3, 'Friendly with people', 'Zeus', 'CHIP0015', 2, 2, 2, 2, 2, 2, 2, 2, 4, 2)
+INTO Pet VALUES (16, 'Cream', 1, 'Small and energetic pet', 'Kira', 'CHIP0016', 3, 3, 1, 3, 3, 3, 3, 3, 3, 1)
+INTO Pet VALUES (17, 'Black', 8, 'Older but active pet', 'Rex', 'CHIP0017', 1, 4, 2, 4, 1, 1, 1, 1, 4, 2)
+INTO Pet VALUES (18, 'White and Brown', 2, 'Loves attention and games', 'Lola', 'CHIP0018', 2, 1, 1, 5, 2, 2, 2, 2, 3, 1)
+INTO Pet VALUES (19, 'Gray and White', 4, 'Quiet and easygoing pet', 'Bruno', 'CHIP0019', 3, 2, 2, 6, 3, 3, 3, 3, 4, 2)
+INTO Pet VALUES (20, 'Tan', 6, 'Very loyal companion', 'Sasha', 'CHIP0020', 1, 3, 1, 1, 1, 1, 1, 1, 3, 1)
+INTO Pet VALUES (21, 'Black', 3, 'Curious and friendly pet', 'Leo', 'CHIP0021', 2, 4, 2, 2, 2, 2, 2, 2, 4, 2)
+
+INTO Pet VALUES (22, 'White', 2, 'Playful and affectionate pet', 'Maya', 'CHIP0022', 3, 1, 1, 3, 3, 3, 3, 3, 3, 1)
+INTO Pet VALUES (23, 'Brown', 5, 'Calm pet suitable for family', 'Thor', 'CHIP0023', 1, 2, 2, 4, 1, 1, 1, 1, 4, 2)
+INTO Pet VALUES (24, 'Gray', 4, 'Energetic and social pet', 'Kiara', 'CHIP0024', 2, 3, 1, 5, 2, 2, 2, 2, 3, 1)
+INTO Pet VALUES (25, 'Golden', 1, 'Young pet with good behavior', 'Benji', 'CHIP0025', 3, 4, 2, 6, 3, 3, 3, 3, 4, 2)
+INTO Pet VALUES (26, 'Cream', 6, 'Obedient and friendly pet', 'Nina', 'CHIP0026', 1, 1, 1, 1, 1, 1, 1, 1, 3, 1)
+INTO Pet VALUES (27, 'Black and Brown', 3, 'Loves walks and attention', 'Jack', 'CHIP0027', 2, 2, 2, 2, 2, 2, 2, 2, 4, 2)
+INTO Pet VALUES (28, 'Orange', 2, 'Curious and independent pet', 'Misha', 'CHIP0028', 3, 3, 1, 3, 3, 3, 3, 3, 3, 1)
+INTO Pet VALUES (29, 'White', 7, 'Quiet and affectionate pet', 'Lucas', 'CHIP0029', 1, 4, 2, 4, 1, 1, 1, 1, 4, 2)
+INTO Pet VALUES (30, 'Brown', 4, 'Friendly with other animals', 'Chispa', 'CHIP0030', 2, 1, 1, 5, 2, 2, 2, 2, 3, 1)
+INTO Pet VALUES (31, 'Gray', 5, 'Healthy and calm pet', 'Bobby', 'CHIP0031', 3, 2, 2, 6, 3, 3, 3, 3, 4, 2)
+INTO Pet VALUES (32, 'Black', 2, 'Very playful and smart pet', 'Tara', 'CHIP0032', 1, 3, 1, 1, 1, 1, 1, 1, 3, 1)
+INTO Pet VALUES (33, 'Golden', 1, 'Young and friendly pet', 'Paco', 'CHIP0033', 2, 4, 2, 2, 2, 2, 2, 2, 4, 2)
+INTO Pet VALUES (34, 'Cream', 3, 'Affectionate and relaxed pet', 'Roma', 'CHIP0034', 3, 1, 1, 3, 3, 3, 3, 3, 3, 1)
+INTO Pet VALUES (35, 'White and Gray', 4, 'Social and obedient pet', 'Duke', 'CHIP0035', 1, 2, 2, 4, 1, 1, 1, 1, 4, 2)
+INTO Pet VALUES (36, 'Brown and Black', 6, 'Protective and calm pet', 'Canela', 'CHIP0036', 2, 3, 1, 5, 2, 2, 2, 2, 3, 1)
+INTO Pet VALUES (37, 'Gray', 2, 'Friendly pet with good energy', 'Oliver', 'CHIP0037', 3, 4, 2, 6, 3, 3, 3, 3, 4, 2)
+INTO Pet VALUES (38, 'Black', 5, 'Loyal and healthy pet', 'Princesa', 'CHIP0038', 1, 1, 1, 1, 1, 1, 1, 1, 3, 1)
+INTO Pet VALUES (39, 'White', 3, 'Calm and easy to handle', 'Lucky', 'CHIP0039', 2, 2, 2, 2, 2, 2, 2, 2, 4, 2)
+INTO Pet VALUES (40, 'Brown', 1, 'Small pet with playful behavior', 'Lily', 'CHIP0040', 3, 3, 1, 3, 3, 3, 3, 3, 3, 1)
+INTO Pet VALUES (41, 'Golden', 8, 'Older and very calm pet', 'Apollo', 'CHIP0041', 1, 4, 2, 4, 1, 1, 1, 1, 4, 2)
+
+INTO Pet VALUES (42, 'Cream', 2, 'Cheerful and affectionate pet', 'Mimi', 'CHIP0042', 2, 1, 1, 5, 2, 2, 2, 2, 3, 1)
+INTO Pet VALUES (43, 'Black and White', 4, 'Smart and obedient pet', 'Felix', 'CHIP0043', 3, 2, 2, 6, 3, 3, 3, 3, 4, 2)
+INTO Pet VALUES (44, 'Orange', 3, 'Independent and curious pet', 'Fiona', 'CHIP0044', 1, 3, 1, 1, 1, 1, 1, 1, 3, 1)
+INTO Pet VALUES (45, 'Gray', 5, 'Friendly and calm companion', 'Hachi', 'CHIP0045', 2, 4, 2, 2, 2, 2, 2, 2, 4, 2)
+INTO Pet VALUES (46, 'White', 1, 'Young and active pet', 'Perla', 'CHIP0046', 3, 1, 1, 3, 3, 3, 3, 3, 3, 1)
+INTO Pet VALUES (47, 'Brown', 6, 'Gentle and loyal pet', 'Balu', 'CHIP0047', 1, 2, 2, 4, 1, 1, 1, 1, 4, 2)
+INTO Pet VALUES (48, 'Black', 3, 'Energetic and playful pet', 'Mora', 'CHIP0048', 2, 3, 1, 5, 2, 2, 2, 2, 3, 1)
+INTO Pet VALUES (49, 'Golden', 4, 'Well trained and calm pet', 'Tango', 'CHIP0049', 3, 4, 2, 6, 3, 3, 3, 3, 4, 2)
+INTO Pet VALUES (50, 'Cream', 2, 'Sociable and affectionate pet', 'Atenea', 'CHIP0050', 1, 1, 1, 1, 1, 1, 1, 1, 3, 1)
+INTO Pet VALUES (51, 'White and Brown', 7, 'Quiet and loving pet', 'Nico', 'CHIP0051', 2, 2, 2, 2, 2, 2, 2, 2, 4, 2)
+INTO Pet VALUES (52, 'Gray and Black', 5, 'Healthy and protective pet', 'Frida', 'CHIP0052', 3, 3, 1, 3, 3, 3, 3, 3, 3, 1)
+INTO Pet VALUES (53, 'Brown', 1, 'Young pet with lots of energy', 'Rocco', 'CHIP0053', 1, 4, 2, 4, 1, 1, 1, 1, 4, 2)
+INTO Pet VALUES (54, 'Black', 3, 'Friendly and adaptable pet', 'Amy', 'CHIP0054', 2, 1, 1, 5, 2, 2, 2, 2, 3, 1)
+INTO Pet VALUES (55, 'White', 4, 'Calm and obedient pet', 'Sam', 'CHIP0055', 3, 2, 2, 6, 3, 3, 3, 3, 4, 2)
+INTO Pet VALUES (56, 'Golden', 6, 'Loves playing outdoors', 'Dana', 'CHIP0056', 1, 3, 1, 1, 1, 1, 1, 1, 3, 1)
+INTO Pet VALUES (57, 'Cream', 2, 'Sweet and sociable pet', 'Otto', 'CHIP0057', 2, 4, 2, 2, 2, 2, 2, 2, 4, 2)
+INTO Pet VALUES (58, 'Gray', 5, 'Independent but affectionate pet', 'Cleopatra', 'CHIP0058', 3, 1, 1, 3, 3, 3, 3, 3, 3, 1)
+INTO Pet VALUES (59, 'Brown and White', 3, 'Very friendly with people', 'Brisa', 'CHIP0059', 1, 2, 2, 4, 1, 1, 1, 1, 4, 2)
+INTO Pet VALUES (60, 'Black', 4, 'Strong and active pet', 'Bolt', 'CHIP0060', 2, 3, 1, 5, 2, 2, 2, 2, 3, 1)
+INTO Pet VALUES (61, 'Orange', 1, 'Small and curious pet', 'Tom', 'CHIP0061', 3, 4, 2, 6, 3, 3, 3, 3, 4, 2)
+
+INTO Pet VALUES (62, 'White', 2, 'Playful and gentle pet', 'Emma', 'CHIP0062', 1, 1, 1, 1, 1, 1, 1, 1, 3, 1)
+INTO Pet VALUES (63, 'Brown', 5, 'Calm and friendly pet', 'Oreo', 'CHIP0063', 2, 2, 2, 2, 2, 2, 2, 2, 4, 2)
+INTO Pet VALUES (64, 'Gray', 6, 'Relaxed and affectionate pet', 'Laika', 'CHIP0064', 3, 3, 1, 3, 3, 3, 3, 3, 3, 1)
+INTO Pet VALUES (65, 'Golden', 3, 'Energetic and healthy pet', 'Kovu', 'CHIP0065', 1, 4, 2, 4, 1, 1, 1, 1, 4, 2)
+INTO Pet VALUES (66, 'Cream', 4, 'Friendly and loyal companion', 'Bonnie', 'CHIP0066', 2, 1, 1, 5, 2, 2, 2, 2, 3, 1)
+INTO Pet VALUES (67, 'Black and Brown', 2, 'Smart and alert pet', 'Chester', 'CHIP0067', 3, 2, 2, 6, 3, 3, 3, 3, 4, 2)
+INTO Pet VALUES (68, 'White and Gray', 5, 'Gentle and calm pet', 'Estrella', 'CHIP0068', 1, 3, 1, 1, 1, 1, 1, 1, 3, 1)
+INTO Pet VALUES (69, 'Brown', 1, 'Young and cheerful pet', 'Cooper', 'CHIP0069', 2, 4, 2, 2, 2, 2, 2, 2, 4, 2)
+INTO Pet VALUES (70, 'Black', 6, 'Protective and obedient pet', 'Sombra', 'CHIP0070', 3, 1, 1, 3, 3, 3, 3, 3, 3, 1)
+INTO Pet VALUES (71, 'White', 3, 'Friendly and easygoing pet', 'Candy', 'CHIP0071', 1, 2, 2, 4, 1, 1, 1, 1, 4, 2)
+SELECT 1 FROM dual;
+
+COMMIT;

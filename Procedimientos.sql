@@ -1,4 +1,111 @@
+CREATE OR REPLACE PROCEDURE pr_get_found_pet_table (
+    p_result OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    OPEN p_result FOR
+        SELECT
+            PetId,
+            OwnerId,
+            FirstName,
+            LastName,
+            'Click to view emails' AS Emails,
+            'Click to view phones' AS Phones,
+            PetName,
+            Color,
+            Chip,
+            PetType,
+            Breed,
+            PetSize
+        FROM VW_FOUND_PET_TABLE
+        ORDER BY PetName;
+END;
+/
 
+CREATE OR REPLACE PROCEDURE pr_get_owner_emails (
+    p_owner_id IN NUMBER,
+    p_result   OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    OPEN p_result FOR
+        SELECT Email
+        FROM Email
+        WHERE IdPerson = p_owner_id
+        ORDER BY Email;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE pr_get_owner_phones (
+    p_owner_id IN NUMBER,
+    p_result   OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    OPEN p_result FOR
+        SELECT Phone
+        FROM Phone
+        WHERE IdPerson = p_owner_id
+        ORDER BY Phone;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE pr_take_back_missing_report (
+    p_pet_id   IN NUMBER,
+    p_owner_id IN NUMBER
+)
+AS
+BEGIN
+    UPDATE Pet
+    SET IdState = 2
+    WHERE Id = p_pet_id
+      AND IdOwner = p_owner_id
+      AND IdState = 3;
+
+    IF SQL%ROWCOUNT = 0 THEN
+        RAISE_APPLICATION_ERROR(
+            -20041,
+            'Pet not found, pet does not belong to this user, or pet is not currently lost.'
+        );
+    END IF;
+
+    UPDATE LostReport
+    SET State = 'Found'
+    WHERE IdPet = p_pet_id
+      AND State = 'Lost';
+
+    COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE pr_get_user_missing_pet_table (
+    p_owner_id IN NUMBER,
+    p_result   OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    OPEN p_result FOR
+        SELECT
+            PetId,
+            PetName,
+            Color,
+            Age,
+            Chip,
+            Energy,
+            PetState,
+            PetType,
+            Breed,
+            District,
+            SpaceRequired,
+            Training,
+            PetSize,
+            VeterinarianName
+        FROM VW_USER_PET_TABLE
+        WHERE IdOwner = p_owner_id
+          AND IdState = 3
+        ORDER BY PetName;
+END;
+/
 
 CREATE OR REPLACE PROCEDURE pr_reject_adoption_request (
     p_adoption_id IN NUMBER,
@@ -738,17 +845,18 @@ FUNCTION FN_PUT_PET_UP_FOR_ADOPTION(
         P_OWNER_ID IN NUMBER
     ) RETURN NUMBER
     IS
-        v_pet_count NUMBER;
+        v_state NUMBER;
     BEGIN
-        SELECT COUNT(*)
-          INTO v_pet_count
-          FROM Pet
-         WHERE Id = P_PET_ID
-           AND IdOwner = P_OWNER_ID;
+        SELECT IdState
+        INTO v_state
+        FROM Pet
+        WHERE Id = P_PET_ID
+          AND IdOwner = P_OWNER_ID;
 
-        IF v_pet_count = 0 THEN
-            RETURN 0;
+        IF v_state = 3 THEN
+            RETURN -2; -- pet is missing/lost
         END IF;
+
 
         UPDATE Pet
            SET IdState = 1
@@ -984,6 +1092,13 @@ BEGIN
         FROM VW_USER_PET_TABLE
         WHERE IdState = 1
           AND IdOwner <> p_current_user_id
+          AND NOT EXISTS (
+        SELECT 1
+        FROM Adoption a
+        WHERE a.IdPet = VW_USER_PET_TABLE.PetId
+          AND a.IdAdopter = p_current_user_id
+          AND a.State = 'To be confirmed'
+    )
           AND (p_id_energy IS NULL OR IdEnergy = p_id_energy)
           AND (p_id_type IS NULL OR IdType = p_id_type)
           AND (p_id_breed IS NULL OR IdBreed = p_id_breed)

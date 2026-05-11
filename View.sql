@@ -1,3 +1,36 @@
+CREATE OR REPLACE VIEW VW_FOUND_PET_TABLE AS
+SELECT
+    p.Id AS PetId,
+    owner.Id AS OwnerId,
+    owner.FirstName,
+    owner.LastName,
+
+    p.Name AS PetName,
+    p.Color,
+    p.Chip,
+
+    petType.Name AS PetType,
+    breed.Name AS Breed,
+    sizeTable.Name AS PetSize
+
+FROM Pet p
+
+LEFT JOIN Person owner
+    ON p.IdOwner = owner.Id
+
+LEFT JOIN PetType petType
+    ON p.IdType = petType.Id
+
+LEFT JOIN PetBreed breed
+    ON p.IdBreed = breed.Id
+
+LEFT JOIN PetSize sizeTable
+    ON p.IdSize = sizeTable.Id
+
+WHERE p.IdState = 4;
+/
+
+
 CREATE OR REPLACE VIEW vw_adoption_request_table AS
     SELECT
         a.Id AS AdoptionId,
