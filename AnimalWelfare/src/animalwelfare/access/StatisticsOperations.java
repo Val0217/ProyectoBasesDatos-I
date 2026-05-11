@@ -64,7 +64,7 @@ public class StatisticsOperations {
      */
     public static ArrayList<String[]> getDonationsByAssociation(Date dateFrom, Date dateTo) {
         ArrayList<String[]> rows = new ArrayList<>();
-        String call = "{ call pr_stat_donations_by_association(?, ?, ?) }";
+        String call = "{ call pr_stat_donation_by_asso(?, ?, ?) }";
 
         try (Connection con = ConexionOracle.connect();
              CallableStatement cs = con.prepareCall(call)) {

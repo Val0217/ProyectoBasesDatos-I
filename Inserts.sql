@@ -53,19 +53,62 @@ INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Santiago 
 -- -------------------------------------------------------------
 
 -- Tipos de mascota
-INSERT INTO PetType (Id, Name) VALUES (1, 'Perro');
-INSERT INTO PetType (Id, Name) VALUES (2, 'Gato');
-INSERT INTO PetType (Id, Name) VALUES (3, 'Conejo');
-INSERT INTO PetType (Id, Name) VALUES (4, 'Ave');
-INSERT INTO PetType (Id, Name) VALUES (5, 'Otro');
+INSERT INTO PetType (Id, Name) VALUES (s_PetType.NEXTVAL, 'Perro');
+INSERT INTO PetType (Id, Name) VALUES (s_PetType.NEXTVAL, 'Gato');
+INSERT INTO PetType (Id, Name) VALUES (s_PetType.NEXTVAL, 'Conejo');
+INSERT INTO PetType (Id, Name) VALUES (s_PetType.NEXTVAL, 'Ave');
+INSERT INTO PetType (Id, Name) VALUES (s_PetType.NEXTVAL, 'Otro');
 
 -- Razas
-INSERT INTO PetBreed (Id, Name) VALUES (1, 'Labrador');
-INSERT INTO PetBreed (Id, Name) VALUES (2, 'Poodle');
-INSERT INTO PetBreed (Id, Name) VALUES (3, 'Chihuahua');
-INSERT INTO PetBreed (Id, Name) VALUES (4, 'Siames');
-INSERT INTO PetBreed (Id, Name) VALUES (5, 'Persa');
-INSERT INTO PetBreed (Id, Name) VALUES (6, 'Raza Unica');   -- obligatorio segun requerimiento
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Labrador Retriever', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Golden Retriever', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Pastor Alemán', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Bulldog', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Poodle', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Beagle', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Rottweiler', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Chihuahua', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Husky Siberiano', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Dálmata', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Boxer', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Doberman', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Shih Tzu', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Pug', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Border Collie', 1);
+
+-- Gatos
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Persa', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Siamés', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Maine Coon', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Bengalí', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Ragdoll', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'British Shorthair', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Sphynx', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Azul Ruso', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Abisinio', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Scottish Fold', 2);
+
+-- Conejos
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Mini Lop', 3);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Holandés', 3);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Lionhead', 3);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Rex', 3);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Angora', 3);
+
+-- Aves
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Periquito', 4);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Canario', 4);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Cacatúa', 4);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Loro Amazónico', 4);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Agapornis', 4);
+
+-- Otros
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Hámster Sirio', 5);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Cobaya', 5);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Erizo', 5);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Tortuga', 5);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Hurón', 5);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Raza Unica', 5);   -- obligatorio segun requerimiento
 
 
 -- Estados de mascota
@@ -219,40 +262,49 @@ INSERT INTO SpaceRequiredXFosterHome (IdSpaceRequired, IdFosterHome) VALUES (3, 
 -- -------------------------------------------------------------
 
 
-INSERT INTO Pet (Id, Name, Color, Age, Description, Chip,
-                 IdEnergy, IdState, IdType, IdBreed,
-                 IdDistrict, IdSpace, IdPetTraining, IdSize,
-                 IdOwner, IdVeterinarian)
-VALUES (1, 'Luna', 'Blanco', 3, 'Perra amigable, vacunada',
-        'CHIP001', 2, 1, 1, 1, 1, 3, 2, 2, 2, 1);
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Negro', 2, 'Perro amigable y activo', 'Max', 'CH001', 1, 1, 1, 1, 12, 1, 1, 2, 1, 1);
 
-INSERT INTO Pet (Id, Name, Color, Age, Description, Chip,
-                 IdEnergy, IdState, IdType, IdBreed,
-                 IdDistrict, IdSpace, IdPetTraining, IdSize,
-                 IdOwner, IdVeterinarian)
-VALUES (2, 'Michi', 'Negro', 2, 'Gato tranquilo, castrado',
-        'CHIP002', 4, 3, 2, 4, 2, 1, 1, 1, 3, 2);
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Blanco', 1, 'Gato tranquilo y cariñoso', 'Luna', 'CH002', 2, 1, 2, 16, 13, 1, 2, 1, 2, 1);
 
-INSERT INTO Pet (Id, Name, Color, Age, Description, Chip,
-                 IdEnergy, IdState, IdType, IdBreed,
-                 IdDistrict, IdSpace, IdPetTraining, IdSize,
-                 IdOwner, IdVeterinarian)
-VALUES (3, 'Rocky', 'Cafe', 5, 'Perro activo, necesita espacio',
-        NULL, 1, 2, 1, 6, 3, 4, 3, 3, NULL, 1);
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Marrón', 3, 'Conejo pequeño y juguetón', 'Coco', 'CH003', 1, 1, 3, 26, 14, 1, 1, 1, 3, 1);
 
-INSERT INTO Pet (Id, Name, Color, Age, Description, Chip,
-                 IdEnergy, IdState, IdType, IdBreed,
-                 IdDistrict, IdSpace, IdPetTraining, IdSize,
-                 IdOwner, IdVeterinarian)
-VALUES (4, 'Nala', 'Dorado', 1, 'Cachorra rescatada',
-        NULL, 1, 3, 1, 2, 1, 3, 4, 1, NULL, 1);
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Gris', 4, 'Ave muy sociable', 'Kiwi', 'CH004', 2, 1, 4, 31, 15, 1, 2, 1, 6, 1);
 
-INSERT INTO Pet (Id, Name, Color, Age, Description, Chip,
-                 IdEnergy, IdState, IdType, IdBreed,
-                 IdDistrict, IdSpace, IdPetTraining, IdSize,
-                 IdOwner, IdVeterinarian)
-VALUES (5, 'Simba', 'Naranja', 4, 'Gato persa, requiere cuidados',
-        'CHIP005', 3, 1, 2, 5, 4, 2, 2, 2, 4, 2);
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Dorado', 5, 'Perro protector y leal', 'Rocky', 'CH005', 3, 1, 1, 3, 16, 2, 2, 3, 7, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Blanco y negro', 2, 'Gato curioso', 'Milo', 'CH006', 1, 1, 2, 17, 17, 1, 1, 1, 1, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Beige', 1, 'Conejo muy tranquilo', 'Nube', 'CH007', 1, 1, 3, 27, 18, 1, 1, 1, 2, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Verde', 2, 'Ave parlanchina', 'Paco', 'CH008', 2, 1, 4, 34, 19, 1, 2, 1, 3, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Negro y café', 6, 'Perro muy energético', 'Thor', 'CH009', 3, 1, 1, 9, 20, 3, 2, 3, 6, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Naranja', 3, 'Gato dormilón', 'Simba', 'CH010', 1, 1, 2, 18, 21, 1, 1, 2, 7, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Blanco', 2, 'Conejo amigable', 'Pelusa', 'CH011', 1, 1, 3, 28, 12, 1, 1, 1, 1, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Azul', 1, 'Ave pequeña y rápida', 'Sky', 'CH012', 2, 1, 4, 32, 13, 1, 2, 1, 2, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Café', 7, 'Perro obediente', 'Bruno', 'CH013', 2, 1, 1, 7, 14, 2, 2, 3, 3, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Gris oscuro', 4, 'Gato independiente', 'Shadow', 'CH014', 2, 1, 2, 21, 15, 1, 1, 2, 6, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Marrón claro', 1, 'Conejo curioso', 'Bunny', 'CH015', 1, 1, 3, 29, 16, 1, 1, 1, 7, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Amarillo', 2, 'Ave muy activa', 'Sunny', 'CH016', 3, 1, 4, 35, 17, 1, 2, 1, 1, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Negro', 5, 'Perro tranquilo', 'Zeus', 'CH017', 2, 1, 1, 11, 18, 2, 2, 3, 2, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Blanco', 2, 'Gato amigable', 'Michi', 'CH018', 1, 1, 2, 25, 19, 1, 1, 1, 3, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Café oscuro', 3, 'Perro juguetón', 'Toby', 'CH019', 3, 1, 1, 6, 20, 2, 2, 2, 6, 1);
+
+INSERT INTO Pet VALUES (s_pet.NEXTVAL, 'Gris y blanco', 1, 'Gato pequeño y curioso', 'Nina', 'CH020', 1, 1, 2, 20, 21, 1, 1, 1, 7, 1);
+COMMIT;
+
+
+
 
 -- Relaciones de mascota con enfermedades, medicamentos, tratamientos
 INSERT INTO PetXPetIllness (IdPet, IdPetIllness) VALUES (1, 4); -- Luna con sarna
