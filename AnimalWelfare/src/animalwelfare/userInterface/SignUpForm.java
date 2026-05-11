@@ -151,6 +151,7 @@ public class SignUpForm extends javax.swing.JFrame {
         ListEmail = new javax.swing.JList<>();
         ButtonAddPhone = new javax.swing.JPanel();
         ButtonAddEmail = new javax.swing.JPanel();
+        jButtonGoBack = new javax.swing.JButton();
         LableTitle1 = new javax.swing.JLabel();
         LableTitle3 = new javax.swing.JLabel();
         ImagenBackGround = new javax.swing.JLabel();
@@ -323,6 +324,9 @@ public class SignUpForm extends javax.swing.JFrame {
             .addGap(0, 26, Short.MAX_VALUE)
         );
 
+        jButtonGoBack.setText("Go Back");
+        jButtonGoBack.addActionListener(this::jButtonGoBackActionPerformed);
+
         javax.swing.GroupLayout PanelFormLayout = new javax.swing.GroupLayout(PanelForm);
         PanelForm.setLayout(PanelFormLayout);
         PanelFormLayout.setHorizontalGroup(
@@ -407,8 +411,10 @@ public class SignUpForm extends javax.swing.JFrame {
                                         .addGap(7, 7, 7)))))))
                 .addGap(55, 55, 55))
             .addGroup(PanelFormLayout.createSequentialGroup()
-                .addGap(78, 78, 78)
+                .addGap(38, 38, 38)
                 .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonGoBack)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelFormLayout.setVerticalGroup(
@@ -481,7 +487,9 @@ public class SignUpForm extends javax.swing.JFrame {
                     .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonGoBack))
                 .addGap(20, 20, 20))
         );
 
@@ -674,6 +682,11 @@ public class SignUpForm extends javax.swing.JFrame {
         TextEmail.setText("");
     }//GEN-LAST:event_ButtonAddEmailMouseClicked
 
+    private void jButtonGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGoBackActionPerformed
+        SignInForm window = new SignInForm();
+        dispose();
+    }//GEN-LAST:event_jButtonGoBackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -735,6 +748,7 @@ public class SignUpForm extends javax.swing.JFrame {
     private javax.swing.JTextField TextPhone;
     private javax.swing.JTextField TextUserName;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonGoBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
