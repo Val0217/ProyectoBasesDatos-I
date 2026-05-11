@@ -3,8 +3,7 @@ package animalwelfare.business;
 import animalwelfare.access.BlockListOperations;
 import animalwelfare.access.DbObject;
 import animalwelfare.security.Session;
-//import animalwelfare.userInterface.BlockListForm; 
-//cambiar nombre a BlickListFormPreview y hacer cambios necesarios
+import animalwelfare.userInterface.BlockListForm; 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;

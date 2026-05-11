@@ -1,5 +1,6 @@
 package animalwelfare.userInterface;
 
+import animalwelfare.access.DbObject;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -14,10 +15,10 @@ import javax.swing.table.JTableHeader;
  *
  * @author team
  */
-public class BlockListFormPreview extends javax.swing.JFrame {
+public class BlockListForm extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger =
-        java.util.logging.Logger.getLogger(BlockListFormPreview.class.getName());
+        java.util.logging.Logger.getLogger(BlockListForm.class.getName());
 
     // -------------------------------------------------------------------------
     // Tab 1 — Block List
@@ -39,10 +40,9 @@ public class BlockListFormPreview extends javax.swing.JFrame {
     // -------------------------------------------------------------------------
     // Constructor
     // -------------------------------------------------------------------------
-    public BlockListFormPreview() {
+    public BlockListForm() {
         initComponents();
         loadMockTable();
-        fillMockPersonCombo();
         setLocationRelativeTo(null);
     }
 
@@ -335,14 +335,31 @@ public class BlockListFormPreview extends javax.swing.JFrame {
         clearReportForm();
     }
 
-    private void clearReportForm() {
+    public void clearReportForm() {
         comboPerson.setSelectedIndex(0);
         textDescription.setText("");
     }
 
-    // -------------------------------------------------------------------------
-    // Mock data
-    // -------------------------------------------------------------------------
+
+    public void fillPersonCombo(ArrayList<DbObject> listPerson) {
+        comboPerson.removeAllItems();
+        comboPerson.addItem("Select a person...");
+        for (DbObject person : listPerson) {
+            comboPerson.addItem(person.getName());
+        }
+    }
+
+    public void loadBlockList(DefaultTableModel blockList) {
+
+        tableBlockList.setModel(blockList);
+
+        // Hide ID column
+        tableBlockList.getColumnModel().getColumn(0).setMinWidth(0);
+        tableBlockList.getColumnModel().getColumn(0).setMaxWidth(0);
+        tableBlockList.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+        labelCount.setText("Records: " + blockList.getRowCount());
+    }
 
     private void loadMockTable() {
         DefaultTableModel model = new DefaultTableModel(
@@ -366,15 +383,6 @@ public class BlockListFormPreview extends javax.swing.JFrame {
         tableBlockList.getColumnModel().getColumn(0).setPreferredWidth(0);
 
         labelCount.setText("Records: " + model.getRowCount());
-    }
-
-    private void fillMockPersonCombo() {
-        comboPerson.addItem("Select a person...");
-        comboPerson.addItem("Carlos González");
-        comboPerson.addItem("María Rodríguez");
-        comboPerson.addItem("José Vargas");
-        comboPerson.addItem("Luisa Campos");
-        comboPerson.addItem("Sofía Mena");
     }
 
     // -------------------------------------------------------------------------
@@ -433,6 +441,6 @@ public class BlockListFormPreview extends javax.swing.JFrame {
         } catch (ReflectiveOperationException | UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        java.awt.EventQueue.invokeLater(() -> new BlockListFormPreview().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new BlockListForm().setVisible(true));
     }
 }
