@@ -74,6 +74,8 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         BlockListButton = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
+        ButtonOthers = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -311,7 +313,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(FosterHomeButtonLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel24)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         FosterHomeButtonLayout.setVerticalGroup(
             FosterHomeButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,6 +351,37 @@ public class MainMenu extends javax.swing.JFrame {
             .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        ButtonOthers.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ButtonOthers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonOthersMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ButtonOthersMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ButtonOthersMouseExited(evt);
+            }
+        });
+
+        jLabel26.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel26.setText("Others");
+
+        javax.swing.GroupLayout ButtonOthersLayout = new javax.swing.GroupLayout(ButtonOthers);
+        ButtonOthers.setLayout(ButtonOthersLayout);
+        ButtonOthersLayout.setHorizontalGroup(
+            ButtonOthersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ButtonOthersLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel26)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        ButtonOthersLayout.setVerticalGroup(
+            ButtonOthersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         javax.swing.GroupLayout BackGroundLayout = new javax.swing.GroupLayout(BackGround);
         BackGround.setLayout(BackGroundLayout);
         BackGroundLayout.setHorizontalGroup(
@@ -372,7 +405,8 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(StatsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(DonationsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(FosterHomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(FosterHomeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ButtonOthers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackGroundLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -402,7 +436,9 @@ public class MainMenu extends javax.swing.JFrame {
                         .addComponent(StatsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(FosterHomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ButtonOthers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
                         .addComponent(LogOffButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -512,6 +548,19 @@ public class MainMenu extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_StatsButtonMouseClicked
 
+    private void ButtonOthersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonOthersMouseClicked
+        RegisterVeterinarian window = new RegisterVeterinarian();
+        dispose();
+    }//GEN-LAST:event_ButtonOthersMouseClicked
+
+    private void ButtonOthersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonOthersMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonOthersMouseEntered
+
+    private void ButtonOthersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonOthersMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonOthersMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -541,6 +590,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel BackGround;
     private javax.swing.JPanel Banner;
     private javax.swing.JPanel BlockListButton;
+    private javax.swing.JPanel ButtonOthers;
     private javax.swing.JPanel DonationsButton;
     private javax.swing.JPanel FosterHomeButton;
     private javax.swing.JLabel LableTitle;
@@ -556,6 +606,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
