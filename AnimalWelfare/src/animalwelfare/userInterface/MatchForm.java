@@ -14,10 +14,10 @@ import javax.swing.table.JTableHeader;
  *
  * @author team
  */
-public class MatchFormPreview extends javax.swing.JFrame {
+public class MatchForm extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger =
-        java.util.logging.Logger.getLogger(MatchFormPreview.class.getName());
+        java.util.logging.Logger.getLogger(MatchForm.class.getName());
 
     // -------------------------------------------------------------------------
     // Tab 1 — Match Report
@@ -36,7 +36,7 @@ public class MatchFormPreview extends javax.swing.JFrame {
     // -------------------------------------------------------------------------
     // Constructor
     // -------------------------------------------------------------------------
-    public MatchFormPreview() {
+    public MatchForm() {
         initComponents();
         loadMockMatches();
         setLocationRelativeTo(null);
@@ -384,6 +384,6 @@ public class MatchFormPreview extends javax.swing.JFrame {
         } catch (ReflectiveOperationException | UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        java.awt.EventQueue.invokeLater(() -> new MatchFormPreview().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new MatchForm().setVisible(true));
     }
 }

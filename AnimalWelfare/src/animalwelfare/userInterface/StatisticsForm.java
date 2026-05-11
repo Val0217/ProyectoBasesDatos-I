@@ -41,6 +41,9 @@ public class StatisticsForm extends javax.swing.JFrame {
     // controlador
     private StatisticsController controller = null;
 
+    // variable 
+    DefaultCategoryDataset datasetPetsByTypeState = null;
+
     // Date range spinners (shared across tabs)
     private JSpinner spinnerFrom;
     private JSpinner spinnerTo;
@@ -136,9 +139,7 @@ public class StatisticsForm extends javax.swing.JFrame {
 
         JButton btnApply = tealButton("APPLY");
         btnApply.setPreferredSize(new Dimension(90, 28));
-        btnApply.addActionListener(e -> JOptionPane.showMessageDialog(this,
-            "In the real version this would reload all charts with the selected date range. (MOCK)",
-            "Info", JOptionPane.INFORMATION_MESSAGE));
+        btnApply.addActionListener(e -> onApplyDateFilter());
         bar.add(btnApply);
 
         JButton btnReset = grayButton("RESET");
@@ -201,12 +202,12 @@ public class StatisticsForm extends javax.swing.JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.WHITE);
 
-        DefaultCategoryDataset dataset = controller.getPetsByTypeAndState(
+        datasetPetsByTypeState = controller.getPetsByTypeAndState(
             new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()),
             new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime())
         );
 
-        if (dataset.getRowCount() == 0) {
+        if (datasetPetsByTypeState.getRowCount() == 0) {
             JLabel noData = new JLabel("No data available for the selected date range.");
             noData.setFont(new Font("Segoe UI", Font.ITALIC, 14));
             noData.setForeground(Color.GRAY);
@@ -219,7 +220,7 @@ public class StatisticsForm extends javax.swing.JFrame {
             "Total Pets by Type and State",
             "Pet Type",
             "Count",
-            dataset,
+            datasetPetsByTypeState,
             PlotOrientation.VERTICAL,
             true, true, false
         );
@@ -239,7 +240,7 @@ public class StatisticsForm extends javax.swing.JFrame {
 
         // Numbers below chart
         /*JPanel statsRow = buildStatsRow(new String[]{
-            "Total Lost: "+dataset.getValue(0, 0), "Total Found: "+dataset.getValue(1, 0), "In Adoption: "+dataset.getValue(2, 0), "Adopted: "+dataset.getValue(3, 0)
+            "Total Lost: "+datasetPetsByTypeState.getValue(0, 0), "Total Found: "+datasetPetsByTypeState.getValue(1, 0), "In Adoption: "+datasetPetsByTypeState.getValue(2, 0), "Adopted: "+datasetPetsByTypeState.getValue(3, 0)
         });*/
 
         panel.add(chartPanel, BorderLayout.CENTER);
@@ -460,6 +461,13 @@ public class StatisticsForm extends javax.swing.JFrame {
         panel.add(chartPanel, BorderLayout.CENTER);
         panel.add(statsRow,   BorderLayout.SOUTH);
         return panel;
+    }
+
+    public void onApplyDateFilter() {
+        controller.getPetsByTypeAndState(
+            new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()),
+            new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime())
+        );
     }
 
     // -------------------------------------------------------------------------
