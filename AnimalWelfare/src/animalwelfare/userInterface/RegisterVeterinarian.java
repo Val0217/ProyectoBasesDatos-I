@@ -24,9 +24,33 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
  
     public RegisterVeterinarian() {
         initComponents();
+        ((javax.swing.text.AbstractDocument) TextPhoneVet.getDocument())
+            .setDocumentFilter(new NumbersOnlyFilter());
         loadCountries();
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+    private static class NumbersOnlyFilter extends javax.swing.text.DocumentFilter {
+
+        @Override
+        public void insertString(FilterBypass fb, int offset, String string,
+                                 javax.swing.text.AttributeSet attr)
+                throws javax.swing.text.BadLocationException {
+
+            if (string != null && string.matches("\\d+")) {
+                super.insertString(fb, offset, string, attr);
+            }
+        }
+
+        @Override
+        public void replace(FilterBypass fb, int offset, int length, String text,
+                            javax.swing.text.AttributeSet attrs)
+                throws javax.swing.text.BadLocationException {
+
+            if (text != null && text.matches("\\d*")) {
+                super.replace(fb, offset, length, text, attrs);
+            }
+        }
     }
     private void loadCountries() {
         try {
@@ -98,6 +122,9 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
                     "Veterinarian registered successfully! ID: " + newId,
                     "Success", JOptionPane.INFORMATION_MESSAGE);
             clearForm();
+            MainMenu window = new MainMenu();
+            dispose();
+            
             
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
@@ -231,6 +258,8 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         LabelCountry3.setForeground(new java.awt.Color(0, 153, 153));
         LabelCountry3.setText("Country");
         jPanel2.add(LabelCountry3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, -1));
+
+        TextPhoneVet.addActionListener(this::TextPhoneVetActionPerformed);
         jPanel2.add(TextPhoneVet, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 180, -1));
 
         jLabel28.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
@@ -316,13 +345,15 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
         registerVeterinarian();
-        MainMenu window = new MainMenu();
-        dispose();
     }//GEN-LAST:event_ButtonCreateAccountActionPerformed
 
     private void ComboDistrict3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboDistrict3ActionPerformed
         
     }//GEN-LAST:event_ComboDistrict3ActionPerformed
+
+    private void TextPhoneVetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPhoneVetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextPhoneVetActionPerformed
 
     /**
      * @param args the command line arguments
