@@ -58,8 +58,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="StatsButton" max="32767" attributes="0"/>
+                              <Component id="DonationsButton" max="32767" attributes="0"/>
                               <Component id="RescuesButton" max="32767" attributes="0"/>
                               <Component id="PetsButton" max="32767" attributes="0"/>
+<<<<<<< Updated upstream
                               <Component id="NewPetButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
@@ -67,7 +70,13 @@
                               <Component id="DonationsButton" max="32767" attributes="0"/>
                               <Component id="StatsButton" max="32767" attributes="0"/>
                               <Component id="FosterHomeButton" min="-2" max="-2" attributes="0"/>
+=======
+                              <Component id="NewPetButton" max="32767" attributes="0"/>
+                              <Component id="FosterHomeButton" max="32767" attributes="0"/>
+>>>>>>> Stashed changes
                           </Group>
+                          <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                          <Component id="BlockListButton" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="279" max="-2" attributes="0"/>
@@ -78,7 +87,11 @@
                           <Component id="LableTitle" min="-2" pref="303" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+<<<<<<< Updated upstream
                   <EmptySpace max="32767" attributes="0"/>
+=======
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+>>>>>>> Stashed changes
               </Group>
           </Group>
         </DimensionLayout>
@@ -86,6 +99,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Component id="Banner" min="-2" max="-2" attributes="0"/>
+<<<<<<< Updated upstream
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="LableTitle" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
@@ -109,6 +123,34 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="LogOffButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+=======
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="LableTitle" pref="59" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="LogOffButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="PetsButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="BlockListButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="DonationsButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="NewPetButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="StatsButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="RescuesButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="FosterHomeButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+>>>>>>> Stashed changes
               </Group>
           </Group>
         </DimensionLayout>
@@ -131,22 +173,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel1" max="32767" attributes="0"/>
-                          <Component id="jLabel19" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="245" max="-2" attributes="0"/>
+                      <EmptySpace pref="8" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="15" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel1" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -160,14 +194,6 @@
                   <Color blue="66" green="66" red="0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pets"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel19">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Roboto Light" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Manage your pets and discover others"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -221,22 +247,22 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
+<<<<<<< Updated upstream
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel3" max="32767" attributes="0"/>
                           <Component id="jLabel20" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="62" max="32767" attributes="0"/>
+=======
+                      <Component id="jLabel3" min="-2" pref="189" max="-2" attributes="0"/>
+                      <EmptySpace pref="64" max="32767" attributes="0"/>
+>>>>>>> Stashed changes
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="15" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel3" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -250,14 +276,6 @@
                   <Color blue="66" green="66" red="0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="New Pet"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel20">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Roboto Light" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Add a rescued or adopted pet"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -279,22 +297,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel13" max="32767" attributes="0"/>
-                          <Component id="jLabel22" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel13" min="-2" pref="146" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel13" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="15" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel13" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -308,14 +318,6 @@
                   <Color blue="66" green="66" red="0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Donations"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel22">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Roboto Light" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Support animal welfare"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -337,22 +339,22 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
+<<<<<<< Updated upstream
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel15" max="32767" attributes="0"/>
                           <Component id="jLabel21" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
+=======
+                      <Component id="jLabel15" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace pref="53" max="32767" attributes="0"/>
+>>>>>>> Stashed changes
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel15" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="15" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel15" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -366,14 +368,6 @@
                   <Color blue="66" green="66" red="0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Match"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel21">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Roboto Light" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Report rescue cases, and more"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -392,12 +386,18 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< Updated upstream
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel17" min="-2" pref="152" max="-2" attributes="0"/>
                           <Component id="jLabel23" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
+=======
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel17" min="-2" pref="154" max="-2" attributes="0"/>
+>>>>>>> Stashed changes
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -406,8 +406,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jLabel17" min="-2" pref="40" max="-2" attributes="0"/>
+<<<<<<< Updated upstream
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+=======
+>>>>>>> Stashed changes
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -423,14 +426,6 @@
                   <Color blue="66" green="66" red="0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Stats"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel23">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Roboto Light" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Explore rescue statistics"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -512,22 +507,31 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
+<<<<<<< Updated upstream
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel24" alignment="0" max="32767" attributes="0"/>
                           <Component id="jLabel25" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="46" max="32767" attributes="0"/>
+=======
+                      <Component id="jLabel24" min="-2" pref="220" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+>>>>>>> Stashed changes
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< Updated upstream
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel24" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel25" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
+=======
+                  <Component id="jLabel24" min="-2" pref="40" max="-2" attributes="0"/>
+>>>>>>> Stashed changes
               </Group>
             </DimensionLayout>
           </Layout>
@@ -543,12 +547,50 @@
                 <Property name="text" type="java.lang.String" value="Foster Home"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel25">
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="BlockListButton">
+          <Properties>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BlockListButtonMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BlockListButtonMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BlockListButtonMouseExited"/>
+          </Events>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel26" min="-2" pref="220" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel26" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel26">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Roboto Light" size="14" style="0"/>
+                  <Font name="Roboto" size="18" style="1"/>
                 </Property>
+<<<<<<< Updated upstream
                 <Property name="text" type="java.lang.String" value="Give a pet a safe temporary home"/>
+=======
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Blocklist"/>
+>>>>>>> Stashed changes
               </Properties>
             </Component>
           </SubComponents>
