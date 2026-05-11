@@ -51,6 +51,7 @@ public class UserPetTable extends javax.swing.JFrame {
     private void prepareTables() {
         jTable1.setDefaultEditor(Object.class, null);
         jTable2.setDefaultEditor(Object.class, null);
+        jTable3.setDefaultEditor(Object.class, null);
         jTable5.setDefaultEditor(Object.class, null);
 
         jTable1.getTableHeader().setReorderingAllowed(false);
@@ -60,6 +61,7 @@ public class UserPetTable extends javax.swing.JFrame {
         jButtonAdopt.setEnabled(false);
         jButtonEditPet.setEnabled(false);
         jButtonReportMissing.setEnabled(false);
+        jButtonTakeBackMiss.setEnabled(false);
         jButtonAcceptAdopt.setEnabled(false);
         jButtonRejectAdopt.setEnabled(false);
         jButtonUndoAdoption.setVisible(false);
@@ -77,6 +79,12 @@ public class UserPetTable extends javax.swing.JFrame {
             if (!event.getValueIsAdjusting()) {
                 updateAdoptButtonState();
             }
+        });
+        
+        jTable3.getSelectionModel().addListSelectionListener(event -> {
+        if (!event.getValueIsAdjusting()) {
+            jButtonTakeBackMiss.setEnabled(jTable3.getSelectedRow() >= 0);
+        }
         });
 
         jTable5.getSelectionModel().addListSelectionListener(event -> {
@@ -230,6 +238,14 @@ public class UserPetTable extends javax.swing.JFrame {
             controller.loadUserPets(jTable1, filterPanel1);
             controller.loadAdoptionPets(jTable2, filterPanel2);
             controller.loadAdoptionRequests(jTable5);
+            controller.loadUserMissingPets(jTable3);
+        } catch (SQLException ex) {
+            showError(ex);
+        }
+    }
+    private void loadPanel3Table() {
+        try {
+            controller.loadUserMissingPets(jTable3);
         } catch (SQLException ex) {
             showError(ex);
         }
@@ -421,25 +437,30 @@ private String nullToEmpty(String text) {
         jButtonUndoAdoption = new javax.swing.JButton();
         jButtonEditPet = new javax.swing.JButton();
         jButtonReportMissing = new javax.swing.JButton();
+        jButtonReturnMM = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButtonFilter2 = new javax.swing.JButton();
         jButtonCleanFilter2 = new javax.swing.JButton();
         jButtonAdopt = new javax.swing.JButton();
+        jButtonReturnMM2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
+        jButtonTakeBackMiss = new javax.swing.JButton();
+        jButtonReturnMM3 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        jButtonReturnMM4 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
         jButtonAcceptAdopt = new javax.swing.JButton();
         jButtonRejectAdopt = new javax.swing.JButton();
+        jButtonReturnMM5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -476,6 +497,9 @@ private String nullToEmpty(String text) {
         jButtonReportMissing.setText("Report Missing");
         jButtonReportMissing.addActionListener(this::jButtonReportMissingActionPerformed);
 
+        jButtonReturnMM.setText("Return to Main Menu");
+        jButtonReturnMM.addActionListener(this::jButtonReturnMMActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -483,20 +507,21 @@ private String nullToEmpty(String text) {
             .addComponent(jScrollPane1)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButtonFilter1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonCleanFilter1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonPutAdopt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonUndoAdoption, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonEditPet, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                        .addComponent(jButtonCleanFilter1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButtonReportMissing, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonReturnMM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonPutAdopt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonUndoAdoption, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonEditPet, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -511,7 +536,9 @@ private String nullToEmpty(String text) {
                     .addComponent(jButtonUndoAdoption)
                     .addComponent(jButtonEditPet))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonReportMissing)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonReportMissing)
+                    .addComponent(jButtonReturnMM))
                 .addGap(0, 9, Short.MAX_VALUE))
         );
 
@@ -539,6 +566,9 @@ private String nullToEmpty(String text) {
         jButtonAdopt.setText("Adopt");
         jButtonAdopt.addActionListener(this::jButtonAdoptActionPerformed);
 
+        jButtonReturnMM2.setText("Return to Main Menu");
+        jButtonReturnMM2.addActionListener(this::jButtonReturnMM2ActionPerformed);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -551,7 +581,9 @@ private String nullToEmpty(String text) {
                 .addComponent(jButtonCleanFilter2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonAdopt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonReturnMM2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(152, 152, 152))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -561,7 +593,8 @@ private String nullToEmpty(String text) {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFilter2)
                     .addComponent(jButtonCleanFilter2)
-                    .addComponent(jButtonAdopt))
+                    .addComponent(jButtonAdopt)
+                    .addComponent(jButtonReturnMM2))
                 .addGap(25, 25, 25))
         );
 
@@ -580,7 +613,11 @@ private String nullToEmpty(String text) {
         ));
         jScrollPane3.setViewportView(jTable3);
 
-        jButton3.setText("Take back missing report");
+        jButtonTakeBackMiss.setText("Take back missing report");
+        jButtonTakeBackMiss.addActionListener(this::jButtonTakeBackMissActionPerformed);
+
+        jButtonReturnMM3.setText("Return to Main Menu");
+        jButtonReturnMM3.addActionListener(this::jButtonReturnMM3ActionPerformed);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -589,15 +626,19 @@ private String nullToEmpty(String text) {
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 891, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButtonTakeBackMiss, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonReturnMM3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(500, 500, 500))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonTakeBackMiss)
+                    .addComponent(jButtonReturnMM3))
                 .addGap(23, 23, 23))
         );
 
@@ -618,6 +659,9 @@ private String nullToEmpty(String text) {
 
         jButton2.setText("Claim as mine");
 
+        jButtonReturnMM4.setText("Return to Main Menu");
+        jButtonReturnMM4.addActionListener(this::jButtonReturnMM4ActionPerformed);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -626,6 +670,8 @@ private String nullToEmpty(String text) {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonReturnMM4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -633,7 +679,9 @@ private String nullToEmpty(String text) {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButtonReturnMM4))
                 .addGap(0, 22, Short.MAX_VALUE))
         );
 
@@ -658,6 +706,9 @@ private String nullToEmpty(String text) {
         jButtonRejectAdopt.setText("Reject");
         jButtonRejectAdopt.addActionListener(this::jButtonRejectAdoptActionPerformed);
 
+        jButtonReturnMM5.setText("Return to Main Menu");
+        jButtonReturnMM5.addActionListener(this::jButtonReturnMM5ActionPerformed);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -668,6 +719,8 @@ private String nullToEmpty(String text) {
                 .addComponent(jButtonAcceptAdopt, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonRejectAdopt, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonReturnMM5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -677,7 +730,8 @@ private String nullToEmpty(String text) {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAcceptAdopt)
-                    .addComponent(jButtonRejectAdopt))
+                    .addComponent(jButtonRejectAdopt)
+                    .addComponent(jButtonReturnMM5))
                 .addGap(0, 32, Short.MAX_VALUE))
         );
 
@@ -691,9 +745,7 @@ private String nullToEmpty(String text) {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -869,6 +921,60 @@ private String nullToEmpty(String text) {
         }
     }//GEN-LAST:event_jButtonRejectAdoptActionPerformed
 
+    private void jButtonReturnMM5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReturnMM5ActionPerformed
+        MainMenu window = new MainMenu(currentUserId);
+        dispose();
+    }//GEN-LAST:event_jButtonReturnMM5ActionPerformed
+
+    private void jButtonReturnMMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReturnMMActionPerformed
+            MainMenu window = new MainMenu(currentUserId);
+            dispose();
+    }//GEN-LAST:event_jButtonReturnMMActionPerformed
+
+    private void jButtonReturnMM2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReturnMM2ActionPerformed
+        MainMenu window = new MainMenu(currentUserId);
+        dispose();
+    }//GEN-LAST:event_jButtonReturnMM2ActionPerformed
+
+    private void jButtonReturnMM3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReturnMM3ActionPerformed
+        MainMenu window = new MainMenu(currentUserId);
+        dispose();
+    }//GEN-LAST:event_jButtonReturnMM3ActionPerformed
+
+    private void jButtonReturnMM4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReturnMM4ActionPerformed
+        MainMenu window = new MainMenu(currentUserId);
+        dispose();
+    }//GEN-LAST:event_jButtonReturnMM4ActionPerformed
+
+    private void jButtonTakeBackMissActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTakeBackMissActionPerformed
+        try {
+            int option = JOptionPane.showConfirmDialog(
+                this,
+                "Do you want to mark this pet as found?",
+                "Take back missing report",
+                JOptionPane.YES_NO_OPTION
+            );
+
+            if (option != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            controller.takeBackSelectedMissingReport(jTable3);
+
+            JOptionPane.showMessageDialog(
+                this,
+                "The pet was marked as found."
+            );
+
+            loadTables();
+            jTable3.clearSelection();
+            jButtonTakeBackMiss.setEnabled(false);
+
+        } catch (SQLException ex) {
+            showError(ex);
+        }
+    }//GEN-LAST:event_jButtonTakeBackMissActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -896,7 +1002,6 @@ private String nullToEmpty(String text) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonAcceptAdopt;
     private javax.swing.JButton jButtonAdopt;
     private javax.swing.JButton jButtonCleanFilter1;
@@ -907,6 +1012,12 @@ private String nullToEmpty(String text) {
     private javax.swing.JButton jButtonPutAdopt;
     private javax.swing.JButton jButtonRejectAdopt;
     private javax.swing.JButton jButtonReportMissing;
+    private javax.swing.JButton jButtonReturnMM;
+    private javax.swing.JButton jButtonReturnMM2;
+    private javax.swing.JButton jButtonReturnMM3;
+    private javax.swing.JButton jButtonReturnMM4;
+    private javax.swing.JButton jButtonReturnMM5;
+    private javax.swing.JButton jButtonTakeBackMiss;
     private javax.swing.JButton jButtonUndoAdoption;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

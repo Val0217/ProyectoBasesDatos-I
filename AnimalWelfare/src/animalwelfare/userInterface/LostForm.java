@@ -12,6 +12,17 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.NumberFormatter;
+import java.text.DecimalFormat;
+import java.util.Date;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 /**
  *
  * @author valer
@@ -29,7 +40,9 @@ public class LostForm extends javax.swing.JFrame {
      */
     public LostForm() {
         initComponents();
-        setLocationRelativeTo(null);
+        
+        configureFormattedFields();
+        configureDatePicker();
     }
 
     public LostForm(int petId, int currentUserId, UserPetTable parent) {
@@ -41,7 +54,68 @@ public class LostForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         loadCurrencies();
     }
+    private void configureDatePicker() {
+        jFormattedTextFieldDateLost.setEditable(false);
+        jFormattedTextFieldDateLost.setToolTipText("Click to select a date");
 
+        jFormattedTextFieldDateLost.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showDatePickerDialog();
+            }
+        });
+    }
+    private void showDatePickerDialog() {
+        JDialog dialog = new JDialog(this, "Select lost date", true);
+        dialog.setLayout(new BorderLayout());
+
+        SpinnerDateModel dateModel = new SpinnerDateModel();
+        JSpinner dateSpinner = new JSpinner(dateModel);
+
+        JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dateSpinner, "dd/MM/yyyy");
+        dateSpinner.setEditor(dateEditor);
+
+        JButton btnOk = new JButton("OK");
+        JButton btnCancel = new JButton("Cancel");
+
+        btnOk.addActionListener(e -> {
+            Date selectedDate = (Date) dateSpinner.getValue();
+
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            jFormattedTextFieldDateLost.setText(format.format(selectedDate));
+            jFormattedTextFieldDateLost.setValue(selectedDate);
+
+            dialog.dispose();
+        });
+
+        btnCancel.addActionListener(e -> dialog.dispose());
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.add(btnCancel);
+        buttonPanel.add(btnOk);
+
+        dialog.add(dateSpinner, BorderLayout.CENTER);
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
+
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+    }
+    private void configureFormattedFields() {
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+        decimalFormat.setParseBigDecimal(true);
+
+        NumberFormatter rewardFormatter = new NumberFormatter(decimalFormat);
+        rewardFormatter.setValueClass(java.math.BigDecimal.class);
+        rewardFormatter.setAllowsInvalid(false);
+        rewardFormatter.setMinimum(java.math.BigDecimal.ZERO);
+
+        jFormattedTextFieldReward.setFormatterFactory(
+            new javax.swing.text.DefaultFormatterFactory(rewardFormatter)
+        );
+
+        jFormattedTextFieldReward.setFocusLostBehavior(JFormattedTextField.COMMIT_OR_REVERT);
+    }
     private void loadCurrencies() {
         try {
             jComboBoxCurrency.removeAllItems();
@@ -133,6 +207,7 @@ public class LostForm extends javax.swing.JFrame {
         jLabel2.setText("Lost Date:");
 
         jFormattedTextFieldDateLost.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        jFormattedTextFieldDateLost.addActionListener(this::jFormattedTextFieldDateLostActionPerformed);
 
         jLabel3.setText("Last place it was seen:");
 
@@ -227,7 +302,18 @@ public class LostForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldLastPlaceActionPerformed
 
     private void jButtonSubmitLostReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitLostReportActionPerformed
-         if (controller == null) {
+        Date lostDate = (Date) jFormattedTextFieldDateLost.getValue();
+        if (lostDate == null) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Please select the lost date.",
+                "Missing date",
+                JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+        
+        if (controller == null) {
             JOptionPane.showMessageDialog(this, "Open this form from My Pets.");
             return;
         }
@@ -268,6 +354,10 @@ public class LostForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonSubmitLostReportActionPerformed
+
+    private void jFormattedTextFieldDateLostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDateLostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldDateLostActionPerformed
 
     /**
      * @param args the command line arguments

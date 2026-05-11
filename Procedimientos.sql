@@ -1,4 +1,59 @@
+CREATE OR REPLACE PROCEDURE pr_take_back_missing_report (
+    p_pet_id   IN NUMBER,
+    p_owner_id IN NUMBER
+)
+AS
+BEGIN
+    UPDATE Pet
+    SET IdState = 4
+    WHERE Id = p_pet_id
+      AND IdOwner = p_owner_id
+      AND IdState = 3;
 
+    IF SQL%ROWCOUNT = 0 THEN
+        RAISE_APPLICATION_ERROR(
+            -20041,
+            'Pet not found, pet does not belong to this user, or pet is not currently lost.'
+        );
+    END IF;
+
+    UPDATE LostReport
+    SET State = 'Found'
+    WHERE IdPet = p_pet_id
+      AND State = 'Lost';
+
+    COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE pr_get_user_missing_pet_table (
+    p_owner_id IN NUMBER,
+    p_result   OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    OPEN p_result FOR
+        SELECT
+            PetId,
+            PetName,
+            Color,
+            Age,
+            Chip,
+            Energy,
+            PetState,
+            PetType,
+            Breed,
+            District,
+            SpaceRequired,
+            Training,
+            PetSize,
+            VeterinarianName
+        FROM VW_USER_PET_TABLE
+        WHERE IdOwner = p_owner_id
+          AND IdState = 3
+        ORDER BY PetName;
+END;
+/
 
 CREATE OR REPLACE PROCEDURE pr_reject_adoption_request (
     p_adoption_id IN NUMBER,

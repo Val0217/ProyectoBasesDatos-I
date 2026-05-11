@@ -50,6 +50,7 @@ ALTER TABLE Person MODIFY (
     IdDistrict NUMBER(8)    NOT NULL
 );
 
+
 ALTER TABLE PetBreed MODIFY (
     Name VARCHAR2(25) NOT NULL,
     IdType NUMBER(8) NOT NULL

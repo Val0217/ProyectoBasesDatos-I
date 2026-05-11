@@ -84,6 +84,32 @@ public class UserPetOperations {
             }
         }
     }
+    
+    public DefaultTableModel getUserMissingPets(int ownerId) throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall(
+                 "{call pr_get_user_missing_pet_table(?,?)}")) {
+
+            cs.setInt(1, ownerId);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
+                return buildPetTableModel(rs);
+            }
+        }
+    }
+    public void takeBackMissingReport(int petId, int ownerId) throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall(
+                 "{call pr_take_back_missing_report(?,?)}")) {
+
+            cs.setInt(1, petId);
+            cs.setInt(2, ownerId);
+            cs.execute();
+        }
+    }
 
         public DefaultTableModel getAdoptionPets(int currentUserId, PetFilter filter) throws SQLException {
             try (Connection conn = ConexionOracle.connect();

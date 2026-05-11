@@ -459,29 +459,10 @@ INSERT INTO PetType (Id, Name)
 SELECT 2, 'Cat' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetType WHERE Id = 2);
 
-INSERT INTO PetBreed (Id, Name)
-SELECT 1, 'Labrador' FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 1);
-
-INSERT INTO PetBreed (Id, Name)
-SELECT 2, 'Poodle' FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 2);
-
-INSERT INTO PetBreed (Id, Name)
-SELECT 3, 'Siames' FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 3);
-
-INSERT INTO PetBreed (Id, Name)
-SELECT 4, 'Persa' FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 4);
-
-INSERT INTO PetBreed (Id, Name)
-SELECT 5, 'Chihuahua' FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 5);
-
-INSERT INTO PetBreed (Id, Name)
-SELECT 6, 'Mixed Breed' FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM PetBreed WHERE Id = 6);
+INSERT INTO PetBreed (ID, NAME, IDTYPE) VALUES (1, 'Labrador Retriever', 1);
+INSERT INTO PetBreed (ID, NAME, IDTYPE) VALUES (2, 'German Shepherd', 1);
+INSERT INTO PetBreed (ID, NAME, IDTYPE) VALUES (3, 'Persian', 2);
+INSERT INTO PetBreed (ID, NAME, IDTYPE) VALUES (4, 'Siamese', 2);
 
 INSERT INTO PetLevelEnergy (Id, Name)
 SELECT 1, 'Athletic' FROM dual

@@ -17,7 +17,15 @@ public class UserPetTableController {
     public UserPetTableController(int currentUserId) {
         this.currentUserId = currentUserId;
     }
-
+    public void loadUserMissingPets(JTable table) throws SQLException {
+        DefaultTableModel model = operations.getUserMissingPets(currentUserId);
+        table.setModel(model);
+        protectTable(table);
+    }
+    public void takeBackSelectedMissingReport(JTable table) throws SQLException {
+        int petId = getSelectedPetId(table);
+        operations.takeBackMissingReport(petId, currentUserId);
+    }
     public void loadUserPets(JTable table, PetFilter filter) throws SQLException {
         DefaultTableModel model = operations.getUserPets(currentUserId, safeFilter(filter));
         table.setModel(model);
