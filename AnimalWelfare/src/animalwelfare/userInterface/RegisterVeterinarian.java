@@ -3,25 +3,120 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package animalwelfare.userInterface;
-
+ 
 import animalwelfare.access.DbObject;
-
+import animalwelfare.business.VetFormController;
+ 
+import javax.swing.JOptionPane;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
  * @author valer
  */
 public class RegisterVeterinarian extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegisterVeterinarian.class.getName());
-
-    /**
-     * Creates new form RegisterVeterinarian
-     */
+ 
+    private static final java.util.logging.Logger logger =
+            java.util.logging.Logger.getLogger(RegisterVeterinarian.class.getName());
+ 
+    private final VetFormController controller = new VetFormController();
+ 
     public RegisterVeterinarian() {
         initComponents();
+        loadCountries();
     }
-
+    private void loadCountries() {
+        try {
+            ComboCountry3.removeAllItems();
+            for (DbObject c : controller.getCountries()) {
+                ComboCountry3.addItem(c);
+            }
+            loadProvinces();
+        } catch (SQLException e) {
+            showError("Error loading countries: " + e.getMessage());
+        }
+    }
+ 
+    private void loadProvinces() {
+        ComboProvince3.removeAllItems();
+        ComboCanton3.removeAllItems();
+        ComboDistrict3.removeAllItems();
+        DbObject country = (DbObject) ComboCountry3.getSelectedItem();
+        if (country == null) return;
+        try {
+            for (DbObject p : controller.getProvincesByCountry(country.getId())) {
+                ComboProvince3.addItem(p);
+            }
+            loadCantons();
+        } catch (SQLException e) {
+            showError("Error loading provinces: " + e.getMessage());
+        }
+    }
+ 
+    private void loadCantons() {
+        ComboCanton3.removeAllItems();
+        ComboDistrict3.removeAllItems();
+        DbObject province = (DbObject) ComboProvince3.getSelectedItem();
+        if (province == null) return;
+        try {
+            for (DbObject c : controller.getCantonsByProvince(province.getId())) {
+                ComboCanton3.addItem(c);
+            }
+            loadDistricts();
+        } catch (SQLException e) {
+            showError("Error loading cantons: " + e.getMessage());
+        }
+    }
+ 
+    private void loadDistricts() {
+        ComboDistrict3.removeAllItems();
+        DbObject canton = (DbObject) ComboCanton3.getSelectedItem();
+        if (canton == null) return;
+        try {
+            for (DbObject d : controller.getDistrictsByCanton(canton.getId())) {
+                ComboDistrict3.addItem(d);
+            }
+        } catch (SQLException e) {
+            showError("Error loading districts: " + e.getMessage());
+        }
+    }
+     private void registerVeterinarian() {
+        try {
+            int newId = controller.registerVeterinarian(
+                    TextVetFirstName.getText(),
+                    TextVetLastName.getText(),
+                    TextVetClinicName.getText(),
+                    TextPhoneVet.getText(),
+                    TextVetEmail.getText(),
+                    TextVetLoctaion.getText(),
+                    (DbObject) ComboDistrict3.getSelectedItem()
+            );
+            JOptionPane.showMessageDialog(this,
+                    "Veterinarian registered successfully! ID: " + newId,
+                    "Success", JOptionPane.INFORMATION_MESSAGE);
+            clearForm();
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(),
+                    "Validation Error", JOptionPane.WARNING_MESSAGE);
+        } catch (SQLException ex) {
+            showError("Database error: " + ex.getMessage());
+        }
+    }
+ 
+    private void clearForm() {
+        TextVetFirstName.setText("");
+        TextVetLastName.setText("");
+        TextVetClinicName.setText("");
+        TextPhoneVet.setText("");
+        TextVetEmail.setText("");
+        TextVetLoctaion.setText("");
+        loadCountries();
+    }
+ 
+    private void showError(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,6 +127,9 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
+        TextVetEmail = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         TextVetLoctaion = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
@@ -59,23 +157,35 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(TextVetEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 180, -1));
+
+        jLabel30.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel30.setText("Email");
+        jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 70, 30));
+
+        jLabel31.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel31.setText("Address");
+        jPanel2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, 90, 30));
 
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("_________________________________________________________________________");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, -1));
 
         TextVetLoctaion.addActionListener(this::TextVetLoctaionActionPerformed);
-        jPanel2.add(TextVetLoctaion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, 450, 60));
+        jPanel2.add(TextVetLoctaion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, 450, 60));
 
         jLabel29.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(0, 153, 153));
         jLabel29.setText("Address");
-        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 90, 30));
+        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, 90, 30));
 
         ComboDistrict3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboDistrict3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboDistrict3.setOpaque(true);
         ComboDistrict3.setRequestFocusEnabled(false);
+        ComboDistrict3.addActionListener(this::ComboDistrict3ActionPerformed);
         jPanel2.add(ComboDistrict3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 180, -1));
 
         LabelDistrict3.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
@@ -149,7 +259,7 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         ButtonCreateAccount.setText("REGISTER");
         ButtonCreateAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ButtonCreateAccount.addActionListener(this::ButtonCreateAccountActionPerformed);
-        jPanel2.add(ButtonCreateAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, 120, 40));
+        jPanel2.add(ButtonCreateAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 550, 120, 40));
 
         jLabel24.setBackground(new java.awt.Color(255, 255, 255));
         jLabel24.setFont(new java.awt.Font("Roboto SemiBold", 0, 36)); // NOI18N
@@ -186,15 +296,15 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComboCountry3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCountry3ActionPerformed
-
+        
     }//GEN-LAST:event_ComboCountry3ActionPerformed
 
     private void ComboProvince3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboProvince3ActionPerformed
-
+        loadProvinces();
     }//GEN-LAST:event_ComboProvince3ActionPerformed
 
     private void ComboCanton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCanton3ActionPerformed
-
+        loadCantons();
     }//GEN-LAST:event_ComboCanton3ActionPerformed
 
     private void TextVetLoctaionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextVetLoctaionActionPerformed
@@ -202,8 +312,12 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     }//GEN-LAST:event_TextVetLoctaionActionPerformed
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
-
+        registerVeterinarian();
     }//GEN-LAST:event_ButtonCreateAccountActionPerformed
+
+    private void ComboDistrict3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboDistrict3ActionPerformed
+        loadDistricts();
+    }//GEN-LAST:event_ComboDistrict3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,6 +356,7 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     private javax.swing.JLabel LabelProvince3;
     private javax.swing.JTextField TextPhoneVet;
     private javax.swing.JTextField TextVetClinicName;
+    private javax.swing.JTextField TextVetEmail;
     private javax.swing.JTextField TextVetFirstName;
     private javax.swing.JTextField TextVetLastName;
     private javax.swing.JTextField TextVetLoctaion;
@@ -252,6 +367,8 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
