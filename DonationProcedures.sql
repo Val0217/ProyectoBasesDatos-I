@@ -34,6 +34,7 @@ BEGIN
     OPEN p_cursor FOR
         SELECT
             d.Id,
+            per.id                               AS PersonId,
             per.FirstName || ' ' || per.LastName AS DonorName,
             a.Name                               AS AssociationName,
             d.Amount,
