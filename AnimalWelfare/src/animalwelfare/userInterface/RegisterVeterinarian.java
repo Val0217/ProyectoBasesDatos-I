@@ -6,10 +6,14 @@ package animalwelfare.userInterface;
  
 import animalwelfare.access.DbObject;
 import animalwelfare.business.VetFormController;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
  
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.JButton;
 
 /**
  *
@@ -29,6 +33,23 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         loadCountries();
         setLocationRelativeTo(null);
         setVisible(true);
+            // button back
+        JButton btnBack = new JButton("← Back to Menu");
+        btnBack.setBackground(new Color(0, 153, 153));
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setFocusPainted(false);
+        btnBack.setBorderPainted(false);
+        btnBack.setOpaque(true);
+        btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnBack.addActionListener(e -> {
+            goBack();
+        });
+        getContentPane().add(btnBack, BorderLayout.SOUTH);
+    }
+    
+    private void goBack(){
+        MainMenu window = new MainMenu();
+        dispose();
     }
     private static class NumbersOnlyFilter extends javax.swing.text.DocumentFilter {
 

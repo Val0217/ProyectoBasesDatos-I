@@ -49,6 +49,19 @@ public class BlockListForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         controler = new BlockListController(this);
         setVisible(true);
+        
+        
+        JButton btnBack = new JButton("← Back to Menu");
+        btnBack.setBackground(new Color(0, 153, 153));
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setFocusPainted(false);
+        btnBack.setBorderPainted(false);
+        btnBack.setOpaque(true);
+        btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnBack.addActionListener(e -> {
+            goBack();
+        });
+        getContentPane().add(btnBack, BorderLayout.SOUTH); 
     }
 
     // -------------------------------------------------------------------------
@@ -78,6 +91,11 @@ public class BlockListForm extends javax.swing.JFrame {
         getContentPane().add(header, BorderLayout.NORTH);
         getContentPane().add(tabs,   BorderLayout.CENTER);
         pack();
+    }
+    
+    private void goBack(){
+        MainMenu window = new MainMenu();
+        dispose();
     }
 
     // -------------------------------------------------------------------------
@@ -397,6 +415,8 @@ public class BlockListForm extends javax.swing.JFrame {
         btn.setOpaque(true);
         return btn;
     }
+    
+    
 
     // -------------------------------------------------------------------------
     // Main — RIGHT CLICK → Run File
