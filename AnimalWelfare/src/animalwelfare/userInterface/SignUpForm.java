@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.ListCellRenderer;
 import javax.swing.text.AbstractDocument;
+import javax.swing.JOptionPane;
 /**
  *
  * @author carlo
@@ -61,7 +62,9 @@ public class SignUpForm extends javax.swing.JFrame {
             ComboDistrict.addItem(c);
         }
     }
-    
+    private boolean isValidEmail(String email) {
+        return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.(com|net|org)$");
+    }
     
     public SignUpForm() {
         initComponents();
@@ -72,6 +75,9 @@ public class SignUpForm extends javax.swing.JFrame {
         ComboProvince.setEnabled(false);
         ComboCanton.setEnabled(false);
         ComboDistrict.setEnabled(false);
+        
+        ListEmail.setModel(modelEmail);
+        ListPhone.setModel(modelPhone);
         
         // Diseño de las combo box
         ComboCountry.setBackground(new Color(255, 255, 255));
@@ -144,13 +150,12 @@ public class SignUpForm extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         ListEmail = new javax.swing.JList<>();
         ButtonAddPhone = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         ButtonAddEmail = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
         LableTitle1 = new javax.swing.JLabel();
         LableTitle3 = new javax.swing.JLabel();
         ImagenBackGround = new javax.swing.JLabel();
         LableTitle2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -289,25 +294,15 @@ public class SignUpForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("+");
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout ButtonAddPhoneLayout = new javax.swing.GroupLayout(ButtonAddPhone);
         ButtonAddPhone.setLayout(ButtonAddPhoneLayout);
         ButtonAddPhoneLayout.setHorizontalGroup(
             ButtonAddPhoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+            .addGap(0, 31, Short.MAX_VALUE)
         );
         ButtonAddPhoneLayout.setVerticalGroup(
             ButtonAddPhoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+            .addGap(0, 26, Short.MAX_VALUE)
         );
 
         ButtonAddEmail.setBackground(new java.awt.Color(0, 142, 142));
@@ -317,25 +312,15 @@ public class SignUpForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("+");
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel9MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout ButtonAddEmailLayout = new javax.swing.GroupLayout(ButtonAddEmail);
         ButtonAddEmail.setLayout(ButtonAddEmailLayout);
         ButtonAddEmailLayout.setHorizontalGroup(
             ButtonAddEmailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+            .addGap(0, 31, Short.MAX_VALUE)
         );
         ButtonAddEmailLayout.setVerticalGroup(
             ButtonAddEmailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+            .addGap(0, 26, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout PanelFormLayout = new javax.swing.GroupLayout(PanelForm);
@@ -450,7 +435,6 @@ public class SignUpForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ButtonAddPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)))
-                .addGap(18, 18, 18)
                 .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -497,7 +481,6 @@ public class SignUpForm extends javax.swing.JFrame {
                     .addGroup(PanelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ComboDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(ComboCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ButtonCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -525,6 +508,9 @@ public class SignUpForm extends javax.swing.JFrame {
         LableTitle2.setText("CREATE ACCOUNT");
         PanelBackGround.add(LableTitle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 20, 586, -1));
 
+        jButton1.setText("jButton1");
+        PanelBackGround.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, 40, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -547,14 +533,22 @@ public class SignUpForm extends javax.swing.JFrame {
     }//GEN-LAST:event_TextEmailActionPerformed
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
-        // boton que envia los datos del formulario a la capa de access para que los inserten en la base de datos
-        DbObject District = (DbObject) ComboDistrict.getSelectedItem();
-        char[] passwordCharecters = TextPassword.getPassword();
-        char[] rePasswordCharecters = TextPasswordRE.getPassword();
-        boolean correct = controller.InsertPerson(TextEmail.getText(),TextFirstName.getText(),TextLastName.getText(),new String(passwordCharecters),new String(rePasswordCharecters), TextUserName.getText(),District, TextPhone.getText());
-        if (correct){
-            SignInForm window = new SignInForm();
-            dispose();
+        DbObject district = (DbObject) ComboDistrict.getSelectedItem();
+
+        boolean created = controller.InsertPerson(
+                TextFirstName.getText().trim(),
+                TextLastName.getText().trim(),
+                TextPassword.getText().trim(),
+                TextPasswordRE.getText().trim(),
+                TextUserName.getText().trim(),
+                district,
+                modelEmail,
+                modelPhone
+        );
+
+        if (created) {
+            this.dispose();
+            new SignInForm(); 
         }
     }//GEN-LAST:event_ButtonCreateAccountActionPerformed
 
@@ -628,58 +622,56 @@ public class SignUpForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboDistrictActionPerformed
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel8MouseClicked
-
     private void ButtonAddPhoneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonAddPhoneMouseClicked
-        String phone = TextPhone.getText();
+        String phone = TextPhone.getText().trim();
 
-        if (phone != null && !phone.isEmpty()) {
+        if (phone.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Phone number cannot be empty.");
+            return;
+        }
 
-            boolean exists = false;
+        if (!phone.matches("\\d{8}")) {
+            JOptionPane.showMessageDialog(null, "Phone number must have exactly 8 digits.");
+            return;
+        }
 
-            for (int i = 0; i < modelPhone.size(); i++) {
+        for (int i = 0; i < modelPhone.size(); i++) {
+            String item = modelPhone.get(i);
 
-                String item = modelPhone.get(i);
-
-                if (item.equals(phone)) {
-                    exists = true;
-                    break;
-                }
-            }
-
-            if (!exists) {
-                modelPhone.addElement(phone);
+            if (item.equals(phone)) {
+                JOptionPane.showMessageDialog(null, "This phone number is already added.");
+                return;
             }
         }
+
+        modelPhone.addElement(phone);
+        TextPhone.setText("");
     }//GEN-LAST:event_ButtonAddPhoneMouseClicked
 
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel9MouseClicked
-
     private void ButtonAddEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonAddEmailMouseClicked
-        String email = TextEmail.getText();
+        String email = TextEmail.getText().trim();
 
-        if (email != null && !email.isEmpty()) {
+        if (email.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Email cannot be empty.");
+            return;
+        }
 
-            boolean exists = false;
+        if (!isValidEmail(email)) {
+            JOptionPane.showMessageDialog(null, "Invalid email format. Example: user@example.com");
+            return;
+        }
 
-            for (int i = 0; i < modelEmail.size(); i++) {
+        for (int i = 0; i < modelEmail.size(); i++) {
+            String item = modelEmail.get(i);
 
-                String item = modelEmail.get(i);
-
-                if (item.equals(email)) {
-                    exists = true;
-                    break;
-                }
-            }
-
-            if (!exists) {
-                modelEmail.addElement(email);
+            if (item.equalsIgnoreCase(email)) {
+                JOptionPane.showMessageDialog(null, "This email is already added.");
+                return;
             }
         }
+
+        modelEmail.addElement(email);
+        TextEmail.setText("");
     }//GEN-LAST:event_ButtonAddEmailMouseClicked
 
     /**
@@ -709,8 +701,6 @@ public class SignUpForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ButtonAddEmail;
-    private javax.swing.JPanel ButtonAddEmail1;
-    private javax.swing.JPanel ButtonAddEmail2;
     private javax.swing.JPanel ButtonAddPhone;
     private javax.swing.JButton ButtonCreateAccount;
     private javax.swing.JComboBox<DbObject> ComboCanton;
@@ -744,14 +734,11 @@ public class SignUpForm extends javax.swing.JFrame {
     private javax.swing.JPasswordField TextPasswordRE;
     private javax.swing.JTextField TextPhone;
     private javax.swing.JTextField TextUserName;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

@@ -16,34 +16,40 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import oracle.jdbc.OracleTypes;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author carlo
  */
 public class PersonOperations {
-    public static boolean Insert(String Email,String FirstName, String LastName, String Password, String UserName, int IdDistrict, int PhoneNumber){
-        try {
-            Connection con = ConexionOracle.connect();
+    public static int Insert(String FirstName, String LastName, String Password, String UserName, int IdDistrict) {
+        int idPerson = -1;
 
-            // Creamos la consulta SQL para insertar una nueva persona utilizando el procedimiento insertPerson
-            String SQL = "BEGIN pr_insert_person('"+FirstName+"','"+LastName+"','"+Email+"','"+Password+"','"+UserName+"',"+IdDistrict+","+PhoneNumber+"); END;";
-            
-            Statement cn = con.createStatement(); // esto es para poder ejecutar consultas
-            cn.execute(SQL); // ejecutamos el query
-            
+        String sql = "{ call pr_insert_person(?, ?, ?, ?, ?, ?) }";
 
-            cn.close();
-            con.close();
-            
-            return true;
+        try (Connection con = ConexionOracle.connect();
+             CallableStatement cs = con.prepareCall(sql)) {
+
+            cs.setString(1, FirstName);
+            cs.setString(2, LastName);
+            cs.setString(3, Password);
+            cs.setString(4, UserName);
+            cs.setInt(5, IdDistrict);
+
+            cs.registerOutParameter(6, java.sql.Types.INTEGER);
+
+            cs.execute();
+
+            idPerson = cs.getInt(6);
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
-            return false;
+            JOptionPane.showMessageDialog(null, "Error inserting person: " + e.getMessage());
         }
-        
+
+        return idPerson;
     }
-    
+
     // obtenemos si el usuario existe o no y en caso de que exista devuelve la password
     // esta forma de crear la consulta viene de https://docs.oracle.com/javase/tutorial/jdbc/basics/storedprocedures.html
     public static String CheckUser(String userName) {
@@ -181,5 +187,50 @@ public class PersonOperations {
 
             return emails;
         }
+    public static boolean addEmailsToPerson(int idPerson, DefaultListModel<String> modelEmail) {
+        String sql = "{ call ADD_EMAIL_PERSON(?, ?) }";
 
+        try (Connection con = ConexionOracle.connect();
+             CallableStatement stmt = con.prepareCall(sql)) {
+
+            for (int i = 0; i < modelEmail.size(); i++) {
+                String email = modelEmail.getElementAt(i);
+
+                stmt.setString(1, email);
+                stmt.setInt(2, idPerson);
+
+                stmt.addBatch();
+            }
+
+            stmt.executeBatch();
+            return true;
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error saving emails: " + e.getMessage());
+            return false;
+        }
+    }
+    public static boolean addPhonesToPerson(int idPerson, DefaultListModel<String> modelPhone) {
+        String sql = "{ call ADD_PHONE_PERSON(?, ?) }";
+
+        try (Connection con = ConexionOracle.connect();
+             CallableStatement stmt = con.prepareCall(sql)) {
+
+            for (int i = 0; i < modelPhone.size(); i++) {
+                String phone = modelPhone.getElementAt(i);
+
+                stmt.setString(1, phone);
+                stmt.setInt(2, idPerson);
+
+                stmt.addBatch();
+            }
+
+            stmt.executeBatch();
+            return true;
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error saving phones: " + e.getMessage());
+            return false;
+        }
+    }
 }

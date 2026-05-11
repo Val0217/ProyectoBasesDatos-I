@@ -1,3 +1,71 @@
+CREATE OR REPLACE PROCEDURE ADD_EMAIL_PERSON (
+    p_email    IN EMAIL.EMAIL%TYPE,
+    p_idperson IN EMAIL.IDPERSON%TYPE
+)
+AS
+BEGIN
+    INSERT INTO EMAIL (
+        ID,
+        EMAIL,
+        IDPERSON
+    )
+    VALUES (
+        S_EMAIL.NEXTVAL,
+        p_email,
+        p_idperson
+    );
+END;
+/
+
+CREATE OR REPLACE PROCEDURE ADD_PHONE_PERSON (
+    p_phone    IN PHONE.PHONE%TYPE,
+    p_idperson IN PHONE.IDPERSON%TYPE
+)
+AS
+BEGIN
+    INSERT INTO PHONE (
+        ID,
+        PHONE,
+        IDPERSON
+    )
+    VALUES (
+        S_PHONE.NEXTVAL,
+        p_phone,
+        p_idperson
+    );
+END;
+/
+
+CREATE OR REPLACE PROCEDURE pr_insert_person (
+    p_firstname   IN PERSON.FIRSTNAME%TYPE,
+    p_lastname    IN PERSON.LASTNAME%TYPE,
+    p_password    IN PERSON.PASSWORD%TYPE,
+    p_username    IN PERSON.USERNAME%TYPE,
+    p_iddistrict  IN PERSON.IDDISTRICT%TYPE,
+    p_idperson    OUT PERSON.ID%TYPE
+)
+AS
+BEGIN
+    INSERT INTO PERSON (
+        ID,
+        FIRSTNAME,
+        LASTNAME,
+        PASSWORD,
+        USERNAME,
+        IDDISTRICT
+    )
+    VALUES (
+        S_PERSON.NEXTVAL,
+        p_firstname,
+        p_lastname,
+        p_password,
+        p_username,
+        p_iddistrict
+    )
+    RETURNING ID INTO p_idperson;
+END;
+/
+
 CREATE OR REPLACE PROCEDURE pr_register_veterinarian (
     p_first_name  IN  VARCHAR2,
     p_last_name   IN  VARCHAR2,
