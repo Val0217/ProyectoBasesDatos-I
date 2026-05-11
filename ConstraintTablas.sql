@@ -171,11 +171,12 @@ ALTER TABLE PetMatch ADD CONSTRAINT chk_PetMatch_Percentage
 -- -------------------------------------------------------------
 -- ADOPTION
 -- -------------------------------------------------------------
-
+ALTER TABLE Adoption
+MODIFY IdAdopter NULL;
 ALTER TABLE Adoption MODIFY (
     AvailableDate DATE      NOT NULL,
     IdPet         NUMBER(8) NOT NULL,
-    IdAdopter     NUMBER(8) NOT NULL,
+    IdAdopter     NUMBER(8),
     IdOwner       NUMBER(8) NOT NULL
 );
 
@@ -292,7 +293,7 @@ ALTER TABLE Bitacora MODIFY (
 -- -------------------------------------------------------------
 
 ALTER TABLE Rescuer MODIFY (IdPerson NUMBER(8) NOT NULL);
-ALTER TABLE Adopter MODIFY (IdPerson NUMBER(8) NOT NULL);
+ALTER TABLE Adopter MODIFY (IdPerson NUMBER(8)  );
 ALTER TABLE Admin   MODIFY (IdPerson NUMBER(8) NOT NULL);
 
 -- Una persona no puede ser rescatista dos veces

@@ -52,11 +52,13 @@ public class UserPetTable extends javax.swing.JFrame {
         jTable1.setDefaultEditor(Object.class, null);
         jTable2.setDefaultEditor(Object.class, null);
         jTable3.setDefaultEditor(Object.class, null);
+        jTable4.setDefaultEditor(Object.class, null);
         jTable5.setDefaultEditor(Object.class, null);
 
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable2.getTableHeader().setReorderingAllowed(false);
-        jTable5.getTableHeader().setReorderingAllowed(false);
+        jTable3.getTableHeader().setReorderingAllowed(false);
+        jTable4.getTableHeader().setReorderingAllowed(false);
 
         jButtonAdopt.setEnabled(false);
         jButtonEditPet.setEnabled(false);
@@ -65,6 +67,7 @@ public class UserPetTable extends javax.swing.JFrame {
         jButtonAcceptAdopt.setEnabled(false);
         jButtonRejectAdopt.setEnabled(false);
         jButtonUndoAdoption.setVisible(false);
+        jButtonPutAdopt.setEnabled(false);
     }
     private void addTableSelectionListeners() {
         jTable1.getSelectionModel().addListSelectionListener(event -> {
@@ -72,6 +75,7 @@ public class UserPetTable extends javax.swing.JFrame {
                 updateUndoAdoptionButtonVisibility();
                 updateEditPetButtonState();
                 updateReportMissingButtonState();
+                updatePutAdoptButtonState();
             }
         });
 
@@ -86,12 +90,84 @@ public class UserPetTable extends javax.swing.JFrame {
             jButtonTakeBackMiss.setEnabled(jTable3.getSelectedRow() >= 0);
         }
         });
+        
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                handleFoundPetsTableClick();
+            }
+        });
 
         jTable5.getSelectionModel().addListSelectionListener(event -> {
             if (!event.getValueIsAdjusting()) {
                 updateAdoptionDecisionButtonsState();
             }
         });
+    }
+    private void updatePutAdoptButtonState() {
+        if (jTable1.getSelectedRow() < 0) {
+            jButtonPutAdopt.setEnabled(false);
+            return;
+        }
+
+        String state = getSelectedPetStateFromTable();
+
+        boolean isLost =
+                state != null &&
+                (state.equalsIgnoreCase("Lost")
+                || state.equalsIgnoreCase("Missing")
+                || state.equals("3"));
+
+        jButtonPutAdopt.setEnabled(!isLost);
+    }
+    
+    private void handleFoundPetsTableClick() {
+        int selectedRow = jTable4.getSelectedRow();
+        int selectedColumn = jTable4.getSelectedColumn();
+
+        if (selectedRow < 0 || selectedColumn < 0) {
+            return;
+        }
+
+        String columnName = jTable4.getColumnName(selectedColumn);
+
+        if (!columnName.equalsIgnoreCase("Emails")
+                && !columnName.equalsIgnoreCase("Phones")) {
+            return;
+        }
+
+        int modelRow = jTable4.convertRowIndexToModel(selectedRow);
+
+        int ownerIdColumn = findModelColumn(jTable4, "OwnerId");
+        if (ownerIdColumn < 0) {
+            showError(new Exception("OwnerId column was not found."));
+            return;
+        }
+
+        Object ownerValue = jTable4.getModel().getValueAt(modelRow, ownerIdColumn);
+
+        if (ownerValue == null) {
+            showError(new Exception("The selected row does not have an owner ID."));
+            return;
+        }
+
+        int ownerId;
+
+        if (ownerValue instanceof Number) {
+            ownerId = ((Number) ownerValue).intValue();
+        } else {
+            ownerId = Integer.parseInt(ownerValue.toString());
+        }
+
+        try {
+            if (columnName.equalsIgnoreCase("Emails")) {
+                showListPopup("Owner emails", controller.getOwnerEmails(ownerId));
+            } else {
+                showListPopup("Owner phones", controller.getOwnerPhones(ownerId));
+            }
+        } catch (SQLException ex) {
+            showError(ex);
+        }
     }
     private void updateAdoptButtonState() {
         jButtonAdopt.setEnabled(jTable2.getSelectedRow() >= 0);
@@ -207,6 +283,43 @@ public class UserPetTable extends javax.swing.JFrame {
 
         return -1;
     }
+    private int findModelColumn(javax.swing.JTable table, String columnName) {
+        for (int i = 0; i < table.getModel().getColumnCount(); i++) {
+            String currentName = table.getModel().getColumnName(i);
+
+            if (currentName != null && currentName.equalsIgnoreCase(columnName)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+    private void showListPopup(String title, java.util.List<String> values) {
+        if (values == null || values.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "No information registered.",
+                title,
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        StringBuilder message = new StringBuilder();
+
+        for (String value : values) {
+            if (value != null && !value.trim().isEmpty()) {
+                message.append(value).append("\n");
+            }
+        }
+
+        JOptionPane.showMessageDialog(
+            this,
+            message.toString(),
+            title,
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }
     private void updateUndoAdoptionButtonVisibility() {
         int selectedRow = jTable1.getSelectedRow();
 
@@ -239,6 +352,7 @@ public class UserPetTable extends javax.swing.JFrame {
             controller.loadAdoptionPets(jTable2, filterPanel2);
             controller.loadAdoptionRequests(jTable5);
             controller.loadUserMissingPets(jTable3);
+            controller.loadFoundPets(jTable4);
         } catch (SQLException ex) {
             showError(ex);
         }
@@ -677,12 +791,13 @@ private String nullToEmpty(String text) {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButtonReturnMM4))
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Found Pets", jPanel4);

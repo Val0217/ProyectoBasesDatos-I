@@ -17,6 +17,23 @@ public class UserPetTableController {
     public UserPetTableController(int currentUserId) {
         this.currentUserId = currentUserId;
     }
+    public void loadFoundPets(JTable table) throws SQLException {
+        DefaultTableModel model = operations.getFoundPets();
+        table.setModel(model);
+        protectTable(table);
+
+        if (table.getColumnModel().getColumnCount() > 1) {
+            table.getColumnModel().getColumn(1).setMinWidth(0);
+            table.getColumnModel().getColumn(1).setMaxWidth(0);
+            table.getColumnModel().getColumn(1).setPreferredWidth(0);
+        }
+    }
+    public List<String> getOwnerEmails(int ownerId) throws SQLException {
+       return operations.getOwnerEmails(ownerId);
+    } 
+    public List<String> getOwnerPhones(int ownerId) throws SQLException {
+    return operations.getOwnerPhones(ownerId);
+}
     public void loadUserMissingPets(JTable table) throws SQLException {
         DefaultTableModel model = operations.getUserMissingPets(currentUserId);
         table.setModel(model);

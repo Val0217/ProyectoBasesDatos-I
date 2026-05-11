@@ -41,8 +41,7 @@ public class LostForm extends javax.swing.JFrame {
     public LostForm() {
         initComponents();
         
-        configureFormattedFields();
-        configureDatePicker();
+        
     }
 
     public LostForm(int petId, int currentUserId, UserPetTable parent) {
@@ -53,6 +52,8 @@ public class LostForm extends javax.swing.JFrame {
         this.controller = new UserPetTableController(currentUserId);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         loadCurrencies();
+        configureFormattedFields();
+        configureDatePicker();
     }
     private void configureDatePicker() {
         jFormattedTextFieldDateLost.setEditable(false);
