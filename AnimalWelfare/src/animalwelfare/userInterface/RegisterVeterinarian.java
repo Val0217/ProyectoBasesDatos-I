@@ -35,6 +35,11 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         setVisible(true);
     }
     
+    private void goBack(){
+        MainMenu window = new MainMenu();
+        dispose();
+    }
+    
     
     private static class NumbersOnlyFilter extends javax.swing.text.DocumentFilter {
 
