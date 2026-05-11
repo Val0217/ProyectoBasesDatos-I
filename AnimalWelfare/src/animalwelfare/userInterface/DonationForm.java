@@ -61,6 +61,24 @@ public class DonationForm extends javax.swing.JFrame {
         controller = new DonationController(this); // Initialize controller (replace with real when BD ready)
         setLocationRelativeTo(null);
         setVisible(true);
+        
+        // button back
+        JButton btnBack = new JButton("← Back to Menu");
+        btnBack.setBackground(new Color(0, 153, 153));
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setFocusPainted(false);
+        btnBack.setBorderPainted(false);
+        btnBack.setOpaque(true);
+        btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnBack.addActionListener(e -> {
+            goBack();
+        });
+        getContentPane().add(btnBack, BorderLayout.SOUTH);
+    }
+    
+    private void goBack(){
+        MainMenu window = new MainMenu();
+        dispose();
     }
 
     // -------------------------------------------------------------------------
