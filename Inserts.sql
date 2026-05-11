@@ -626,6 +626,167 @@ WHERE NOT EXISTS (SELECT 1 FROM Veterinarian WHERE Id = 2);
    ------------------------------------------------------------ */
 INSERT INTO Pet (
     Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed,
+    IdDistrict, IdSpace, IdPetTraining,
+    IdSize, IdOwner, IdVeterinarian
+)
+VALUES (
+    200, 'Brown', 3, 'Friendly brown dog', 'Rocky', 'CHIP200',
+    1, 3, 1, 1,
+    12, 1, 1,
+    1, 1, 1
+);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed,
+    IdDistrict, IdSpace, IdPetTraining,
+    IdSize, IdOwner, IdVeterinarian
+)
+VALUES (
+    201, 'White', 2, 'White cat', 'Luna', 'CHIP201',
+    1, 3, 2, 2,
+    13, 1, 1,
+    1, 1, 1
+);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed,
+    IdDistrict, IdSpace, IdPetTraining,
+    IdSize, IdOwner, IdVeterinarian
+)
+VALUES (
+    202, 'Black', 5, 'Black dog', 'Max', 'CHIP202',
+    1, 3, 1, 3,
+    14, 1, 1,
+    2, 2, 1
+);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed,
+    IdDistrict, IdSpace, IdPetTraining,
+    IdSize, IdOwner, IdVeterinarian
+)
+VALUES (
+    210, 'Brown', 3, 'Found brown dog', 'Unknown1', 'CHIP210',
+    1, 4, 1, 1,
+    12, 1, 1,
+    1, 2, 1
+);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed,
+    IdDistrict, IdSpace, IdPetTraining,
+    IdSize, IdOwner, IdVeterinarian
+)
+VALUES (
+    211, 'White', 2, 'Found white cat', 'Unknown2', 'CHIP211',
+    1, 4, 2, 2,
+    13, 1, 1,
+    1, 2, 1
+);
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
+    IdEnergy, IdState, IdType, IdBreed,
+    IdDistrict, IdSpace, IdPetTraining,
+    IdSize, IdOwner, IdVeterinarian
+)
+VALUES (
+    212, 'Black', 5, 'Found black dog', 'Unknown3', 'CHIP212',
+    1, 4, 1, 3,
+    14, 1, 1,
+    2, 3, 1
+);
+
+INSERT INTO LostReport (
+    Id, LostDate, Place, Description,
+    Reward, State, IdPet,
+    IdDistrict, IdCurrency
+)
+VALUES (
+    10,
+    DATE '2026-05-01',
+    'Central Park',
+    'Lost brown dog',
+    10000,
+    'Perdido',
+    200,
+    12,
+    1
+);
+
+INSERT INTO LostReport VALUES (
+    11,
+    DATE '2026-05-02',
+    'Mall',
+    'Lost white cat',
+    8000,
+    'Perdido',
+    201,
+    13,
+    1
+);
+
+INSERT INTO LostReport VALUES (
+    12,
+    DATE '2026-05-03',
+    'School',
+    'Lost black dog',
+    12000,
+    'Perdido',
+    202,
+    14,
+    1
+);
+
+-- =====================================================
+-- FOUND REPORTS
+-- =====================================================
+
+INSERT INTO FoundReport (
+    Id, FoundDate, Place,
+    Description, IdPet,
+    IdDistrict, IdPerson
+)
+VALUES (
+    20,
+    DATE '2026-05-05',
+    'Downtown',
+    'Found brown dog',
+    210,
+    12,
+    2
+);
+
+INSERT INTO FoundReport VALUES (
+    21,
+    DATE '2026-05-06',
+    'Mall Entrance',
+    'Found white cat',
+    211,
+    13,
+    3
+);
+
+INSERT INTO FoundReport VALUES (
+    22,
+    DATE '2026-05-07',
+    'School Area',
+    'Found black dog',
+    212,
+    14,
+    1
+);
+
+COMMIT;
+
+
+INSERT INTO Pet (
+    Id, Color, Age, Description, Name, Chip,
     IdEnergy, IdState, IdType, IdBreed, IdDistrict,
     IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
 )
