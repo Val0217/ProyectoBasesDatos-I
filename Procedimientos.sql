@@ -1,3 +1,46 @@
+CREATE OR REPLACE PROCEDURE pr_register_veterinarian (
+    p_first_name  IN  VARCHAR2,
+    p_last_name   IN  VARCHAR2,
+    p_clinic_name IN  VARCHAR2,
+    p_phone       IN  NUMBER,
+    p_email       IN  VARCHAR2,
+    p_location    IN  VARCHAR2,
+    p_id_district IN  NUMBER,
+    p_new_id      OUT NUMBER
+)
+AS
+BEGIN
+    p_new_id := fn_next_id('Veterinarian');
+ 
+    INSERT INTO Veterinarian (
+        Id,
+        FirstName,
+        LastName,
+        Name,
+        Phone,
+        Email,
+        Location,
+        IdDistrict
+    ) VALUES (
+        p_new_id,
+        p_first_name,
+        p_last_name,
+        p_clinic_name,
+        p_phone,
+        p_email,
+        p_location,
+        p_id_district
+    );
+ 
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        RAISE;
+END pr_register_veterinarian;
+/
+SHOW ERRORS PROCEDURE pr_register_veterinarian;
+
 CREATE OR REPLACE PROCEDURE pr_get_found_pet_table (
     p_result OUT SYS_REFCURSOR
 )
