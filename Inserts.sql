@@ -403,6 +403,13 @@ VALUES (1, 85, DATE '2024-06-04', 1, 1);
 INSERT INTO PetMatch (Id, SimilarityPercentage, MatchDate, IdLostRepost, IdFoundReport)
 VALUES (2, 72, DATE '2024-07-21', 2, 2);
 
+
+INSERT INTO Parameter (Id, Name, Value, Description)
+VALUES (1, 'MinMatchPercentage', '60', 'Minimum similarity percentage for pet matches');
+
+INSERT INTO Parameter (Id, Name, Value, Description)
+VALUES (2, 'MatchIntervalHours', '2', 'Hours between automatic pet match executions');
+
 -- -------------------------------------------------------------
 -- 12. ADOPCIONES
 -- -------------------------------------------------------------

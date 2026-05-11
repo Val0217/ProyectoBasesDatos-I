@@ -63,8 +63,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="BlockListButton" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="RescuesButton" alignment="0" max="32767" attributes="0"/>
-                          <Component id="NewPetButton" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="MatchButton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="NewPetButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="PetsButton" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -100,7 +100,7 @@
                       <Group type="102" attributes="0">
                           <Component id="NewPetButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Component id="RescuesButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="MatchButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="BlockListButton" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
@@ -211,7 +211,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" pref="206" max="-2" attributes="0"/>
+                      <Component id="jLabel3" min="-2" pref="155" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -278,16 +278,16 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="RescuesButton">
+        <Container class="javax.swing.JPanel" name="MatchButton">
           <Properties>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="RescuesButtonMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="RescuesButtonMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="RescuesButtonMouseExited"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MatchButtonMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MatchButtonMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MatchButtonMouseExited"/>
           </Events>
 
           <Layout>

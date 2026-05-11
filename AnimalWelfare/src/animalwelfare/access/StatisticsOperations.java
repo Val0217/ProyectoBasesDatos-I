@@ -22,6 +22,36 @@ public class StatisticsOperations {
      * @param dateFrom start date (nullable)
      * @param dateTo   end date (nullable)
      */
+
+    public static ArrayList<String[]> getPetsByTypeAndState() {
+        ArrayList<String[]> rows = new ArrayList<>();
+        String call = "{ call pr_stat_pets_by_type_state(?, ?, ?) }";
+
+        try (Connection con = ConexionOracle.connect();
+             CallableStatement cs = con.prepareCall(call)) {
+
+            setNullableDate(cs, 1, null);
+            setNullableDate(cs, 2, null);
+            cs.registerOutParameter(3, OracleTypes.CURSOR);
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(3)) {
+                while (rs.next()) {
+                    rows.add(new String[]{
+                        rs.getString("PetType"),
+                        rs.getString("PetState"),
+                        String.valueOf(rs.getInt("Total"))
+                    });
+                }
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                "Error loading pet stats: " + e.getMessage());
+        }
+
+        return rows;
+    }
     public static ArrayList<String[]> getPetsByTypeAndState(Date dateFrom, Date dateTo) {
         ArrayList<String[]> rows = new ArrayList<>();
         String call = "{ call pr_stat_pets_by_type_state(?, ?, ?) }";
@@ -69,8 +99,8 @@ public class StatisticsOperations {
         try (Connection con = ConexionOracle.connect();
              CallableStatement cs = con.prepareCall(call)) {
 
-            setNullableDate(cs, 1, dateFrom);
-            setNullableDate(cs, 2, dateTo);
+            setNullableDate(cs, 1, null);
+            setNullableDate(cs, 2, null);
             cs.registerOutParameter(3, OracleTypes.CURSOR);
             cs.execute();
 

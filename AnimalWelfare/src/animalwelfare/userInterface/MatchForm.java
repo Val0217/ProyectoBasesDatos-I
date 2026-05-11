@@ -1,5 +1,6 @@
 package animalwelfare.userInterface;
 
+import animalwelfare.business.MatchController;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -19,6 +20,8 @@ public class MatchForm extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger =
         java.util.logging.Logger.getLogger(MatchForm.class.getName());
 
+    private MatchController controller = null;
+
     // -------------------------------------------------------------------------
     // Tab 1 — Match Report
     // -------------------------------------------------------------------------
@@ -29,7 +32,7 @@ public class MatchForm extends javax.swing.JFrame {
     // -------------------------------------------------------------------------
     // Tab 2 — Run Match (Admin only)
     // -------------------------------------------------------------------------
-    private JLabel lblPendingMatches;
+    private JLabel lblPendingMatches = new JLabel();;
     private JButton btnRunMatch;
     private JTextArea logArea;
 
@@ -38,8 +41,9 @@ public class MatchForm extends javax.swing.JFrame {
     // -------------------------------------------------------------------------
     public MatchForm() {
         initComponents();
-        loadMockMatches();
+        controller = new MatchController(this);
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     // -------------------------------------------------------------------------
@@ -95,7 +99,7 @@ public class MatchForm extends javax.swing.JFrame {
         infoBar.add(info);
 
         btnRefresh = grayButton("REFRESH");
-        btnRefresh.addActionListener(e -> loadMockMatches());
+        btnRefresh.addActionListener(e -> controller.refresh());
         infoBar.add(btnRefresh);
 
         // Table
@@ -162,7 +166,6 @@ public class MatchForm extends javax.swing.JFrame {
         cardDesc.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         cardDesc.setForeground(new Color(255, 255, 255, 220));
 
-        lblPendingMatches = new JLabel("Pending new matches: 3 (MOCK)");
         lblPendingMatches.setFont(new Font("Segoe UI", Font.BOLD, 14));
         lblPendingMatches.setForeground(new Color(255, 230, 100));
 
@@ -194,10 +197,7 @@ public class MatchForm extends javax.swing.JFrame {
         logArea.setForeground(new Color(0, 230, 100));
         logArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         logArea.setText(
-            "> Match engine ready.\n" +
-            "> Last run: today at 08:00 AM\n" +
-            "> Total matches generated: 5\n" +
-            "> Next scheduled run: in 2 hours\n"
+            "> Match engine ready.\n"
         );
 
         JScrollPane logScroll = new JScrollPane(logArea);
@@ -240,12 +240,12 @@ public class MatchForm extends javax.swing.JFrame {
 
         detail.add(boldLabel("Lost Pet:"));
         detail.add(new JLabel(lostPet));
-        detail.add(styledLabel("Owner contact: " + lostOwner + " — owner@email.com | 8800-0000"));
+        detail.add(styledLabel("Owner: " + lostOwner));
         detail.add(new JSeparator());
 
         detail.add(boldLabel("Found Pet:"));
         detail.add(new JLabel(foundPet));
-        detail.add(styledLabel("Finder contact: " + finder + " — finder@email.com | 8801-1111"));
+        detail.add(styledLabel("Finder: " + finder));
         detail.add(new JSeparator());
 
         detail.add(boldLabel("Match generated on: " + matchDate));
@@ -261,56 +261,12 @@ public class MatchForm extends javax.swing.JFrame {
 
         if (confirm != JOptionPane.YES_OPTION) return;
 
-        // Simulate running
-        btnRunMatch.setEnabled(false);
-        btnRunMatch.setText("Running...");
-
-        // MOCK — simulate delay and result
-        Timer timer = new Timer(1500, e -> {
-            btnRunMatch.setEnabled(true);
-            btnRunMatch.setText("RUN MATCH NOW");
-            lblPendingMatches.setText("Pending new matches: 0");
-
-            logArea.append(
-                "> [" + new java.util.Date() + "] Match started\n" +
-                "> Comparing lost pets vs found pets...\n" +
-                "> 3 new matches generated.\n" +
-                "> Match completed successfully.\n"
-            );
-
-            JOptionPane.showMessageDialog(this,
-                "Match completed! 3 new matches were generated. (MOCK)",
-                "Success", JOptionPane.INFORMATION_MESSAGE);
-
-            loadMockMatches();
-        });
-        timer.setRepeats(false);
-        timer.start();
+        controller.runMatch();
     }
 
-    // -------------------------------------------------------------------------
-    // Mock data
-    // -------------------------------------------------------------------------
 
-    private void loadMockMatches() {
-        DefaultTableModel model = new DefaultTableModel(
-            new String[]{"ID", "Match %", "Lost Pet", "Owner", "Found Pet", "Finder", "Match Date"}, 0
-        ) {
-            @Override public boolean isCellEditable(int r, int c) { return false; }
-        };
-
-        model.addRow(new Object[]{1, "100%", "Luna — Dog/Labrador/White",  "Carlos González",
-            "Unknown Dog — Labrador/White", "Pedro Salas",    "2024-06-04"});
-        model.addRow(new Object[]{2, "85%",  "Simba — Cat/Persian/Orange", "Luisa Campos",
-            "Orange Cat — Persian",         "Sofía Mena",     "2024-07-21"});
-        model.addRow(new Object[]{3, "75%",  "Rocky — Dog/Mixed/Brown",    "José Vargas",
-            "Brown Dog — Mixed",            "María Rodríguez","2024-08-05"});
-        model.addRow(new Object[]{4, "60%",  "Michi — Cat/Siamese/Black",  "Ana Torres",
-            "Black Cat — Unknown",          "Luis Mora",      "2024-09-12"});
-        model.addRow(new Object[]{5, "60%",  "Nala — Dog/Poodle/Golden",   "Roberto Díaz",
-            "Golden Dog — Poodle",          "Carmen Rojas",   "2024-10-01"});
-
-        tableMatches.setModel(model);
+    public void loadMatchReport(DefaultTableModel data){
+        tableMatches.setModel(data);
 
         // Hide ID column
         tableMatches.getColumnModel().getColumn(0).setMinWidth(0);
@@ -337,7 +293,14 @@ public class MatchForm extends javax.swing.JFrame {
             }
         });
 
-        labelCount.setText("Records: " + model.getRowCount());
+        labelCount.setText("Records: " + data.getRowCount());
+    }
+
+    public void updatePendingCount(int count){
+        logArea.setText(
+            "> Match engine ready.\n" +
+            "> Next scheduled run: in "+ count +" hours\n"
+        );
     }
 
     // -------------------------------------------------------------------------
@@ -387,3 +350,4 @@ public class MatchForm extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new MatchForm().setVisible(true));
     }
 }
+

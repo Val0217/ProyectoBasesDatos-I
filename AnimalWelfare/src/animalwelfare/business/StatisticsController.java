@@ -24,6 +24,26 @@ public class StatisticsController {
      * @param dateFrom start date (nullable = no filter)
      * @param dateTo   end date (nullable = no filter)
      */
+    public DefaultCategoryDataset getPetsByTypeAndState() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        ArrayList<String[]> rows = StatisticsOperations.getPetsByTypeAndState();
+
+        // rows: [PetType, PetState, Total]
+        for (String[] row : rows) {
+            String petType  = row[0];
+            String petState = row[1];
+            int total       = Integer.parseInt(row[2]);
+            dataset.addValue(total, petState, petType);
+        }
+
+        return dataset;
+    }
+
+    /**
+     * Returns summary totals for the stats row below the chart.
+     * @return String array with one entry per state
+     */
     public DefaultCategoryDataset getPetsByTypeAndState(Date dateFrom, Date dateTo) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -39,6 +59,8 @@ public class StatisticsController {
 
         return dataset;
     }
+    
+    
 
     /**
      * Returns summary totals for the stats row below the chart.

@@ -63,7 +63,7 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         DonationsButton = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        RescuesButton = new javax.swing.JPanel();
+        MatchButton = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         StatsButton = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -151,7 +151,7 @@ public class MainMenu extends javax.swing.JFrame {
             NewPetButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NewPetButtonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         NewPetButtonLayout.setVerticalGroup(
@@ -190,16 +190,16 @@ public class MainMenu extends javax.swing.JFrame {
             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        RescuesButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        RescuesButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        MatchButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        MatchButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RescuesButtonMouseClicked(evt);
+                MatchButtonMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                RescuesButtonMouseEntered(evt);
+                MatchButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                RescuesButtonMouseExited(evt);
+                MatchButtonMouseExited(evt);
             }
         });
 
@@ -207,17 +207,17 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(0, 102, 102));
         jLabel15.setText("Match");
 
-        javax.swing.GroupLayout RescuesButtonLayout = new javax.swing.GroupLayout(RescuesButton);
-        RescuesButton.setLayout(RescuesButtonLayout);
-        RescuesButtonLayout.setHorizontalGroup(
-            RescuesButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RescuesButtonLayout.createSequentialGroup()
+        javax.swing.GroupLayout MatchButtonLayout = new javax.swing.GroupLayout(MatchButton);
+        MatchButton.setLayout(MatchButtonLayout);
+        MatchButtonLayout.setHorizontalGroup(
+            MatchButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MatchButtonLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        RescuesButtonLayout.setVerticalGroup(
-            RescuesButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        MatchButtonLayout.setVerticalGroup(
+            MatchButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
@@ -403,8 +403,8 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BlockListButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(RescuesButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(NewPetButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(MatchButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(NewPetButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(PetsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -433,7 +433,7 @@ public class MainMenu extends javax.swing.JFrame {
                     .addGroup(BackGroundLayout.createSequentialGroup()
                         .addComponent(NewPetButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(RescuesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(MatchButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BlockListButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(257, 257, 257))
@@ -478,13 +478,13 @@ public class MainMenu extends javax.swing.JFrame {
         NewPetButton.setBackground(buttonBase);
     }//GEN-LAST:event_NewPetButtonMouseExited
 
-    private void RescuesButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RescuesButtonMouseEntered
-        RescuesButton.setBackground(buttonHover);
-    }//GEN-LAST:event_RescuesButtonMouseEntered
+    private void MatchButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MatchButtonMouseEntered
+        MatchButton.setBackground(buttonHover);
+    }//GEN-LAST:event_MatchButtonMouseEntered
 
-    private void RescuesButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RescuesButtonMouseExited
-        RescuesButton.setBackground(buttonBase);
-    }//GEN-LAST:event_RescuesButtonMouseExited
+    private void MatchButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MatchButtonMouseExited
+        MatchButton.setBackground(buttonBase);
+    }//GEN-LAST:event_MatchButtonMouseExited
 
     private void DonationsButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DonationsButtonMouseEntered
         DonationsButton.setBackground(buttonHover);
@@ -507,10 +507,10 @@ public class MainMenu extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_PetsButtonMouseClicked
 
-    private void RescuesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RescuesButtonMouseClicked
-        InsertPetForm window = new InsertPetForm();
+    private void MatchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MatchButtonMouseClicked
+        MatchForm window = new MatchForm();
         dispose();
-    }//GEN-LAST:event_RescuesButtonMouseClicked
+    }//GEN-LAST:event_MatchButtonMouseClicked
 
     private void NewPetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewPetButtonMouseClicked
         InsertPetForm window = new InsertPetForm();
@@ -605,9 +605,9 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel FosterHomeButton;
     private javax.swing.JLabel LableTitle;
     private javax.swing.JPanel LogOffButton;
+    private javax.swing.JPanel MatchButton;
     private javax.swing.JPanel NewPetButton;
     private javax.swing.JPanel PetsButton;
-    private javax.swing.JPanel RescuesButton;
     private javax.swing.JPanel StatsButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;

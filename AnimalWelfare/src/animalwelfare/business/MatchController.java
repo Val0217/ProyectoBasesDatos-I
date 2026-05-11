@@ -16,8 +16,8 @@ public class MatchController {
 
     public MatchController(MatchForm view) {
         this.view = view;
-        //view.loadMatchReport(MatchOperations.getMatchReport());
-        //view.updatePendingCount(MatchOperations.countPendingMatches());
+        view.loadMatchReport(MatchOperations.getMatchReport());
+        view.updatePendingCount(MatchOperations.countPendingMatches());
     }
 
     // -------------------------------------------------------------------------
@@ -70,8 +70,8 @@ public class MatchController {
     // -------------------------------------------------------------------------
 
     public void refresh() {
-        //view.loadMatchReport(MatchOperations.getMatchReport());
-        //view.updatePendingCount(MatchOperations.countPendingMatches());
+        view.loadMatchReport(MatchOperations.getMatchReport());
+        view.updatePendingCount(MatchOperations.countPendingMatches());
     }
 
     // -------------------------------------------------------------------------

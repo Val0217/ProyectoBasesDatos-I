@@ -144,10 +144,7 @@ public class StatisticsForm extends javax.swing.JFrame {
 
         JButton btnReset = grayButton("RESET");
         btnReset.setPreferredSize(new Dimension(80, 28));
-        btnReset.addActionListener(e -> {
-            spinnerFrom.setValue(getStartOfYear());
-            spinnerTo.setValue(new java.util.Date());
-        });
+        btnReset.addActionListener(e -> { onResetDateFilter();});
         bar.add(btnReset);
 
         return bar;
@@ -157,13 +154,33 @@ public class StatisticsForm extends javax.swing.JFrame {
     // Summary Cards
     // -------------------------------------------------------------------------
     private JPanel buildSummaryCards() {
+        String[] summaryData = controller.getDonationSummary(
+            new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()),
+            new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime())
+        );
+
+
         JPanel panel = new JPanel(new GridLayout(1, 3, 10, 0));
         panel.setBackground(Color.WHITE);
         panel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
-        lblTotalPets       = buildSummaryCard("Total Pets",       "42",     new Color(0, 153, 153));
-        lblTotalDonations  = buildSummaryCard("Total Donations",  "₡85,000", new Color(0, 102, 102));
-        lblTotalAdoptions  = buildSummaryCard("Adoptions",        "18",     new Color(255, 153, 0));
+        lblTotalPets = buildSummaryCard(
+            "Total Colones",
+            summaryData[0],
+            new Color(0, 153, 153)
+        );
+
+        lblTotalDonations = buildSummaryCard(
+            "Total Dollars",
+            summaryData[1],
+            new Color(0, 102, 102)
+        );
+
+        lblTotalAdoptions = buildSummaryCard(
+            "Donations",
+            summaryData[2],
+            new Color(255, 153, 0)
+        );
 
         panel.add(lblTotalPets.getParent());
         panel.add(lblTotalDonations.getParent());
@@ -202,10 +219,7 @@ public class StatisticsForm extends javax.swing.JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.WHITE);
 
-        datasetPetsByTypeState = controller.getPetsByTypeAndState(
-            new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()),
-            new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime())
-        );
+        datasetPetsByTypeState = controller.getPetsByTypeAndState();
 
         if (datasetPetsByTypeState.getRowCount() == 0) {
             JLabel noData = new JLabel("No data available for the selected date range.");
@@ -239,12 +253,21 @@ public class StatisticsForm extends javax.swing.JFrame {
         chartPanel.setPreferredSize(new Dimension(900, 380));
 
         // Numbers below chart
-        /*JPanel statsRow = buildStatsRow(new String[]{
-            "Total Lost: "+datasetPetsByTypeState.getValue(0, 0), "Total Found: "+datasetPetsByTypeState.getValue(1, 0), "In Adoption: "+datasetPetsByTypeState.getValue(2, 0), "Adopted: "+datasetPetsByTypeState.getValue(3, 0)
-        });*/
+        JPanel statsRow = buildStatsRow(new String[]{
+            "Total Lost: " + (datasetPetsByTypeState.getRowCount() > 0 && datasetPetsByTypeState.getValue(0, 0) != null
+                ? datasetPetsByTypeState.getValue(0, 0).toString() : "0"),
+
+            "Total Found: " + (datasetPetsByTypeState.getRowCount() > 1 && datasetPetsByTypeState.getValue(1, 0) != null
+                ? datasetPetsByTypeState.getValue(1, 0).toString() : "0"),
+
+            "In Adoption: " + (datasetPetsByTypeState.getRowCount() > 2 && datasetPetsByTypeState.getValue(2, 0) != null
+                ? datasetPetsByTypeState.getValue(2, 0).toString() : "0"),
+
+            "Adopted: " + (datasetPetsByTypeState.getRowCount() > 3 && datasetPetsByTypeState.getValue(3, 0) != null
+                ? datasetPetsByTypeState.getValue(3, 0).toString() : "0")
+        });
 
         panel.add(chartPanel, BorderLayout.CENTER);
-        //panel.add(statsRow,   BorderLayout.SOUTH); //descomentar para mockup sin números
         return panel;
     }
 
@@ -289,12 +312,18 @@ public class StatisticsForm extends javax.swing.JFrame {
 
 
 
-        /*JPanel statsRow = buildStatsRow(new String[]{
-            "Total Colones: "+dataset.getValue(0, 0), "Total Dollars: "+dataset.getValue(1, 0), "Associations: "+dataset.getColumnCount()
-        });*/
+        JPanel statsRow = buildStatsRow(new String[]{
+            "Total Colones: " + (dataset.getRowCount() > 0 && dataset.getValue(0, 0) != null
+                ? dataset.getValue(0, 0).toString() : "0"),
+
+            "Total Dollars: " + (dataset.getRowCount() > 1 && dataset.getValue(1, 0) != null
+                ? dataset.getValue(1, 0).toString() : "0"),
+
+            "Associations: " + dataset.getColumnCount()
+        });
 
         panel.add(chartPanel, BorderLayout.CENTER);
-        //panel.add(statsRow,   BorderLayout.SOUTH); // descomentar para mockup sin números
+        panel.add(statsRow,   BorderLayout.SOUTH); // descomentar para mockup sin números
         return panel;
     }
 
@@ -464,10 +493,25 @@ public class StatisticsForm extends javax.swing.JFrame {
     }
 
     public void onApplyDateFilter() {
-        controller.getPetsByTypeAndState(
+        DefaultCategoryDataset newData = controller.getPetsByTypeAndState(
             new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()),
             new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime())
         );
+
+        datasetPetsByTypeState.clear();
+
+        for (int r = 0; r < newData.getRowCount(); r++) {
+            for (int c = 0; c < newData.getColumnCount(); c++) {
+                Comparable rowKey = newData.getRowKey(r);
+                Comparable colKey = newData.getColumnKey(c);
+
+                Number value = newData.getValue(r, c);
+
+                if (value != null) {
+                    datasetPetsByTypeState.addValue(value, rowKey, colKey);
+                }
+            }
+        }
     }
 
     // -------------------------------------------------------------------------
@@ -508,6 +552,29 @@ public class StatisticsForm extends javax.swing.JFrame {
         plot.setLabelBackgroundPaint(new Color(255, 255, 255, 200));
         plot.setLabelOutlinePaint(null);
         plot.setLabelShadowPaint(null);
+    }
+
+    public void onResetDateFilter() {
+
+        spinnerFrom.setValue(getStartOfYear());
+        spinnerTo.setValue(new java.util.Date());
+
+        DefaultCategoryDataset newData = controller.getPetsByTypeAndState();
+
+        datasetPetsByTypeState.clear();
+
+        for (int r = 0; r < newData.getRowCount(); r++) {
+            for (int c = 0; c < newData.getColumnCount(); c++) {
+
+                Comparable rowKey = newData.getRowKey(r);
+                Comparable colKey = newData.getColumnKey(c);
+                Number value = newData.getValue(r, c);
+
+                if (value != null) {
+                    datasetPetsByTypeState.addValue(value, rowKey, colKey);
+                }
+            }
+        }
     }
 
     // -------------------------------------------------------------------------
