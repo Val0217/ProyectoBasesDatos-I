@@ -887,6 +887,11 @@ public class InsertPetForm extends javax.swing.JFrame {
 
         ButtonCancel.setBackground(new java.awt.Color(120, 120, 120));
         ButtonCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ButtonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonCancelMouseClicked(evt);
+            }
+        });
 
         jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(255, 255, 255));
@@ -1267,6 +1272,11 @@ public class InsertPetForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_ButtonSelectImageMouseClicked
+
+    private void ButtonCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonCancelMouseClicked
+        MainMenu window = new MainMenu();
+        dispose();
+    }//GEN-LAST:event_ButtonCancelMouseClicked
 
     
     
