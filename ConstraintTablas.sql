@@ -50,6 +50,8 @@ ALTER TABLE Person MODIFY (
     IdDistrict NUMBER(8)    NOT NULL
 );
 
+ALTER TABLE Person ADD CONSTRAINT uq_Person_UserName UNIQUE (UserName);
+
 
 ALTER TABLE PetBreed MODIFY (
     Name VARCHAR2(25) NOT NULL,

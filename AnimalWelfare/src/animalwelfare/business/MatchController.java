@@ -54,8 +54,8 @@ public class MatchController {
                 (pending == 0 ? "check the report" : "see report"),
                 "Success", JOptionPane.INFORMATION_MESSAGE);
 
-            //view.loadMatchReport(MatchOperations.getMatchReport());
-            //view.updatePendingCount(MatchOperations.countPendingMatches());
+            view.loadMatchReport(MatchOperations.getMatchReport());
+            view.updatePendingCount(MatchOperations.countPendingMatches());
         } else {
             JOptionPane.showMessageDialog(null,
                 "Match engine failed. Check the database logs.",
