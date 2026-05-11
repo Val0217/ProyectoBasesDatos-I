@@ -110,9 +110,9 @@ CREATE TABLE Veterinarian (
     Email VARCHAR2(25),
     FirstName VARCHAR2(25),
     LastName VARCHAR2(25),
-    Location VARCHAR2(100), -- Agregar Distrito
+    Location VARCHAR2(1000), -- Agregar Distrito
     IdDistrict NUMBER(8),
-    Phone NUMBER(8),
+    Phone NUMBER(10),
     Name VARCHAR2(50)
 );
 

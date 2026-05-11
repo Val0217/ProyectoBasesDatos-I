@@ -173,6 +173,10 @@ ALTER TABLE PetMatch ADD CONSTRAINT chk_PetMatch_Percentage
 -- -------------------------------------------------------------
 ALTER TABLE Adoption
 MODIFY IdAdopter NULL;
+
+ALTER TABLE Veterinarian
+MODIFY (Location VARCHAR2(1000), Phone NUMBER(10));
+
 ALTER TABLE Adoption MODIFY (
     AvailableDate DATE      NOT NULL,
     IdPet         NUMBER(8) NOT NULL,

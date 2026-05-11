@@ -271,6 +271,11 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 102, 102));
         jLabel18.setText("EXIT");
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel18MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout LogOffButtonLayout = new javax.swing.GroupLayout(LogOffButton);
         LogOffButton.setLayout(LogOffButtonLayout);
@@ -560,6 +565,11 @@ public class MainMenu extends javax.swing.JFrame {
     private void ButtonOthersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonOthersMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonOthersMouseExited
+
+    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
+        SignInForm window = new SignInForm();
+        dispose();
+    }//GEN-LAST:event_jLabel18MouseClicked
 
     /**
      * @param args the command line arguments

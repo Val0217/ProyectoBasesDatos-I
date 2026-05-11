@@ -25,6 +25,8 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     public RegisterVeterinarian() {
         initComponents();
         loadCountries();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
     private void loadCountries() {
         try {
@@ -96,6 +98,7 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
                     "Veterinarian registered successfully! ID: " + newId,
                     "Success", JOptionPane.INFORMATION_MESSAGE);
             clearForm();
+            
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     "Validation Error", JOptionPane.WARNING_MESSAGE);
@@ -296,15 +299,15 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComboCountry3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCountry3ActionPerformed
-        
+        loadProvinces();
     }//GEN-LAST:event_ComboCountry3ActionPerformed
 
     private void ComboProvince3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboProvince3ActionPerformed
-        loadProvinces();
+        loadCantons();
     }//GEN-LAST:event_ComboProvince3ActionPerformed
 
     private void ComboCanton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCanton3ActionPerformed
-        loadCantons();
+        loadDistricts();
     }//GEN-LAST:event_ComboCanton3ActionPerformed
 
     private void TextVetLoctaionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextVetLoctaionActionPerformed
@@ -313,10 +316,12 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
 
     private void ButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccountActionPerformed
         registerVeterinarian();
+        MainMenu window = new MainMenu();
+        dispose();
     }//GEN-LAST:event_ButtonCreateAccountActionPerformed
 
     private void ComboDistrict3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboDistrict3ActionPerformed
-        loadDistricts();
+        
     }//GEN-LAST:event_ComboDistrict3ActionPerformed
 
     /**
