@@ -1,6 +1,7 @@
 package animalwelfare.userInterface;
 
 import animalwelfare.access.DbObject;
+import animalwelfare.business.BlockListController;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -20,6 +21,9 @@ public class BlockListForm extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger =
         java.util.logging.Logger.getLogger(BlockListForm.class.getName());
 
+    // cotroller
+    private BlockListController controler = null;
+
     // -------------------------------------------------------------------------
     // Tab 1 — Block List
     // -------------------------------------------------------------------------
@@ -32,7 +36,7 @@ public class BlockListForm extends javax.swing.JFrame {
     // -------------------------------------------------------------------------
     // Tab 2 — Report Person
     // -------------------------------------------------------------------------
-    private JComboBox<String> comboPerson;
+    private JComboBox<DbObject> comboPerson;
     private JTextArea textDescription;
     private JButton btnReport;
     private JButton btnClearReport;
@@ -42,8 +46,9 @@ public class BlockListForm extends javax.swing.JFrame {
     // -------------------------------------------------------------------------
     public BlockListForm() {
         initComponents();
-        loadMockTable();
         setLocationRelativeTo(null);
+        controler = new BlockListController(this);
+        setVisible(true);
     }
 
     // -------------------------------------------------------------------------
@@ -101,7 +106,7 @@ public class BlockListForm extends javax.swing.JFrame {
         btnRemove.addActionListener(e -> onRemove());
 
         btnRefresh = grayButton("REFRESH");
-        btnRefresh.addActionListener(e -> loadMockTable());
+        btnRefresh.addActionListener(e -> refreshTable());
 
         btnBar.add(btnViewDetail);
         btnBar.add(btnRemove);
@@ -232,7 +237,12 @@ public class BlockListForm extends javax.swing.JFrame {
         String blockDate = tableBlockList.getValueAt(row, 2).toString();
         String reason    = tableBlockList.getValueAt(row, 3).toString();
         String stars     = tableBlockList.getValueAt(row, 4).toString();
-        String notes     = tableBlockList.getValueAt(row, 5).toString();
+        String notes;
+        if (tableBlockList.getValueAt(row, 5) == null) {
+            notes = "No additional notes.";
+        } else {
+            notes = tableBlockList.getValueAt(row, 5).toString();
+        }
 
         // Build detail panel
         JPanel detail = new JPanel(new GridLayout(0, 1, 5, 5));
@@ -289,20 +299,14 @@ public class BlockListForm extends javax.swing.JFrame {
 
         if (confirm != JOptionPane.YES_OPTION) return;
 
-        // MOCK — remove row from table
-        ((DefaultTableModel) tableBlockList.getModel()).removeRow(row);
-        labelCount.setText("Records: " + tableBlockList.getRowCount());
-
-        JOptionPane.showMessageDialog(this,
-            name + " removed from block list. (MOCK)",
-            "Success", JOptionPane.INFORMATION_MESSAGE);
+        controler.removeFromBlockList(Integer.parseInt(tableBlockList.getValueAt(row, 0).toString()));
     }
 
     private void onReport() {
-        String person = (String) comboPerson.getSelectedItem();
+        DbObject person = (DbObject) comboPerson.getSelectedItem();
         String reason = textDescription.getText().trim();
 
-        if (person == null || person.isEmpty()) {
+        if (person == null || person.getName().isEmpty()) {
             JOptionPane.showMessageDialog(this,
                 "Please select a person to report.",
                 "Validation", JOptionPane.WARNING_MESSAGE);
@@ -316,22 +320,9 @@ public class BlockListForm extends javax.swing.JFrame {
             return;
         }
 
-        // MOCK — simulate report
-        JOptionPane.showMessageDialog(this,
-            person + " has been reported and added to the block list. (MOCK)",
-            "Success", JOptionPane.INFORMATION_MESSAGE);
+        DbObject dbPerson = (DbObject) comboPerson.getSelectedItem();
 
-        // Add to table
-        DefaultTableModel model = (DefaultTableModel) tableBlockList.getModel();
-        model.insertRow(0, new Object[]{
-            model.getRowCount() + 1,
-            person,
-            new java.sql.Date(System.currentTimeMillis()).toString(),
-            reason,
-            "N/A",
-            "No notes yet"
-        });
-        labelCount.setText("Records: " + tableBlockList.getRowCount());
+        controler.reportPerson(dbPerson, reason);
         clearReportForm();
     }
 
@@ -343,9 +334,9 @@ public class BlockListForm extends javax.swing.JFrame {
 
     public void fillPersonCombo(ArrayList<DbObject> listPerson) {
         comboPerson.removeAllItems();
-        comboPerson.addItem("Select a person...");
+        comboPerson.addItem(new DbObject(0, "-- Select Person --"));
         for (DbObject person : listPerson) {
-            comboPerson.addItem(person.getName());
+            comboPerson.addItem(person);
         }
     }
 
@@ -361,28 +352,8 @@ public class BlockListForm extends javax.swing.JFrame {
         labelCount.setText("Records: " + blockList.getRowCount());
     }
 
-    private void loadMockTable() {
-        DefaultTableModel model = new DefaultTableModel(
-            new String[]{"ID", "Person", "Blocked On", "Reason", "Stars", "Notes"}, 0
-        ) {
-            @Override public boolean isCellEditable(int r, int c) { return false; }
-        };
-
-        model.addRow(new Object[]{1, "Pedro Salas",    "2024-02-01",
-            "Reported for animal mistreatment", "1", "Returned the pet in bad condition."});
-        model.addRow(new Object[]{2, "Roberto Méndez", "2024-03-15",
-            "Did not follow adoption agreement", "2", "Ignored follow-up calls."});
-        model.addRow(new Object[]{3, "Ana Solís",      "2024-05-20",
-            "Abandoned the adopted pet",         "1", "Pet was found on the street."});
-
-        tableBlockList.setModel(model);
-
-        // Hide ID column
-        tableBlockList.getColumnModel().getColumn(0).setMinWidth(0);
-        tableBlockList.getColumnModel().getColumn(0).setMaxWidth(0);
-        tableBlockList.getColumnModel().getColumn(0).setPreferredWidth(0);
-
-        labelCount.setText("Records: " + model.getRowCount());
+    private void refreshTable() {
+        controler.refreshBlockList();
     }
 
     // -------------------------------------------------------------------------

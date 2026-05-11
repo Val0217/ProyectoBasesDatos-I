@@ -106,10 +106,10 @@ public class PersonOperations {
 
         try {
             // Usamos un CallableStatement para llamar a la función almacenada en la base de datos que devuelve el rol del usuario
-            try (Connection con = ConexionOracle.connect(); CallableStatement cs = con.prepareCall("{ ? = call fn_get_person_role(?) }")) {
+            try (Connection con = ConexionOracle.connect(); CallableStatement cs = con.prepareCall("{ ? = call fn_is_admin(?) }")) {
                 
                 // Parámetro de retorno
-                cs.registerOutParameter(1, java.sql.Types.VARCHAR);
+                cs.registerOutParameter(1, java.sql.Types.INTEGER);
                 
                 // Parámetro de entrada
                 cs.setInt(2, userId);
