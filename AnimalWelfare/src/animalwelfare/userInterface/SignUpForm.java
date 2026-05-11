@@ -7,6 +7,7 @@ import animalwelfare.access.DbObject;
 import animalwelfare.business.SignUpController;
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.ListCellRenderer;
 import javax.swing.text.AbstractDocument;
 /**
@@ -20,6 +21,10 @@ public class SignUpForm extends javax.swing.JFrame {
     
     // controlador
     private SignUpController controller = null;
+
+    // modelo
+    private DefaultListModel<String> modelEmail = null;
+    private DefaultListModel<String> modelPhone = null;
 
     // procedimiento que rellena el combobox de Country
     public void fillCountry(ArrayList<DbObject> listCountry) {
@@ -62,7 +67,8 @@ public class SignUpForm extends javax.swing.JFrame {
         initComponents();
         controller = new SignUpController(this);
         setLocationRelativeTo(null);
-        
+        modelEmail = new DefaultListModel<>();
+        modelPhone = new DefaultListModel<>();
         ComboProvince.setEnabled(false);
         ComboCanton.setEnabled(false);
         ComboDistrict.setEnabled(false);
@@ -627,7 +633,26 @@ public class SignUpForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void ButtonAddPhoneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonAddPhoneMouseClicked
-        // TODO add your handling code here:
+        String phone = TextPhone.getText();
+
+        if (phone != null && !phone.isEmpty()) {
+
+            boolean exists = false;
+
+            for (int i = 0; i < modelPhone.size(); i++) {
+
+                String item = modelPhone.get(i);
+
+                if (item.equals(phone)) {
+                    exists = true;
+                    break;
+                }
+            }
+
+            if (!exists) {
+                modelPhone.addElement(phone);
+            }
+        }
     }//GEN-LAST:event_ButtonAddPhoneMouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
@@ -635,7 +660,26 @@ public class SignUpForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void ButtonAddEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonAddEmailMouseClicked
-        // TODO add your handling code here:
+        String email = TextEmail.getText();
+
+        if (email != null && !email.isEmpty()) {
+
+            boolean exists = false;
+
+            for (int i = 0; i < modelEmail.size(); i++) {
+
+                String item = modelEmail.get(i);
+
+                if (item.equals(email)) {
+                    exists = true;
+                    break;
+                }
+            }
+
+            if (!exists) {
+                modelEmail.addElement(email);
+            }
+        }
     }//GEN-LAST:event_ButtonAddEmailMouseClicked
 
     /**

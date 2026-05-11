@@ -452,13 +452,8 @@ SELECT 1, 'En Adopcion' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetState WHERE Id = 1);
 
 INSERT INTO PetType (Id, Name)
-<<<<<<< HEAD
 SELECT 1, 'Dog' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM PetType WHERE Id = 1);
-=======
-SELECT 1, 'Perro' FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM PetType WHERE Id = 3);
->>>>>>> 2045f04091160651bf5fba5839c625d82a61bf3b
 
 INSERT INTO PetType (Id, Name)
 SELECT 2, 'Cat' FROM dual
@@ -540,11 +535,11 @@ WHERE NOT EXISTS (SELECT 1 FROM PetSize WHERE Id = 3);
 /* ------------------------------------------------------------
    4. Veterinarians needed by Pet.IdVeterinarian
    ------------------------------------------------------------ */
-INSERT INTO Veterinarian (Id, Email, FirstName, LastName, Location, IdDristrict, Phone, Name)
+INSERT INTO Veterinarian (Id, Email, FirstName, LastName, Location, IdDistrict, Phone, Name)
 SELECT 1, 'luis@vet.com', 'Luis', 'Mora', 'San Jose', 1, 22345678, 'Mascotas Felices' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM Veterinarian WHERE Id = 1);
 
-INSERT INTO Veterinarian (Id, Email, FirstName, LastName, Location, IdDristrict, Phone, Name)
+INSERT INTO Veterinarian (Id, Email, FirstName, LastName, Location, IdDistrict, Phone, Name)
 SELECT 2, 'ana@vet.com', 'Ana', 'Jimenez', 'Hatillo', 2, 22876543, 'VetCenter' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM Veterinarian WHERE Id = 2);
 
