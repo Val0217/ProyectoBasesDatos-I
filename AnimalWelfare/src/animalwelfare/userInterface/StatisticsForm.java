@@ -463,15 +463,9 @@ public class StatisticsForm extends javax.swing.JFrame {
         infoBar.add(info);
 
         // MOCK data — average days to adoption
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(12, "Dog",    "Labrador");
-        dataset.addValue(25, "Dog",    "Poodle");
-        dataset.addValue(18, "Dog",    "Chihuahua");
-        dataset.addValue(30, "Dog",    "Mixed");
-        dataset.addValue(20, "Cat",    "Siamese");
-        dataset.addValue(35, "Cat",    "Persian");
-        dataset.addValue(28, "Cat",    "Mixed");
-        dataset.addValue(45, "Rabbit", "Mixed");
+        DefaultCategoryDataset dataset = controller.getAvgAdoptionTime();
+
+
 
         JFreeChart chart = ChartFactory.createBarChart(
             "Average Adoption Time (days) by Type and Breed",
