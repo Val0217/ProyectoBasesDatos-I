@@ -335,25 +335,63 @@ VALUES (2, DATE '2024-03-10', 'Barrio Amon', 'Rescatado de maltrato',
 -- 10. REPORTES PERDIDOS Y ENCONTRADOS
 -- -------------------------------------------------------------
 
-INSERT INTO LostReport (Id, LostDate, Place, Description, Reward, State,
-                        IdPet, IdDistrict, IdCurrency)
-VALUES (1, DATE '2024-06-01', 'Barrio Escalante', 'Se perdio en la manana',
-        50000, 'Perdido', 1, 1, 1);
+INSERT INTO LostReport (Id, LostDate, Place, Description, Reward, State, IdPet, IdDistrict, IdCurrency)
+VALUES (s_lostreport.nextval, TO_DATE('2025-04-10', 'YYYY-MM-DD'), 'Central Park Area', 'Brown dog lost near park', 50, 'Lost', 79, 12, 1);
 
-INSERT INTO LostReport (Id, LostDate, Place, Description, Reward, State,
-                        IdPet, IdDistrict, IdCurrency)
-VALUES (2, DATE '2024-07-15', 'Rohrmoser', 'Se escapo del jardin',
-        100, 'Perdido', 5, 1, 2);
+INSERT INTO LostReport (Id, LostDate, Place, Description, Reward, State, IdPet, IdDistrict, IdCurrency)
+VALUES (s_lostreport.nextval, TO_DATE('2025-04-12', 'YYYY-MM-DD'), 'Downtown Street', 'White cat with blue collar missing', 75, 'Lost', 80, 13, 2);
 
-INSERT INTO FoundReport (Id, FoundDate, Place, Description,
-                          IdPet, IdDistrict, IdPerson)
-VALUES (1, DATE '2024-06-03', 'Barrio Escalante', 'Encontrado cerca del parque',
-        3, 1, 5);
+INSERT INTO LostReport (Id, LostDate, Place, Description, Reward, State, IdPet, IdDistrict, IdCurrency)
+VALUES (s_lostreport.nextval, TO_DATE('2025-04-15', 'YYYY-MM-DD'), 'River Side', 'Small black dog with spot on ear', 40, 'Lost', 81, 14, 1);
 
-INSERT INTO FoundReport (Id, FoundDate, Place, Description,
-                          IdPet, IdDistrict, IdPerson)
-VALUES (2, DATE '2024-07-20', 'Sabana Norte', 'Visto en la madrugada',
-        5, 1, 6);
+INSERT INTO LostReport (Id, LostDate, Place, Description, Reward, State, IdPet, IdDistrict, IdCurrency)
+VALUES (s_lostreport.nextval, TO_DATE('2025-04-18', 'YYYY-MM-DD'), 'Green Hills', 'Orange cat very shy and fast', 60, 'Lost', 82, 15, 2);
+
+INSERT INTO LostReport (Id, LostDate, Place, Description, Reward, State, IdPet, IdDistrict, IdCurrency)
+VALUES (s_lostreport.nextval, TO_DATE('2025-04-20', 'YYYY-MM-DD'), 'School Area', 'Grey dog wearing red collar', 80, 'Lost', 83, 16, 1);
+
+INSERT INTO LostReport (Id, LostDate, Place, Description, Reward, State, IdPet, IdDistrict, IdCurrency)
+VALUES (s_lostreport.nextval, TO_DATE('2025-04-22', 'YYYY-MM-DD'), 'Market Zone', 'Small white kitten very friendly', 30, 'Lost', 84, 17, 2);
+
+INSERT INTO LostReport (Id, LostDate, Place, Description, Reward, State, IdPet, IdDistrict, IdCurrency)
+VALUES (s_lostreport.nextval, TO_DATE('2025-04-23', 'YYYY-MM-DD'), 'North Bridge', 'Brown dog with injured paw', 90, 'Lost', 85, 18, 1);
+
+INSERT INTO LostReport (Id, LostDate, Place, Description, Reward, State, IdPet, IdDistrict, IdCurrency)
+VALUES (s_lostreport.nextval, TO_DATE('2025-04-24', 'YYYY-MM-DD'), 'Old Town', 'Black cat with yellow eyes', 55, 'Lost', 86, 19, 2);
+
+INSERT INTO LostReport (Id, LostDate, Place, Description, Reward, State, IdPet, IdDistrict, IdCurrency)
+VALUES (s_lostreport.nextval, TO_DATE('2025-04-25', 'YYYY-MM-DD'), 'University Zone', 'Dog wearing blue harness', 100, 'Lost', 87, 20, 1);
+
+INSERT INTO LostReport (Id, LostDate, Place, Description, Reward, State, IdPet, IdDistrict, IdCurrency)
+VALUES (s_lostreport.nextval, TO_DATE('2025-04-26', 'YYYY-MM-DD'), 'Beach Road', 'Small golden dog very friendly', 120, 'Lost', 88, 21, 2);
+
+
+INSERT INTO FoundReport (Id, FoundDate, Place, Description, IdPet, IdDistrict, IdPerson)
+VALUES (s_foundreport.nextval, TO_DATE('2025-04-11', 'YYYY-MM-DD'), 'Central Park Area', 'Brown dog found near playground', 79, 12, 1);
+
+INSERT INTO FoundReport (Id, FoundDate, Place, Description, IdPet, IdDistrict, IdPerson)
+VALUES (s_foundreport.nextval, TO_DATE('2025-04-13', 'YYYY-MM-DD'), 'Downtown Street', 'White cat with blue collar found', 80, 13, 2);
+
+INSERT INTO FoundReport (Id, FoundDate, Place, Description, IdPet, IdDistrict, IdPerson)
+VALUES (s_foundreport.nextval, TO_DATE('2025-04-16', 'YYYY-MM-DD'), 'River Side', 'Small black dog with spot on ear found', 81, 14, 3);
+
+INSERT INTO FoundReport (Id, FoundDate, Place, Description, IdPet, IdDistrict, IdPerson)
+VALUES (s_foundreport.nextval, TO_DATE('2025-04-21', 'YYYY-MM-DD'), 'School Area', 'Grey dog wearing red collar found wandering', 83, 16, 7);
+
+INSERT INTO FoundReport (Id, FoundDate, Place, Description, IdPet, IdDistrict, IdPerson)
+VALUES (s_foundreport.nextval, TO_DATE('2025-04-22', 'YYYY-MM-DD'), 'Market Zone', 'Small white kitten found near shop', 84, 17, 1);
+
+INSERT INTO FoundReport (Id, FoundDate, Place, Description, IdPet, IdDistrict, IdPerson)
+VALUES (s_foundreport.nextval, TO_DATE('2025-04-24', 'YYYY-MM-DD'), 'North Bridge', 'Brown dog with injured paw rescued', 85, 18, 2);
+
+INSERT INTO FoundReport (Id, FoundDate, Place, Description, IdPet, IdDistrict, IdPerson)
+VALUES (s_foundreport.nextval, TO_DATE('2025-04-25', 'YYYY-MM-DD'), 'Old Town', 'Black cat with yellow eyes found hiding', 86, 19, 3);
+
+INSERT INTO FoundReport (Id, FoundDate, Place, Description, IdPet, IdDistrict, IdPerson)
+VALUES (s_foundreport.nextval, TO_DATE('2025-04-26', 'YYYY-MM-DD'), 'University Zone', 'Dog wearing blue harness found near campus', 87, 20, 6);
+
+INSERT INTO FoundReport (Id, FoundDate, Place, Description, IdPet, IdDistrict, IdPerson)
+VALUES (s_foundreport.nextval, TO_DATE('2025-04-27', 'YYYY-MM-DD'), 'Beach Road', 'Small golden dog found friendly and safe', 88, 21, 7);
 
 -- -------------------------------------------------------------
 -- 11. MATCH
