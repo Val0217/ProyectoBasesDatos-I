@@ -1,5 +1,6 @@
 package animalwelfare.userInterface;
 
+import animalwelfare.business.StatisticsController;
 import java.awt.*;
 import java.util.Calendar;
 import javax.swing.*;
@@ -32,10 +33,13 @@ import java.text.DecimalFormat;
  *
  * @author team
  */
-public class StatisticsFormPreview extends javax.swing.JFrame {
+public class StatisticsForm extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger =
-        java.util.logging.Logger.getLogger(StatisticsFormPreview.class.getName());
+        java.util.logging.Logger.getLogger(StatisticsForm.class.getName());
+
+    // controlador
+    private StatisticsController controller = null;
 
     // Date range spinners (shared across tabs)
     private JSpinner spinnerFrom;
@@ -49,9 +53,11 @@ public class StatisticsFormPreview extends javax.swing.JFrame {
     // -------------------------------------------------------------------------
     // Constructor
     // -------------------------------------------------------------------------
-    public StatisticsFormPreview() {
+    public StatisticsForm() {
+        controller = new StatisticsController();
         initComponents();
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     // -------------------------------------------------------------------------
@@ -188,24 +194,26 @@ public class StatisticsFormPreview extends javax.swing.JFrame {
     // =========================================================================
     // TAB A — Pets by Type and State (Bar Chart)
     // =========================================================================
+
+
     private JPanel buildPetsByTypeTab() {
+
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.WHITE);
 
-        // MOCK data
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(8,  "Lost",       "Dog");
-        dataset.addValue(12, "Found",      "Dog");
-        dataset.addValue(5,  "In Adoption","Dog");
-        dataset.addValue(3,  "Adopted",    "Dog");
-        dataset.addValue(4,  "Lost",       "Cat");
-        dataset.addValue(6,  "Found",      "Cat");
-        dataset.addValue(2,  "In Adoption","Cat");
-        dataset.addValue(1,  "Adopted",    "Cat");
-        dataset.addValue(1,  "Lost",       "Rabbit");
-        dataset.addValue(0,  "Found",      "Rabbit");
-        dataset.addValue(1,  "In Adoption","Rabbit");
-        dataset.addValue(0,  "Adopted",    "Rabbit");
+        DefaultCategoryDataset dataset = controller.getPetsByTypeAndState(
+            new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()),
+            new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime())
+        );
+
+        if (dataset.getRowCount() == 0) {
+            JLabel noData = new JLabel("No data available for the selected date range.");
+            noData.setFont(new Font("Segoe UI", Font.ITALIC, 14));
+            noData.setForeground(Color.GRAY);
+            noData.setHorizontalAlignment(SwingConstants.CENTER);
+            panel.add(noData, BorderLayout.CENTER);
+            return panel;
+        }
 
         JFreeChart chart = ChartFactory.createBarChart(
             "Total Pets by Type and State",
@@ -230,12 +238,12 @@ public class StatisticsFormPreview extends javax.swing.JFrame {
         chartPanel.setPreferredSize(new Dimension(900, 380));
 
         // Numbers below chart
-        JPanel statsRow = buildStatsRow(new String[]{
-            "Total Lost: 13", "Total Found: 18", "In Adoption: 8", "Adopted: 4"
-        });
+        /*JPanel statsRow = buildStatsRow(new String[]{
+            "Total Lost: "+dataset.getValue(0, 0), "Total Found: "+dataset.getValue(1, 0), "In Adoption: "+dataset.getValue(2, 0), "Adopted: "+dataset.getValue(3, 0)
+        });*/
 
         panel.add(chartPanel, BorderLayout.CENTER);
-        panel.add(statsRow,   BorderLayout.SOUTH);
+        //panel.add(statsRow,   BorderLayout.SOUTH); //descomentar para mockup sin números
         return panel;
     }
 
@@ -246,13 +254,7 @@ public class StatisticsFormPreview extends javax.swing.JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.WHITE);
 
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(35000, "Colones", "Refugio Animal CR");
-        dataset.addValue(15000, "Colones", "Amigos Peludos");
-        dataset.addValue(10000, "Colones", "Patitas Felices");
-        dataset.addValue(125,   "Dollars", "Refugio Animal CR");
-        dataset.addValue(50,    "Dollars", "Amigos Peludos");
-        dataset.addValue(75,    "Dollars", "Patitas Felices");
+        DefaultCategoryDataset dataset = controller.getDonationsByAssociation(new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()), new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime()));
 
         JFreeChart chart = ChartFactory.createBarChart(
             "Total Donations by Association",
@@ -262,6 +264,17 @@ public class StatisticsFormPreview extends javax.swing.JFrame {
             PlotOrientation.VERTICAL,
             true, true, false
         );
+
+
+        if (dataset.getRowCount() == 0) {
+            JLabel noData = new JLabel("No data available for the selected date range.");
+            noData.setFont(new Font("Segoe UI", Font.ITALIC, 14));
+            noData.setForeground(Color.GRAY);
+            noData.setHorizontalAlignment(SwingConstants.CENTER);
+            panel.add(noData, BorderLayout.CENTER);
+            return panel;
+        }
+
 
         styleBarChart(chart);
 
@@ -273,12 +286,14 @@ public class StatisticsFormPreview extends javax.swing.JFrame {
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(900, 380));
 
-        JPanel statsRow = buildStatsRow(new String[]{
-            "Total Colones: ₡60,000", "Total Dollars: $250", "Associations: 3"
-        });
+
+
+        /*JPanel statsRow = buildStatsRow(new String[]{
+            "Total Colones: "+dataset.getValue(0, 0), "Total Dollars: "+dataset.getValue(1, 0), "Associations: "+dataset.getColumnCount()
+        });*/
 
         panel.add(chartPanel, BorderLayout.CENTER);
-        panel.add(statsRow,   BorderLayout.SOUTH);
+        //panel.add(statsRow,   BorderLayout.SOUTH); // descomentar para mockup sin números
         return panel;
     }
 
@@ -578,6 +593,6 @@ public class StatisticsFormPreview extends javax.swing.JFrame {
         } catch (ReflectiveOperationException | UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        java.awt.EventQueue.invokeLater(() -> new StatisticsFormPreview().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new StatisticsForm().setVisible(true));
     }
 }
