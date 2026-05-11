@@ -120,7 +120,7 @@ public class DonationController {
     public double calculateTotal(DefaultTableModel model) {
         double total = 0;
         for (int i = 0; i < model.getRowCount(); i++) {
-            Object val = model.getValueAt(i, 3); // Amount column
+            Object val = model.getValueAt(i, 4); // Amount column
             if (val instanceof Number) {
                 total += ((Number) val).doubleValue();
             }
