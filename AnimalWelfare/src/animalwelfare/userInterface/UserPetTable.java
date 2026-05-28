@@ -7,6 +7,7 @@ package animalwelfare.userInterface;
 import animalwelfare.access.UserPetOperations.CatalogItem;
 import animalwelfare.access.UserPetOperations.PetFilter;
 import animalwelfare.business.UserPetTableController;
+import animalwelfare.security.Session;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -32,14 +33,14 @@ public class UserPetTable extends javax.swing.JFrame {
      * Creates new form UserPetTable
      */
     public UserPetTable() {
-        this(1);
+        this(5);
     }
 
     public UserPetTable(int currentUserId) {
         initComponents();
         setLocationRelativeTo(null);
 
-        this.currentUserId = currentUserId;
+        this.currentUserId = Session.getInstance().getUserId();
 
         controller = new UserPetTableController(this.currentUserId);
 
