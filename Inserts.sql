@@ -12,41 +12,41 @@
 INSERT INTO Country (Id, Name) VALUES (s_Country.NEXTVAL, 'Costa Rica');
 INSERT INTO Country (Id, Name) VALUES (s_Country.NEXTVAL, 'Panama');
 
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'San Jose',    9);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Heredia',     9);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Alajuela',    9);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Cartago',     9);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Guanacaste',  9);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'San Jose',    1);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Heredia',     1);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Alajuela',    1);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Cartago',     1);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Guanacaste',  1);
 
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'San Jose',     27);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Desamparados', 28);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Heredia',      29);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Alajuela',     30);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Cartago',      31);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'San Jose',     1);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Desamparados', 2);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Heredia',      3);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Alajuela',     4);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Cartago',      5);
 
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Carmen',        37);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Hatillo',       38);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Desamparados',  39);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Heredia Centro',40);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Alajuela Centro', 41);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Carmen',        1);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Hatillo',       2);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Desamparados',  3);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Heredia Centro',4);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Alajuela Centro', 5);
 
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Panama',        10);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Chiriqui',      10);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Colon',         10);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Veraguas',      10);
-INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Los Santos',   10);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Panama',        2);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Chiriqui',      2);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Colon',         2);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Veraguas',      2);
+INSERT INTO Province (Id, Name, IdCountry) VALUES (s_Province.NEXTVAL, 'Los Santos',   2);
 
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Panama',       18);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'San Miguelito',18);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'David',        19);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Santiago',     20);
-INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL,'Chitre',       21);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Panama',       6);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'San Miguelito',7);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'David',        8);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL, 'Santiago',     9);
+INSERT INTO Canton (Id, Name, IdProvince) VALUES (s_Canton.NEXTVAL,'Chitre',       10);
 
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL,  'Bella Vista',     17);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL,  'Calidonia',       18);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL,  'Belisario Porras',19);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL,  'David Centro',    20);
-INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Santiago Centro', 21);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL,  'Bella Vista',     7);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL,  'Calidonia',       8);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL,  'Belisario Porras',9);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL,  'David Centro',    10);
+INSERT INTO District (Id, Name, IdCanton) VALUES (s_District.NEXTVAL, 'Santiago Centro', 11);
 
 -- -------------------------------------------------------------
 -- 2. CATALOGOS DE MASCOTAS
@@ -69,7 +69,7 @@ INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Beagle', 1)
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Rottweiler', 1);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Chihuahua', 1);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Husky Siberiano', 1);
-INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Dálmata', 1);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Dalmata', 1);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Boxer', 1);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Doberman', 1);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Shih Tzu', 1);
@@ -78,7 +78,7 @@ INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Border Coll
 
 -- Gatos
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Persa', 2);
-INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Siamés', 2);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Siames', 2);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Maine Coon', 2);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Bengalí', 2);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Ragdoll', 2);
@@ -90,7 +90,7 @@ INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Scottish Fo
 
 -- Conejos
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Mini Lop', 3);
-INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Holandés', 3);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Holandes', 3);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Lionhead', 3);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Rex', 3);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Angora', 3);
@@ -98,16 +98,16 @@ INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Angora', 3)
 -- Aves
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Periquito', 4);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Canario', 4);
-INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Cacatúa', 4);
-INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Loro Amazónico', 4);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Cacata', 4);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Loro Amazonico', 4);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Agapornis', 4);
 
 -- Otros
-INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Hámster Sirio', 5);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Hamster Sirio', 5);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Cobaya', 5);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Erizo', 5);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Tortuga', 5);
-INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Hurón', 5);
+INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Huran', 5);
 INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, 'Raza Unica', 5);   -- obligatorio segun requerimiento
 
 

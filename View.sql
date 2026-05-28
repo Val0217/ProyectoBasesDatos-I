@@ -1,3 +1,39 @@
+CREATE OR REPLACE VIEW vw_pet_claim_request_table AS
+SELECT
+    pc.Id AS ClaimId,
+    pc.IdPet AS PetId,
+    pc.IdClaimant AS ClaimantId,
+    p.Name AS PetName,
+    pc.Description AS ClaimDescription,
+    claimant.FirstName AS FirstName,
+    claimant.LastName AS LastName,
+    (
+        SELECT TO_CHAR(MIN(ph.Phone))
+        FROM Phone ph
+        WHERE ph.IdPerson = claimant.Id
+    ) AS Phone,
+    d.Name AS District,
+    ca.Name AS Canton,
+    pr.Name AS Province,
+    co.Name AS Country,
+    pc.State AS ClaimState,
+    pc.IdOwner AS OwnerId
+FROM PetClaim pc
+INNER JOIN Pet p
+        ON p.Id = pc.IdPet
+INNER JOIN Person claimant
+        ON claimant.Id = pc.IdClaimant
+LEFT JOIN District d
+        ON claimant.IdDistrict = d.Id
+LEFT JOIN Canton ca
+        ON d.IdCanton = ca.Id
+LEFT JOIN Province pr
+        ON ca.IdProvince = pr.Id
+LEFT JOIN Country co
+        ON pr.IdCountry = co.Id;
+/
+SHOW ERRORS VIEW vw_pet_claim_request_table;
+
 CREATE OR REPLACE VIEW VW_FOUND_PET_TABLE AS
 SELECT
     p.Id AS PetId,

@@ -164,4 +164,26 @@ public class UserPetTableController {
 
         return Integer.parseInt(value.toString());
     }
+    public void loadClaimRequests(JTable table) throws SQLException {
+        DefaultTableModel model = operations.getClaimRequestsForOwner(currentUserId);
+        table.setModel(model);
+        protectTable(table);
+
+        hideColumn(table, 1); // PetId
+        hideColumn(table, 2); // ClaimantId
+    }
+
+    public void createClaimRequest(int petId, String description) throws SQLException {
+        operations.createPetClaimRequest(petId, currentUserId, description);
+    }
+
+    public void acceptSelectedClaimRequest(JTable table) throws SQLException {
+        int claimId = getSelectedId(table, 0, "Select a claim request first.");
+        operations.acceptPetClaimRequest(claimId, currentUserId);
+    }
+
+    public void rejectSelectedClaimRequest(JTable table) throws SQLException {
+        int claimId = getSelectedId(table, 0, "Select a claim request first.");
+        operations.rejectPetClaimRequest(claimId, currentUserId);
+    }
 }

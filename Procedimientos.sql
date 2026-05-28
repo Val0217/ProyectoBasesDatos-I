@@ -1,3 +1,154 @@
+CREATE SEQUENCE s_PetClaim
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+/
+
+CREATE OR REPLACE PROCEDURE pr_create_pet_claim (
+    p_pet_id      IN NUMBER,
+    p_claimant_id IN NUMBER,
+    p_description IN VARCHAR2,
+    p_new_id      OUT NUMBER
+)
+AS
+    v_owner_id Pet.IdOwner%TYPE;
+    v_state_id Pet.IdState%TYPE;
+    v_count NUMBER;
+BEGIN
+    SELECT IdOwner, IdState
+      INTO v_owner_id, v_state_id
+      FROM Pet
+     WHERE Id = p_pet_id;
+
+    IF v_owner_id = p_claimant_id THEN
+        RAISE_APPLICATION_ERROR(-20201, 'You cannot claim a pet that already belongs to you.');
+    END IF;
+
+    IF v_state_id <> 4 THEN
+        RAISE_APPLICATION_ERROR(-20202, 'Only found pets can be claimed.');
+    END IF;
+
+    SELECT COUNT(*)
+      INTO v_count
+      FROM PetClaim
+     WHERE IdPet = p_pet_id
+       AND IdClaimant = p_claimant_id
+       AND State = 'To be confirmed';
+
+    IF v_count > 0 THEN
+        RAISE_APPLICATION_ERROR(-20203, 'You already have a pending claim for this pet.');
+    END IF;
+
+    p_new_id := fn_next_id('PetClaim');
+
+    INSERT INTO PetClaim (
+        Id,
+        ClaimDate,
+        Description,
+        State,
+        IdPet,
+        IdClaimant,
+        IdOwner
+    ) VALUES (
+        p_new_id,
+        SYSDATE,
+        p_description,
+        'To be confirmed',
+        p_pet_id,
+        p_claimant_id,
+        v_owner_id
+    );
+END;
+/
+SHOW ERRORS PROCEDURE pr_create_pet_claim;
+
+
+CREATE OR REPLACE PROCEDURE pr_get_claim_requests_owner (
+    p_owner_id IN NUMBER,
+    p_result   OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    OPEN p_result FOR
+        SELECT
+            ClaimId,
+            PetId,
+            ClaimantId,
+            PetName,
+            ClaimDescription,
+            FirstName,
+            LastName,
+            Phone,
+            District,
+            Canton,
+            Province,
+            Country,
+            ClaimState
+        FROM vw_pet_claim_request_table
+        WHERE OwnerId = p_owner_id
+          AND ClaimState = 'To be confirmed'
+        ORDER BY PetName, ClaimId;
+END;
+/
+SHOW ERRORS PROCEDURE pr_get_claim_requests_owner;
+
+
+CREATE OR REPLACE PROCEDURE pr_accept_pet_claim (
+    p_claim_id IN NUMBER,
+    p_owner_id IN NUMBER
+)
+AS
+    v_pet_id Pet.Id%TYPE;
+    v_claimant_id Person.Id%TYPE;
+BEGIN
+    SELECT IdPet, IdClaimant
+      INTO v_pet_id, v_claimant_id
+      FROM PetClaim
+     WHERE Id = p_claim_id
+       AND IdOwner = p_owner_id
+       AND State = 'To be confirmed';
+
+    UPDATE Pet
+       SET IdOwner = v_claimant_id,
+           IdState = 2
+     WHERE Id = v_pet_id
+       AND IdOwner = p_owner_id;
+
+    IF SQL%ROWCOUNT = 0 THEN
+        RAISE_APPLICATION_ERROR(-20204, 'Pet was not found for this owner.');
+    END IF;
+
+    DELETE FROM PetClaim
+     WHERE IdPet = v_pet_id;
+
+    UPDATE FoundReport
+       SET IdPerson = v_claimant_id
+     WHERE IdPet = v_pet_id;
+END;
+/
+SHOW ERRORS PROCEDURE pr_accept_pet_claim;
+
+
+CREATE OR REPLACE PROCEDURE pr_reject_pet_claim (
+    p_claim_id IN NUMBER,
+    p_owner_id IN NUMBER
+)
+AS
+BEGIN
+    DELETE FROM PetClaim
+     WHERE Id = p_claim_id
+       AND IdOwner = p_owner_id
+       AND State = 'To be confirmed';
+
+    IF SQL%ROWCOUNT = 0 THEN
+        RAISE_APPLICATION_ERROR(-20205, 'Pending claim request not found for this owner.');
+    END IF;
+END;
+/
+SHOW ERRORS PROCEDURE pr_reject_pet_claim;
+
+
 CREATE OR REPLACE PROCEDURE ADD_EMAIL_PERSON (
     p_email    IN EMAIL.EMAIL%TYPE,
     p_idperson IN EMAIL.IDPERSON%TYPE

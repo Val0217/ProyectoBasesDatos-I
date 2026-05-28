@@ -467,4 +467,94 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
 
         return model;
     }
+    public void createPetClaimRequest(int petId, int claimantId, String description) throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall("{call pr_create_pet_claim(?,?,?,?)}")) {
+
+            cs.setInt(1, petId);
+            cs.setInt(2, claimantId);
+            setNullableString(cs, 3, description);
+            cs.registerOutParameter(4, Types.NUMERIC);
+            cs.execute();
+        }
+    }
+
+    public DefaultTableModel getClaimRequestsForOwner(int ownerId) throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall("{call pr_get_claim_requests_owner(?,?)}")) {
+
+            cs.setInt(1, ownerId);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
+                return buildClaimRequestTableModel(rs);
+            }
+        }
+    }
+
+    public void acceptPetClaimRequest(int claimId, int ownerId) throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall("{call pr_accept_pet_claim(?,?)}")) {
+
+            cs.setInt(1, claimId);
+            cs.setInt(2, ownerId);
+            cs.execute();
+        }
+    }
+
+    public void rejectPetClaimRequest(int claimId, int ownerId) throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall("{call pr_reject_pet_claim(?,?)}")) {
+
+            cs.setInt(1, claimId);
+            cs.setInt(2, ownerId);
+            cs.execute();
+        }
+    }
+
+    private DefaultTableModel buildClaimRequestTableModel(ResultSet rs) throws SQLException {
+        String[] columns = {
+            "ClaimId",
+            "PetId",
+            "ClaimantId",
+            "Pet Name",
+            "Claim Description",
+            "First Name",
+            "Last Name",
+            "Phone",
+            "District",
+            "Canton",
+            "Province",
+            "Country",
+            "State"
+        };
+
+        DefaultTableModel model = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        while (rs.next()) {
+            model.addRow(new Object[] {
+                rs.getInt("ClaimId"),
+                rs.getInt("PetId"),
+                rs.getInt("ClaimantId"),
+                rs.getString("PetName"),
+                rs.getString("ClaimDescription"),
+                rs.getString("FirstName"),
+                rs.getString("LastName"),
+                rs.getString("Phone"),
+                rs.getString("District"),
+                rs.getString("Canton"),
+                rs.getString("Province"),
+                rs.getString("Country"),
+                rs.getString("ClaimState")
+            });
+        }
+
+        return model;
+    }
 }

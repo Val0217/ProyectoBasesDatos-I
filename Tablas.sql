@@ -1,3 +1,14 @@
+CREATE TABLE PetClaim (
+    Id NUMBER(8),
+    ClaimDate DATE,
+    Description VARCHAR2(250),
+    State VARCHAR2(25),
+    IdPet NUMBER(8),
+    IdClaimant NUMBER(8),
+    IdOwner NUMBER(8)
+);
+/
+
 CREATE TABLE PetLevelEnergy (
     Id NUMBER(8),
     Name VARCHAR2(25)

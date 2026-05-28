@@ -54,11 +54,14 @@ public class UserPetTable extends javax.swing.JFrame {
         jTable3.setDefaultEditor(Object.class, null);
         jTable4.setDefaultEditor(Object.class, null);
         jTable5.setDefaultEditor(Object.class, null);
+        jTable6.setDefaultEditor(Object.class, null);
 
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable2.getTableHeader().setReorderingAllowed(false);
         jTable3.getTableHeader().setReorderingAllowed(false);
         jTable4.getTableHeader().setReorderingAllowed(false);
+        jTable5.getTableHeader().setReorderingAllowed(false);
+        jTable6.getTableHeader().setReorderingAllowed(false);
 
         jButtonAdopt.setEnabled(false);
         jButtonEditPet.setEnabled(false);
@@ -68,6 +71,9 @@ public class UserPetTable extends javax.swing.JFrame {
         jButtonRejectAdopt.setEnabled(false);
         jButtonUndoAdoption.setVisible(false);
         jButtonPutAdopt.setEnabled(false);
+        jButtonClaimAsMine.setEnabled(false);
+        jButtonAcceptClaim.setEnabled(false);
+        jButtonRejectClaim.setEnabled(false);
     }
     private void addTableSelectionListeners() {
         jTable1.getSelectionModel().addListSelectionListener(event -> {
@@ -91,6 +97,12 @@ public class UserPetTable extends javax.swing.JFrame {
         }
         });
         
+        jTable4.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting()) {
+                jButtonClaimAsMine.setEnabled(jTable4.getSelectedRow() >= 0);
+            }
+        });
+
         jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -102,7 +114,18 @@ public class UserPetTable extends javax.swing.JFrame {
             if (!event.getValueIsAdjusting()) {
                 updateAdoptionDecisionButtonsState();
             }
+
         });
+        jTable6.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting()) {
+                updateClaimDecisionButtonsState();
+            }
+        });
+    }
+    private void updateClaimDecisionButtonsState() {
+        boolean hasSelection = jTable6.getSelectedRow() >= 0;
+        jButtonAcceptClaim.setEnabled(hasSelection);
+        jButtonRejectClaim.setEnabled(hasSelection);
     }
     private void updatePutAdoptButtonState() {
         if (jTable1.getSelectedRow() < 0) {
@@ -353,6 +376,7 @@ public class UserPetTable extends javax.swing.JFrame {
             controller.loadAdoptionRequests(jTable5);
             controller.loadUserMissingPets(jTable3);
             controller.loadFoundPets(jTable4);
+            controller.loadClaimRequests(jTable6);
         } catch (SQLException ex) {
             showError(ex);
         }
@@ -385,7 +409,12 @@ public class UserPetTable extends javax.swing.JFrame {
             "Error",
             JOptionPane.ERROR_MESSAGE
         );
-    }   
+    }
+    public void refreshAfterClaimRequest() {
+        loadTables();
+        jTable4.clearSelection();
+        jButtonClaimAsMine.setEnabled(false);
+    }
     
 //Combox Funcion para que salga un mini menu como estilo popup
 private PetFilter showFilterDialog(PetFilter currentFilter) throws SQLException {
@@ -567,7 +596,7 @@ private String nullToEmpty(String text) {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        jButtonClaimAsMine = new javax.swing.JButton();
         jButtonReturnMM4 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -575,6 +604,12 @@ private String nullToEmpty(String text) {
         jButtonAcceptAdopt = new javax.swing.JButton();
         jButtonRejectAdopt = new javax.swing.JButton();
         jButtonReturnMM5 = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable6 = new javax.swing.JTable();
+        jButtonAcceptClaim = new javax.swing.JButton();
+        jButtonRejectClaim = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -771,7 +806,8 @@ private String nullToEmpty(String text) {
         ));
         jScrollPane4.setViewportView(jTable4);
 
-        jButton2.setText("Claim as mine");
+        jButtonClaimAsMine.setText("Claim as mine");
+        jButtonClaimAsMine.addActionListener(this::jButtonClaimAsMineActionPerformed);
 
         jButtonReturnMM4.setText("Return to Main Menu");
         jButtonReturnMM4.addActionListener(this::jButtonReturnMM4ActionPerformed);
@@ -783,7 +819,7 @@ private String nullToEmpty(String text) {
             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 891, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonClaimAsMine, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonReturnMM4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -795,7 +831,7 @@ private String nullToEmpty(String text) {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(jButtonClaimAsMine)
                     .addComponent(jButtonReturnMM4))
                 .addGap(0, 8, Short.MAX_VALUE))
         );
@@ -851,6 +887,56 @@ private String nullToEmpty(String text) {
         );
 
         jTabbedPane1.addTab("Adoption Aplications", jPanel5);
+
+        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(jTable6);
+
+        jButtonAcceptClaim.setText("Accept Claim");
+        jButtonAcceptClaim.addActionListener(this::jButtonAcceptClaimActionPerformed);
+
+        jButtonRejectClaim.setText("Reject Claim");
+        jButtonRejectClaim.addActionListener(this::jButtonRejectClaimActionPerformed);
+
+        jButton1.setText("Return to Main Menu");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButtonAcceptClaim, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonRejectClaim, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(299, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAcceptClaim)
+                    .addComponent(jButtonRejectClaim)
+                    .addComponent(jButton1))
+                .addGap(0, 22, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Claim Pet Requests", jPanel6);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1090,6 +1176,82 @@ private String nullToEmpty(String text) {
         }
     }//GEN-LAST:event_jButtonTakeBackMissActionPerformed
 
+    private void jButtonClaimAsMineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClaimAsMineActionPerformed
+         try {
+            int petId = controller.getSelectedPetIdFromTable(jTable4);
+
+            ClaimForm claimForm = new ClaimForm(petId, currentUserId, this);
+            claimForm.setVisible(true);
+            this.setVisible(false);
+
+        } catch (SQLException ex) {
+            showError(ex);
+        }
+    }//GEN-LAST:event_jButtonClaimAsMineActionPerformed
+
+    private void jButtonAcceptClaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcceptClaimActionPerformed
+        try {
+            int option = JOptionPane.showConfirmDialog(
+                this,
+                "Do you want to accept this claim request?",
+                "Accept claim",
+                JOptionPane.YES_NO_OPTION
+            );
+
+            if (option != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            controller.acceptSelectedClaimRequest(jTable6);
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Claim accepted. The pet ownership was transferred."
+            );
+
+            loadTables();
+            jTable6.clearSelection();
+            updateClaimDecisionButtonsState();
+
+        } catch (SQLException ex) {
+            showError(ex);
+        }
+    }//GEN-LAST:event_jButtonAcceptClaimActionPerformed
+
+    private void jButtonRejectClaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRejectClaimActionPerformed
+        try {
+            int option = JOptionPane.showConfirmDialog(
+                this,
+                "Do you want to reject this claim request?",
+                "Reject claim",
+                JOptionPane.YES_NO_OPTION
+            );
+
+            if (option != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            controller.rejectSelectedClaimRequest(jTable6);
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Claim request rejected."
+            );
+
+            loadTables();
+            jTable6.clearSelection();
+            updateClaimDecisionButtonsState();
+
+        } catch (SQLException ex) {
+            showError(ex);
+        }
+    }//GEN-LAST:event_jButtonRejectClaimActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         MainMenu window = new MainMenu(currentUserId);
+         dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1116,9 +1278,11 @@ private String nullToEmpty(String text) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAcceptAdopt;
+    private javax.swing.JButton jButtonAcceptClaim;
     private javax.swing.JButton jButtonAdopt;
+    private javax.swing.JButton jButtonClaimAsMine;
     private javax.swing.JButton jButtonCleanFilter1;
     private javax.swing.JButton jButtonCleanFilter2;
     private javax.swing.JButton jButtonEditPet;
@@ -1126,6 +1290,7 @@ private String nullToEmpty(String text) {
     private javax.swing.JButton jButtonFilter2;
     private javax.swing.JButton jButtonPutAdopt;
     private javax.swing.JButton jButtonRejectAdopt;
+    private javax.swing.JButton jButtonRejectClaim;
     private javax.swing.JButton jButtonReportMissing;
     private javax.swing.JButton jButtonReturnMM;
     private javax.swing.JButton jButtonReturnMM2;
@@ -1139,16 +1304,19 @@ private String nullToEmpty(String text) {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
+    private javax.swing.JTable jTable6;
     // End of variables declaration//GEN-END:variables
 }
