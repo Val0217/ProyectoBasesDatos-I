@@ -187,6 +187,7 @@ BEGIN
 END;
 /
 
+-- esta version esta actualizada para los nuevos insert, pero no incluye los tipo type para el loop
 CREATE OR REPLACE PROCEDURE pr_insert_person (
     p_firstname   IN PERSON.FIRSTNAME%TYPE,
     p_lastname    IN PERSON.LASTNAME%TYPE,

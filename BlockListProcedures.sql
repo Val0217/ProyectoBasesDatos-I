@@ -125,7 +125,7 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20011, 'Only admins can remove people from the block list.');
     END IF;
 
-    DELETE FROM BlockList WHERE IdPerson = p_idPerson;
+    DELETE FROM BlockList WHERE Id = p_idPerson;
 
     COMMIT;
 END pr_remove_from_block_list;
