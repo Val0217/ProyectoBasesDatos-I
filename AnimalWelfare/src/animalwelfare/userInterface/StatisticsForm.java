@@ -42,10 +42,14 @@ public class StatisticsForm extends javax.swing.JFrame {
     // variable 
     DefaultCategoryDataset datasetPetsByTypeState = null;
     DefaultPieDataset datasetAdoptionsVsWaiting = null;
+    DefaultCategoryDataset datasetDonationsByAssociation = null;
 
     // Date range spinners (shared across tabs)
     private JSpinner spinnerFrom;
     private JSpinner spinnerTo;
+
+    // tabs
+    JTabbedPane tabs;
 
     // combos
     JComboBox<String> comboBreed;
@@ -107,7 +111,7 @@ public class StatisticsForm extends javax.swing.JFrame {
         JPanel summaryPanel = buildSummaryCards();
 
         // Tabs with charts
-        JTabbedPane tabs = new JTabbedPane();
+        tabs = new JTabbedPane();
         tabs.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         tabs.addTab("  Pets by Type & State  ",  buildPetsByTypeTab());
         tabs.addTab("  Donations  ",             buildDonationsTab());
@@ -298,19 +302,19 @@ public class StatisticsForm extends javax.swing.JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.WHITE);
 
-        DefaultCategoryDataset dataset = controller.getDonationsByAssociation(new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()), new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime()));
+        datasetDonationsByAssociation = controller.getDonationsByAssociation(new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()), new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime()));
 
         JFreeChart chart = ChartFactory.createBarChart(
             "Total Donations by Association",
             "Association",
             "Amount",
-            dataset,
+            datasetDonationsByAssociation,
             PlotOrientation.VERTICAL,
             true, true, false
         );
 
 
-        if (dataset.getRowCount() == 0) {
+        if (datasetDonationsByAssociation.getRowCount() == 0) {
             JLabel noData = new JLabel("No data available for the selected date range.");
             noData.setFont(new Font("Segoe UI", Font.ITALIC, 14));
             noData.setForeground(Color.GRAY);
@@ -333,13 +337,13 @@ public class StatisticsForm extends javax.swing.JFrame {
 
 
         JPanel statsRow = buildStatsRow(new String[]{
-            "Total Colones: " + (dataset.getRowCount() > 0 && dataset.getValue(0, 0) != null
-                ? dataset.getValue(0, 0).toString() : "0"),
+            "Total Colones: " + (datasetDonationsByAssociation.getRowCount() > 0 && datasetDonationsByAssociation.getValue(0, 0) != null
+                ? datasetDonationsByAssociation.getValue(0, 0).toString() : "0"),
 
-            "Total Dollars: " + (dataset.getRowCount() > 1 && dataset.getValue(1, 0) != null
-                ? dataset.getValue(1, 0).toString() : "0"),
+            "Total Dollars: " + (datasetDonationsByAssociation.getRowCount() > 1 && datasetDonationsByAssociation.getValue(1, 0) != null
+                ? datasetDonationsByAssociation.getValue(1, 0).toString() : "0"),
 
-            "Associations: " + dataset.getColumnCount()
+            "Associations: " + datasetDonationsByAssociation.getColumnCount()
         });
 
         panel.add(chartPanel, BorderLayout.CENTER);
@@ -516,25 +520,51 @@ public class StatisticsForm extends javax.swing.JFrame {
     }
 
     public void onApplyDateFilter() {
-        DefaultCategoryDataset newData = controller.getPetsByTypeAndState(
-            new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()),
-            new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime())
-        );
+        int indice = tabs.getSelectedIndex();
 
-        datasetPetsByTypeState.clear();
+        if (indice == 0) {
+            DefaultCategoryDataset newData = controller.getPetsByTypeAndState(
+                new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()),
+                new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime())
+            );
 
-        for (int r = 0; r < newData.getRowCount(); r++) {
-            for (int c = 0; c < newData.getColumnCount(); c++) {
-                Comparable rowKey = newData.getRowKey(r);
-                Comparable colKey = newData.getColumnKey(c);
+            datasetPetsByTypeState.clear();
 
-                Number value = newData.getValue(r, c);
+            for (int r = 0; r < newData.getRowCount(); r++) {
+                for (int c = 0; c < newData.getColumnCount(); c++) {
+                    Comparable rowKey = newData.getRowKey(r);
+                    Comparable colKey = newData.getColumnKey(c);
 
-                if (value != null) {
-                    datasetPetsByTypeState.addValue(value, rowKey, colKey);
+                    Number value = newData.getValue(r, c);
+
+                    if (value != null) {
+                        datasetPetsByTypeState.addValue(value, rowKey, colKey);
+                    }
                 }
             }
+        } else if (indice == 1) {
+            DefaultCategoryDataset newData = controller.getDonationsByAssociation(
+                new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()),
+                new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime())
+            );
+
+            datasetDonationsByAssociation.clear();
+
+            for (int r = 0; r < newData.getRowCount(); r++) {
+                for (int c = 0; c < newData.getColumnCount(); c++) {
+                    Comparable rowKey = newData.getRowKey(r);
+                    Comparable colKey = newData.getColumnKey(c);
+
+                    Number value = newData.getValue(r, c);
+
+                    if (value != null) {
+                        datasetDonationsByAssociation.addValue(value, rowKey, colKey);
+                    }
+                }
+            }
+
         }
+        
     }
 
     public void onApplyAdoptionsFilter() {
@@ -553,33 +583,6 @@ public class StatisticsForm extends javax.swing.JFrame {
                 datasetAdoptionsVsWaiting.setValue(key, value);
             }
         }
-        
-        /*if (comboType.getSelectedIndex() > 0) {
-            if (comboBreed.getSelectedIndex() > 0) {
-                    datasetAdoptionsVsWaiting = controller.getAdoptionsVsWaiting(
-                    typeData.get(comboType.getSelectedIndex()-1).getId(),
-                    breedData.get(comboBreed.getSelectedIndex()-1).getId()
-                );
-            }
-            else {
-                datasetAdoptionsVsWaiting = controller.getAdoptionsVsWaiting(
-                    typeData.get(comboType.getSelectedIndex()-1).getId(),
-                    null
-                );
-            }
-        }else {
-            if (comboBreed.getSelectedIndex() > 0) {
-                    datasetAdoptionsVsWaiting = controller.getAdoptionsVsWaiting(
-                    null,
-                    breedData.get(comboBreed.getSelectedIndex()-1).getId()
-                );
-            }else{
-                datasetAdoptionsVsWaiting = controller.getAdoptionsVsWaiting(
-                    null,
-                    null
-                );
-            }
-        }*/
     }
 
     // -------------------------------------------------------------------------
@@ -627,19 +630,43 @@ public class StatisticsForm extends javax.swing.JFrame {
         spinnerFrom.setValue(getStartOfYear());
         spinnerTo.setValue(new java.util.Date());
 
-        DefaultCategoryDataset newData = controller.getPetsByTypeAndState();
+        int indice = tabs.getSelectedIndex();
 
-        datasetPetsByTypeState.clear();
+        if (indice == 0) {
+            DefaultCategoryDataset newData = controller.getPetsByTypeAndState();
 
-        for (int r = 0; r < newData.getRowCount(); r++) {
-            for (int c = 0; c < newData.getColumnCount(); c++) {
+            datasetPetsByTypeState.clear();
 
-                Comparable rowKey = newData.getRowKey(r);
-                Comparable colKey = newData.getColumnKey(c);
-                Number value = newData.getValue(r, c);
+            for (int r = 0; r < newData.getRowCount(); r++) {
+                for (int c = 0; c < newData.getColumnCount(); c++) {
 
-                if (value != null) {
-                    datasetPetsByTypeState.addValue(value, rowKey, colKey);
+                    Comparable rowKey = newData.getRowKey(r);
+                    Comparable colKey = newData.getColumnKey(c);
+                    Number value = newData.getValue(r, c);
+
+                    if (value != null) {
+                        datasetPetsByTypeState.addValue(value, rowKey, colKey);
+                    }
+                }
+            }
+        } else if (indice == 1) {
+            DefaultCategoryDataset newData = controller.getDonationsByAssociation(
+                new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()),
+                new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime())
+            );;
+
+            datasetDonationsByAssociation.clear();
+
+            for (int r = 0; r < newData.getRowCount(); r++) {
+                for (int c = 0; c < newData.getColumnCount(); c++) {
+
+                    Comparable rowKey = newData.getRowKey(r);
+                    Comparable colKey = newData.getColumnKey(c);
+                    Number value = newData.getValue(r, c);
+
+                    if (value != null) {
+                        datasetDonationsByAssociation.addValue(value, rowKey, colKey);
+                    }
                 }
             }
         }
