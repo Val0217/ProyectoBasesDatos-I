@@ -428,12 +428,8 @@ public class StatisticsForm extends javax.swing.JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.WHITE);
 
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("0-1 yrs (Puppies): 3",  3);
-        dataset.setValue("1-5 yrs: 8",            8);
-        dataset.setValue("5-9 yrs: 5",            5);
-        dataset.setValue("10-12 yrs: 2",          2);
-        dataset.setValue("+12 yrs: 1",            1);
+        DefaultPieDataset dataset = controller.getNonAdoptedByAge();
+        String[] ageStats = controller.getAgeSummary();
 
         JFreeChart chart = ChartFactory.createPieChart(
             "Non-adopted Pets by Age Range",
@@ -442,22 +438,10 @@ public class StatisticsForm extends javax.swing.JFrame {
 
         stylePieChart(chart);
 
-        PiePlot plot = (PiePlot) chart.getPlot();
-        plot.setSectionPaint("0-1 yrs (Puppies): 3", new Color(0,   153, 153));
-        plot.setSectionPaint("1-5 yrs: 8",           new Color(255, 153, 0));
-        plot.setSectionPaint("5-9 yrs: 5",           new Color(80,  180, 80));
-        plot.setSectionPaint("10-12 yrs: 2",         new Color(220, 80,  80));
-        plot.setSectionPaint("+12 yrs: 1",           new Color(150, 100, 200));
-        plot.setLabelGenerator(new org.jfree.chart.labels.StandardPieSectionLabelGenerator(
-            "{0}: {2}", new DecimalFormat("0"), new DecimalFormat("0.0%")));
-
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(900, 360));
 
-        JPanel statsRow = buildStatsRow(new String[]{
-            "Puppies (0-1): 3 (15.8%)", "Young (1-5): 8 (42.1%)",
-            "Adult (5-9): 5 (26.3%)", "Senior (10-12): 2 (10.5%)", "+12: 1 (5.3%)"
-        });
+        JPanel statsRow = buildStatsRow(ageStats);
 
         panel.add(chartPanel, BorderLayout.CENTER);
         panel.add(statsRow,   BorderLayout.SOUTH);
@@ -508,14 +492,8 @@ public class StatisticsForm extends javax.swing.JFrame {
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(900, 360));
 
-        JPanel statsRow = buildStatsRow(new String[]{
-            "Fastest: Labrador (12 days)", "Slowest: Rabbit Mixed (45 days)",
-            "Overall Average: 26.6 days"
-        });
-
         panel.add(infoBar,    BorderLayout.NORTH);
         panel.add(chartPanel, BorderLayout.CENTER);
-        panel.add(statsRow,   BorderLayout.SOUTH);
         return panel;
     }
 
