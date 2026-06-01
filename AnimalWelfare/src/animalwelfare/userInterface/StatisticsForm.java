@@ -21,9 +21,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
- * PREVIEW ONLY — Statistics screen using JFreeChart with mock data.
- * Right click → Run File to preview.
- * DELETE this file before final delivery.
  *
  * Statistics implemented:
  *   a. Total pets by type and state (bar chart)
@@ -44,10 +41,15 @@ public class StatisticsForm extends javax.swing.JFrame {
 
     // variable 
     DefaultCategoryDataset datasetPetsByTypeState = null;
+    DefaultPieDataset datasetAdoptionsVsWaiting = null;
 
     // Date range spinners (shared across tabs)
     private JSpinner spinnerFrom;
     private JSpinner spinnerTo;
+
+    // combos
+    JComboBox<String> comboBreed;
+    JComboBox<String> comboType;
 
     // Summary labels
     private JLabel lblTotalPets;
@@ -109,7 +111,7 @@ public class StatisticsForm extends javax.swing.JFrame {
         tabs.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         tabs.addTab("  Pets by Type & State  ",  buildPetsByTypeTab());
         tabs.addTab("  Donations  ",             buildDonationsTab());
-        tabs.addTab("  Adoptions  ",             buildAdoptionsTab());
+        tabs.addTab("  Adoptions  ",             buildAdoptionsTab(null,null));
         tabs.addTab("  Age Ranges  ",            buildAgeRangesTab());
         tabs.addTab("  Avg Adoption Time  ",     buildAvgAdoptionTimeTab());
 
@@ -341,29 +343,39 @@ public class StatisticsForm extends javax.swing.JFrame {
         });
 
         panel.add(chartPanel, BorderLayout.CENTER);
-        panel.add(statsRow,   BorderLayout.SOUTH); // descomentar para mockup sin números
+        panel.add(statsRow,   BorderLayout.SOUTH);
         return panel;
     }
 
     // =========================================================================
     // TAB C — Adoption Success vs Waiting (Pie Chart)
     // =========================================================================
-    private JPanel buildAdoptionsTab() {
+    private JPanel buildAdoptionsTab(Integer idType, Integer idBreed) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.WHITE);
 
         // data base 
-        DefaultPieDataset dataset = controller.getAdoptionsVsWaiting(null, null);
+        datasetAdoptionsVsWaiting = controller.getAdoptionsVsWaiting(idType, idBreed);
         ArrayList<DbObject> typeData = controller.getPetTypes();
         ArrayList<DbObject> breedData = controller.getBreeds();
-        String[] summaryData = controller.getAdoptionSummary(null, null);
+        String[] summaryData = controller.getAdoptionSummary(idType, idBreed);
+
+        if (datasetAdoptionsVsWaiting.getItemCount() == 0) {
+            JLabel noData = new JLabel("No data available for the selected date range.");
+            noData.setFont(new Font("Segoe UI", Font.ITALIC, 14));
+            noData.setForeground(Color.GRAY);
+            noData.setHorizontalAlignment(SwingConstants.CENTER);
+            panel.add(noData, BorderLayout.CENTER);
+            return panel;
+        }
 
         // Filter bar for type and breed
         JPanel filterBar = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 8));
         filterBar.setBackground(new Color(245, 245, 245));
 
         filterBar.add(styledLabel("Pet Type:"));
-        JComboBox<String> comboType = new JComboBox<>();
+        comboType = new JComboBox<>();
+        comboType.addItem("All Types");
         for (DbObject type : typeData) {
             comboType.addItem(type.getName());
         }
@@ -371,24 +383,25 @@ public class StatisticsForm extends javax.swing.JFrame {
         filterBar.add(comboType);
 
         filterBar.add(styledLabel("Breed:"));
-        JComboBox<String> comboBreed = new JComboBox<>();
+        comboBreed = new JComboBox<>();
+        comboBreed.addItem("All Breeds");
         for (DbObject breed : breedData) {
             comboBreed.addItem(breed.getName());
         }
         comboBreed.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         filterBar.add(comboBreed);
 
+        // esto es de adoptions
         JButton btnFilter = tealButton("FILTER");
         btnFilter.setPreferredSize(new Dimension(80, 28));
-        btnFilter.addActionListener(e -> JOptionPane.showMessageDialog(this,
-            "Filter applied. (MOCK)", "Info", JOptionPane.INFORMATION_MESSAGE));
+        btnFilter.addActionListener(e -> onApplyAdoptionsFilter());
         filterBar.add(btnFilter);
 
         // Pie chart
 
         JFreeChart chart = ChartFactory.createPieChart(
             "Adoptions: Success vs Waiting",
-            dataset, true, true, false
+            datasetAdoptionsVsWaiting, true, true, false
         );
 
         stylePieChart(chart);
@@ -462,7 +475,6 @@ public class StatisticsForm extends javax.swing.JFrame {
         info.setForeground(Color.GRAY);
         infoBar.add(info);
 
-        // MOCK data — average days to adoption
         DefaultCategoryDataset dataset = controller.getAvgAdoptionTime();
 
 
@@ -523,6 +535,51 @@ public class StatisticsForm extends javax.swing.JFrame {
                 }
             }
         }
+    }
+
+    public void onApplyAdoptionsFilter() {
+        // data base 
+        ArrayList<DbObject> typeData = controller.getPetTypes();
+        ArrayList<DbObject> breedData = controller.getBreeds();
+        DefaultPieDataset newData = controller.getAdoptionsVsWaiting(
+            comboType.getSelectedIndex() > 0 ? typeData.get(comboType.getSelectedIndex()-1).getId() : null,
+            comboBreed.getSelectedIndex() > 0 ? breedData.get(comboBreed.getSelectedIndex()-1).getId() : null
+        );
+        datasetAdoptionsVsWaiting.clear();
+        for (int i = 0; i < newData.getItemCount(); i++) {
+            Comparable key = newData.getKey(i);
+            Number value = newData.getValue(i);
+            if (value != null) {
+                datasetAdoptionsVsWaiting.setValue(key, value);
+            }
+        }
+        
+        /*if (comboType.getSelectedIndex() > 0) {
+            if (comboBreed.getSelectedIndex() > 0) {
+                    datasetAdoptionsVsWaiting = controller.getAdoptionsVsWaiting(
+                    typeData.get(comboType.getSelectedIndex()-1).getId(),
+                    breedData.get(comboBreed.getSelectedIndex()-1).getId()
+                );
+            }
+            else {
+                datasetAdoptionsVsWaiting = controller.getAdoptionsVsWaiting(
+                    typeData.get(comboType.getSelectedIndex()-1).getId(),
+                    null
+                );
+            }
+        }else {
+            if (comboBreed.getSelectedIndex() > 0) {
+                    datasetAdoptionsVsWaiting = controller.getAdoptionsVsWaiting(
+                    null,
+                    breedData.get(comboBreed.getSelectedIndex()-1).getId()
+                );
+            }else{
+                datasetAdoptionsVsWaiting = controller.getAdoptionsVsWaiting(
+                    null,
+                    null
+                );
+            }
+        }*/
     }
 
     // -------------------------------------------------------------------------

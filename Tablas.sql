@@ -7,7 +7,6 @@ CREATE TABLE PetClaim (
     IdClaimant NUMBER(8),
     IdOwner NUMBER(8)
 );
-/
 
 CREATE TABLE PetLevelEnergy (
     Id NUMBER(8),
