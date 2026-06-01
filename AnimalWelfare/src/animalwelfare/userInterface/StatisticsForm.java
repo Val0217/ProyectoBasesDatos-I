@@ -1,5 +1,6 @@
 package animalwelfare.userInterface;
 
+import animalwelfare.access.DbObject;
 import animalwelfare.business.StatisticsController;
 import java.awt.*;
 import java.util.Calendar;
@@ -16,8 +17,8 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
-import java.awt.Color;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 /**
  * PREVIEW ONLY — Statistics screen using JFreeChart with mock data.
@@ -351,19 +352,29 @@ public class StatisticsForm extends javax.swing.JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.WHITE);
 
+        // data base 
+        DefaultPieDataset dataset = controller.getAdoptionsVsWaiting(null, null);
+        ArrayList<DbObject> typeData = controller.getPetTypes();
+        ArrayList<DbObject> breedData = controller.getBreeds();
+        String[] summaryData = controller.getAdoptionSummary(null, null);
+
         // Filter bar for type and breed
         JPanel filterBar = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 8));
         filterBar.setBackground(new Color(245, 245, 245));
 
         filterBar.add(styledLabel("Pet Type:"));
-        JComboBox<String> comboType = new JComboBox<>(
-            new String[]{"All", "Dog", "Cat", "Rabbit"});
+        JComboBox<String> comboType = new JComboBox<>();
+        for (DbObject type : typeData) {
+            comboType.addItem(type.getName());
+        }
         comboType.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         filterBar.add(comboType);
 
         filterBar.add(styledLabel("Breed:"));
-        JComboBox<String> comboBreed = new JComboBox<>(
-            new String[]{"All", "Labrador", "Poodle", "Siamese", "Mixed"});
+        JComboBox<String> comboBreed = new JComboBox<>();
+        for (DbObject breed : breedData) {
+            comboBreed.addItem(breed.getName());
+        }
         comboBreed.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         filterBar.add(comboBreed);
 
@@ -374,9 +385,6 @@ public class StatisticsForm extends javax.swing.JFrame {
         filterBar.add(btnFilter);
 
         // Pie chart
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Adopted (18)",        18);
-        dataset.setValue("Waiting for Adoption (8)", 8);
 
         JFreeChart chart = ChartFactory.createPieChart(
             "Adoptions: Success vs Waiting",
@@ -385,18 +393,10 @@ public class StatisticsForm extends javax.swing.JFrame {
 
         stylePieChart(chart);
 
-        PiePlot plot = (PiePlot) chart.getPlot();
-        plot.setSectionPaint("Adopted (18)",             new Color(0, 153, 153));
-        plot.setSectionPaint("Waiting for Adoption (8)", new Color(255, 153, 0));
-        plot.setLabelGenerator(new org.jfree.chart.labels.StandardPieSectionLabelGenerator(
-            "{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0.0%")));
-
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(900, 340));
 
-        JPanel statsRow = buildStatsRow(new String[]{
-            "Adopted: 18 (69.2%)", "Waiting: 8 (30.8%)", "Total: 26"
-        });
+        JPanel statsRow = buildStatsRow(summaryData);
 
         panel.add(filterBar,  BorderLayout.NORTH);
         panel.add(chartPanel, BorderLayout.CENTER);
