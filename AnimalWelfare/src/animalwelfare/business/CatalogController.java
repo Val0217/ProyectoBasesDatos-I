@@ -3,6 +3,7 @@ package animalwelfare.business;
 import animalwelfare.access.CatalogOperations;
 import animalwelfare.access.DbObject;
 import animalwelfare.userInterface.CatalogForm;
+import animalwelfare.userInterface.CatalogForm;
 import javax.swing.JOptionPane;
 import java.util.List;
 
