@@ -519,6 +519,7 @@ IS
     v_owner_id       Pet.IdOwner%TYPE;
     v_state_id       Pet.IdState%TYPE;
     v_existing_count NUMBER;
+    v_available_date Adoption.AvailableDate%TYPE;
 BEGIN
     SELECT IdOwner, IdState
       INTO v_owner_id, v_state_id
@@ -544,6 +545,25 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20103, 'You already have a pending adoption request for this pet.');
     END IF;
 
+    SELECT MIN(AvailableDate)
+      INTO v_available_date
+      FROM Adoption
+     WHERE IdPet = p_pet_id
+       AND IdOwner = v_owner_id
+       AND State = 'In process';
+
+    IF v_available_date IS NULL THEN
+        SELECT MIN(AvailableDate)
+          INTO v_available_date
+          FROM Adoption
+         WHERE IdPet = p_pet_id
+           AND IdOwner = v_owner_id;
+    END IF;
+
+    IF v_available_date IS NULL THEN
+        v_available_date := SYSDATE;
+    END IF;
+
     p_new_id := fn_next_id('Adoption');
 
     INSERT INTO Adoption (
@@ -558,7 +578,7 @@ BEGIN
     ) VALUES (
         p_new_id,
         NULL,
-        SYSDATE,
+        v_available_date,
         SUBSTR(p_description, 1, 100),
         'To be confirmed',
         p_pet_id,
@@ -573,6 +593,7 @@ EXCEPTION
 END;
 /
 SHOW ERRORS PROCEDURE pr_create_adoption_request;
+
 
 CREATE OR REPLACE PROCEDURE pr_get_adoption_requests_owner (
     p_owner_id IN NUMBER,
