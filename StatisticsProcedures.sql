@@ -88,7 +88,8 @@ END pr_stat_adoptions_vs_waiting;
 -- -------------------------------------------------------------
 -- D. Mascotas no adoptadas por rango de edad
 -- -------------------------------------------------------------
-CREATE OR REPLACE PROCEDURE pr_stat_nonadopted_by_age(
+
+create or replace PROCEDURE pr_stat_nonadopted_by_age(
     p_cursor OUT SYS_REFCURSOR
 ) AS
 BEGIN
@@ -106,7 +107,7 @@ BEGIN
                 SUM(COUNT(*)) OVER (), 1) AS Percentage
         FROM Pet p
         JOIN PetState ps ON p.IdState = ps.Id
-        WHERE ps.Name = 'En Adopcion'
+        WHERE ps.Name = 'up for adoption'
           AND p.Age IS NOT NULL
         GROUP BY
             CASE
@@ -124,7 +125,7 @@ END pr_stat_nonadopted_by_age;
 -- E. Tiempo promedio de adopción por tipo y raza (ADICIONAL)
 --    Calcula días entre AvailableDate y AdoptionDate
 -- -------------------------------------------------------------
-CREATE OR REPLACE PROCEDURE pr_stat_avg_adoption_time(
+create or replace PROCEDURE pr_stat_avg_adoption_time(
     p_cursor OUT SYS_REFCURSOR
 ) AS
 BEGIN
@@ -138,10 +139,8 @@ BEGIN
         JOIN Pet      p  ON a.IdPet   = p.Id
         JOIN PetType  pt ON p.IdType  = pt.Id
         JOIN PetBreed pb ON p.IdBreed = pb.Id
-        WHERE a.State = 'Adopted'
-          AND a.AvailableDate IS NOT NULL
+        WHERE a.AvailableDate IS NOT NULL
           AND a.AdoptionDate  IS NOT NULL
-          AND a.AdoptionDate > a.AvailableDate
         GROUP BY pt.Name, pb.Name
         HAVING COUNT(*) > 0
         ORDER BY pt.Name, AvgDays ASC;

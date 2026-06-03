@@ -1,5 +1,6 @@
 package animalwelfare.userInterface;
 
+import animalwelfare.access.DbObject;
 import animalwelfare.business.StatisticsController;
 import java.awt.*;
 import java.util.Calendar;
@@ -16,13 +17,10 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
-import java.awt.Color;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 /**
- * PREVIEW ONLY — Statistics screen using JFreeChart with mock data.
- * Right click → Run File to preview.
- * DELETE this file before final delivery.
  *
  * Statistics implemented:
  *   a. Total pets by type and state (bar chart)
@@ -43,10 +41,19 @@ public class StatisticsForm extends javax.swing.JFrame {
 
     // variable 
     DefaultCategoryDataset datasetPetsByTypeState = null;
+    DefaultPieDataset datasetAdoptionsVsWaiting = null;
+    DefaultCategoryDataset datasetDonationsByAssociation = null;
 
     // Date range spinners (shared across tabs)
     private JSpinner spinnerFrom;
     private JSpinner spinnerTo;
+
+    // tabs
+    JTabbedPane tabs;
+
+    // combos
+    JComboBox<String> comboBreed;
+    JComboBox<String> comboType;
 
     // Summary labels
     private JLabel lblTotalPets;
@@ -104,11 +111,11 @@ public class StatisticsForm extends javax.swing.JFrame {
         JPanel summaryPanel = buildSummaryCards();
 
         // Tabs with charts
-        JTabbedPane tabs = new JTabbedPane();
+        tabs = new JTabbedPane();
         tabs.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         tabs.addTab("  Pets by Type & State  ",  buildPetsByTypeTab());
         tabs.addTab("  Donations  ",             buildDonationsTab());
-        tabs.addTab("  Adoptions  ",             buildAdoptionsTab());
+        tabs.addTab("  Adoptions  ",             buildAdoptionsTab(null,null));
         tabs.addTab("  Age Ranges  ",            buildAgeRangesTab());
         tabs.addTab("  Avg Adoption Time  ",     buildAvgAdoptionTimeTab());
 
@@ -295,19 +302,19 @@ public class StatisticsForm extends javax.swing.JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.WHITE);
 
-        DefaultCategoryDataset dataset = controller.getDonationsByAssociation(new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()), new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime()));
+        datasetDonationsByAssociation = controller.getDonationsByAssociation(new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()), new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime()));
 
         JFreeChart chart = ChartFactory.createBarChart(
             "Total Donations by Association",
             "Association",
             "Amount",
-            dataset,
+            datasetDonationsByAssociation,
             PlotOrientation.VERTICAL,
             true, true, false
         );
 
 
-        if (dataset.getRowCount() == 0) {
+        if (datasetDonationsByAssociation.getRowCount() == 0) {
             JLabel noData = new JLabel("No data available for the selected date range.");
             noData.setFont(new Font("Segoe UI", Font.ITALIC, 14));
             noData.setForeground(Color.GRAY);
@@ -330,73 +337,83 @@ public class StatisticsForm extends javax.swing.JFrame {
 
 
         JPanel statsRow = buildStatsRow(new String[]{
-            "Total Colones: " + (dataset.getRowCount() > 0 && dataset.getValue(0, 0) != null
-                ? dataset.getValue(0, 0).toString() : "0"),
+            "Total Colones: " + (datasetDonationsByAssociation.getRowCount() > 0 && datasetDonationsByAssociation.getValue(0, 0) != null
+                ? datasetDonationsByAssociation.getValue(0, 0).toString() : "0"),
 
-            "Total Dollars: " + (dataset.getRowCount() > 1 && dataset.getValue(1, 0) != null
-                ? dataset.getValue(1, 0).toString() : "0"),
+            "Total Dollars: " + (datasetDonationsByAssociation.getRowCount() > 1 && datasetDonationsByAssociation.getValue(1, 0) != null
+                ? datasetDonationsByAssociation.getValue(1, 0).toString() : "0"),
 
-            "Associations: " + dataset.getColumnCount()
+            "Associations: " + datasetDonationsByAssociation.getColumnCount()
         });
 
         panel.add(chartPanel, BorderLayout.CENTER);
-        panel.add(statsRow,   BorderLayout.SOUTH); // descomentar para mockup sin números
+        panel.add(statsRow,   BorderLayout.SOUTH);
         return panel;
     }
 
     // =========================================================================
     // TAB C — Adoption Success vs Waiting (Pie Chart)
     // =========================================================================
-    private JPanel buildAdoptionsTab() {
+    private JPanel buildAdoptionsTab(Integer idType, Integer idBreed) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.WHITE);
+
+        // data base 
+        datasetAdoptionsVsWaiting = controller.getAdoptionsVsWaiting(idType, idBreed);
+        ArrayList<DbObject> typeData = controller.getPetTypes();
+        ArrayList<DbObject> breedData = controller.getBreeds();
+        String[] summaryData = controller.getAdoptionSummary(idType, idBreed);
+
+        if (datasetAdoptionsVsWaiting.getItemCount() == 0) {
+            JLabel noData = new JLabel("No data available for the selected date range.");
+            noData.setFont(new Font("Segoe UI", Font.ITALIC, 14));
+            noData.setForeground(Color.GRAY);
+            noData.setHorizontalAlignment(SwingConstants.CENTER);
+            panel.add(noData, BorderLayout.CENTER);
+            return panel;
+        }
 
         // Filter bar for type and breed
         JPanel filterBar = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 8));
         filterBar.setBackground(new Color(245, 245, 245));
 
         filterBar.add(styledLabel("Pet Type:"));
-        JComboBox<String> comboType = new JComboBox<>(
-            new String[]{"All", "Dog", "Cat", "Rabbit"});
+        comboType = new JComboBox<>();
+        comboType.addItem("All Types");
+        for (DbObject type : typeData) {
+            comboType.addItem(type.getName());
+        }
         comboType.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         filterBar.add(comboType);
 
         filterBar.add(styledLabel("Breed:"));
-        JComboBox<String> comboBreed = new JComboBox<>(
-            new String[]{"All", "Labrador", "Poodle", "Siamese", "Mixed"});
+        comboBreed = new JComboBox<>();
+        comboBreed.addItem("All Breeds");
+        for (DbObject breed : breedData) {
+            comboBreed.addItem(breed.getName());
+        }
         comboBreed.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         filterBar.add(comboBreed);
 
+        // esto es de adoptions
         JButton btnFilter = tealButton("FILTER");
         btnFilter.setPreferredSize(new Dimension(80, 28));
-        btnFilter.addActionListener(e -> JOptionPane.showMessageDialog(this,
-            "Filter applied. (MOCK)", "Info", JOptionPane.INFORMATION_MESSAGE));
+        btnFilter.addActionListener(e -> onApplyAdoptionsFilter());
         filterBar.add(btnFilter);
 
         // Pie chart
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Adopted (18)",        18);
-        dataset.setValue("Waiting for Adoption (8)", 8);
 
         JFreeChart chart = ChartFactory.createPieChart(
             "Adoptions: Success vs Waiting",
-            dataset, true, true, false
+            datasetAdoptionsVsWaiting, true, true, false
         );
 
         stylePieChart(chart);
 
-        PiePlot plot = (PiePlot) chart.getPlot();
-        plot.setSectionPaint("Adopted (18)",             new Color(0, 153, 153));
-        plot.setSectionPaint("Waiting for Adoption (8)", new Color(255, 153, 0));
-        plot.setLabelGenerator(new org.jfree.chart.labels.StandardPieSectionLabelGenerator(
-            "{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0.0%")));
-
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(900, 340));
 
-        JPanel statsRow = buildStatsRow(new String[]{
-            "Adopted: 18 (69.2%)", "Waiting: 8 (30.8%)", "Total: 26"
-        });
+        JPanel statsRow = buildStatsRow(summaryData);
 
         panel.add(filterBar,  BorderLayout.NORTH);
         panel.add(chartPanel, BorderLayout.CENTER);
@@ -411,12 +428,8 @@ public class StatisticsForm extends javax.swing.JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.WHITE);
 
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("0-1 yrs (Puppies): 3",  3);
-        dataset.setValue("1-5 yrs: 8",            8);
-        dataset.setValue("5-9 yrs: 5",            5);
-        dataset.setValue("10-12 yrs: 2",          2);
-        dataset.setValue("+12 yrs: 1",            1);
+        DefaultPieDataset dataset = controller.getNonAdoptedByAge();
+        String[] ageStats = controller.getAgeSummary();
 
         JFreeChart chart = ChartFactory.createPieChart(
             "Non-adopted Pets by Age Range",
@@ -425,22 +438,10 @@ public class StatisticsForm extends javax.swing.JFrame {
 
         stylePieChart(chart);
 
-        PiePlot plot = (PiePlot) chart.getPlot();
-        plot.setSectionPaint("0-1 yrs (Puppies): 3", new Color(0,   153, 153));
-        plot.setSectionPaint("1-5 yrs: 8",           new Color(255, 153, 0));
-        plot.setSectionPaint("5-9 yrs: 5",           new Color(80,  180, 80));
-        plot.setSectionPaint("10-12 yrs: 2",         new Color(220, 80,  80));
-        plot.setSectionPaint("+12 yrs: 1",           new Color(150, 100, 200));
-        plot.setLabelGenerator(new org.jfree.chart.labels.StandardPieSectionLabelGenerator(
-            "{0}: {2}", new DecimalFormat("0"), new DecimalFormat("0.0%")));
-
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(900, 360));
 
-        JPanel statsRow = buildStatsRow(new String[]{
-            "Puppies (0-1): 3 (15.8%)", "Young (1-5): 8 (42.1%)",
-            "Adult (5-9): 5 (26.3%)", "Senior (10-12): 2 (10.5%)", "+12: 1 (5.3%)"
-        });
+        JPanel statsRow = buildStatsRow(ageStats);
 
         panel.add(chartPanel, BorderLayout.CENTER);
         panel.add(statsRow,   BorderLayout.SOUTH);
@@ -462,7 +463,6 @@ public class StatisticsForm extends javax.swing.JFrame {
         info.setForeground(Color.GRAY);
         infoBar.add(info);
 
-        // MOCK data — average days to adoption
         DefaultCategoryDataset dataset = controller.getAvgAdoptionTime();
 
 
@@ -492,35 +492,73 @@ public class StatisticsForm extends javax.swing.JFrame {
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(900, 360));
 
-        JPanel statsRow = buildStatsRow(new String[]{
-            "Fastest: Labrador (12 days)", "Slowest: Rabbit Mixed (45 days)",
-            "Overall Average: 26.6 days"
-        });
-
         panel.add(infoBar,    BorderLayout.NORTH);
         panel.add(chartPanel, BorderLayout.CENTER);
-        panel.add(statsRow,   BorderLayout.SOUTH);
         return panel;
     }
 
     public void onApplyDateFilter() {
-        DefaultCategoryDataset newData = controller.getPetsByTypeAndState(
-            new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()),
-            new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime())
-        );
+        int indice = tabs.getSelectedIndex();
 
-        datasetPetsByTypeState.clear();
+        if (indice == 0) {
+            DefaultCategoryDataset newData = controller.getPetsByTypeAndState(
+                new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()),
+                new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime())
+            );
 
-        for (int r = 0; r < newData.getRowCount(); r++) {
-            for (int c = 0; c < newData.getColumnCount(); c++) {
-                Comparable rowKey = newData.getRowKey(r);
-                Comparable colKey = newData.getColumnKey(c);
+            datasetPetsByTypeState.clear();
 
-                Number value = newData.getValue(r, c);
+            for (int r = 0; r < newData.getRowCount(); r++) {
+                for (int c = 0; c < newData.getColumnCount(); c++) {
+                    Comparable rowKey = newData.getRowKey(r);
+                    Comparable colKey = newData.getColumnKey(c);
 
-                if (value != null) {
-                    datasetPetsByTypeState.addValue(value, rowKey, colKey);
+                    Number value = newData.getValue(r, c);
+
+                    if (value != null) {
+                        datasetPetsByTypeState.addValue(value, rowKey, colKey);
+                    }
                 }
+            }
+        } else if (indice == 1) {
+            DefaultCategoryDataset newData = controller.getDonationsByAssociation(
+                new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()),
+                new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime())
+            );
+
+            datasetDonationsByAssociation.clear();
+
+            for (int r = 0; r < newData.getRowCount(); r++) {
+                for (int c = 0; c < newData.getColumnCount(); c++) {
+                    Comparable rowKey = newData.getRowKey(r);
+                    Comparable colKey = newData.getColumnKey(c);
+
+                    Number value = newData.getValue(r, c);
+
+                    if (value != null) {
+                        datasetDonationsByAssociation.addValue(value, rowKey, colKey);
+                    }
+                }
+            }
+
+        }
+        
+    }
+
+    public void onApplyAdoptionsFilter() {
+        // data base 
+        ArrayList<DbObject> typeData = controller.getPetTypes();
+        ArrayList<DbObject> breedData = controller.getBreeds();
+        DefaultPieDataset newData = controller.getAdoptionsVsWaiting(
+            comboType.getSelectedIndex() > 0 ? typeData.get(comboType.getSelectedIndex()-1).getId() : null,
+            comboBreed.getSelectedIndex() > 0 ? breedData.get(comboBreed.getSelectedIndex()-1).getId() : null
+        );
+        datasetAdoptionsVsWaiting.clear();
+        for (int i = 0; i < newData.getItemCount(); i++) {
+            Comparable key = newData.getKey(i);
+            Number value = newData.getValue(i);
+            if (value != null) {
+                datasetAdoptionsVsWaiting.setValue(key, value);
             }
         }
     }
@@ -570,19 +608,43 @@ public class StatisticsForm extends javax.swing.JFrame {
         spinnerFrom.setValue(getStartOfYear());
         spinnerTo.setValue(new java.util.Date());
 
-        DefaultCategoryDataset newData = controller.getPetsByTypeAndState();
+        int indice = tabs.getSelectedIndex();
 
-        datasetPetsByTypeState.clear();
+        if (indice == 0) {
+            DefaultCategoryDataset newData = controller.getPetsByTypeAndState();
 
-        for (int r = 0; r < newData.getRowCount(); r++) {
-            for (int c = 0; c < newData.getColumnCount(); c++) {
+            datasetPetsByTypeState.clear();
 
-                Comparable rowKey = newData.getRowKey(r);
-                Comparable colKey = newData.getColumnKey(c);
-                Number value = newData.getValue(r, c);
+            for (int r = 0; r < newData.getRowCount(); r++) {
+                for (int c = 0; c < newData.getColumnCount(); c++) {
 
-                if (value != null) {
-                    datasetPetsByTypeState.addValue(value, rowKey, colKey);
+                    Comparable rowKey = newData.getRowKey(r);
+                    Comparable colKey = newData.getColumnKey(c);
+                    Number value = newData.getValue(r, c);
+
+                    if (value != null) {
+                        datasetPetsByTypeState.addValue(value, rowKey, colKey);
+                    }
+                }
+            }
+        } else if (indice == 1) {
+            DefaultCategoryDataset newData = controller.getDonationsByAssociation(
+                new java.sql.Date(((java.util.Date)spinnerFrom.getValue()).getTime()),
+                new java.sql.Date(((java.util.Date)spinnerTo.getValue()).getTime())
+            );;
+
+            datasetDonationsByAssociation.clear();
+
+            for (int r = 0; r < newData.getRowCount(); r++) {
+                for (int c = 0; c < newData.getColumnCount(); c++) {
+
+                    Comparable rowKey = newData.getRowKey(r);
+                    Comparable colKey = newData.getColumnKey(c);
+                    Number value = newData.getValue(r, c);
+
+                    if (value != null) {
+                        datasetDonationsByAssociation.addValue(value, rowKey, colKey);
+                    }
                 }
             }
         }

@@ -99,8 +99,8 @@ public class StatisticsOperations {
         try (Connection con = ConexionOracle.connect();
              CallableStatement cs = con.prepareCall(call)) {
 
-            setNullableDate(cs, 1, null);
-            setNullableDate(cs, 2, null);
+            setNullableDate(cs, 1, dateFrom);
+            setNullableDate(cs, 2, dateTo);
             cs.registerOutParameter(3, OracleTypes.CURSOR);
             cs.execute();
 

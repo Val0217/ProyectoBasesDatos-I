@@ -18,7 +18,6 @@ public class StatisticsController {
     // -------------------------------------------------------------------------
     // A. Pets by Type and State → CategoryDataset for Bar Chart
     // -------------------------------------------------------------------------
-
     /**
      * Builds a bar chart dataset: series = PetState, category = PetType.
      * @param dateFrom start date (nullable = no filter)
