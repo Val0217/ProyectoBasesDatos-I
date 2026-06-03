@@ -84,14 +84,15 @@ public class UserPetOperations {
             }
         }
     }
-    public DefaultTableModel getFoundPets() throws SQLException {
+    public DefaultTableModel getFoundPets(int currentUserId) throws SQLException {
         try (Connection conn = ConexionOracle.connect();
-             CallableStatement cs = conn.prepareCall("{call pr_get_found_pet_table(?)}")) {
+             CallableStatement cs = conn.prepareCall("{call pr_get_found_pet_table(?,?)}")) {
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(1, currentUserId);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
             cs.execute();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
+            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
                 return buildFoundPetTableModel(rs);
             }
         }

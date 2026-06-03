@@ -262,28 +262,40 @@ END pr_register_veterinarian;
 SHOW ERRORS PROCEDURE pr_register_veterinarian;
 
 CREATE OR REPLACE PROCEDURE pr_get_found_pet_table (
+    p_current_user_id IN NUMBER,
     p_result OUT SYS_REFCURSOR
 )
 AS
 BEGIN
     OPEN p_result FOR
         SELECT
-            PetId,
-            OwnerId,
-            FirstName,
-            LastName,
-            'Click to view emails' AS Emails,
-            'Click to view phones' AS Phones,
-            PetName,
-            Color,
-            Chip,
-            PetType,
-            Breed,
-            PetSize
-        FROM VW_FOUND_PET_TABLE
-        ORDER BY PetName;
+            p.Id AS PetId,
+            p.IdOwner AS OwnerId,
+            owner.FirstName AS FirstName,
+            owner.LastName AS LastName,
+            'Click to see emails' AS Emails,
+            'Click to see phones' AS Phones,
+            p.Name AS PetName,
+            p.Color AS Color,
+            p.Chip AS Chip,
+            pt.Name AS PetType,
+            b.Name AS Breed,
+            ps.Name AS PetSize
+        FROM Pet p
+        INNER JOIN Person owner
+                ON owner.Id = p.IdOwner
+        LEFT JOIN PetType pt
+                ON pt.Id = p.IdType
+        LEFT JOIN PetBreed b
+                ON b.Id = p.IdBreed
+        LEFT JOIN PetSize ps
+                ON ps.Id = p.IdSize
+        WHERE p.IdState = 4
+          AND p.IdOwner <> p_current_user_id
+        ORDER BY p.Name;
 END;
 /
+SHOW ERRORS PROCEDURE pr_get_found_pet_table;
 
 CREATE OR REPLACE PROCEDURE pr_get_owner_emails (
     p_owner_id IN NUMBER,

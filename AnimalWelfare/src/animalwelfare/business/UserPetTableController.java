@@ -18,7 +18,7 @@ public class UserPetTableController {
         this.currentUserId = currentUserId;
     }
     public void loadFoundPets(JTable table) throws SQLException {
-        DefaultTableModel model = operations.getFoundPets();
+        DefaultTableModel model = operations.getFoundPets(currentUserId);
         table.setModel(model);
         protectTable(table);
 

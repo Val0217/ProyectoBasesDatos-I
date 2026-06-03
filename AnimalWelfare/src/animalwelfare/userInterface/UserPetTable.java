@@ -122,7 +122,58 @@ public class UserPetTable extends javax.swing.JFrame {
                 updateClaimDecisionButtonsState();
             }
         });
+        jTable6.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                handleClaimRequestTableClick();
+            }
+        });
     }
+    private void handleClaimRequestTableClick() {
+        int selectedRow = jTable6.getSelectedRow();
+        int selectedColumn = jTable6.getSelectedColumn();
+
+        if (selectedRow < 0 || selectedColumn < 0) {
+            return;
+        }
+
+        String columnName = jTable6.getColumnName(selectedColumn);
+
+        if (!columnName.equalsIgnoreCase("Claim Description")) {
+            return;
+        }
+
+        int modelRow = jTable6.convertRowIndexToModel(selectedRow);
+        int descriptionColumn = findModelColumn(jTable6, "Claim Description");
+
+        if (descriptionColumn < 0) {
+            showError(new Exception("Claim Description column was not found."));
+            return;
+        }
+
+        Object value = jTable6.getModel().getValueAt(modelRow, descriptionColumn);
+
+        String description = value == null ? "" : value.toString();
+
+        showLargeTextPopup("Claim Description", description);
+    }
+    private void showLargeTextPopup(String title, String text) {
+        javax.swing.JTextArea textArea = new javax.swing.JTextArea(text);
+        textArea.setEditable(false);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setCaretPosition(0);
+
+        javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane(textArea);
+        scrollPane.setPreferredSize(new java.awt.Dimension(500, 300));
+
+        JOptionPane.showMessageDialog(
+            this,
+            scrollPane,
+            title,
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }    
     private void updateClaimDecisionButtonsState() {
         boolean hasSelection = jTable6.getSelectedRow() >= 0;
         jButtonAcceptClaim.setEnabled(hasSelection);
