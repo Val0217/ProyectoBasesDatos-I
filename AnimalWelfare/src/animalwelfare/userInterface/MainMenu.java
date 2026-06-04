@@ -21,6 +21,8 @@ public class MainMenu extends javax.swing.JFrame {
     // constante
     Color buttonHover = new Color(220, 220, 220);
     Color buttonBase = new Color(242, 242, 242);
+    Color buttonExitHover = new Color(230, 184, 46);
+    Color buttonExitBase = new Color(255,204,51);
     
     
     private int currentUserId;
@@ -38,10 +40,10 @@ public class MainMenu extends javax.swing.JFrame {
     }
     
     private void LogOffButtonMouseEntered(java.awt.event.MouseEvent evt) {
-        LogOffButton.setBackground(buttonHover);
+        LogOffButton.setBackground(buttonExitHover);
     }
     private void LogOffButtonMouseExited(java.awt.event.MouseEvent evt) {
-        LogOffButton.setBackground(buttonBase);
+        LogOffButton.setBackground(buttonExitBase);
     }
 
     /**
@@ -76,6 +78,8 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         ButtonOthers = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
+        ParametersButton = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -284,13 +288,13 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(LogOffButtonLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel18)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         LogOffButtonLayout.setVerticalGroup(
             LogOffButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LogOffButtonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -387,6 +391,37 @@ public class MainMenu extends javax.swing.JFrame {
             .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        ParametersButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ParametersButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ParametersButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ParametersButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ParametersButtonMouseExited(evt);
+            }
+        });
+
+        jLabel27.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel27.setText("Parameters");
+
+        javax.swing.GroupLayout ParametersButtonLayout = new javax.swing.GroupLayout(ParametersButton);
+        ParametersButton.setLayout(ParametersButtonLayout);
+        ParametersButtonLayout.setHorizontalGroup(
+            ParametersButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ParametersButtonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(84, Short.MAX_VALUE))
+        );
+        ParametersButtonLayout.setVerticalGroup(
+            ParametersButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         javax.swing.GroupLayout BackGroundLayout = new javax.swing.GroupLayout(BackGround);
         BackGround.setLayout(BackGroundLayout);
         BackGroundLayout.setHorizontalGroup(
@@ -398,25 +433,23 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGap(152, 152, 152)
                 .addComponent(LableTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(BackGroundLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackGroundLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BlockListButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(MatchButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(NewPetButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(PetsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(PetsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ParametersButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BlockListButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(LogOffButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(StatsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(DonationsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(FosterHomeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ButtonOthers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackGroundLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(LogOffButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(274, 274, 274))
         );
         BackGroundLayout.setVerticalGroup(
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -436,16 +469,17 @@ public class MainMenu extends javax.swing.JFrame {
                         .addComponent(MatchButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BlockListButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(257, 257, 257))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ParametersButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(BackGroundLayout.createSequentialGroup()
                         .addComponent(StatsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(FosterHomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ButtonOthers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(LogOffButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LogOffButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(205, 205, 205))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -523,11 +557,11 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_DonationsButtonMouseClicked
 
     private void FosterHomeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FosterHomeButtonMouseEntered
-        // TODO add your handling code here:
+        FosterHomeButton.setBackground(buttonHover);
     }//GEN-LAST:event_FosterHomeButtonMouseEntered
 
     private void FosterHomeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FosterHomeButtonMouseExited
-        // TODO add your handling code here:
+       FosterHomeButton.setBackground(buttonBase);
     }//GEN-LAST:event_FosterHomeButtonMouseExited
 
     private void FosterHomeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FosterHomeButtonMouseClicked
@@ -541,11 +575,11 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_BlockListButtonMouseClicked
 
     private void BlockListButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BlockListButtonMouseEntered
-        // TODO add your handling code here:
+        BlockListButton.setBackground(buttonHover);
     }//GEN-LAST:event_BlockListButtonMouseEntered
 
     private void BlockListButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BlockListButtonMouseExited
-        // TODO add your handling code here:
+        BlockListButton.setBackground(buttonBase);
     }//GEN-LAST:event_BlockListButtonMouseExited
 
     private void StatsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StatsButtonMouseClicked
@@ -559,17 +593,30 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonOthersMouseClicked
 
     private void ButtonOthersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonOthersMouseEntered
-        // TODO add your handling code here:
+        ButtonOthers.setBackground(buttonHover);
     }//GEN-LAST:event_ButtonOthersMouseEntered
 
     private void ButtonOthersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonOthersMouseExited
-        // TODO add your handling code here:
+        ButtonOthers.setBackground(buttonBase);
     }//GEN-LAST:event_ButtonOthersMouseExited
 
     private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
         SignInForm window = new SignInForm();
         dispose();
     }//GEN-LAST:event_jLabel18MouseClicked
+
+    private void ParametersButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ParametersButtonMouseClicked
+        CatalogForm window = new CatalogForm();
+        dispose();
+    }//GEN-LAST:event_ParametersButtonMouseClicked
+
+    private void ParametersButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ParametersButtonMouseEntered
+        ParametersButton.setBackground(buttonHover);
+    }//GEN-LAST:event_ParametersButtonMouseEntered
+
+    private void ParametersButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ParametersButtonMouseExited
+        ParametersButton.setBackground(buttonBase);
+    }//GEN-LAST:event_ParametersButtonMouseExited
 
     /**
      * @param args the command line arguments
@@ -607,6 +654,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel LogOffButton;
     private javax.swing.JPanel MatchButton;
     private javax.swing.JPanel NewPetButton;
+    private javax.swing.JPanel ParametersButton;
     private javax.swing.JPanel PetsButton;
     private javax.swing.JPanel StatsButton;
     private javax.swing.JLabel jLabel1;
@@ -617,6 +665,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
