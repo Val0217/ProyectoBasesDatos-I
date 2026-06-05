@@ -207,7 +207,6 @@ public class CatalogOperations {
                 }
             }
             ps.executeUpdate();
-            con.commit();
             return true;
         } catch (SQLException e) {
             System.out.println("executeWrite: " + e.getMessage());

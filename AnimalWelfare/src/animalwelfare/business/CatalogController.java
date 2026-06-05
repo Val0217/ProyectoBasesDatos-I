@@ -107,6 +107,7 @@ public class CatalogController {
     public boolean removeMedicine(int id) {
         if (!confirmDelete()) return false;
         boolean ok = CatalogOperations.deleteMedicine(id);
+        System.out.println("Resultado deleteMedicine: " + ok);
         if (!ok) showError("Could not delete the medicine. It may be in use.");
         return ok;
     }
