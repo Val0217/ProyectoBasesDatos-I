@@ -172,7 +172,7 @@ public class CatalogController {
         if (!email.contains("@")
                 || email.startsWith("@")
                 || email.endsWith("@")
-                || (!email.contains(".com") && !email.contains(".net") && !email.contains(".org"))) {
+                || (!email.contains(".com") && !email.contains(".net") && !email.contains(".org") && !email.contains(".cr"))) {
             showError("Invalid email format: " + email);
             return false;
         }
