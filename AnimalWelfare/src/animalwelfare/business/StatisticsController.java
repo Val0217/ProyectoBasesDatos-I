@@ -129,7 +129,7 @@ public class StatisticsController {
             double amount = Double.parseDouble(row[2]);
             count += Integer.parseInt(row[3]);
             if ("Colones".equals(row[1])) totalColones += amount;
-            else if ("Dólares".equals(row[1])) totalDollars += amount;
+            else if ("Dollars".equals(row[1])) totalDollars += amount;
         }
 
         return new String[]{

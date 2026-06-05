@@ -335,7 +335,7 @@ public class StatisticsForm extends javax.swing.JFrame {
         chartPanel.setPreferredSize(new Dimension(900, 380));
 
 
-
+    
         JPanel statsRow = buildStatsRow(new String[]{
             "Total Colones: " + (datasetDonationsByAssociation.getRowCount() > 0 && datasetDonationsByAssociation.getValue(0, 0) != null
                 ? datasetDonationsByAssociation.getValue(0, 0).toString() : "0"),
