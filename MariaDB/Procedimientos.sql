@@ -111,9 +111,9 @@ DELIMITER ;
 
 DELIMITER $$
 
-DROP PROCEDURE IF EXISTS fn_get_by_id$$
+DROP PROCEDURE IF EXISTS pr_get_by_id$$
 
-CREATE PROCEDURE fn_get_by_id (
+CREATE PROCEDURE pr_get_by_id (
     IN p_table_name VARCHAR(64),
     IN p_id BIGINT
 )
