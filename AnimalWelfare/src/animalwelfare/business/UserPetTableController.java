@@ -186,4 +186,9 @@ public class UserPetTableController {
         int claimId = getSelectedId(table, 0, "Select a claim request first.");
         operations.rejectPetClaimRequest(claimId, currentUserId);
     }
+    public void loadBitacora(JTable table) throws SQLException {
+        DefaultTableModel model = operations.getBitacora();
+        table.setModel(model);
+        protectTable(table);
+    }
 }

@@ -558,4 +558,55 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
 
         return model;
     }
+    
+    public DefaultTableModel getBitacora() throws SQLException {
+        try (Connection conn = ConexionOracle.connect();
+             CallableStatement cs = conn.prepareCall("{call pr_query_bitacora(?,?,?,?,?,?)}")) {
+
+            cs.setNull(1, Types.VARCHAR); // p_table_name
+            cs.setNull(2, Types.VARCHAR); // p_field_name
+            cs.setNull(3, Types.NUMERIC); // p_changed_by
+            cs.setNull(4, Types.DATE);    // p_start_date
+            cs.setNull(5, Types.DATE);    // p_end_date
+
+            cs.registerOutParameter(6, OracleTypes.CURSOR);
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(6)) {
+                return buildBitacoraTableModel(rs);
+            }
+        }
+    }
+    private DefaultTableModel buildBitacoraTableModel(ResultSet rs) throws SQLException {
+        String[] columns = {
+            "Id",
+            "Table Name",
+            "Field Name",
+            "Previous Value",
+            "Current Value",
+            "Changed By",
+            "Change Date"
+        };
+
+    DefaultTableModel model = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        while (rs.next()) {
+            model.addRow(new Object[] {
+                rs.getInt("Id"),
+                rs.getString("TableName"),
+                rs.getString("FieldName"),
+                rs.getString("PreviousValue"),
+                rs.getString("CurrentValue"),
+                rs.getObject("ChangedBy"),
+                rs.getTimestamp("ChangeDate")
+            });
+        }
+
+        return model;
+    }
 }

@@ -1,3 +1,32 @@
+CREATE OR REPLACE PROCEDURE pr_query_bitacora (
+    p_table_name IN VARCHAR2 DEFAULT NULL,
+    p_field_name IN VARCHAR2 DEFAULT NULL,
+    p_changed_by IN NUMBER DEFAULT NULL,
+    p_start_date IN DATE DEFAULT NULL,
+    p_end_date   IN DATE DEFAULT NULL,
+    p_result     OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_result FOR
+        SELECT
+            Id,
+            TableName,
+            FieldName,
+            PreviousValue,
+            CurrentValue,
+            ChangedBy,
+            ChangeDate
+        FROM Bitacora
+        WHERE (p_table_name IS NULL OR UPPER(TableName) = UPPER(p_table_name))
+          AND (p_field_name IS NULL OR UPPER(FieldName) = UPPER(p_field_name))
+          AND (p_changed_by IS NULL OR ChangedBy = p_changed_by)
+          AND (p_start_date IS NULL OR ChangeDate >= p_start_date)
+          AND (p_end_date IS NULL OR ChangeDate <= p_end_date)
+        ORDER BY ChangeDate DESC;
+END;
+/
+
 CREATE SEQUENCE s_PetClaim
 START WITH 1
 INCREMENT BY 1

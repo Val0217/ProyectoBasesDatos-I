@@ -56,6 +56,7 @@ public class UserPetTable extends javax.swing.JFrame {
         jTable4.setDefaultEditor(Object.class, null);
         jTable5.setDefaultEditor(Object.class, null);
         jTable6.setDefaultEditor(Object.class, null);
+        jTable7.setDefaultEditor(Object.class, null);
 
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable2.getTableHeader().setReorderingAllowed(false);
@@ -63,6 +64,7 @@ public class UserPetTable extends javax.swing.JFrame {
         jTable4.getTableHeader().setReorderingAllowed(false);
         jTable5.getTableHeader().setReorderingAllowed(false);
         jTable6.getTableHeader().setReorderingAllowed(false);
+        jTable7.getTableHeader().setReorderingAllowed(false);
 
         jButtonAdopt.setEnabled(false);
         jButtonEditPet.setEnabled(false);
@@ -429,6 +431,7 @@ public class UserPetTable extends javax.swing.JFrame {
             controller.loadUserMissingPets(jTable3);
             controller.loadFoundPets(jTable4);
             controller.loadClaimRequests(jTable6);
+            controller.loadBitacora(jTable7);
         } catch (SQLException ex) {
             showError(ex);
         }
@@ -662,6 +665,9 @@ private String nullToEmpty(String text) {
         jButtonAcceptClaim = new javax.swing.JButton();
         jButtonRejectClaim = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTable7 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -989,6 +995,32 @@ private String nullToEmpty(String text) {
         );
 
         jTabbedPane1.addTab("Claim Pet Requests", jPanel6);
+
+        jTable7.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane7.setViewportView(jTable7);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 891, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Bitacora", jPanel7);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1357,12 +1389,14 @@ private String nullToEmpty(String text) {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
@@ -1370,5 +1404,6 @@ private String nullToEmpty(String text) {
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
+    private javax.swing.JTable jTable7;
     // End of variables declaration//GEN-END:variables
 }
