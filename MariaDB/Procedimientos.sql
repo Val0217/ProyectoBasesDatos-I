@@ -821,7 +821,7 @@ END $$
 
 
 /* BITACORA - BY ID */
-CREATE PROCEDURE pr_get_bitacora_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_bitacora_by_id (
     IN p_id INT
 )
 BEGIN
