@@ -1,5 +1,5 @@
 DELIMITER $$
-
+DROP FUNCTION IF EXISTS fn_is_admin;
 CREATE FUNCTION fn_is_admin(
     p_idPerson INT
 )

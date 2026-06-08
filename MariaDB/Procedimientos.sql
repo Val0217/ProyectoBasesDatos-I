@@ -11,7 +11,7 @@ DROP PROCEDURE IF EXISTS pr_get_districts_by_canton;
 
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_districts_by_canton(
+CREATE OR REPLACE PROCEDURE pr_get_districts_by_canton(
     IN pIdCanton INT
 )
 BEGIN
@@ -35,7 +35,7 @@ DROP PROCEDURE IF EXISTS pr_get_canton_by_province;
 
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_canton_by_province(
+CREATE OR REPLACE PROCEDURE pr_get_canton_by_province(
     IN pIdProvince INT
 )
 BEGIN
@@ -58,7 +58,7 @@ DROP PROCEDURE IF EXISTS pr_get_province_by_country;
 
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_province_by_country(
+CREATE OR REPLACE PROCEDURE pr_get_province_by_country(
     IN pIdCountry INT
 )
 BEGIN
@@ -81,7 +81,7 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS pr_get_all$$
 
-CREATE PROCEDURE pr_get_all(
+CREATE OR REPLACE PROCEDURE pr_get_all(
     IN p_table_name VARCHAR(50)
 )
 BEGIN
@@ -113,7 +113,7 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS pr_get_by_id$$
 
-CREATE PROCEDURE pr_get_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_by_id (
     IN p_table_name VARCHAR(64),
     IN p_id BIGINT
 )
@@ -153,7 +153,7 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS pr_get_person_all$$
 
-CREATE PROCEDURE pr_get_person_all()
+CREATE OR REPLACE PROCEDURE pr_get_person_all()
 BEGIN
     SELECT * FROM Person;
 END$$
@@ -165,7 +165,7 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS pr_get_person_by_id$$
 
-CREATE PROCEDURE pr_get_person_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_person_by_id (
     IN p_id BIGINT
 )
 BEGIN
@@ -181,7 +181,7 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS pr_get_pet_all$$
 
-CREATE PROCEDURE pr_get_pet_all()
+CREATE OR REPLACE PROCEDURE pr_get_pet_all()
 BEGIN
     SELECT * FROM Pet;
 END$$
@@ -192,7 +192,7 @@ DELIMITER ;
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS pr_get_pet_by_id$$
-CREATE PROCEDURE pr_get_pet_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_pet_by_id (
     IN p_id BIGINT
 )
 BEGIN
@@ -203,14 +203,14 @@ END$$
 
 /* Procedimiento almacenado para obtener todas las razas de mascotas registradas en la base de datos. */
 DROP PROCEDURE IF EXISTS pr_get_pet_type_all$$
-CREATE PROCEDURE pr_get_pet_type_all()
+CREATE OR REPLACE PROCEDURE pr_get_pet_type_all()
 BEGIN
     SELECT * FROM PetType;
 END$$
 
 /* Procedimiento almacenado para obtener una raza de mascota por su ID. */
 DROP PROCEDURE IF EXISTS pr_get_pet_type_by_id$$
-CREATE PROCEDURE pr_get_pet_type_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_pet_type_by_id (
     IN p_id BIGINT
 )
 BEGIN
@@ -221,7 +221,7 @@ END$$
 
 /* Procedimiento almacenado para obtener todas las razas de mascotas registradas en la base de datos. */
 DROP PROCEDURE IF EXISTS pr_get_pet_breed_all$$
-CREATE PROCEDURE pr_get_pet_breed_all()
+CREATE OR REPLACE PROCEDURE pr_get_pet_breed_all()
 BEGIN
     SELECT * FROM PetBreed;
 END$$
@@ -231,7 +231,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener una raza de mascota por su ID. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_pet_breed_by_pet_type (
+CREATE OR REPLACE PROCEDURE pr_get_pet_breed_by_pet_type (
     IN p_id_pet_type INT
 )
 BEGIN
@@ -245,7 +245,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener una raza de mascota por su ID. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_pet_breed_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_pet_breed_by_id (
     IN p_id INT
 )
 BEGIN
@@ -259,7 +259,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener el estado de una mascota por su ID. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_pet_state_all ()
+CREATE OR REPLACE PROCEDURE pr_get_pet_state_all ()
 BEGIN
     SELECT *
     FROM PetState;
@@ -270,7 +270,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener el estado de una mascota por su ID. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_pet_state_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_pet_state_by_id (
     IN p_id INT
 )
 BEGIN
@@ -284,7 +284,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener el tamaño de una mascota por su ID. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_pet_size_all ()
+CREATE OR REPLACE PROCEDURE pr_get_pet_size_all ()
 BEGIN
     SELECT *
     FROM PetSize;
@@ -295,7 +295,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener el tamaño de una mascota por su ID. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_pet_size_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_pet_size_by_id (
     IN p_id INT
 )
 BEGIN
@@ -309,7 +309,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener el nivel de energía de una mascota por su ID. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_pet_energy_all ()
+CREATE OR REPLACE PROCEDURE pr_get_pet_energy_all ()
 BEGIN
     SELECT *
     FROM PetLevelEnergy;
@@ -320,7 +320,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener el nivel de energía de una mascota por su ID. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_pet_energy_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_pet_energy_by_id (
     IN p_id INT
 )
 BEGIN
@@ -334,7 +334,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener el entrenamiento de una mascota por su ID. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_pet_training_all ()
+CREATE OR REPLACE PROCEDURE pr_get_pet_training_all ()
 BEGIN
     SELECT *
     FROM PetTraining;
@@ -345,7 +345,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener el entrenamiento de una mascota por su ID. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_pet_training_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_pet_training_by_id (
     IN p_id INT
 )
 BEGIN
@@ -360,7 +360,7 @@ DELIMITER ;
 DELIMITER $$
 
 /* VETERINARIAN */
-CREATE PROCEDURE pr_get_pet_veterinarian_all ()
+CREATE OR REPLACE PROCEDURE pr_get_pet_veterinarian_all ()
 BEGIN
     SELECT *
     FROM Veterinarian;
@@ -368,7 +368,7 @@ END $$
 
 
 /* SPACE REQUIRED - ALL */
-CREATE PROCEDURE pr_get_pet_space_required_all ()
+CREATE OR REPLACE PROCEDURE pr_get_pet_space_required_all ()
 BEGIN
     SELECT *
     FROM SpaceRequired;
@@ -376,7 +376,7 @@ END $$
 
 
 /* SPACE REQUIRED - BY ID */
-CREATE PROCEDURE pr_get_space_required_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_space_required_by_id (
     IN p_id INT
 )
 BEGIN
@@ -387,7 +387,7 @@ END $$
 
 
 /* PET ILLNESS - ALL */
-CREATE PROCEDURE pr_get_pet_illness_all ()
+CREATE OR REPLACE PROCEDURE pr_get_pet_illness_all ()
 BEGIN
     SELECT *
     FROM PetIllness;
@@ -395,7 +395,7 @@ END $$
 
 
 /* PET ILLNESS - BY ID */
-CREATE PROCEDURE pr_get_pet_illness_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_pet_illness_by_id (
     IN p_id INT
 )
 BEGIN
@@ -406,7 +406,7 @@ END $$
 
 
 /* MEDICINE - ALL */
-CREATE PROCEDURE pr_get_medicine_all ()
+CREATE OR REPLACE PROCEDURE pr_get_medicine_all ()
 BEGIN
     SELECT *
     FROM Medicine;
@@ -414,7 +414,7 @@ END $$
 
 
 /* MEDICINE - BY ID */
-CREATE PROCEDURE pr_get_medicine_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_medicine_by_id (
     IN p_id INT
 )
 BEGIN
@@ -429,7 +429,7 @@ DELIMITER ;
 DELIMITER $$
 
 /* PET TREATMENT - ALL */
-CREATE PROCEDURE pr_get_pet_treatment_all ()
+CREATE OR REPLACE PROCEDURE pr_get_pet_treatment_all ()
 BEGIN
     SELECT *
     FROM PetTreatment;
@@ -437,7 +437,7 @@ END $$
 
 
 /* PET TREATMENT - BY ID */
-CREATE PROCEDURE pr_get_pet_treatment_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_pet_treatment_by_id (
     IN p_id INT
 )
 BEGIN
@@ -448,7 +448,7 @@ END $$
 
 
 /* LOCATION - COUNTRY */
-CREATE PROCEDURE pr_get_country_all ()
+CREATE OR REPLACE PROCEDURE pr_get_country_all ()
 BEGIN
     SELECT *
     FROM Country;
@@ -456,7 +456,7 @@ END $$
 
 
 /* LOCATION - PROVINCE */
-CREATE PROCEDURE pr_get_province_all ()
+CREATE OR REPLACE PROCEDURE pr_get_province_all ()
 BEGIN
     SELECT *
     FROM Province;
@@ -464,7 +464,7 @@ END $$
 
 
 /* LOCATION - CANTON */
-CREATE PROCEDURE pr_get_canton_all ()
+CREATE OR REPLACE PROCEDURE pr_get_canton_all ()
 BEGIN
     SELECT *
     FROM Canton;
@@ -472,7 +472,7 @@ END $$
 
 
 /* LOCATION - DISTRICT */
-CREATE PROCEDURE pr_get_district_all ()
+CREATE OR REPLACE PROCEDURE pr_get_district_all ()
 BEGIN
     SELECT *
     FROM District;
@@ -480,7 +480,7 @@ END $$
 
 
 /* LOST REPORT - ALL */
-CREATE PROCEDURE pr_get_lost_report_all ()
+CREATE OR REPLACE PROCEDURE pr_get_lost_report_all ()
 BEGIN
     SELECT *
     FROM LostReport;
@@ -488,7 +488,7 @@ END $$
 
 
 /* LOST REPORT - BY ID */
-CREATE PROCEDURE pr_get_lost_report_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_lost_report_by_id (
     IN p_id INT
 )
 BEGIN
@@ -499,7 +499,7 @@ END $$
 
 
 /* FOUND REPORT - ALL */
-CREATE PROCEDURE pr_get_found_report_all ()
+CREATE OR REPLACE PROCEDURE pr_get_found_report_all ()
 BEGIN
     SELECT *
     FROM FoundReport;
@@ -507,7 +507,7 @@ END $$
 
 
 /* FOUND REPORT - BY ID */
-CREATE PROCEDURE pr_get_found_report_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_found_report_by_id (
     IN p_id INT
 )
 BEGIN
@@ -522,7 +522,7 @@ DELIMITER ;
 DELIMITER $$
 
 /* PET MATCH - ALL */
-CREATE PROCEDURE pr_get_pet_match_all ()
+CREATE OR REPLACE PROCEDURE pr_get_pet_match_all ()
 BEGIN
     SELECT *
     FROM PetMatch;
@@ -530,7 +530,7 @@ END $$
 
 
 /* PET MATCH - BY ID */
-CREATE PROCEDURE pr_get_pet_match_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_pet_match_by_id (
     IN p_id INT
 )
 BEGIN
@@ -541,7 +541,7 @@ END $$
 
 
 /* ADOPTION - ALL */
-CREATE PROCEDURE pr_get_adoption_all ()
+CREATE OR REPLACE PROCEDURE pr_get_adoption_all ()
 BEGIN
     SELECT *
     FROM Adoption;
@@ -549,7 +549,7 @@ END $$
 
 
 /* ADOPTION - BY ID */
-CREATE PROCEDURE pr_get_adoption_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_adoption_by_id (
     IN p_id INT
 )
 BEGIN
@@ -560,7 +560,7 @@ END $$
 
 
 /* RESCUED - ALL */
-CREATE PROCEDURE pr_get_rescued_all ()
+CREATE OR REPLACE PROCEDURE pr_get_rescued_all ()
 BEGIN
     SELECT *
     FROM Rescued;
@@ -568,7 +568,7 @@ END $$
 
 
 /* RESCUED - BY ID */
-CREATE PROCEDURE pr_get_rescued_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_rescued_by_id (
     IN p_id INT
 )
 BEGIN
@@ -579,7 +579,7 @@ END $$
 
 
 /* DONATION - ALL */
-CREATE PROCEDURE pr_get_donation_all ()
+CREATE OR REPLACE PROCEDURE pr_get_donation_all ()
 BEGIN
     SELECT *
     FROM Donation;
@@ -587,7 +587,7 @@ END $$
 
 
 /* DONATION - BY ID */
-CREATE PROCEDURE pr_get_donation_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_donation_by_id (
     IN p_id INT
 )
 BEGIN
@@ -601,7 +601,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener una lista de donaciones con información detallada, incluyendo el nombre del donante, el nombre de la asociación, el monto, la moneda y la fecha de la donación. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_donation_join ()
+CREATE OR REPLACE PROCEDURE pr_get_donation_join ()
 BEGIN
     SELECT 
         d.Id,
@@ -626,7 +626,7 @@ DELIMITER ;
 DELIMITER $$
 
 /* CURRENCY - ALL */
-CREATE PROCEDURE pr_get_currency_all ()
+CREATE OR REPLACE PROCEDURE pr_get_currency_all ()
 BEGIN
     SELECT *
     FROM Currency;
@@ -634,7 +634,7 @@ END $$
 
 
 /* CURRENCY - BY ID */
-CREATE PROCEDURE pr_get_currency_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_currency_by_id (
     IN p_id INT
 )
 BEGIN
@@ -645,7 +645,7 @@ END $$
 
 
 /* ASSOCIATION - ALL */
-CREATE PROCEDURE pr_get_associations_all ()
+CREATE OR REPLACE PROCEDURE pr_get_associations_all ()
 BEGIN
     SELECT *
     FROM Association;
@@ -653,7 +653,7 @@ END $$
 
 
 /* ASSOCIATION - BY ID */
-CREATE PROCEDURE pr_get_association_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_association_by_id (
     IN p_id INT
 )
 BEGIN
@@ -664,7 +664,7 @@ END $$
 
 
 /* FOSTER HOME - ALL */
-CREATE PROCEDURE pr_get_foster_home_all ()
+CREATE OR REPLACE PROCEDURE pr_get_foster_home_all ()
 BEGIN
     SELECT *
     FROM FosterHome;
@@ -672,7 +672,7 @@ END $$
 
 
 /* FOSTER HOME - BY ID */
-CREATE PROCEDURE pr_get_foster_home_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_foster_home_by_id (
     IN p_id INT
 )
 BEGIN
@@ -683,7 +683,7 @@ END $$
 
 
 /* CALIFICATION - ALL */
-CREATE PROCEDURE pr_get_calification_all ()
+CREATE OR REPLACE PROCEDURE pr_get_calification_all ()
 BEGIN
     SELECT *
     FROM Calification;
@@ -691,7 +691,7 @@ END $$
 
 
 /* CALIFICATION - BY ID */
-CREATE PROCEDURE pr_get_calification_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_calification_by_id (
     IN p_id INT
 )
 BEGIN
@@ -702,7 +702,7 @@ END $$
 
 
 /* BLOCK LIST - ALL */
-CREATE PROCEDURE pr_get_blocklist_all ()
+CREATE OR REPLACE PROCEDURE pr_get_blocklist_all ()
 BEGIN
     SELECT *
     FROM BlockList;
@@ -710,7 +710,7 @@ END $$
 
 
 /* BLOCK LIST - BY ID */
-CREATE PROCEDURE pr_get_blocklist_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_blocklist_by_id (
     IN p_id INT
 )
 BEGIN
@@ -725,7 +725,7 @@ DELIMITER ;
 DELIMITER $$
 
 /* EMAIL - ALL */
-CREATE PROCEDURE pr_get_email_all ()
+CREATE OR REPLACE PROCEDURE pr_get_email_all ()
 BEGIN
     SELECT *
     FROM Email;
@@ -733,7 +733,7 @@ END $$
 
 
 /* EMAIL - BY ID */
-CREATE PROCEDURE pr_get_email_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_email_by_id (
     IN p_id INT
 )
 BEGIN
@@ -744,7 +744,7 @@ END $$
 
 
 /* EMAIL - BY PERSON ID */
-CREATE PROCEDURE pr_get_email_by_person_id (
+CREATE OR REPLACE PROCEDURE pr_get_email_by_person_id (
     IN p_id_person INT
 )
 BEGIN
@@ -755,7 +755,7 @@ END $$
 
 
 /* PHONE - ALL */
-CREATE PROCEDURE pr_get_phone_all ()
+CREATE OR REPLACE PROCEDURE pr_get_phone_all ()
 BEGIN
     SELECT *
     FROM Phone;
@@ -763,7 +763,7 @@ END $$
 
 
 /* PHONE - BY ID */
-CREATE PROCEDURE pr_get_phone_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_phone_by_id (
     IN p_id INT
 )
 BEGIN
@@ -777,7 +777,7 @@ DELIMITER ;
 /* PHONE - BY PERSON ID */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_phone_by_person_id (
+CREATE OR REPLACE PROCEDURE pr_get_phone_by_person_id (
     IN p_id_person INT
 )
 BEGIN
@@ -794,7 +794,7 @@ DELIMITER ;
 DELIMITER $$
 
 /* PARAMETER - ALL */
-CREATE PROCEDURE pr_get_parameter_all ()
+CREATE OR REPLACE PROCEDURE pr_get_parameter_all ()
 BEGIN
     SELECT *
     FROM Parameter;
@@ -802,7 +802,7 @@ END $$
 
 
 /* PARAMETER - BY ID */
-CREATE PROCEDURE pr_get_parameter_by_id (
+CREATE OR REPLACE PROCEDURE pr_get_parameter_by_id (
     IN p_id INT
 )
 BEGIN
@@ -813,7 +813,7 @@ END $$
 
 
 /* BITACORA - ALL */
-CREATE PROCEDURE pr_get_bitacora_all ()
+CREATE OR REPLACE PROCEDURE pr_get_bitacora_all ()
 BEGIN
     SELECT *
     FROM Bitacora;
@@ -835,7 +835,7 @@ DELIMITER ;
 /* ARRIBA DE ESTO HAY QUE REVISAR TODO REVISAR */
 DELIMITER $$
 
-CREATE PROCEDURE pr_query_bitacora (
+CREATE OR REPLACE PROCEDURE pr_query_bitacora (
     IN p_table_name VARCHAR(100),
     IN p_field_name VARCHAR(100),
     IN p_changed_by INT,
@@ -865,7 +865,7 @@ DELIMITER ;
 /* Procedimiento almacenado para crear un reclamo de mascota, con validaciones para evitar reclamos inválidos o duplicados. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_create_pet_claim (
+CREATE OR REPLACE PROCEDURE pr_create_pet_claim (
     IN p_pet_id INT,
     IN p_claimant_id INT,
     IN p_description VARCHAR(255),
@@ -937,7 +937,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener una lista de reclamos de mascotas pendientes para un dueño específico, con información detallada sobre la mascota y el reclamante. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_claim_requests_owner (
+CREATE OR REPLACE PROCEDURE pr_get_claim_requests_owner (
     IN p_owner_id INT
 )
 BEGIN
@@ -966,7 +966,7 @@ DELIMITER ;
 /* Procedimiento almacenado para aceptar un reclamo de mascota, con validaciones para asegurar que el reclamo es válido y que la transferencia de propiedad se realiza correctamente. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_accept_pet_claim (
+CREATE OR REPLACE PROCEDURE pr_accept_pet_claim (
     IN p_claim_id INT,
     IN p_owner_id INT
 )
@@ -1013,7 +1013,7 @@ DELIMITER ;
 /* Procedimiento almacenado para rechazar un reclamo de mascota, con validaciones para asegurar que el reclamo es válido y que el estado del reclamo se actualiza correctamente. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_reject_pet_claim (
+CREATE OR REPLACE PROCEDURE pr_reject_pet_claim (
     IN p_claim_id INT,
     IN p_owner_id INT
 )
@@ -1040,7 +1040,7 @@ DELIMITER ;
 DELIMITER $$
 
 /* ADD EMAIL PERSON */
-CREATE PROCEDURE pr_add_email_person (
+CREATE OR REPLACE PROCEDURE pr_add_email_person (
     IN p_email VARCHAR(255),
     IN p_idperson INT
 )
@@ -1057,7 +1057,7 @@ END $$
 
 
 /* ADD PHONE PERSON */
-CREATE PROCEDURE pr_add_phone_person (
+CREATE OR REPLACE PROCEDURE pr_add_phone_person (
     IN p_phone VARCHAR(50),
     IN p_idperson INT
 )
@@ -1077,7 +1077,7 @@ DELIMITER ;
 /* Procedimiento almacenado para insertar una nueva persona en la base de datos, con validaciones para asegurar que el nombre de usuario no se repite y que el distrito existe. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_insert_person (
+CREATE OR REPLACE PROCEDURE pr_insert_person (
     IN p_firstname VARCHAR(100),
     IN p_lastname VARCHAR(100),
     IN p_password VARCHAR(255),
@@ -1109,7 +1109,7 @@ DELIMITER ;
 /* Procedimiento almacenado para registrar un nuevo veterinario en la base de datos, con validaciones para asegurar que el correo electrónico no se repite y que el distrito existe. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_register_veterinarian (
+CREATE OR REPLACE PROCEDURE pr_register_veterinarian (
     IN p_first_name VARCHAR(100),
     IN p_last_name VARCHAR(100),
     IN p_clinic_name VARCHAR(150),
@@ -1161,7 +1161,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener una lista de mascotas encontradas que no pertenecen al usuario actual, con información detallada sobre la mascota y su dueño. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_found_pet_table (
+CREATE OR REPLACE PROCEDURE pr_get_found_pet_table (
     IN p_current_user_id INT
 )
 BEGIN
@@ -1198,7 +1198,7 @@ DELIMITER ;
 DELIMITER $$
 
 /* OWNER EMAILS */
-CREATE PROCEDURE pr_get_owner_emails (
+CREATE OR REPLACE PROCEDURE pr_get_owner_emails (
     IN p_owner_id INT
 )
 BEGIN
@@ -1210,7 +1210,7 @@ END $$
 
 
 /* OWNER PHONES */
-CREATE PROCEDURE pr_get_owner_phones (
+CREATE OR REPLACE PROCEDURE pr_get_owner_phones (
     IN p_owner_id INT
 )
 BEGIN
@@ -1222,7 +1222,7 @@ END $$
 
 
 /* TAKE BACK MISSING REPORT */
-CREATE PROCEDURE pr_take_back_missing_report (
+CREATE OR REPLACE PROCEDURE pr_take_back_missing_report (
     IN p_pet_id INT,
     IN p_owner_id INT
 )
@@ -1259,7 +1259,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener una lista de mascotas perdidas que pertenecen a un dueño específico, con información detallada sobre la mascota y su estado. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_user_missing_pet_table (
+CREATE OR REPLACE PROCEDURE pr_get_user_missing_pet_table (
     IN p_owner_id INT
 )
 BEGIN
@@ -1289,7 +1289,7 @@ DELIMITER ;
 /* Procedimiento almacenado para rechazar una solicitud de adopción, con validaciones para asegurar que la solicitud es válida y que el estado de la solicitud se actualiza correctamente. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_reject_adoption_request (
+CREATE OR REPLACE PROCEDURE pr_reject_adoption_request (
     IN p_adoption_id INT,
     IN p_owner_id INT
 )
@@ -1320,7 +1320,7 @@ DELIMITER ;
 /* Procedimiento almacenado para registrar un nuevo reporte de mascota perdida, con validaciones para asegurar que la mascota existe, que pertenece al dueño que reporta la pérdida, y que se actualizan correctamente el estado de la mascota y las adopciones relacionadas. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_register_lost_for_owner (
+CREATE OR REPLACE PROCEDURE pr_register_lost_for_owner (
     IN p_pet_id INT,
     IN p_owner_id INT,
     IN p_lost_date DATETIME,
@@ -1400,7 +1400,7 @@ DELIMITER ;
 /* Procedimiento almacenado para aceptar una solicitud de adopción, con validaciones para asegurar que la solicitud es válida, que la transferencia de propiedad se realiza correctamente, y que se actualizan los estados de las solicitudes relacionadas. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_accept_adoption_request (
+CREATE OR REPLACE PROCEDURE pr_accept_adoption_request (
     IN p_adoption_id INT,
     IN p_owner_id INT
 )
@@ -1477,7 +1477,7 @@ DELIMITER ;
 /* Procedimiento almacenado para crear una nueva solicitud de adopción, con validaciones para asegurar que la solicitud es válida y que no existen solicitudes pendientes duplicadas. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_create_adoption_request (
+CREATE OR REPLACE PROCEDURE pr_create_adoption_request (
     IN p_pet_id INT,
     IN p_adopter_id INT,
     IN p_description VARCHAR(255),
@@ -1586,7 +1586,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener una lista de solicitudes de adopción pendientes para un dueño específico, con información detallada sobre la mascota, el solicitante y el estado de la solicitud. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_adoption_requests_owner (
+CREATE OR REPLACE PROCEDURE pr_get_adoption_requests_owner (
     IN p_owner_id INT
 )
 BEGIN
@@ -1621,7 +1621,7 @@ CHECK (State IN ('In process', 'To be confirmed', 'Canceled', 'Approved'));
 /* Procedimiento almacenado para actualizar la información de una mascota, con validaciones para asegurar que la mascota existe, que pertenece al dueño que realiza la actualización, y que se actualizan correctamente los campos relacionados. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_update_pet_for_owner (
+CREATE OR REPLACE PROCEDURE pr_update_pet_for_owner (
     IN p_pet_id INT,
     IN p_owner_id INT,
     IN p_color VARCHAR(100),
@@ -1666,7 +1666,7 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener la información de una mascota para edición, con validaciones para asegurar que la mascota existe y que pertenece al dueño que realiza la consulta. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_pet_for_edit (
+CREATE OR REPLACE PROCEDURE pr_get_pet_for_edit (
     IN p_pet_id INT,
     IN p_owner_id INT
 )
@@ -1708,7 +1708,7 @@ DELIMITER ;
 /* Procedimiento almacenado para retirar una mascota del estado de adopción, con validaciones para asegurar que la mascota existe, que pertenece al dueño que realiza la acción, y que se actualizan correctamente el estado de la mascota y las solicitudes de adopción relacionadas. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_undo_pet_up_for_adoption (
+CREATE OR REPLACE PROCEDURE pr_undo_pet_up_for_adoption (
     IN p_pet_id INT,
     IN p_owner_id INT
 )
@@ -1748,7 +1748,7 @@ DELIMITER $$
 /* ------------------------------------------------------------
    SP_GET_PETS_BY_STATE
 ------------------------------------------------------------ */
-CREATE PROCEDURE pr_get_pets_by_state (
+CREATE OR REPLACE PROCEDURE pr_get_pets_by_state (
     IN p_id_state INT,
     IN p_color VARCHAR(100),
     IN p_age INT,
@@ -1773,7 +1773,7 @@ END $$
 /* ------------------------------------------------------------
    SP_GET_PETS_UP_FOR_ADOPTION
 ------------------------------------------------------------ */
-CREATE PROCEDURE pr_get_pets_up_for_adoption (
+CREATE OR REPLACE PROCEDURE pr_get_pets_up_for_adoption (
     IN p_color VARCHAR(100),
     IN p_age INT,
     IN p_name VARCHAR(100),
@@ -1797,7 +1797,7 @@ END $$
 /* ------------------------------------------------------------
    SP_GET_FOUND_PETS
 ------------------------------------------------------------ */
-CREATE PROCEDURE pr_get_found_pets (
+CREATE OR REPLACE PROCEDURE pr_get_found_pets (
     IN p_color VARCHAR(100),
     IN p_age INT,
     IN p_name VARCHAR(100),
@@ -1821,7 +1821,7 @@ END $$
 /* ------------------------------------------------------------
    FN_PUT_PET_UP_FOR_ADOPTION (FUNCTION → PROCEDURE)
 ------------------------------------------------------------ */
-CREATE PROCEDURE pr_put_pet_up_for_adoption (
+CREATE OR REPLACE PROCEDURE pr_put_pet_up_for_adoption (
     IN p_pet_id INT,
     IN p_owner_id INT,
     OUT p_result INT
@@ -1840,42 +1840,42 @@ END $$
    OPTIONS QUERIES (CURSOR → SELECT)
 ------------------------------------------------------------ */
 
-CREATE PROCEDURE pr_get_energy_options ()
+CREATE OR REPLACE PROCEDURE pr_get_energy_options ()
 BEGIN
     SELECT * FROM PetLevelEnergy;
 END $$
 
-CREATE PROCEDURE pr_get_type_options ()
+CREATE OR REPLACE PROCEDURE pr_get_type_options ()
 BEGIN
     SELECT * FROM PetType;
 END $$
 
-CREATE PROCEDURE pr_get_breed_options ()
+CREATE OR REPLACE PROCEDURE pr_get_breed_options ()
 BEGIN
     SELECT * FROM PetBreed;
 END $$
 
-CREATE PROCEDURE pr_get_district_options ()
+CREATE OR REPLACE PROCEDURE pr_get_district_options ()
 BEGIN
     SELECT * FROM District;
 END $$
 
-CREATE PROCEDURE pr_get_space_required_options ()
+CREATE OR REPLACE PROCEDURE pr_get_space_required_options ()
 BEGIN
     SELECT * FROM SpaceRequired;
 END $$
 
-CREATE PROCEDURE pr_get_training_options ()
+CREATE OR REPLACE PROCEDURE pr_get_training_options ()
 BEGIN
     SELECT * FROM PetTraining;
 END $$
 
-CREATE PROCEDURE pr_get_size_options ()
+CREATE OR REPLACE PROCEDURE pr_get_size_options ()
 BEGIN
     SELECT * FROM PetSize;
 END $$
 
-CREATE PROCEDURE pr_get_veterinarian_options ()
+CREATE OR REPLACE PROCEDURE pr_get_veterinarian_options ()
 BEGIN
     SELECT * FROM Veterinarian;
 END $$
@@ -1888,7 +1888,7 @@ DELIMITER $$
 /* ============================================================
    GET PETS BY STATE (CORE FILTER)
 ============================================================ */
-CREATE PROCEDURE pr_pkg_get_pets_by_state (
+CREATE OR REPLACE PROCEDURE pr_pkg_get_pets_by_state (
     IN p_id_state INT,
     IN p_color VARCHAR(100),
     IN p_age INT,
@@ -1913,7 +1913,7 @@ END $$
 /* ============================================================
    UP FOR ADOPTION
 ============================================================ */
-CREATE PROCEDURE pr_pkg_get_pets_up_for_adoption (
+CREATE OR REPLACE PROCEDURE pr_pkg_get_pets_up_for_adoption (
     IN p_color VARCHAR(100),
     IN p_age INT,
     IN p_name VARCHAR(100),
@@ -1937,7 +1937,7 @@ END $$
 /* ============================================================
    FOUND PETS
 ============================================================ */
-CREATE PROCEDURE pr_pkg_get_found_pets (
+CREATE OR REPLACE PROCEDURE pr_pkg_get_found_pets (
     IN p_color VARCHAR(100),
     IN p_age INT,
     IN p_name VARCHAR(100),
@@ -1961,7 +1961,7 @@ END $$
 /* ============================================================
    PUT PET UP FOR ADOPTION (FUNCTION → PROCEDURE)
 ============================================================ */
-CREATE PROCEDURE pr_pkg_put_pet_up_for_adoption (
+CREATE OR REPLACE PROCEDURE pr_pkg_put_pet_up_for_adoption (
     IN p_pet_id INT,
     IN p_owner_id INT,
     OUT p_result INT
@@ -2022,49 +2022,49 @@ END $$
    OPTIONS (ALL CURSOR FUNCTIONS → SELECT)
 ============================================================ */
 
-CREATE PROCEDURE pr_pkg_get_energy_options ()
+CREATE OR REPLACE PROCEDURE pr_pkg_get_energy_options ()
 BEGIN
     SELECT 'All' AS Name, 0 AS SortOrder
     UNION ALL SELECT Name, 1 FROM PetLevelEnergy;
 END $$
 
-CREATE PROCEDURE pr_pkg_get_type_options ()
+CREATE OR REPLACE PROCEDURE pr_pkg_get_type_options ()
 BEGIN
     SELECT 'All' AS Name, 0 AS SortOrder
     UNION ALL SELECT Name, 1 FROM PetType;
 END $$
 
-CREATE PROCEDURE pr_pkg_get_breed_options ()
+CREATE OR REPLACE PROCEDURE pr_pkg_get_breed_options ()
 BEGIN
     SELECT 'All' AS Name, 0 AS SortOrder
     UNION ALL SELECT Name, 1 FROM PetBreed;
 END $$
 
-CREATE PROCEDURE pr_pkg_get_district_options ()
+CREATE OR REPLACE PROCEDURE pr_pkg_get_district_options ()
 BEGIN
     SELECT 'All' AS Name, 0 AS SortOrder
     UNION ALL SELECT Name, 1 FROM District;
 END $$
 
-CREATE PROCEDURE pr_pkg_get_space_required_options ()
+CREATE OR REPLACE PROCEDURE pr_pkg_get_space_required_options ()
 BEGIN
     SELECT 'All' AS Name, 0 AS SortOrder
     UNION ALL SELECT Name, 1 FROM SpaceRequired;
 END $$
 
-CREATE PROCEDURE pr_pkg_get_training_options ()
+CREATE OR REPLACE PROCEDURE pr_pkg_get_training_options ()
 BEGIN
     SELECT 'All' AS Name, 0 AS SortOrder
     UNION ALL SELECT Name, 1 FROM PetTraining;
 END $$
 
-CREATE PROCEDURE pr_pkg_get_size_options ()
+CREATE OR REPLACE PROCEDURE pr_pkg_get_size_options ()
 BEGIN
     SELECT 'All' AS Name, 0 AS SortOrder
     UNION ALL SELECT Name, 1 FROM PetSize;
 END $$
 
-CREATE PROCEDURE pr_pkg_get_veterinarian_options ()
+CREATE OR REPLACE PROCEDURE pr_pkg_get_veterinarian_options ()
 BEGIN
     SELECT 'All' AS VeterinarianName, 0 AS SortOrder
     UNION ALL
@@ -2078,7 +2078,7 @@ DELIMITER ;
 /** Procedimiento almacenado para obtener los valores de un catálogo específico, con validaciones para asegurar que el nombre del catálogo es válido y que se devuelven los resultados ordenados alfabéticamente. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_catalog (
+CREATE OR REPLACE PROCEDURE pr_get_catalog (
     IN p_catalog_name VARCHAR(50)
 )
 BEGIN
@@ -2139,7 +2139,7 @@ DELIMITER ;
 /** Procedimiento almacenado para obtener una lista de mascotas disponibles para adopción que no pertenecen al usuario actual, con filtros opcionales para diferentes atributos de la mascota y validaciones para asegurar que se excluyen las mascotas con solicitudes de adopción pendientes del usuario. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_adoption_pet_table (
+CREATE OR REPLACE PROCEDURE pr_get_adoption_pet_table (
     IN p_current_user_id INT,
     IN p_id_energy INT,
     IN p_id_type INT,
@@ -2210,7 +2210,7 @@ DELIMITER ;
 /** Procedimiento almacenado para obtener una lista de mascotas perdidas que pertenecen a un dueño específico, con filtros opcionales para diferentes atributos de la mascota y validaciones para asegurar que se devuelven solo las mascotas del dueño que cumplen con los criterios de búsqueda. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_get_user_pet_table (
+CREATE OR REPLACE PROCEDURE pr_get_user_pet_table (
     IN p_id_owner INT,
     IN p_id_energy INT,
     IN p_id_type INT,
@@ -2303,7 +2303,7 @@ DELIMITER ;
 /** Procedimiento almacenado para registrar una nueva mascota, con validaciones para asegurar que se insertan correctamente los datos de la mascota y que se devuelve el ID de la nueva mascota creada. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_register_pet (
+CREATE OR REPLACE PROCEDURE pr_register_pet (
     IN p_color VARCHAR(100),
     IN p_age INT,
     IN p_description VARCHAR(255),
@@ -2345,7 +2345,7 @@ DELIMITER ;
 /* Procedimiento almacenado para actualizar la información de una mascota, con validaciones para asegurar que la mascota existe y que se actualizan correctamente los campos relacionados. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_update_pet (
+CREATE OR REPLACE PROCEDURE pr_update_pet (
     IN p_id INT,
     IN p_color VARCHAR(100),
     IN p_age INT,
@@ -2392,7 +2392,7 @@ DELIMITER ;
 /* Procedimiento almacenado para buscar mascotas perdidas, con filtros opcionales para diferentes atributos de la mascota y validaciones para asegurar que se devuelven solo las mascotas que cumplen con los criterios de búsqueda. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_search_pets (
+CREATE OR REPLACE PROCEDURE pr_search_pets (
     IN p_id_type INT,
     IN p_id_breed INT,
     IN p_id_state INT,
@@ -2433,7 +2433,7 @@ DELIMITER ;
 /* Procedimiento almacenado para registrar un nuevo reporte de mascota perdida, con validaciones para asegurar que se insertan correctamente los datos del reporte y que se devuelve el ID del nuevo reporte creado. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_register_lost_report (
+CREATE OR REPLACE PROCEDURE pr_register_lost_report (
     IN p_lost_date DATETIME,
     IN p_place VARCHAR(255),
     IN p_description VARCHAR(255),
@@ -2478,7 +2478,7 @@ DELIMITER ;
 /* Procedimiento almacenado para registrar un nuevo reporte de mascota encontrada, con validaciones para asegurar que se insertan correctamente los datos del reporte y que se devuelve el ID del nuevo reporte creado. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_register_found_report (
+CREATE OR REPLACE PROCEDURE pr_register_found_report (
     IN p_found_date DATETIME,
     IN p_place VARCHAR(255),
     IN p_description VARCHAR(255),
@@ -2517,7 +2517,7 @@ DELIMITER ;
 /* Procedimiento almacenado para generar coincidencias entre reportes de mascotas perdidas y encontradas, con validaciones para asegurar que se calculan correctamente los puntajes de similitud y que se insertan las coincidencias en la tabla correspondiente solo si cumplen con el umbral mínimo establecido. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_generate_pet_matches()
+CREATE OR REPLACE PROCEDURE pr_generate_pet_matches()
 BEGIN
     DECLARE v_score INT DEFAULT 0;
     DECLARE v_min_score INT DEFAULT 60;
@@ -2616,7 +2616,7 @@ DELIMITER ;
 /* Procedimiento almacenado para generar un reporte de coincidencias entre mascotas perdidas y encontradas, con filtros opcionales para el rango de fechas de las coincidencias y validaciones para asegurar que se devuelven solo las coincidencias que cumplen con los criterios de búsqueda. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_report_pet_matches (
+CREATE OR REPLACE PROCEDURE pr_report_pet_matches (
     p_start_date DATETIME,
     p_end_date DATETIME
 )
@@ -2657,7 +2657,7 @@ DELIMITER ;
 /
 DELIMITER $$
 
-CREATE PROCEDURE pr_calificate_person (
+CREATE OR REPLACE PROCEDURE pr_calificate_person (
     p_stars INT,
     p_note VARCHAR(255),
     p_id_person INT,
@@ -2687,7 +2687,7 @@ DELIMITER ;
 /* Procedimiento almacenado para agregar una persona a la lista de bloqueados, con validaciones para asegurar que se inserta correctamente el registro en la tabla de bloqueados y que se devuelve el ID del nuevo registro creado. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_add_to_blocklist (
+CREATE OR REPLACE PROCEDURE pr_add_to_blocklist (
     p_id_person INT,
     OUT p_new_id INT
 )
@@ -2711,7 +2711,7 @@ DELIMITER ;
 /* Procedimiento almacenado para registrar una nueva donación, con validaciones para asegurar que se insertan correctamente los datos de la donación y que se devuelve el ID de la nueva donación creada. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_register_donation (
+CREATE OR REPLACE PROCEDURE pr_register_donation (
     p_amount DECIMAL(10,2),
     p_donation_date DATETIME,
     p_id_person INT,
@@ -2745,7 +2745,7 @@ DELIMITER ;
 /* Procedimiento almacenado para generar un reporte de donaciones, con filtros opcionales para el rango de fechas, el donante, la asociación receptora, y el monto de la donación, y validaciones para asegurar que se devuelven solo las donaciones que cumplen con los criterios de búsqueda. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_report_donations (
+CREATE OR REPLACE PROCEDURE pr_report_donations (
     p_start_date DATETIME,
     p_end_date DATETIME,
     p_id_person INT,
@@ -2779,7 +2779,7 @@ DELIMITER ;
 /* Procedimiento almacenado para generar un reporte de donaciones totales por asociación, con filtros opcionales para el rango de fechas, y validaciones para asegurar que se devuelven solo las asociaciones que han recibido donaciones dentro del rango especificado, ordenadas por el monto total recibido. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_total_donations_assoc (
+CREATE OR REPLACE PROCEDURE pr_total_donations_assoc (
     p_start_date DATETIME,
     p_end_date DATETIME
 )
@@ -2806,7 +2806,7 @@ DELIMITER ;
 /* Procedimiento almacenado para registrar un nuevo hogar de acogida, con validaciones para asegurar que se insertan correctamente los datos del hogar de acogida y que se devuelve el ID del nuevo hogar creado. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_register_foster_home (
+CREATE OR REPLACE PROCEDURE pr_register_foster_home (
     p_needs_donation VARCHAR(10),
     p_id_person INT,
     OUT p_new_id INT
@@ -2831,7 +2831,7 @@ DELIMITER ;
 /* Procedimiento almacenado para buscar hogares de acogida que coincidan con los criterios especificados, con filtros opcionales para el tamaño del animal, el nivel de energía y el espacio requerido. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_search_foster_homes (
+CREATE OR REPLACE PROCEDURE pr_search_foster_homes (
     p_id_pet_size INT,
     p_id_energy INT,
     p_id_space INT
@@ -2863,7 +2863,7 @@ DELIMITER ;
 /* Procedimiento almacenado para generar un reporte de mascotas que han estado disponibles para adopción por más de 2 meses, con validaciones para asegurar que se devuelven solo las mascotas que cumplen con los criterios de búsqueda y que se ordenan por la fecha en que estuvieron disponibles. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_report_not_adopted_pets ()
+CREATE OR REPLACE PROCEDURE pr_report_not_adopted_pets ()
 BEGIN
     SELECT
         p.Id,
@@ -2914,7 +2914,7 @@ DELIMITER ;
 /* Procedimiento almacenado para generar un reporte de estadísticas de mascotas por tipo y estado, con filtros opcionales para el rango de fechas en que las mascotas estuvieron disponibles para adopción o fueron reportadas como perdidas o encontradas. */
 DELIMITER $$
 
-CREATE PROCEDURE pr_stats_pets_by_type_state (
+CREATE OR REPLACE PROCEDURE pr_stats_pets_by_type_state (
     p_start_date DATETIME,
     p_end_date DATETIME
 )
@@ -2941,7 +2941,7 @@ DELIMITER ;
 /* Procedimiento almacenado para generar un reporte de estadísticas de adopciones por estado, con filtros opcionales para el tipo y la raza de las mascotas adoptadas, y validaciones para asegurar que se devuelven solo las adopciones que cumplen con los criterios de búsqueda y que se calculan correctamente los totales y porcentajes. */
 DELIMITER //
 
-CREATE PROCEDURE pr_stats_adoptions (
+CREATE OR REPLACE PROCEDURE pr_stats_adoptions (
     IN p_id_type INT,
     IN p_id_breed INT
 )
@@ -2966,7 +2966,7 @@ DELIMITER ;
 /* Procedimiento almacenado para generar un reporte de estadísticas de mascotas que no han sido adoptadas por rango de edad, con validaciones para asegurar que se devuelven solo las mascotas que cumplen con los criterios de búsqueda y que se calculan correctamente los totales y porcentajes por cada rango de edad. */
 DELIMITER //
 
-CREATE PROCEDURE pr_stats_not_adopted_by_age ()
+CREATE OR REPLACE PROCEDURE pr_stats_not_adopted_by_age ()
 BEGIN
     SELECT
         fn_pet_age_range(p.Age) AS AgeRange,
@@ -2987,7 +2987,7 @@ DELIMITER ;
 /* Procedimiento almacenado para insertar una nueva imagen de mascota, con validaciones para asegurar que se insertan correctamente los datos de la imagen y que se asocian con la mascota correspondiente. */
 DELIMITER //
 
-CREATE PROCEDURE pr_insert_pet_image (
+CREATE OR REPLACE PROCEDURE pr_insert_pet_image (
     IN pImage LONGTEXT,
     IN pIdPet INT
 )
@@ -3001,7 +3001,7 @@ DELIMITER ;
 /* Procedimiento almacenado */
 DELIMITER //
 
-CREATE PROCEDURE pr_insert_donation(
+CREATE OR REPLACE PROCEDURE pr_insert_donation(
     IN p_idPerson INT,
     IN p_amount DECIMAL(10,2),
     IN p_idCurrency INT,
@@ -3079,7 +3079,7 @@ DELIMITER ;
 /* Procedimiento almacenado para insertar una nueva mascota, con validaciones para asegurar que se insertan correctamente los datos de la mascota, que se asocian con los registros relacionados de enfermedades, tratamientos, medicamentos y fotos, y que se devuelve el ID de la nueva mascota creada. */
 DELIMITER //
 
-CREATE PROCEDURE pr_insert_pet (
+CREATE OR REPLACE PROCEDURE pr_insert_pet (
     IN pColor VARCHAR(50),
     IN pAge INT,
     IN pDescription TEXT,
@@ -3153,7 +3153,7 @@ DELIMITER ;
 /* Procedimiento almacenado para registrar un nuevo email para una persona, con validaciones para asegurar que se inserta correctamente el registro en la tabla de email y que se devuelve el ID del nuevo email creado. */
 DELIMITER //
 
-CREATE PROCEDURE pr_register_person_email (
+CREATE OR REPLACE PROCEDURE pr_register_person_email (
     IN p_email VARCHAR(255),
     IN p_id_person INT,
     OUT p_new_id INT
@@ -3176,7 +3176,7 @@ DELIMITER ;
 /* Procedimiento almacenado para registrar un nuevo número de teléfono para una persona, con validaciones para asegurar que se inserta correctamente el registro en la tabla de teléfono y que se devuelve el ID del nuevo teléfono creado. */
 DELIMITER //
 
-CREATE PROCEDURE pr_register_person_phone (
+CREATE OR REPLACE PROCEDURE pr_register_person_phone (
     IN p_phone VARCHAR(30),
     IN p_id_person INT,
     OUT p_new_id INT
@@ -3199,7 +3199,7 @@ DELIMITER ;
 /* Procedimiento almacenado para asignar el rol de administrador a una persona, con validaciones para asegurar que la persona existe, que no se asigna el rol de administrador más de una vez a la misma persona, y que se devuelve el ID del nuevo registro en la tabla de administradores o el ID existente si ya tenía el rol. */
 DELIMITER //
 
-CREATE PROCEDURE pr_assign_admin_role (
+CREATE OR REPLACE PROCEDURE pr_assign_admin_role (
     IN p_id_person INT,
     OUT p_new_id INT
 )
@@ -3241,7 +3241,7 @@ DELIMITER ;
 /* Procedimiento almacenado para asignar el rol de adoptante a una persona, con validaciones para asegurar que la persona existe, que no se asigna el rol de adoptante más de una vez a la misma persona, y que se devuelve el ID del nuevo registro en la tabla de adoptantes o el ID existente si ya tenía el rol. */
 DELIMITER //
 
-CREATE PROCEDURE pr_assign_adopter_role (
+CREATE OR REPLACE PROCEDURE pr_assign_adopter_role (
     IN p_id_person INT,
     OUT p_new_id INT
 )
@@ -3283,7 +3283,7 @@ DELIMITER ;
 /* Procedimiento almacenado para asignar el rol de rescatista a una persona, con validaciones para asegurar que la persona existe, que no se asigna el rol de rescatista más de una vez a la misma persona, y que se devuelve el ID del nuevo registro en la tabla de rescatistas o el ID existente si ya tenía el rol. */
 DELIMITER //
 
-CREATE PROCEDURE pr_assign_rescuer_role (
+CREATE OR REPLACE PROCEDURE pr_assign_rescuer_role (
     IN p_id_person INT,
     OUT p_new_id INT
 )
@@ -3325,7 +3325,7 @@ DELIMITER ;
 /* Procedimiento almacenado para asignar el rol de hogar de acogida a una persona, con validaciones para asegurar que la persona existe, que no se asigna el rol de hogar de acogida más de una vez a la misma persona, que el valor de NeedsDonation es válido, y que se devuelve el ID del nuevo registro en la tabla de hogares de acogida o el ID existente si ya tenía el rol. */
 DELIMITER //
 
-CREATE PROCEDURE pr_assign_foster_home_role (
+CREATE OR REPLACE PROCEDURE pr_assign_foster_home_role (
     IN p_id_person INT,
     IN p_needs_donation VARCHAR(1),
     OUT p_new_id INT
@@ -3377,7 +3377,7 @@ DELIMITER ;
 /* Procedimiento almacenado para poner una mascota en adopción, con validaciones para asegurar que la mascota existe, que está en estado de encontrada, que se actualiza correctamente su estado a "en adopción", y que se maneja el caso en que no se encuentra la mascota o no está en el estado correcto. */
 DELIMITER $$
 
-CREATE PROCEDURE put_pet_up_for_adoption (
+CREATE OR REPLACE PROCEDURE put_pet_up_for_adoption (
     IN p_pet_id INT
 )
 BEGIN
