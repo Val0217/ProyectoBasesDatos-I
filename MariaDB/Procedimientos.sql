@@ -1608,3 +1608,1793 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+/* Alter table */
+ALTER TABLE Adoption
+DROP CONSTRAINT chk_Adoption_State;
+
+/* Alter table */
+ALTER TABLE Adoption
+ADD CONSTRAINT chk_Adoption_State
+CHECK (State IN ('In process', 'To be confirmed', 'Canceled', 'Approved'));
+
+/* Procedimiento almacenado para actualizar la información de una mascota, con validaciones para asegurar que la mascota existe, que pertenece al dueño que realiza la actualización, y que se actualizan correctamente los campos relacionados. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_update_pet_for_owner (
+    IN p_pet_id INT,
+    IN p_owner_id INT,
+    IN p_color VARCHAR(100),
+    IN p_age INT,
+    IN p_description VARCHAR(255),
+    IN p_name VARCHAR(100),
+    IN p_chip VARCHAR(100),
+    IN p_id_energy INT,
+    IN p_id_type INT,
+    IN p_id_breed INT,
+    IN p_id_district INT,
+    IN p_id_space INT,
+    IN p_id_pet_training INT,
+    IN p_id_size INT,
+    IN p_id_veterinarian INT,
+    OUT p_rows_updated INT
+)
+BEGIN
+    UPDATE Pet
+    SET
+        Color = p_color,
+        Age = p_age,
+        Description = p_description,
+        Name = p_name,
+        Chip = p_chip,
+        IdEnergy = p_id_energy,
+        IdType = p_id_type,
+        IdBreed = p_id_breed,
+        IdDistrict = p_id_district,
+        IdSpace = p_id_space,
+        IdPetTraining = p_id_pet_training,
+        IdSize = p_id_size,
+        IdVeterinarian = p_id_veterinarian
+    WHERE Id = p_pet_id
+      AND IdOwner = p_owner_id;
+
+    SET p_rows_updated = ROW_COUNT();
+END $$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para obtener la información de una mascota para edición, con validaciones para asegurar que la mascota existe y que pertenece al dueño que realiza la consulta. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_get_pet_for_edit (
+    IN p_pet_id INT,
+    IN p_owner_id INT
+)
+BEGIN
+    SELECT
+        p.Id AS IdPet,
+        p.IdOwner,
+        p.Color,
+        p.Age,
+        p.Description,
+        p.Name AS PetName,
+        p.Chip,
+        p.IdEnergy,
+        p.IdType,
+        p.IdBreed,
+        p.IdDistrict,
+        ca.Id AS IdCanton,
+        pr.Id AS IdProvince,
+        co.Id AS IdCountry,
+        p.IdSpace,
+        p.IdPetTraining,
+        p.IdSize,
+        p.IdVeterinarian
+    FROM Pet p
+    INNER JOIN District d
+        ON d.Id = p.IdDistrict
+    INNER JOIN Canton ca
+        ON ca.Id = d.IdCanton
+    INNER JOIN Province pr
+        ON pr.Id = ca.IdProvince
+    INNER JOIN Country co
+        ON co.Id = pr.IdCountry
+    WHERE p.Id = p_pet_id
+      AND p.IdOwner = p_owner_id;
+END $$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para retirar una mascota del estado de adopción, con validaciones para asegurar que la mascota existe, que pertenece al dueño que realiza la acción, y que se actualizan correctamente el estado de la mascota y las solicitudes de adopción relacionadas. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_undo_pet_up_for_adoption (
+    IN p_pet_id INT,
+    IN p_owner_id INT
+)
+BEGIN
+    DECLARE v_rows INT DEFAULT 0;
+
+    START TRANSACTION;
+
+    UPDATE Pet
+    SET IdState = 2
+    WHERE Id = p_pet_id
+      AND IdOwner = p_owner_id
+      AND IdState = 1;
+
+    SET v_rows = ROW_COUNT();
+
+    IF v_rows = 0 THEN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Pet was not found, does not belong to this user, or is not up for adoption.';
+    END IF;
+
+    UPDATE Adoption
+    SET State = 'Canceled'
+    WHERE IdPet = p_pet_id
+      AND IdOwner = p_owner_id
+      AND State IN ('In process', 'To be confirmed');
+
+    COMMIT;
+END $$
+
+DELIMITER ;
+
+/* Procedimientos para filtros de mascotas */
+DELIMITER $$
+
+/* ------------------------------------------------------------
+   SP_GET_PETS_BY_STATE
+------------------------------------------------------------ */
+CREATE PROCEDURE pr_get_pets_by_state (
+    IN p_id_state INT,
+    IN p_color VARCHAR(100),
+    IN p_age INT,
+    IN p_name VARCHAR(100),
+    IN p_chip VARCHAR(100),
+    IN p_energy VARCHAR(100),
+    IN p_type VARCHAR(100),
+    IN p_breed VARCHAR(100),
+    IN p_district VARCHAR(100),
+    IN p_space_required VARCHAR(100),
+    IN p_training VARCHAR(100),
+    IN p_size VARCHAR(100),
+    IN p_veterinarian VARCHAR(100)
+)
+BEGIN
+    SELECT *
+    FROM Pet
+    WHERE IdState = p_id_state;
+END $$
+
+
+/* ------------------------------------------------------------
+   SP_GET_PETS_UP_FOR_ADOPTION
+------------------------------------------------------------ */
+CREATE PROCEDURE pr_get_pets_up_for_adoption (
+    IN p_color VARCHAR(100),
+    IN p_age INT,
+    IN p_name VARCHAR(100),
+    IN p_chip VARCHAR(100),
+    IN p_energy VARCHAR(100),
+    IN p_type VARCHAR(100),
+    IN p_breed VARCHAR(100),
+    IN p_district VARCHAR(100),
+    IN p_space_required VARCHAR(100),
+    IN p_training VARCHAR(100),
+    IN p_size VARCHAR(100),
+    IN p_veterinarian VARCHAR(100)
+)
+BEGIN
+    SELECT *
+    FROM Pet
+    WHERE IdState = 1;
+END $$
+
+
+/* ------------------------------------------------------------
+   SP_GET_FOUND_PETS
+------------------------------------------------------------ */
+CREATE PROCEDURE pr_get_found_pets (
+    IN p_color VARCHAR(100),
+    IN p_age INT,
+    IN p_name VARCHAR(100),
+    IN p_chip VARCHAR(100),
+    IN p_energy VARCHAR(100),
+    IN p_type VARCHAR(100),
+    IN p_breed VARCHAR(100),
+    IN p_district VARCHAR(100),
+    IN p_space_required VARCHAR(100),
+    IN p_training VARCHAR(100),
+    IN p_size VARCHAR(100),
+    IN p_veterinarian VARCHAR(100)
+)
+BEGIN
+    SELECT *
+    FROM Pet
+    WHERE IdState = 4;
+END $$
+
+
+/* ------------------------------------------------------------
+   FN_PUT_PET_UP_FOR_ADOPTION (FUNCTION → PROCEDURE)
+------------------------------------------------------------ */
+CREATE PROCEDURE pr_put_pet_up_for_adoption (
+    IN p_pet_id INT,
+    IN p_owner_id INT,
+    OUT p_result INT
+)
+BEGIN
+    UPDATE Pet
+    SET IdState = 1
+    WHERE Id = p_pet_id
+      AND IdOwner = p_owner_id;
+
+    SET p_result = ROW_COUNT();
+END $$
+
+
+/* ------------------------------------------------------------
+   OPTIONS QUERIES (CURSOR → SELECT)
+------------------------------------------------------------ */
+
+CREATE PROCEDURE pr_get_energy_options ()
+BEGIN
+    SELECT * FROM PetLevelEnergy;
+END $$
+
+CREATE PROCEDURE pr_get_type_options ()
+BEGIN
+    SELECT * FROM PetType;
+END $$
+
+CREATE PROCEDURE pr_get_breed_options ()
+BEGIN
+    SELECT * FROM PetBreed;
+END $$
+
+CREATE PROCEDURE pr_get_district_options ()
+BEGIN
+    SELECT * FROM District;
+END $$
+
+CREATE PROCEDURE pr_get_space_required_options ()
+BEGIN
+    SELECT * FROM SpaceRequired;
+END $$
+
+CREATE PROCEDURE pr_get_training_options ()
+BEGIN
+    SELECT * FROM PetTraining;
+END $$
+
+CREATE PROCEDURE pr_get_size_options ()
+BEGIN
+    SELECT * FROM PetSize;
+END $$
+
+CREATE PROCEDURE pr_get_veterinarian_options ()
+BEGIN
+    SELECT * FROM Veterinarian;
+END $$
+
+DELIMITER ;
+
+/* Procedimientos almacenados para filtros de mascotas, con validaciones para asegurar que se filtran correctamente por estado y que se pueden reutilizar para diferentes estados. */
+DELIMITER $$
+
+/* ============================================================
+   GET PETS BY STATE (CORE FILTER)
+============================================================ */
+CREATE PROCEDURE pr_pkg_get_pets_by_state (
+    IN p_id_state INT,
+    IN p_color VARCHAR(100),
+    IN p_age INT,
+    IN p_name VARCHAR(100),
+    IN p_chip VARCHAR(100),
+    IN p_energy VARCHAR(100),
+    IN p_type VARCHAR(100),
+    IN p_breed VARCHAR(100),
+    IN p_district VARCHAR(100),
+    IN p_space_required VARCHAR(100),
+    IN p_training VARCHAR(100),
+    IN p_size VARCHAR(100),
+    IN p_veterinarian VARCHAR(100)
+)
+BEGIN
+    SELECT *
+    FROM VW_TABLE_ADOPTION
+    WHERE IdState = p_id_state;
+END $$
+
+
+/* ============================================================
+   UP FOR ADOPTION
+============================================================ */
+CREATE PROCEDURE pr_pkg_get_pets_up_for_adoption (
+    IN p_color VARCHAR(100),
+    IN p_age INT,
+    IN p_name VARCHAR(100),
+    IN p_chip VARCHAR(100),
+    IN p_energy VARCHAR(100),
+    IN p_type VARCHAR(100),
+    IN p_breed VARCHAR(100),
+    IN p_district VARCHAR(100),
+    IN p_space_required VARCHAR(100),
+    IN p_training VARCHAR(100),
+    IN p_size VARCHAR(100),
+    IN p_veterinarian VARCHAR(100)
+)
+BEGIN
+    CALL pr_get_pets_by_state(1, p_color, p_age, p_name, p_chip,
+        p_energy, p_type, p_breed, p_district, p_space_required,
+        p_training, p_size, p_veterinarian);
+END $$
+
+
+/* ============================================================
+   FOUND PETS
+============================================================ */
+CREATE PROCEDURE pr_pkg_get_found_pets (
+    IN p_color VARCHAR(100),
+    IN p_age INT,
+    IN p_name VARCHAR(100),
+    IN p_chip VARCHAR(100),
+    IN p_energy VARCHAR(100),
+    IN p_type VARCHAR(100),
+    IN p_breed VARCHAR(100),
+    IN p_district VARCHAR(100),
+    IN p_space_required VARCHAR(100),
+    IN p_training VARCHAR(100),
+    IN p_size VARCHAR(100),
+    IN p_veterinarian VARCHAR(100)
+)
+BEGIN
+    CALL pr_get_pets_by_state(4, p_color, p_age, p_name, p_chip,
+        p_energy, p_type, p_breed, p_district, p_space_required,
+        p_training, p_size, p_veterinarian);
+END $$
+
+
+/* ============================================================
+   PUT PET UP FOR ADOPTION (FUNCTION → PROCEDURE)
+============================================================ */
+CREATE PROCEDURE pr_pkg_put_pet_up_for_adoption (
+    IN p_pet_id INT,
+    IN p_owner_id INT,
+    OUT p_result INT
+)
+BEGIN
+    DECLARE v_state INT;
+
+    SELECT IdState INTO v_state
+    FROM Pet
+    WHERE Id = p_pet_id AND IdOwner = p_owner_id;
+
+    IF v_state = 3 THEN
+        SET p_result = -2;
+    ELSE
+        UPDATE Pet
+        SET IdState = 1
+        WHERE Id = p_pet_id AND IdOwner = p_owner_id;
+
+        UPDATE Adoption
+        SET AdoptionDate = NULL,
+            AvailableDate = NOW(),
+            Description = 'Pet put up for adoption by owner.',
+            State = 'In process',
+            IdAdopter = NULL,
+            IdOwner = p_owner_id
+        WHERE IdPet = p_pet_id
+          AND State IN ('In process', 'To be confirmed');
+
+        IF ROW_COUNT() = 0 THEN
+            INSERT INTO Adoption (
+                Id,
+                AdoptionDate,
+                AvailableDate,
+                Description,
+                State,
+                IdPet,
+                IdAdopter,
+                IdOwner
+            )
+            VALUES (
+                fn_next_id('Adoption'),
+                NULL,
+                NOW(),
+                'Pet put up for adoption by owner.',
+                'In process',
+                p_pet_id,
+                NULL,
+                p_owner_id
+            );
+        END IF;
+
+        SET p_result = 1;
+    END IF;
+END $$
+
+
+/* ============================================================
+   OPTIONS (ALL CURSOR FUNCTIONS → SELECT)
+============================================================ */
+
+CREATE PROCEDURE pr_pkg_get_energy_options ()
+BEGIN
+    SELECT 'All' AS Name, 0 AS SortOrder
+    UNION ALL SELECT Name, 1 FROM PetLevelEnergy;
+END $$
+
+CREATE PROCEDURE pr_pkg_get_type_options ()
+BEGIN
+    SELECT 'All' AS Name, 0 AS SortOrder
+    UNION ALL SELECT Name, 1 FROM PetType;
+END $$
+
+CREATE PROCEDURE pr_pkg_get_breed_options ()
+BEGIN
+    SELECT 'All' AS Name, 0 AS SortOrder
+    UNION ALL SELECT Name, 1 FROM PetBreed;
+END $$
+
+CREATE PROCEDURE pr_pkg_get_district_options ()
+BEGIN
+    SELECT 'All' AS Name, 0 AS SortOrder
+    UNION ALL SELECT Name, 1 FROM District;
+END $$
+
+CREATE PROCEDURE pr_pkg_get_space_required_options ()
+BEGIN
+    SELECT 'All' AS Name, 0 AS SortOrder
+    UNION ALL SELECT Name, 1 FROM SpaceRequired;
+END $$
+
+CREATE PROCEDURE pr_pkg_get_training_options ()
+BEGIN
+    SELECT 'All' AS Name, 0 AS SortOrder
+    UNION ALL SELECT Name, 1 FROM PetTraining;
+END $$
+
+CREATE PROCEDURE pr_pkg_get_size_options ()
+BEGIN
+    SELECT 'All' AS Name, 0 AS SortOrder
+    UNION ALL SELECT Name, 1 FROM PetSize;
+END $$
+
+CREATE PROCEDURE pr_pkg_get_veterinarian_options ()
+BEGIN
+    SELECT 'All' AS VeterinarianName, 0 AS SortOrder
+    UNION ALL
+    SELECT DISTINCT VeterinarianName, 1
+    FROM VW_TABLE_ADOPTION
+    WHERE VeterinarianName IS NOT NULL;
+END $$
+
+DELIMITER ;
+
+/** Procedimiento almacenado para obtener los valores de un catálogo específico, con validaciones para asegurar que el nombre del catálogo es válido y que se devuelven los resultados ordenados alfabéticamente. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_get_catalog (
+    IN p_catalog_name VARCHAR(50)
+)
+BEGIN
+    DECLARE v_cat VARCHAR(50);
+
+    SET v_cat = UPPER(TRIM(p_catalog_name));
+
+    IF v_cat = 'ENERGY' THEN
+        SELECT Id, Name FROM PetLevelEnergy ORDER BY Name;
+
+    ELSEIF v_cat = 'TYPE' THEN
+        SELECT Id, Name FROM PetType ORDER BY Name;
+
+    ELSEIF v_cat = 'BREED' THEN
+        SELECT Id, Name FROM PetBreed ORDER BY Name;
+
+    ELSEIF v_cat = 'DISTRICT' THEN
+        SELECT Id, Name FROM District ORDER BY Name;
+
+    ELSEIF v_cat = 'COUNTRY' THEN
+        SELECT Id, Name FROM Country ORDER BY Name;
+
+    ELSEIF v_cat = 'PROVINCE' THEN
+        SELECT Id, Name FROM Province ORDER BY Name;
+
+    ELSEIF v_cat = 'CANTON' THEN
+        SELECT Id, Name FROM Canton ORDER BY Name;
+
+    ELSEIF v_cat = 'SPACE' THEN
+        SELECT Id, Name FROM SpaceRequired ORDER BY Name;
+
+    ELSEIF v_cat = 'TRAINING' THEN
+        SELECT Id, Name FROM PetTraining ORDER BY Name;
+
+    ELSEIF v_cat = 'SIZE' THEN
+        SELECT Id, Name FROM PetSize ORDER BY Name;
+
+    ELSEIF v_cat = 'VETERINARIAN' THEN
+        SELECT Id,
+               CASE 
+                   WHEN Name IS NOT NULL THEN Name
+                   ELSE CONCAT(FirstName, ' ', LastName)
+               END AS Name
+        FROM Veterinarian
+        ORDER BY Name;
+
+    ELSEIF v_cat = 'CURRENCY' THEN
+        SELECT Id, Name FROM Currency ORDER BY Name;
+
+    ELSE
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Invalid catalog name';
+    END IF;
+END $$
+
+DELIMITER ;
+
+/** Procedimiento almacenado para obtener una lista de mascotas disponibles para adopción que no pertenecen al usuario actual, con filtros opcionales para diferentes atributos de la mascota y validaciones para asegurar que se excluyen las mascotas con solicitudes de adopción pendientes del usuario. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_get_adoption_pet_table (
+    IN p_current_user_id INT,
+    IN p_id_energy INT,
+    IN p_id_type INT,
+    IN p_id_breed INT,
+    IN p_id_country INT,
+    IN p_id_province INT,
+    IN p_id_canton INT,
+    IN p_id_district INT,
+    IN p_id_space INT,
+    IN p_id_training INT,
+    IN p_id_size INT,
+    IN p_id_veterinarian INT,
+    IN p_color VARCHAR(100),
+    IN p_age INT,
+    IN p_name VARCHAR(100),
+    IN p_chip VARCHAR(100)
+)
+BEGIN
+    SELECT
+        PetId,
+        PetName,
+        Color,
+        Age,
+        Chip,
+        Energy,
+        PetState,
+        PetType,
+        Breed,
+        District,
+        SpaceRequired,
+        Training,
+        PetSize,
+        VeterinarianName
+    FROM VW_USER_PET_TABLE
+    WHERE IdState = 1
+      AND IdOwner <> p_current_user_id
+
+      AND NOT EXISTS (
+          SELECT 1
+          FROM Adoption a
+          WHERE a.IdPet = VW_USER_PET_TABLE.PetId
+            AND a.IdAdopter = p_current_user_id
+            AND a.State = 'To be confirmed'
+      )
+
+      AND (p_id_energy IS NULL OR IdEnergy = p_id_energy)
+      AND (p_id_type IS NULL OR IdType = p_id_type)
+      AND (p_id_breed IS NULL OR IdBreed = p_id_breed)
+      AND (p_id_country IS NULL OR IdCountry = p_id_country)
+      AND (p_id_province IS NULL OR IdProvince = p_id_province)
+      AND (p_id_canton IS NULL OR IdCanton = p_id_canton)
+      AND (p_id_district IS NULL OR IdDistrict = p_id_district)
+      AND (p_id_space IS NULL OR IdSpace = p_id_space)
+      AND (p_id_training IS NULL OR IdPetTraining = p_id_training)
+      AND (p_id_size IS NULL OR IdSize = p_id_size)
+      AND (p_id_veterinarian IS NULL OR IdVeterinarian = p_id_veterinarian)
+
+      AND (p_color IS NULL OR LOWER(Color) LIKE CONCAT('%', LOWER(p_color), '%'))
+      AND (p_age IS NULL OR Age = p_age)
+      AND (p_name IS NULL OR LOWER(PetName) LIKE CONCAT('%', LOWER(p_name), '%'))
+      AND (p_chip IS NULL OR LOWER(Chip) LIKE CONCAT('%', LOWER(p_chip), '%'))
+
+    ORDER BY PetName;
+END $$
+
+DELIMITER ;
+
+/** Procedimiento almacenado para obtener una lista de mascotas perdidas que pertenecen a un dueño específico, con filtros opcionales para diferentes atributos de la mascota y validaciones para asegurar que se devuelven solo las mascotas del dueño que cumplen con los criterios de búsqueda. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_get_user_pet_table (
+    IN p_id_owner INT,
+    IN p_id_energy INT,
+    IN p_id_type INT,
+    IN p_id_breed INT,
+    IN p_id_district INT,
+    IN p_id_country INT,
+    IN p_id_province INT,
+    IN p_id_canton INT,
+    IN p_id_space INT,
+    IN p_id_training INT,
+    IN p_id_size INT,
+    IN p_id_veterinarian INT,
+    IN p_color VARCHAR(100),
+    IN p_age INT,
+    IN p_name VARCHAR(100),
+    IN p_chip VARCHAR(100)
+)
+BEGIN
+    SELECT
+        PetId,
+        PetName,
+        Color,
+        Age,
+        Chip,
+        Energy,
+        PetState,
+        PetType,
+        Breed,
+        District,
+        SpaceRequired,
+        Training,
+        PetSize,
+        VeterinarianName
+    FROM VW_USER_PET_TABLE
+    WHERE IdOwner = p_id_owner
+
+      AND (p_id_energy IS NULL OR IdEnergy = p_id_energy)
+      AND (p_id_type IS NULL OR IdType = p_id_type)
+      AND (p_id_breed IS NULL OR IdBreed = p_id_breed)
+      AND (p_id_district IS NULL OR IdDistrict = p_id_district)
+      AND (p_id_country IS NULL OR IdCountry = p_id_country)
+      AND (p_id_province IS NULL OR IdProvince = p_id_province)
+      AND (p_id_canton IS NULL OR IdCanton = p_id_canton)
+      AND (p_id_space IS NULL OR IdSpace = p_id_space)
+      AND (p_id_training IS NULL OR IdPetTraining = p_id_training)
+      AND (p_id_size IS NULL OR IdSize = p_id_size)
+      AND (p_id_veterinarian IS NULL OR IdVeterinarian = p_id_veterinarian)
+
+      AND (p_color IS NULL OR UPPER(Color) LIKE CONCAT('%', UPPER(p_color), '%'))
+      AND (p_age IS NULL OR Age = p_age)
+      AND (p_name IS NULL OR UPPER(PetName) LIKE CONCAT('%', UPPER(p_name), '%'))
+      AND (p_chip IS NULL OR UPPER(Chip) LIKE CONCAT('%', UPPER(p_chip), '%'))
+
+    ORDER BY PetName;
+END $$
+
+DELIMITER ;
+
+/** Procedimiento almacenado para poner una mascota en adopción, con validaciones para asegurar que la mascota existe, que pertenece al dueño que realiza la acción, y que se actualizan correctamente el estado de la mascota y las solicitudes de adopción relacionadas. */
+DELIMITER $$
+
+CREATE OR REPLACE PROCEDURE pr_put_pet_up_for_adoption (
+    IN p_pet_id INT,
+    IN p_owner_id INT
+)
+BEGIN
+    DECLARE v_rows INT DEFAULT 0;
+
+    START TRANSACTION;
+
+    UPDATE Pet
+    SET IdState = 1
+    WHERE Id = p_pet_id
+      AND IdOwner = p_owner_id;
+
+    SET v_rows = ROW_COUNT();
+
+    IF v_rows = 0 THEN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Pet not found, or this pet does not belong to this user.';
+    ELSE
+        COMMIT;
+    END IF;
+
+END $$
+
+DELIMITER ;
+
+/** Procedimiento almacenado para registrar una nueva mascota, con validaciones para asegurar que se insertan correctamente los datos de la mascota y que se devuelve el ID de la nueva mascota creada. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_register_pet (
+    IN p_color VARCHAR(100),
+    IN p_age INT,
+    IN p_description VARCHAR(255),
+    IN p_name VARCHAR(100),
+    IN p_chip VARCHAR(100),
+    IN p_id_energy INT,
+    IN p_id_state INT,
+    IN p_id_type INT,
+    IN p_id_breed INT,
+    IN p_id_district INT,
+    IN p_id_space INT,
+    IN p_id_training INT,
+    IN p_id_size INT,
+    IN p_id_owner INT,
+    IN p_id_veterinarian INT,
+    OUT p_new_id INT
+)
+BEGIN
+    START TRANSACTION;
+
+    INSERT INTO Pet (
+        Color, Age, Description, Name, Chip,
+        IdEnergy, IdState, IdType, IdBreed, IdDistrict,
+        IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian
+    )
+    VALUES (
+        p_color, p_age, p_description, p_name, p_chip,
+        p_id_energy, p_id_state, p_id_type, p_id_breed, p_id_district,
+        p_id_space, p_id_training, p_id_size, p_id_owner, p_id_veterinarian
+    );
+
+    SET p_new_id = LAST_INSERT_ID();
+
+    COMMIT;
+END $$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para actualizar la información de una mascota, con validaciones para asegurar que la mascota existe y que se actualizan correctamente los campos relacionados. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_update_pet (
+    IN p_id INT,
+    IN p_color VARCHAR(100),
+    IN p_age INT,
+    IN p_description VARCHAR(255),
+    IN p_name VARCHAR(100),
+    IN p_chip VARCHAR(100),
+    IN p_id_energy INT,
+    IN p_id_state INT,
+    IN p_id_type INT,
+    IN p_id_breed INT,
+    IN p_id_district INT,
+    IN p_id_space INT,
+    IN p_id_training INT,
+    IN p_id_size INT,
+    IN p_id_owner INT,
+    IN p_id_veterinarian INT
+)
+BEGIN
+    START TRANSACTION;
+
+    UPDATE Pet
+    SET Color = p_color,
+        Age = p_age,
+        Description = p_description,
+        Name = p_name,
+        Chip = p_chip,
+        IdEnergy = p_id_energy,
+        IdState = p_id_state,
+        IdType = p_id_type,
+        IdBreed = p_id_breed,
+        IdDistrict = p_id_district,
+        IdSpace = p_id_space,
+        IdPetTraining = p_id_training,
+        IdSize = p_id_size,
+        IdOwner = p_id_owner,
+        IdVeterinarian = p_id_veterinarian
+    WHERE Id = p_id;
+
+    COMMIT;
+END $$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para buscar mascotas perdidas, con filtros opcionales para diferentes atributos de la mascota y validaciones para asegurar que se devuelven solo las mascotas que cumplen con los criterios de búsqueda. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_search_pets (
+    IN p_id_type INT,
+    IN p_id_breed INT,
+    IN p_id_state INT,
+    IN p_chip VARCHAR(100),
+    IN p_id_district INT,
+    IN p_name VARCHAR(100)
+)
+BEGIN
+    SELECT 
+        p.Id,
+        p.Name,
+        p.Chip,
+        p.Color,
+        p.Age,
+        pt.Name AS PetType,
+        pb.Name AS Breed,
+        ps.Name AS State,
+        d.Name  AS District,
+        COALESCE(lr.LostDate, fr.FoundDate) AS ReportDate
+    FROM Pet p
+    LEFT JOIN PetType pt ON pt.Id = p.IdType
+    LEFT JOIN PetBreed pb ON pb.Id = p.IdBreed
+    LEFT JOIN PetState ps ON ps.Id = p.IdState
+    LEFT JOIN District d ON d.Id = p.IdDistrict
+    LEFT JOIN LostReport lr ON lr.IdPet = p.Id
+    LEFT JOIN FoundReport fr ON fr.IdPet = p.Id
+    WHERE (p_id_type IS NULL OR p.IdType = p_id_type)
+      AND (p_id_breed IS NULL OR p.IdBreed = p_id_breed)
+      AND (p_id_state IS NULL OR p.IdState = p_id_state)
+      AND (p_chip IS NULL OR UPPER(p.Chip) = UPPER(p_chip))
+      AND (p_id_district IS NULL OR p.IdDistrict = p_id_district)
+      AND (p_name IS NULL OR UPPER(p.Name) LIKE CONCAT('%', UPPER(p_name), '%'))
+    ORDER BY COALESCE(lr.LostDate, fr.FoundDate) DESC;
+END $$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para registrar un nuevo reporte de mascota perdida, con validaciones para asegurar que se insertan correctamente los datos del reporte y que se devuelve el ID del nuevo reporte creado. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_register_lost_report (
+    IN p_lost_date DATETIME,
+    IN p_place VARCHAR(255),
+    IN p_description VARCHAR(255),
+    IN p_reward DECIMAL(10,2),
+    IN p_state VARCHAR(50),
+    IN p_id_pet INT,
+    IN p_id_district INT,
+    IN p_id_currency INT,
+    OUT p_new_id INT
+)
+BEGIN
+    START TRANSACTION;
+
+    INSERT INTO LostReport (
+        LostDate,
+        Place,
+        Description,
+        Reward,
+        State,
+        IdPet,
+        IdDistrict,
+        IdCurrency
+    )
+    VALUES (
+        p_lost_date,
+        p_place,
+        p_description,
+        p_reward,
+        p_state,
+        p_id_pet,
+        p_id_district,
+        p_id_currency
+    );
+
+    SET p_new_id = LAST_INSERT_ID();
+
+    COMMIT;
+END $$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para registrar un nuevo reporte de mascota encontrada, con validaciones para asegurar que se insertan correctamente los datos del reporte y que se devuelve el ID del nuevo reporte creado. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_register_found_report (
+    IN p_found_date DATETIME,
+    IN p_place VARCHAR(255),
+    IN p_description VARCHAR(255),
+    IN p_id_pet INT,
+    IN p_id_district INT,
+    IN p_id_person INT,
+    OUT p_new_id INT
+)
+BEGIN
+    START TRANSACTION;
+
+    INSERT INTO FoundReport (
+        FoundDate,
+        Place,
+        Description,
+        IdPet,
+        IdDistrict,
+        IdPerson
+    )
+    VALUES (
+        p_found_date,
+        p_place,
+        p_description,
+        p_id_pet,
+        p_id_district,
+        p_id_person
+    );
+
+    SET p_new_id = LAST_INSERT_ID();
+
+    COMMIT;
+END $$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para generar coincidencias entre reportes de mascotas perdidas y encontradas, con validaciones para asegurar que se calculan correctamente los puntajes de similitud y que se insertan las coincidencias en la tabla correspondiente solo si cumplen con el umbral mínimo establecido. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_generate_pet_matches()
+BEGIN
+    DECLARE v_score INT DEFAULT 0;
+    DECLARE v_min_score INT DEFAULT 60;
+    DECLARE v_new_id INT;
+    DECLARE v_exists INT;
+
+    DECLARE done_lost INT DEFAULT 0;
+    DECLARE done_found INT DEFAULT 0;
+
+    DECLARE v_lost_id INT;
+    DECLARE v_lost_pet INT;
+
+    DECLARE v_found_id INT;
+    DECLARE v_found_pet INT;
+
+    DECLARE cur_lost CURSOR FOR
+        SELECT Id, IdPet
+        FROM LostReport
+        WHERE UPPER(State) = 'PERDIDO';
+
+    DECLARE cur_found CURSOR FOR
+        SELECT Id, IdPet
+        FROM FoundReport;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done_lost = 1;
+
+    /* obtener parámetro */
+    SELECT CAST(Value AS SIGNED)
+    INTO v_min_score
+    FROM Parameter
+    WHERE Name = 'MIN_MATCH_PERCENTAGE'
+    LIMIT 1;
+
+    OPEN cur_lost;
+
+    read_lost: LOOP
+        FETCH cur_lost INTO v_lost_id, v_lost_pet;
+
+        IF done_lost = 1 THEN
+            LEAVE read_lost;
+        END IF;
+
+        /* reiniciar cursor found para cada lost */
+        SET done_found = 0;
+        OPEN cur_found;
+
+        read_found: LOOP
+            FETCH cur_found INTO v_found_id, v_found_pet;
+
+            IF done_found = 1 THEN
+                LEAVE read_found;
+            END IF;
+
+            /* aquí llamamos lógica de scoring */
+            SET v_score = fn_pet_match_score(v_lost_pet, v_found_pet);
+
+            IF v_score >= v_min_score THEN
+
+                SELECT COUNT(*)
+                INTO v_exists
+                FROM PetMatch
+                WHERE IdLostReport = v_lost_id
+                  AND IdFoundReport = v_found_id;
+
+                IF v_exists = 0 THEN
+
+                    INSERT INTO PetMatch (
+                        SimilarityPercentage,
+                        MatchDate,
+                        IdLostReport,
+                        IdFoundReport
+                    )
+                    VALUES (
+                        v_score,
+                        NOW(),
+                        v_lost_id,
+                        v_found_id
+                    );
+
+                END IF;
+
+            END IF;
+
+        END LOOP;
+
+        CLOSE cur_found;
+
+    END LOOP;
+
+    CLOSE cur_lost;
+
+END $$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para generar un reporte de coincidencias entre mascotas perdidas y encontradas, con filtros opcionales para el rango de fechas de las coincidencias y validaciones para asegurar que se devuelven solo las coincidencias que cumplen con los criterios de búsqueda. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_report_pet_matches (
+    p_start_date DATETIME,
+    p_end_date DATETIME
+)
+BEGIN
+    SELECT
+        pm.Id AS MatchId,
+        pm.SimilarityPercentage,
+        pm.MatchDate,
+
+        lost_pet.Id AS LostPetId,
+        lost_pet.Name AS LostPetName,
+        lost_pet.Chip AS LostPetChip,
+        lost_pet.Color AS LostPetColor,
+        lr.Place AS LostPlace,
+        lr.LostDate,
+
+        found_pet.Id AS FoundPetId,
+        found_pet.Name AS FoundPetName,
+        found_pet.Chip AS FoundPetChip,
+        found_pet.Color AS FoundPetColor,
+        fr.Place AS FoundPlace,
+        fr.FoundDate
+
+    FROM PetMatch pm
+    INNER JOIN LostReport lr ON lr.Id = pm.IdLostReport
+    INNER JOIN FoundReport fr ON fr.Id = pm.IdFoundReport
+    INNER JOIN Pet lost_pet ON lost_pet.Id = lr.IdPet
+    INNER JOIN Pet found_pet ON found_pet.Id = fr.IdPet
+
+    WHERE (p_start_date IS NULL OR pm.MatchDate >= p_start_date)
+      AND (p_end_date IS NULL OR pm.MatchDate <= p_end_date)
+
+    ORDER BY pm.MatchDate DESC;
+END$$
+
+DELIMITER ;
+
+/
+DELIMITER $$
+
+CREATE PROCEDURE pr_calificate_person (
+    p_stars INT,
+    p_note VARCHAR(255),
+    p_id_person INT,
+    OUT p_new_id INT
+)
+BEGIN
+    SET p_new_id = fn_next_id('Calification');
+
+    INSERT INTO Calification (
+        Id,
+        Stars,
+        Note,
+        CalificationDate,
+        IdPerson
+    )
+    VALUES (
+        p_new_id,
+        p_stars,
+        p_note,
+        NOW(),
+        p_id_person
+    );
+END$$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para agregar una persona a la lista de bloqueados, con validaciones para asegurar que se inserta correctamente el registro en la tabla de bloqueados y que se devuelve el ID del nuevo registro creado. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_add_to_blocklist (
+    p_id_person INT,
+    OUT p_new_id INT
+)
+BEGIN
+    SET p_new_id = fn_next_id('BlockList');
+
+    INSERT INTO BlockList (
+        Id,
+        BlockDate,
+        IdPerson
+    )
+    VALUES (
+        p_new_id,
+        NOW(),
+        p_id_person
+    );
+END$$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para registrar una nueva donación, con validaciones para asegurar que se insertan correctamente los datos de la donación y que se devuelve el ID de la nueva donación creada. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_register_donation (
+    p_amount DECIMAL(10,2),
+    p_donation_date DATETIME,
+    p_id_person INT,
+    p_id_currency INT,
+    p_id_association INT,
+    OUT p_new_id INT
+)
+BEGIN
+    SET p_new_id = fn_next_id('Donation');
+
+    INSERT INTO Donation (
+        Id,
+        Amount,
+        DonationDate,
+        IdPerson,
+        IdCurrency,
+        IdAssociation
+    )
+    VALUES (
+        p_new_id,
+        p_amount,
+        p_donation_date,
+        p_id_person,
+        p_id_currency,
+        p_id_association
+    );
+END$$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para generar un reporte de donaciones, con filtros opcionales para el rango de fechas, el donante, la asociación receptora, y el monto de la donación, y validaciones para asegurar que se devuelven solo las donaciones que cumplen con los criterios de búsqueda. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_report_donations (
+    p_start_date DATETIME,
+    p_end_date DATETIME,
+    p_id_person INT,
+    p_id_association INT,
+    p_min_amount DECIMAL(10,2),
+    p_max_amount DECIMAL(10,2)
+)
+BEGIN
+    SELECT
+        d.Id,
+        d.Amount,
+        d.DonationDate,
+        c.Name AS Currency,
+        CONCAT(p.FirstName, ' ', p.LastName) AS Donor,
+        a.Name AS AssociationName
+    FROM Donation d
+    INNER JOIN Person p ON p.Id = d.IdPerson
+    INNER JOIN Association a ON a.Id = d.IdAssociation
+    INNER JOIN Currency c ON c.Id = d.IdCurrency
+    WHERE (p_start_date IS NULL OR d.DonationDate >= p_start_date)
+      AND (p_end_date IS NULL OR d.DonationDate <= p_end_date)
+      AND (p_id_person IS NULL OR d.IdPerson = p_id_person)
+      AND (p_id_association IS NULL OR d.IdAssociation = p_id_association)
+      AND (p_min_amount IS NULL OR d.Amount >= p_min_amount)
+      AND (p_max_amount IS NULL OR d.Amount <= p_max_amount)
+    ORDER BY d.DonationDate DESC;
+END$$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para generar un reporte de donaciones totales por asociación, con filtros opcionales para el rango de fechas, y validaciones para asegurar que se devuelven solo las asociaciones que han recibido donaciones dentro del rango especificado, ordenadas por el monto total recibido. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_total_donations_assoc (
+    p_start_date DATETIME,
+    p_end_date DATETIME
+)
+BEGIN
+    SELECT
+        a.Id AS AssociationId,
+        a.Name AS AssociationName,
+        SUM(d.Amount) AS TotalAmount,
+        COUNT(*) AS TotalDonations
+    FROM Donation d
+    INNER JOIN Association a 
+        ON a.Id = d.IdAssociation
+    WHERE (p_start_date IS NULL OR d.DonationDate >= p_start_date)
+      AND (p_end_date IS NULL OR d.DonationDate <= p_end_date)
+    GROUP BY 
+        a.Id,
+        a.Name
+    ORDER BY 
+        SUM(d.Amount) DESC;
+END$$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para registrar un nuevo hogar de acogida, con validaciones para asegurar que se insertan correctamente los datos del hogar de acogida y que se devuelve el ID del nuevo hogar creado. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_register_foster_home (
+    p_needs_donation VARCHAR(10),
+    p_id_person INT,
+    OUT p_new_id INT
+)
+BEGIN
+    SET p_new_id = fn_next_id('FosterHome');
+
+    INSERT INTO FosterHome (
+        Id,
+        NeedsDonation,
+        IdPerson
+    )
+    VALUES (
+        p_new_id,
+        p_needs_donation,
+        p_id_person
+    );
+END$$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para buscar hogares de acogida que coincidan con los criterios especificados, con filtros opcionales para el tamaño del animal, el nivel de energía y el espacio requerido. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_search_foster_homes (
+    p_id_pet_size INT,
+    p_id_energy INT,
+    p_id_space INT
+)
+BEGIN
+    SELECT DISTINCT
+        fh.Id AS FosterHomeId,
+        p.Id AS PersonId,
+        p.FirstName,
+        p.LastName,
+        fh.NeedsDonation
+    FROM FosterHome fh
+    INNER JOIN Person p 
+        ON p.Id = fh.IdPerson
+    LEFT JOIN PetSizeXFosterHome psfh 
+        ON psfh.IdFosterHome = fh.Id
+    LEFT JOIN PetLevelEnergyXFosterHome pefh 
+        ON pefh.IdFosterHome = fh.Id
+    LEFT JOIN SpaceRequiredXFosterHome srfh 
+        ON srfh.IdFosterHome = fh.Id
+    WHERE (p_id_pet_size IS NULL OR psfh.IdPetSize = p_id_pet_size)
+      AND (p_id_energy IS NULL OR pefh.IdPetLevelEnergy = p_id_energy)
+      AND (p_id_space IS NULL OR srfh.IdSpaceRequired = p_id_space)
+    ORDER BY p.FirstName, p.LastName;
+END$$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para generar un reporte de mascotas que han estado disponibles para adopción por más de 2 meses, con validaciones para asegurar que se devuelven solo las mascotas que cumplen con los criterios de búsqueda y que se ordenan por la fecha en que estuvieron disponibles. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_report_not_adopted_pets ()
+BEGIN
+    SELECT
+        p.Id,
+        p.Name,
+        p.Color,
+        p.Age,
+        a.AvailableDate,
+        TIMESTAMPDIFF(MONTH, a.AvailableDate, NOW()) AS WaitingMonths
+    FROM Adoption a
+    INNER JOIN Pet p ON p.Id = a.IdPet
+    WHERE UPPER(a.State) = 'EN ADOPCION'
+      AND a.AvailableDate <= DATE_SUB(NOW(), INTERVAL 2 MONTH)
+    ORDER BY a.AvailableDate ASC;
+END$$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para consultar la bitácora de cambios en la base de datos, con filtros opcionales para el nombre de la tabla, el nombre del campo, el usuario que realizó el cambio, y el rango de fechas en que se realizaron los cambios. */
+DELIMITER $$
+
+CREATE OR REPLACE PROCEDURE pr_query_bitacora (
+    p_table_name VARCHAR(100),
+    p_field_name VARCHAR(100),
+    p_changed_by INT,
+    p_start_date DATETIME,
+    p_end_date DATETIME
+)
+BEGIN
+    SELECT
+        Id,
+        TableName,
+        FieldName,
+        PreviousValue,
+        CurrentValue,
+        ChangedBy,
+        ChangeDate
+    FROM Bitacora
+    WHERE (p_table_name IS NULL OR UPPER(TableName) = UPPER(p_table_name))
+      AND (p_field_name IS NULL OR UPPER(FieldName) = UPPER(p_field_name))
+      AND (p_changed_by IS NULL OR ChangedBy = p_changed_by)
+      AND (p_start_date IS NULL OR ChangeDate >= p_start_date)
+      AND (p_end_date IS NULL OR ChangeDate <= p_end_date)
+    ORDER BY ChangeDate DESC;
+END$$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para generar un reporte de estadísticas de mascotas por tipo y estado, con filtros opcionales para el rango de fechas en que las mascotas estuvieron disponibles para adopción o fueron reportadas como perdidas o encontradas. */
+DELIMITER $$
+
+CREATE PROCEDURE pr_stats_pets_by_type_state (
+    p_start_date DATETIME,
+    p_end_date DATETIME
+)
+BEGIN
+    SELECT
+        pt.Name AS PetType,
+        ps.Name AS PetState,
+        COUNT(*) AS TotalPets
+    FROM Pet p
+    INNER JOIN PetType pt ON pt.Id = p.IdType
+    INNER JOIN PetState ps ON ps.Id = p.IdState
+    LEFT JOIN LostReport lr ON lr.IdPet = p.Id
+    LEFT JOIN FoundReport fr ON fr.IdPet = p.Id
+    WHERE (
+            COALESCE(lr.LostDate, fr.FoundDate) BETWEEN p_start_date AND p_end_date
+            OR COALESCE(lr.LostDate, fr.FoundDate) IS NULL
+          )
+    GROUP BY pt.Name, ps.Name
+    ORDER BY pt.Name, ps.Name;
+END$$
+
+DELIMITER ;
+
+/* Procedimiento almacenado para generar un reporte de estadísticas de adopciones por estado, con filtros opcionales para el tipo y la raza de las mascotas adoptadas, y validaciones para asegurar que se devuelven solo las adopciones que cumplen con los criterios de búsqueda y que se calculan correctamente los totales y porcentajes. */
+DELIMITER //
+
+CREATE PROCEDURE pr_stats_adoptions (
+    IN p_id_type INT,
+    IN p_id_breed INT
+)
+BEGIN
+    SELECT
+        a.State,
+        COUNT(*) AS Total,
+        ROUND(
+            COUNT(*) * 100 / SUM(COUNT(*)) OVER (),
+            2
+        ) AS Percentage
+    FROM Adoption a
+    INNER JOIN Pet p ON p.Id = a.IdPet
+    WHERE (p_id_type IS NULL OR p.IdType = p_id_type)
+      AND (p_id_breed IS NULL OR p.IdBreed = p_id_breed)
+    GROUP BY a.State
+    ORDER BY a.State;
+END//
+
+DELIMITER ;
+
+/* Procedimiento almacenado para generar un reporte de estadísticas de mascotas que no han sido adoptadas por rango de edad, con validaciones para asegurar que se devuelven solo las mascotas que cumplen con los criterios de búsqueda y que se calculan correctamente los totales y porcentajes por cada rango de edad. */
+DELIMITER //
+
+CREATE PROCEDURE pr_stats_not_adopted_by_age ()
+BEGIN
+    SELECT
+        fn_pet_age_range(p.Age) AS AgeRange,
+        COUNT(*) AS TotalPets,
+        ROUND(
+            COUNT(*) * 100 / SUM(COUNT(*)) OVER (),
+            2
+        ) AS Percentage
+    FROM Adoption a
+    INNER JOIN Pet p ON p.Id = a.IdPet
+    WHERE UPPER(a.State) = 'EN ADOPCION'
+    GROUP BY fn_pet_age_range(p.Age)
+    ORDER BY AgeRange;
+END//
+
+DELIMITER ;
+
+/* Procedimiento almacenado para insertar una nueva imagen de mascota, con validaciones para asegurar que se insertan correctamente los datos de la imagen y que se asocian con la mascota correspondiente. */
+DELIMITER //
+
+CREATE PROCEDURE pr_insert_pet_image (
+    IN pImage LONGTEXT,
+    IN pIdPet INT
+)
+BEGIN
+    INSERT INTO petPhoto (Photo, IdPet)
+    VALUES (pImage, pIdPet);
+END//
+
+DELIMITER ;
+
+/* Procedimiento almacenado */
+DELIMITER //
+
+CREATE PROCEDURE pr_insert_donation(
+    IN p_idPerson INT,
+    IN p_amount DECIMAL(10,2),
+    IN p_idCurrency INT,
+    IN p_idAssociation INT
+)
+BEGIN
+    INSERT INTO Donation (
+        Amount,
+        DonationDate,
+        IdPerson,
+        IdCurrency,
+        IdAssociation
+    )
+    VALUES (
+        p_amount,
+        NOW(),
+        p_idPerson,
+        p_idCurrency,
+        p_idAssociation
+    );
+END//
+
+DELIMITER ;
+
+/* Procedimiento almacenado para insertar una nueva persona, con validaciones para asegurar que se insertan correctamente los datos de la persona, que se asocian con el distrito correspondiente, y que se crean los registros relacionados en las tablas de email, teléfono y rol de adoptante. */
+DELIMITER //
+
+CREATE OR REPLACE PROCEDURE pr_insert_person (
+    IN pFirst_name VARCHAR(100),
+    IN pLast_name VARCHAR(100),
+    IN pEmail VARCHAR(255),
+    IN pPassword VARCHAR(255),
+    IN pUserName VARCHAR(100),
+    IN pIdDistrict INT,
+    IN pPhoneNumber VARCHAR(30)
+)
+BEGIN
+    DECLARE vcIdPerson INT;
+
+    -- Insert persona (Id debe ser AUTO_INCREMENT)
+    INSERT INTO Person (
+        FirstName,
+        LastName,
+        Password,
+        UserName,
+        IdDistrict
+    )
+    VALUES (
+        pFirst_name,
+        pLast_name,
+        pPassword,
+        pUserName,
+        pIdDistrict
+    );
+
+    -- obtener ID generado
+    SET vcIdPerson = LAST_INSERT_ID();
+
+    -- Email
+    INSERT INTO Email (Email, IdPerson)
+    VALUES (pEmail, vcIdPerson);
+
+    -- Phone
+    INSERT INTO Phone (Phone, IdPerson)
+    VALUES (pPhoneNumber, vcIdPerson);
+
+    -- Rol por defecto (Adopter)
+    INSERT INTO Adopter (IdPerson)
+    VALUES (vcIdPerson);
+
+END//
+
+DELIMITER ;
+
+/* Procedimiento almacenado para insertar una nueva mascota, con validaciones para asegurar que se insertan correctamente los datos de la mascota, que se asocian con los registros relacionados de enfermedades, tratamientos, medicamentos y fotos, y que se devuelve el ID de la nueva mascota creada. */
+DELIMITER //
+
+CREATE PROCEDURE pr_insert_pet (
+    IN pColor VARCHAR(50),
+    IN pAge INT,
+    IN pDescription TEXT,
+    IN pPetName VARCHAR(100),
+    IN pChip VARCHAR(100),
+    IN pIdEnergy INT,
+    IN pIdType INT,
+    IN pIdBreed INT,
+    IN pIdDistrict INT,
+    IN pIdSpaceRequired INT,
+    IN pIdPetTraining INT,
+    IN pIdPetSize INT,
+    IN pIdPerson INT,
+    IN pIdVeterinarian INT,
+    IN pIllnessJson JSON,
+    IN pTreatmentJson JSON,
+    IN pMedicineJson JSON,
+    IN pPhotoJson JSON
+)
+BEGIN
+    DECLARE vcIdPet INT;
+
+    -- 1. Insert Pet
+    INSERT INTO Pet (
+        Color, Age, Description, Name, Chip,
+        IdEnergy, IdState, IdType, IdBreed,
+        IdDistrict, IdSpace, IdPetTraining,
+        IdSize, IdOwner, IdVeterinarian
+    )
+    VALUES (
+        pColor, pAge, pDescription, pPetName, pChip,
+        pIdEnergy, 2, pIdType, pIdBreed,
+        pIdDistrict, pIdSpaceRequired, pIdPetTraining,
+        pIdPetSize, pIdPerson, pIdVeterinarian
+    );
+
+    SET vcIdPet = LAST_INSERT_ID();
+
+    -- 2. Illnesses
+    IF pIllnessJson IS NOT NULL THEN
+        INSERT INTO PetXPetIllness (IdPet, IdPetIllness)
+        SELECT vcIdPet, CAST(value AS UNSIGNED)
+        FROM JSON_TABLE(pIllnessJson, '$[*]' COLUMNS(value INT PATH '$')) AS jt;
+    END IF;
+
+    -- 3. Treatments
+    IF pTreatmentJson IS NOT NULL THEN
+        INSERT INTO PetXPetTreatment (IdPet, IdPetTreatment)
+        SELECT vcIdPet, CAST(value AS UNSIGNED)
+        FROM JSON_TABLE(pTreatmentJson, '$[*]' COLUMNS(value INT PATH '$')) AS jt;
+    END IF;
+
+    -- 4. Medicines
+    IF pMedicineJson IS NOT NULL THEN
+        INSERT INTO PetXMedicine (IdPet, IdMedicine)
+        SELECT vcIdPet, CAST(value AS UNSIGNED)
+        FROM JSON_TABLE(pMedicineJson, '$[*]' COLUMNS(value INT PATH '$')) AS jt;
+    END IF;
+
+    -- 5. Photos
+    IF pPhotoJson IS NOT NULL THEN
+        INSERT INTO PetPhoto (Photo, IdPet)
+        SELECT value, vcIdPet
+        FROM JSON_TABLE(pPhotoJson, '$[*]' COLUMNS(value TEXT PATH '$')) AS jt;
+    END IF;
+
+END//
+
+DELIMITER ;
+
+/* Procedimiento almacenado para registrar un nuevo email para una persona, con validaciones para asegurar que se inserta correctamente el registro en la tabla de email y que se devuelve el ID del nuevo email creado. */
+DELIMITER //
+
+CREATE PROCEDURE pr_register_person_email (
+    IN p_email VARCHAR(255),
+    IN p_id_person INT,
+    OUT p_new_id INT
+)
+BEGIN
+    INSERT INTO Email (
+        Email,
+        IdPerson
+    )
+    VALUES (
+        p_email,
+        p_id_person
+    );
+
+    SET p_new_id = LAST_INSERT_ID();
+END//
+
+DELIMITER ;
+
+/* Procedimiento almacenado para registrar un nuevo número de teléfono para una persona, con validaciones para asegurar que se inserta correctamente el registro en la tabla de teléfono y que se devuelve el ID del nuevo teléfono creado. */
+DELIMITER //
+
+CREATE PROCEDURE pr_register_person_phone (
+    IN p_phone VARCHAR(30),
+    IN p_id_person INT,
+    OUT p_new_id INT
+)
+BEGIN
+    INSERT INTO Phone (
+        Phone,
+        IdPerson
+    )
+    VALUES (
+        p_phone,
+        p_id_person
+    );
+
+    SET p_new_id = LAST_INSERT_ID();
+END//
+
+DELIMITER ;
+
+/* Procedimiento almacenado para asignar el rol de administrador a una persona, con validaciones para asegurar que la persona existe, que no se asigna el rol de administrador más de una vez a la misma persona, y que se devuelve el ID del nuevo registro en la tabla de administradores o el ID existente si ya tenía el rol. */
+DELIMITER //
+
+CREATE PROCEDURE pr_assign_admin_role (
+    IN p_id_person INT,
+    OUT p_new_id INT
+)
+BEGIN
+    DECLARE v_person_exists INT DEFAULT 0;
+    DECLARE v_admin_id INT DEFAULT NULL;
+
+    -- Validar que la persona exista
+    SELECT COUNT(*)
+    INTO v_person_exists
+    FROM Person
+    WHERE Id = p_id_person;
+
+    IF v_person_exists = 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'La persona indicada no existe.';
+    END IF;
+
+    -- Validar si ya es admin
+    SELECT MAX(Id)
+    INTO v_admin_id
+    FROM Admin
+    WHERE IdPerson = p_id_person;
+
+    -- Si ya existe, retornar el mismo id
+    IF v_admin_id IS NOT NULL THEN
+        SET p_new_id = v_admin_id;
+    ELSE
+        INSERT INTO Admin (IdPerson)
+        VALUES (p_id_person);
+
+        SET p_new_id = LAST_INSERT_ID();
+    END IF;
+
+END//
+
+DELIMITER ;
+
+/* Procedimiento almacenado para asignar el rol de adoptante a una persona, con validaciones para asegurar que la persona existe, que no se asigna el rol de adoptante más de una vez a la misma persona, y que se devuelve el ID del nuevo registro en la tabla de adoptantes o el ID existente si ya tenía el rol. */
+DELIMITER //
+
+CREATE PROCEDURE pr_assign_adopter_role (
+    IN p_id_person INT,
+    OUT p_new_id INT
+)
+BEGIN
+    DECLARE v_person_exists INT DEFAULT 0;
+    DECLARE v_adopter_id INT DEFAULT NULL;
+
+    -- Validar que la persona exista
+    SELECT COUNT(*)
+    INTO v_person_exists
+    FROM Person
+    WHERE Id = p_id_person;
+
+    IF v_person_exists = 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'La persona indicada no existe.';
+    END IF;
+
+    -- Verificar si ya tiene rol adopter
+    SELECT MAX(Id)
+    INTO v_adopter_id
+    FROM Adopter
+    WHERE IdPerson = p_id_person;
+
+    -- Si ya existe, devolver el mismo ID
+    IF v_adopter_id IS NOT NULL THEN
+        SET p_new_id = v_adopter_id;
+    ELSE
+        INSERT INTO Adopter (IdPerson)
+        VALUES (p_id_person);
+
+        SET p_new_id = LAST_INSERT_ID();
+    END IF;
+
+END//
+
+DELIMITER ;
+
+/* Procedimiento almacenado para asignar el rol de rescatista a una persona, con validaciones para asegurar que la persona existe, que no se asigna el rol de rescatista más de una vez a la misma persona, y que se devuelve el ID del nuevo registro en la tabla de rescatistas o el ID existente si ya tenía el rol. */
+DELIMITER //
+
+CREATE PROCEDURE pr_assign_rescuer_role (
+    IN p_id_person INT,
+    OUT p_new_id INT
+)
+BEGIN
+    DECLARE v_person_exists INT DEFAULT 0;
+    DECLARE v_rescuer_id INT DEFAULT NULL;
+
+    -- Validar que la persona exista
+    SELECT COUNT(*)
+    INTO v_person_exists
+    FROM Person
+    WHERE Id = p_id_person;
+
+    IF v_person_exists = 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'La persona indicada no existe.';
+    END IF;
+
+    -- Verificar si ya tiene rol rescuer
+    SELECT MAX(Id)
+    INTO v_rescuer_id
+    FROM Rescuer
+    WHERE IdPerson = p_id_person;
+
+    -- Si ya existe, devolver el mismo ID
+    IF v_rescuer_id IS NOT NULL THEN
+        SET p_new_id = v_rescuer_id;
+    ELSE
+        INSERT INTO Rescuer (IdPerson)
+        VALUES (p_id_person);
+
+        SET p_new_id = LAST_INSERT_ID();
+    END IF;
+
+END//
+
+DELIMITER ;
+
+/* Procedimiento almacenado para asignar el rol de hogar de acogida a una persona, con validaciones para asegurar que la persona existe, que no se asigna el rol de hogar de acogida más de una vez a la misma persona, que el valor de NeedsDonation es válido, y que se devuelve el ID del nuevo registro en la tabla de hogares de acogida o el ID existente si ya tenía el rol. */
+DELIMITER //
+
+CREATE PROCEDURE pr_assign_foster_home_role (
+    IN p_id_person INT,
+    IN p_needs_donation VARCHAR(1),
+    OUT p_new_id INT
+)
+BEGIN
+    DECLARE v_person_exists INT DEFAULT 0;
+    DECLARE v_foster_home_id INT DEFAULT NULL;
+    DECLARE v_needs_donation VARCHAR(1);
+
+    -- Validar existencia de persona
+    SELECT COUNT(*)
+    INTO v_person_exists
+    FROM Person
+    WHERE Id = p_id_person;
+
+    IF v_person_exists = 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'La persona indicada no existe.';
+    END IF;
+
+    -- Normalizar valor
+    SET v_needs_donation = UPPER(COALESCE(p_needs_donation, 'N'));
+
+    -- Validación de dominio
+    IF v_needs_donation NOT IN ('Y', 'N') THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'NeedsDonation solo puede ser Y o N.';
+    END IF;
+
+    -- Verificar si ya existe
+    SELECT MAX(Id)
+    INTO v_foster_home_id
+    FROM FosterHome
+    WHERE IdPerson = p_id_person;
+
+    IF v_foster_home_id IS NOT NULL THEN
+        SET p_new_id = v_foster_home_id;
+    ELSE
+        INSERT INTO FosterHome (NeedsDonation, IdPerson)
+        VALUES (v_needs_donation, p_id_person);
+
+        SET p_new_id = LAST_INSERT_ID();
+    END IF;
+
+END//
+
+DELIMITER ;
+
+/* Procedimiento almacenado para poner una mascota en adopción, con validaciones para asegurar que la mascota existe, que está en estado de encontrada, que se actualiza correctamente su estado a "en adopción", y que se maneja el caso en que no se encuentra la mascota o no está en el estado correcto. */
+DELIMITER $$
+
+CREATE PROCEDURE put_pet_up_for_adoption (
+    IN p_pet_id INT
+)
+BEGIN
+    DECLARE v_rows INT DEFAULT 0;
+
+    UPDATE Pet
+    SET IdState = 1
+    WHERE Id = p_pet_id
+      AND IdState = 4;
+
+    SET v_rows = ROW_COUNT();
+
+    IF v_rows = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Pet was not found or is not in Found state.';
+    END IF;
+
+END$$
+
+DELIMITER ;
