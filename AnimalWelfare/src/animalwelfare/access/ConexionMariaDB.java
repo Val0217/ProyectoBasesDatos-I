@@ -20,7 +20,6 @@ public class ConexionMariaDB {
        try
        {
        con=DriverManager.getConnection(url,user,pass);
-           System.out.println("Conexión exitosa");
        }catch(SQLException e)
        {
         e.printStackTrace();
