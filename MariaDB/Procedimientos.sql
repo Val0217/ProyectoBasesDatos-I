@@ -1,3 +1,45 @@
+DELIMITER $$
+
+DROP FUNCTION IF EXISTS fn_next_id$$
+
+CREATE FUNCTION fn_next_id(
+    p_table_name VARCHAR(64)
+)
+RETURNS BIGINT
+READS SQL DATA
+NOT DETERMINISTIC
+BEGIN
+    DECLARE v_next_id BIGINT DEFAULT NULL;
+
+    CASE UPPER(TRIM(p_table_name))
+        WHEN 'PETCLAIM' THEN
+            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM PetClaim;
+        WHEN 'VETERINARIAN' THEN
+            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM Veterinarian;
+        WHEN 'LOSTREPORT' THEN
+            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM LostReport;
+        WHEN 'ADOPTER' THEN
+            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM Adopter;
+        WHEN 'ADOPTION' THEN
+            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM Adoption;
+        WHEN 'CALIFICATION' THEN
+            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM Calification;
+        WHEN 'BLOCKLIST' THEN
+            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM BlockList;
+        WHEN 'DONATION' THEN
+            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM Donation;
+        WHEN 'FOSTERHOME' THEN
+            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM FosterHome;
+        ELSE
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Tabla no soportada por fn_next_id';
+    END CASE;
+
+    RETURN v_next_id;
+END$$
+
+DELIMITER ;
+
 /*
     Procedimiento almacenado para obtener los distritos de un cantón específico.
     Parámetros:
