@@ -228,13 +228,15 @@ public class UserPetOperations {
     public void putPetUpForAdoption(int petId, int ownerId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall(
-                 "call pr_put_pet_up_for_adoption(?, ?)")) {
+                 "{CALL pr_put_pet_up_for_adoption(?, ?, ?)}")) {
 
             cs.setInt(1, petId);
             cs.setInt(2, ownerId);
-            ResultSet rs = cs.executeQuery();
+            cs.registerOutParameter(3, java.sql.Types.INTEGER);
 
-            int result = cs.getInt(1);
+            cs.execute();
+
+            int result = cs.getInt(3);
 
             if (result == -2) {
                 throw new SQLException("This pet is reported as missing and cannot be put up for adoption.");
