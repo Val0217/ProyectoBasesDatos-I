@@ -82,18 +82,20 @@ public class PersonOperations {
 
         try {
             // Conexión a la base de datos
-            try (Connection con = ConexionMariaDB.conectar(); CallableStatement cs = con.prepareCall("{ call fn_get_person_id(?) }")) {
+            try (Connection con = ConexionMariaDB.conectar(); CallableStatement cs = con.prepareCall("Select fn_get_person_id(?) ")) {
                 
                 // Parámetro de retorno
-                cs.registerOutParameter(1, java.sql.Types.INTEGER);
+                //cs.registerOutParameter(1, java.sql.Types.INTEGER);
                 
                 // Parámetro de entrada
-                cs.setString(2, userName);
+                cs.setString(1, userName);
                 
-                cs.execute();
+                ResultSet rs = cs.executeQuery();
                 
                 // Obtener resultado
-                userId = cs.getInt(1);
+                if (rs.next()) {
+                    userId = rs.getInt(1);
+                }
                 
             }
 
@@ -110,18 +112,20 @@ public class PersonOperations {
 
         try {
             // Usamos un CallableStatement para llamar a la función almacenada en la base de datos que devuelve el rol del usuario
-            try (Connection con = ConexionMariaDB.conectar(); CallableStatement cs = con.prepareCall("{ call fn_is_admin(?) }")) {
+            try (Connection con = ConexionMariaDB.conectar(); CallableStatement cs = con.prepareCall("Select fn_is_admin(?) ")) {
                 
                 // Parámetro de retorno
-                cs.registerOutParameter(1, java.sql.Types.INTEGER);
+                //cs.registerOutParameter(1, java.sql.Types.INTEGER);
                 
                 // Parámetro de entrada
-                cs.setInt(2, userId);
+                cs.setInt(1, userId);
                 
-                cs.execute();
+                ResultSet rs = cs.executeQuery();
                 
                 // Obtener resultado
-                role = cs.getString(1);
+                if (rs.next()) {
+                    role = rs.getString(1);
+                }
                 
             }
 
@@ -186,7 +190,7 @@ public class PersonOperations {
             return emails;
         }
     public static boolean addEmailsToPerson(int idPerson, DefaultListModel<String> modelEmail) {
-        String sql = "{ call ADD_EMAIL_PERSON(?, ?) }";
+        String sql = "{ call pr_ADD_EMAIL_PERSON(?, ?) }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement stmt = con.prepareCall(sql)) {
@@ -209,7 +213,7 @@ public class PersonOperations {
         }
     }
     public static boolean addPhonesToPerson(int idPerson, DefaultListModel<String> modelPhone) {
-        String sql = "{ call ADD_PHONE_PERSON(?, ?) }";
+        String sql = "{ call pr_ADD_PHONE_PERSON(?, ?) }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement stmt = con.prepareCall(sql)) {
