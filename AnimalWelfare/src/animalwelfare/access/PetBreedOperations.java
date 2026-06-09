@@ -52,10 +52,8 @@ public class PetBreedOperations {
             Connection con = ConexionMariaDB.conectar();
             CallableStatement cs = con.prepareCall(SQL);
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.setInt(2, petTypeId);
-            cs.execute();
-            ResultSet res = (ResultSet) cs.getObject(1);
+            cs.setInt(1, petTypeId);
+            ResultSet res = cs.executeQuery();
 
             while (res.next()) {
 

@@ -127,18 +127,10 @@ public class PetOperations {
 
         try {
             Connection con = ConexionMariaDB.conectar();
-            OracleConnection oracleConnection = con.unwrap(OracleConnection.class);
 
-            // Arrays Oracle
-            Array arrayIllness = oracleConnection.createOracleArray("NUMBERLIST", illnessIds);
-            Array arrayTreatment = oracleConnection.createOracleArray("NUMBERLIST", treatmentIds);
-            Array arrayMedicine = oracleConnection.createOracleArray("NUMBERLIST", medicineIds);
-            Array arrayImageFiles = oracleConnection.createOracleArray("VARCHAR2LIST", imageFiles);
+            CallableStatement cs =
+                con.prepareCall("{ CALL pr_insert_pet(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
 
-            // CallableStatement (NO Statement)
-            CallableStatement cs = con.prepareCall("{ call pr_insert_pet(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
-
-            // parámetros simples
             cs.setString(1, color);
             cs.setInt(2, age);
             cs.setString(3, description);
@@ -154,18 +146,16 @@ public class PetOperations {
             cs.setInt(13, idPerson);
             cs.setInt(14, idVeterinarian);
 
-            // arrays
-            cs.setArray(15, arrayIllness);
-            cs.setArray(16, arrayTreatment);
-            cs.setArray(17, arrayMedicine);
-            cs.setArray(18, arrayImageFiles);
+            cs.setString(15, toJson(illnessIds));
+            cs.setString(16, toJson(treatmentIds));
+            cs.setString(17, toJson(medicineIds));
+            cs.setString(18, toJson(imageFiles));
 
-            // ejecutar
             cs.execute();
 
             cs.close();
             con.close();
-            
+
             return true;
 
         } catch (SQLException e) {
@@ -313,6 +303,34 @@ public class PetOperations {
                 return pet;
             }
         }
+    }
+    private static String toJson(Integer[] values) {
+        if (values == null) {
+            return "[]";
+        }
+
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < values.length; i++) {
+            if (i > 0) sb.append(",");
+            sb.append(values[i]);
+        }
+        sb.append("]");
+
+        return sb.toString();
+    }
+    private static String toJson(String[] values) {
+        if (values == null) {
+            return "[]";
+    }
+
+    StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < values.length; i++) {
+            if (i > 0) sb.append(",");
+            sb.append("\"").append(values[i]).append("\"");
+        }
+        sb.append("]");
+
+        return sb.toString();
     }
     public static boolean UpdatePetForOwner(
             int petId,
