@@ -19,8 +19,8 @@ public class PetBreedOperations {
         ArrayList<DbObject> listPetBreed = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "{ ? = call fn_get_pet_breed_all() }";
-            Connection con = ConexionOracle.connect();
+            String SQL = "{ call pr_get_pet_breed_all() }";
+            Connection con = ConexionMariaDB.conectar();
             CallableStatement cs = con.prepareCall(SQL);
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);
@@ -50,8 +50,8 @@ public class PetBreedOperations {
         ArrayList<DbObject> listPetBreed = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "{ ? = call fn_get_pet_breed_by_PetType(?) }";
-            Connection con = ConexionOracle.connect();
+            String SQL = "{ call pr_get_pet_breed_by_pet_type(?) }";
+            Connection con = ConexionMariaDB.conectar();
             CallableStatement cs = con.prepareCall(SQL);
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);

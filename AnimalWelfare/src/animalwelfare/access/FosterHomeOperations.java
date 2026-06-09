@@ -33,7 +33,7 @@ public class FosterHomeOperations {
     public static boolean insertFosterHome(int idPerson, String needsDonation,Integer[] sizeIds,Integer[] energyIds, Integer[] spaceIds) {
         String call = "{ call pr_insert_foster_home(?, ?, ?, ?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.setInt(1, idPerson);
@@ -74,7 +74,7 @@ public class FosterHomeOperations {
 
         String call = "{ call pr_get_foster_homes(?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);
@@ -113,7 +113,7 @@ public class FosterHomeOperations {
     public static FosterHomeData getFosterHomeByPerson(int idPerson) {
         String call = "{ call pr_get_foster_home_by_person(?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.setInt(1, idPerson);
@@ -150,7 +150,7 @@ public class FosterHomeOperations {
     public static boolean updateFosterHome(int idFosterHome, int idPerson,String needsDonation,Integer[] sizeIds,Integer[] energyIds,Integer[] spaceIds) {
         String call = "{ call pr_update_foster_home(?, ?, ?, ?, ?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.setInt(1, idFosterHome);
@@ -184,7 +184,7 @@ public class FosterHomeOperations {
     public static boolean deleteFosterHome(int idFosterHome, int idPerson) {
         String call = "{ call pr_delete_foster_home(?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.setInt(1, idFosterHome);
@@ -203,21 +203,21 @@ public class FosterHomeOperations {
     // -------------------------------------------------------------------------
 
     public static ArrayList<DbObject> listSizes() {
-        return listCatalog("{ ? = call fn_get_pet_size_all() }");
+        return listCatalog("{call pr_get_pet_size_all() }");
     }
 
     public static ArrayList<DbObject> listEnergyLevels() {
-        return listCatalog("{ ? = call fn_get_pet_energy_all() }");
+        return listCatalog("{ call pr_get_pet_energy_all() }");
     }
 
     public static ArrayList<DbObject> listSpacesRequired() {
-        return listCatalog("{ ? = call fn_get_pet_space_required_all() }");
+        return listCatalog("{ call pr_get_pet_space_required_all() }");
     }
 
     private static ArrayList<DbObject> listCatalog(String sql) {
         ArrayList<DbObject> list = new ArrayList<>();
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(sql)) {
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);

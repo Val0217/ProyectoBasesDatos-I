@@ -31,7 +31,7 @@ public class BlockListOperations {
                                         String description) {
         String call = "{ call pr_report_person(?, ?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.setInt(1, idPerson);
@@ -62,7 +62,7 @@ public class BlockListOperations {
 
         String call = "{ call pr_get_block_list(?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);
@@ -108,7 +108,7 @@ public class BlockListOperations {
 
         String call = "{ call pr_get_block_list_detail(?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.setInt(1, idPerson);
@@ -150,7 +150,7 @@ public class BlockListOperations {
     public static boolean removeFromBlockList(int idPerson, int idAdmin) {
         String call = "{ call pr_remove_from_block_list(?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.setInt(1, idPerson);
@@ -174,9 +174,9 @@ public class BlockListOperations {
      */
     public static ArrayList<DbObject> listPersons() {
         ArrayList<DbObject> list = new ArrayList<>();
-        String call = "{ ? = call fn_get_persons_all() }";
+        String call = "{ call pr_get_persons_all() }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);

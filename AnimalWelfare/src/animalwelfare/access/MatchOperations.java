@@ -31,7 +31,7 @@ public class MatchOperations {
     public static boolean runMatch() {
         String call = "{ call pr_run_match() }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.execute();
@@ -53,9 +53,9 @@ public class MatchOperations {
      * @return count of pending matches
      */
     public static int countPendingMatches() {
-        String call = "{ ? = call fn_count_pending_matches() }";
+        String call = "{ call fn_count_pending_matches() }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.registerOutParameter(1, Types.NUMERIC);
@@ -85,7 +85,7 @@ public class MatchOperations {
 
         String call = "{ call pr_get_match_report(?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);

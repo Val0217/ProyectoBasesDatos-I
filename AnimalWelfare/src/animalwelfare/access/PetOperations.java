@@ -33,11 +33,11 @@ public class PetOperations {
     }
 
     public DefaultTableModel getPetsUpForAdoptionTableModel(Map<String, String> filters) {
-        return callPetSearchProcedure("PKG_PET_OPERATIONS.SP_GET_PETS_UP_FOR_ADOPTION", filters);
+        return callPetSearchProcedure("pr_pkg_get_pets_up_for_adoption", filters);
     }
 
     public DefaultTableModel getFoundPetsTableModel(Map<String, String> filters) {
-        return callPetSearchProcedure("PKG_PET_OPERATIONS.SP_GET_FOUND_PETS", filters);
+        return callPetSearchProcedure("pr_pkg_get_found_pets", filters);
     }
 
     private DefaultTableModel callPetSearchProcedure(String procedureName, Map<String, String> filters) {
@@ -51,7 +51,7 @@ public class PetOperations {
         String call = "{ call " + procedureName + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }";
 
         try (
-            Connection connection = ConexionOracle.connect();
+            Connection connection = ConexionMariaDB.conectar();
             CallableStatement statement = connection.prepareCall(call)
         ) {
             statement.setString(1, getFilter(filters, "color"));
@@ -100,10 +100,10 @@ public class PetOperations {
     }
 
     public boolean putPetUpForAdoption(int petId) {
-        String call = "{ ? = call PKG_PET_OPERATIONS.FN_PUT_PET_UP_FOR_ADOPTION(?) }";
+        String call = "{ call pr_pkg_get_pets_up_for_adoption(?) }";
 
         try (
-            Connection connection = ConexionOracle.connect();
+            Connection connection = ConexionMariaDB.conectar();
             CallableStatement statement = connection.prepareCall(call)
         ) {
             statement.registerOutParameter(1, java.sql.Types.NUMERIC);
@@ -126,7 +126,7 @@ public class PetOperations {
     public static boolean InsertPet(String color, int age, String description, String petName, String chip, int idEnergy, int idType, int idBreed, int idDistrict, int idSpaceRequired, int idPetTraining, int idPetSize, int idPerson, int idVeterinarian, Integer[] illnessIds, Integer[] treatmentIds, Integer[] medicineIds, String[] imageFiles) throws SQLException {
 
         try {
-            Connection con = ConexionOracle.connect();
+            Connection con = ConexionMariaDB.conectar();
             OracleConnection oracleConnection = con.unwrap(OracleConnection.class);
 
             // Arrays Oracle
@@ -175,35 +175,35 @@ public class PetOperations {
     }
 
     public List<String> getEnergyOptions() {
-        return callOptionsProcedure("PKG_PET_OPERATIONS.SP_GET_ENERGY_OPTIONS", "Name");
+        return callOptionsProcedure("pr_pkg_get_energy_options", "Name");
     }
 
     public List<String> getTypeOptions() {
-        return callOptionsProcedure("PKG_PET_OPERATIONS.SP_GET_TYPE_OPTIONS", "Name");
+        return callOptionsProcedure("pr_pkg_get_type_options", "Name");
     }
 
     public List<String> getBreedOptions() {
-        return callOptionsProcedure("PKG_PET_OPERATIONS.SP_GET_BREED_OPTIONS", "Name");
+        return callOptionsProcedure("pr_pkg_get_breed_options", "Name");
     }
 
     public List<String> getDistrictOptions() {
-        return callOptionsProcedure("PKG_PET_OPERATIONS.SP_GET_DISTRICT_OPTIONS", "Name");
+        return callOptionsProcedure("pr_pkg_get_district_options", "Name");
     }
 
     public List<String> getSpaceRequiredOptions() {
-        return callOptionsProcedure("PKG_PET_OPERATIONS.SP_GET_SPACE_REQUIRED_OPTIONS", "Name");
+        return callOptionsProcedure("pr_pkg_get_space_required_options", "Name");
     }
 
     public List<String> getTrainingOptions() {
-        return callOptionsProcedure("PKG_PET_OPERATIONS.SP_GET_TRAINING_OPTIONS", "Name");
+        return callOptionsProcedure("pr_pkg_get_training_options", "Name");
     }
 
     public List<String> getSizeOptions() {
-        return callOptionsProcedure("PKG_PET_OPERATIONS.SP_GET_SIZE_OPTIONS", "Name");
+        return callOptionsProcedure("pr_pkg_get_size_options", "Name");
     }
 
     public List<String> getVeterinarianOptions() {
-        return callOptionsProcedure("PKG_PET_OPERATIONS.SP_GET_VETERINARIAN_OPTIONS", "VeterinarianName");
+        return callOptionsProcedure("pr_pkg_get_veterinarian_options", "VeterinarianName");
     }
 
     private List<String> callOptionsProcedure(String procedureName, String columnName) {
@@ -211,7 +211,7 @@ public class PetOperations {
         String call = "{ call " + procedureName + "(?) }";
 
         try (
-            Connection connection = ConexionOracle.connect();
+            Connection connection = ConexionMariaDB.conectar();
             CallableStatement statement = connection.prepareCall(call)
         ) {
             statement.registerOutParameter(1, OracleTypes.CURSOR);
@@ -262,10 +262,10 @@ public class PetOperations {
         }
     }
     public static PetEditData GetPetForEdit(int petId, int ownerId) throws SQLException {
-        String call = "{ call SP_GET_PET_FOR_EDIT(?, ?, ?) }";
+        String call = "{ call pr_get_pet_for_edit(?, ?, ?) }";
 
         try (
-            Connection connection = ConexionOracle.connect();
+            Connection connection = ConexionMariaDB.conectar();
             CallableStatement statement = connection.prepareCall(call)
         ) {
             statement.setInt(1, petId);
@@ -332,10 +332,10 @@ public class PetOperations {
             int idVeterinarian
     ) throws SQLException {
 
-        String call = "{ call SP_UPDATE_PET_FOR_OWNER(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }";
+        String call = "{ call pr_update_pet_for_owner(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }";
 
         try (
-            Connection connection = ConexionOracle.connect();
+            Connection connection = ConexionMariaDB.conectar();
             CallableStatement statement = connection.prepareCall(call)
         ) {
             statement.setInt(1, petId);

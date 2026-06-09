@@ -24,7 +24,7 @@ public class CatalogOperations {
     public static List<DbObject> listSimple(String tableName) {
         List<DbObject> list = new ArrayList<>();
         String sql = "SELECT Id, Name FROM " + tableName + " ORDER BY Name";
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -68,7 +68,7 @@ public class CatalogOperations {
         String sql = "SELECT pb.Id, pb.Name, pt.Name AS TypeName "
                    + "FROM PetBreed pb JOIN PetType pt ON pb.IdType = pt.Id "
                    + "ORDER BY pb.Name";
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -107,7 +107,7 @@ public class CatalogOperations {
     public static List<Object[]> listMedicines() {
         List<Object[]> list = new ArrayList<>();
         String sql = "SELECT Id, Name, Dose FROM Medicine ORDER BY Name";
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -147,7 +147,7 @@ public class CatalogOperations {
         List<Object[]> list = new ArrayList<>();
         String sql = "SELECT Id, Name, PhoneNumber, Email, BankAccount "
                    + "FROM Association ORDER BY Name";
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -192,7 +192,7 @@ public class CatalogOperations {
      * Null or empty strings are bound as SQL NULL.
      */
     private static boolean executeWrite(String sql, String... params) {
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
             for (int i = 0; i < params.length; i++) {
                 String p = params[i];

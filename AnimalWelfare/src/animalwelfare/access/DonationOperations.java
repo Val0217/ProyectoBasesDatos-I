@@ -29,7 +29,7 @@ public class DonationOperations {
                                           int idCurrency, int idAssociation) {
         String call = "{ call pr_insert_donation(?, ?, ?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.setInt(1, idPerson);
@@ -64,7 +64,7 @@ public class DonationOperations {
 
         String call = "{ call pr_get_donations(?, ?, ?, ?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             // Set input parameters (or null if not specified)
@@ -103,9 +103,9 @@ public class DonationOperations {
      */
     public static ArrayList<DbObject> listAssociations() {
         ArrayList<DbObject> list = new ArrayList<>();
-        String call = "{ ? = call fn_get_associations_all() }";
+        String call = "{ call fn_get_associations_all() }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);
@@ -133,9 +133,9 @@ public class DonationOperations {
      */
     public static ArrayList<DbObject> listCurrencies() {
         ArrayList<DbObject> list = new ArrayList<>();
-        String call = "{ ? = call fn_get_currency_all() }";
+        String call = "{ call fn_get_currency_all() }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);

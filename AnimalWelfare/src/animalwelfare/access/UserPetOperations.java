@@ -51,7 +51,7 @@ public class UserPetOperations {
     }
 
     public DefaultTableModel getUserPets(int ownerId, PetFilter filter) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall(
                  "{call pr_get_user_pet_table(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}")) {
 
@@ -85,7 +85,7 @@ public class UserPetOperations {
         }
     }
     public DefaultTableModel getFoundPets(int currentUserId) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_get_found_pet_table(?,?)}")) {
 
             cs.setInt(1, currentUserId);
@@ -142,7 +142,7 @@ public class UserPetOperations {
     public List<String> getOwnerEmails(int ownerId) throws SQLException {
         List<String> emails = new ArrayList<>();
 
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_get_owner_emails(?,?)}")) {
 
             cs.setInt(1, ownerId);
@@ -161,7 +161,7 @@ public class UserPetOperations {
     public List<String> getOwnerPhones(int ownerId) throws SQLException {
         List<String> phones = new ArrayList<>();
 
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_get_owner_phones(?,?)}")) {
 
             cs.setInt(1, ownerId);
@@ -178,7 +178,7 @@ public class UserPetOperations {
         return phones;
     }
     public DefaultTableModel getUserMissingPets(int ownerId) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall(
                  "{call pr_get_user_missing_pet_table(?,?)}")) {
 
@@ -193,7 +193,7 @@ public class UserPetOperations {
         }
     }
     public void takeBackMissingReport(int petId, int ownerId) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall(
                  "{call pr_take_back_missing_report(?,?)}")) {
 
@@ -204,7 +204,7 @@ public class UserPetOperations {
     }
 
         public DefaultTableModel getAdoptionPets(int currentUserId, PetFilter filter) throws SQLException {
-            try (Connection conn = ConexionOracle.connect();
+            try (Connection conn = ConexionMariaDB.conectar();
                  CallableStatement cs = conn.prepareCall(
                      "{call pr_get_adoption_pet_table(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}")) {
 
@@ -240,9 +240,9 @@ public class UserPetOperations {
         }
 
     public void putPetUpForAdoption(int petId, int ownerId) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall(
-                 "{ ? = call PKG_PET_OPERATIONS.FN_PUT_PET_UP_FOR_ADOPTION(?, ?) }")) {
+                 "{ call pr_put_pet_up_for_adoption(?, ?) }")) {
 
             cs.registerOutParameter(1, Types.INTEGER);
             cs.setInt(2, petId);
@@ -261,7 +261,7 @@ public class UserPetOperations {
         }
     }
     public void reportPetMissing(int petId, int ownerId) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_report_pet_missing(?,?)}")) {
 
             cs.setInt(1, petId);
@@ -273,7 +273,7 @@ public class UserPetOperations {
         List<CatalogItem> items = new ArrayList<>();
         items.add(new CatalogItem(null, "Todos"));
 
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_get_catalog(?,?)}")) {
 
             cs.setString(1, catalogName);
@@ -353,7 +353,7 @@ public class UserPetOperations {
         }
     }
     public void undoPetUpForAdoption(int petId, int ownerId) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_undo_pet_up_for_adoption(?,?)}")) {
 
             cs.setInt(1, petId);
@@ -363,7 +363,7 @@ public class UserPetOperations {
     }
     
 public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_get_adoption_requests_owner(?,?)}")) {
 
             cs.setInt(1, ownerId);
@@ -377,7 +377,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
     }
 
     public void createAdoptionRequest(int petId, int adopterId, String description) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_create_adoption_request(?,?,?,?)}")) {
 
             cs.setInt(1, petId);
@@ -389,7 +389,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
     }
 
     public void acceptAdoptionRequest(int adoptionId, int ownerId) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_accept_adoption_request(?,?)}")) {
 
             cs.setInt(1, adoptionId);
@@ -399,7 +399,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
     }
 
     public void rejectAdoptionRequest(int adoptionId, int ownerId) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_reject_adoption_request(?,?)}")) {
 
             cs.setInt(1, adoptionId);
@@ -411,7 +411,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
     public void registerLostReportForOwner(int petId, int ownerId, java.sql.Date lostDate,
                                            String place, String description,
                                            java.math.BigDecimal reward, int currencyId) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_register_lost_for_owner(?,?,?,?,?,?,?,?)}")) {
 
             cs.setInt(1, petId);
@@ -469,7 +469,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
         return model;
     }
     public void createPetClaimRequest(int petId, int claimantId, String description) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_create_pet_claim(?,?,?,?)}")) {
 
             cs.setInt(1, petId);
@@ -481,7 +481,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
     }
 
     public DefaultTableModel getClaimRequestsForOwner(int ownerId) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_get_claim_requests_owner(?,?)}")) {
 
             cs.setInt(1, ownerId);
@@ -495,7 +495,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
     }
 
     public void acceptPetClaimRequest(int claimId, int ownerId) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_accept_pet_claim(?,?)}")) {
 
             cs.setInt(1, claimId);
@@ -505,7 +505,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
     }
 
     public void rejectPetClaimRequest(int claimId, int ownerId) throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_reject_pet_claim(?,?)}")) {
 
             cs.setInt(1, claimId);
@@ -560,7 +560,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
     }
     
     public DefaultTableModel getBitacora() throws SQLException {
-        try (Connection conn = ConexionOracle.connect();
+        try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("{call pr_query_bitacora(?,?,?,?,?,?)}")) {
 
             cs.setNull(1, Types.VARCHAR); // p_table_name

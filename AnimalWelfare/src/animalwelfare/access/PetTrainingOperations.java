@@ -19,8 +19,8 @@ public class PetTrainingOperations {
         ArrayList<DbObject> listPetTraining = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "{ ? = call fn_get_pet_training_all() }";
-            Connection con = ConexionOracle.connect();
+            String SQL = "{call pr_get_pet_training_all() }";
+            Connection con = ConexionMariaDB.conectar();
             CallableStatement cs = con.prepareCall(SQL);
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);

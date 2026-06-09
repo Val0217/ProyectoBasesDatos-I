@@ -21,9 +21,9 @@ public class VetFormOperations {
 
     public List<DbObject> getCountries() throws SQLException {
         List<DbObject> list = new ArrayList<>();
-        String sql = "{ ? = call fn_get_country_all() }";
+        String sql = "SELECT welfare.pr_get_country_all(?)";
  
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(sql)) {
  
             cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
@@ -41,9 +41,9 @@ public class VetFormOperations {
 
     public List<DbObject> getProvincesByCountry(int idCountry) throws SQLException {
         List<DbObject> list = new ArrayList<>();
-        String sql = "{ ? = call fn_get_province_by_country(?) }";
+        String sql = "{ call pr_get_province_by_country(?) }";
  
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(sql)) {
  
             cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
@@ -62,9 +62,9 @@ public class VetFormOperations {
 
     public List<DbObject> getCantonsByProvince(int idProvince) throws SQLException {
         List<DbObject> list = new ArrayList<>();
-        String sql = "{ ? = call fn_get_canton_by_province(?) }";
+        String sql = "{ ? = call pr_get_canton_by_province(?) }";
  
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(sql)) {
  
             cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
@@ -83,9 +83,9 @@ public class VetFormOperations {
 
     public List<DbObject> getDistrictsByCanton(int idCanton) throws SQLException {
         List<DbObject> list = new ArrayList<>();
-        String sql = "{ ? = call fn_get_districts_by_canton(?) }";
+        String sql = "{ ? = call pr_get_districts_by_canton(?) }";
  
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(sql)) {
  
             cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
@@ -110,7 +110,7 @@ public class VetFormOperations {
  
         String sql = "{ call pr_register_veterinarian(?,?,?,?,?,?,?,?) }";
  
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(sql)) {
  
             cs.setString(1, firstName);

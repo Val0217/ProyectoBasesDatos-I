@@ -27,7 +27,7 @@ public class StatisticsOperations {
         ArrayList<String[]> rows = new ArrayList<>();
         String call = "{ call pr_stat_pets_by_type_state(?, ?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             setNullableDate(cs, 1, null);
@@ -56,7 +56,7 @@ public class StatisticsOperations {
         ArrayList<String[]> rows = new ArrayList<>();
         String call = "{ call pr_stat_pets_by_type_state(?, ?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             setNullableDate(cs, 1, dateFrom);
@@ -96,7 +96,7 @@ public class StatisticsOperations {
         ArrayList<String[]> rows = new ArrayList<>();
         String call = "{ call pr_stat_donation_by_asso(?, ?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             setNullableDate(cs, 1, dateFrom);
@@ -137,7 +137,7 @@ public class StatisticsOperations {
         ArrayList<String[]> rows = new ArrayList<>();
         String call = "{ call pr_stat_adoptions_vs_waiting(?, ?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             setNullableInt(cs, 1, idType);
@@ -175,7 +175,7 @@ public class StatisticsOperations {
         ArrayList<String[]> rows = new ArrayList<>();
         String call = "{ call pr_stat_nonadopted_by_age(?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);
@@ -211,7 +211,7 @@ public class StatisticsOperations {
         ArrayList<String[]> rows = new ArrayList<>();
         String call = "{ call pr_stat_avg_adoption_time(?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);
@@ -242,18 +242,18 @@ public class StatisticsOperations {
 
     /** Returns all pet types for filter combos */
     public static ArrayList<DbObject> listPetTypes() {
-        return listCatalog("{ ? = call fn_get_pet_type_all() }");
+        return listCatalog("{ call pr_get_pet_type_all() }");
     }
 
     /** Returns all breeds for filter combos */
     public static ArrayList<DbObject> listBreeds() {
-        return listCatalog("{ ? = call fn_get_pet_breed_all() }");
+        return listCatalog("{ call pr_get_pet_type_all() }");
     }
 
     private static ArrayList<DbObject> listCatalog(String sql) {
         ArrayList<DbObject> list = new ArrayList<>();
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(sql)) {
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);

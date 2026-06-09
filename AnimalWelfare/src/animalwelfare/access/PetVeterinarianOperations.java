@@ -21,8 +21,8 @@ public class PetVeterinarianOperations {
         ArrayList<DbObject> listPetVeterinarian = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "{ ? = call fn_get_pet_veterinarian_all() }";
-            Connection con = ConexionOracle.connect();
+            String SQL = "{ call pr_get_pet_veterinarian_all() }";
+            Connection con = ConexionMariaDB.conectar();
             CallableStatement cs = con.prepareCall(SQL);
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);

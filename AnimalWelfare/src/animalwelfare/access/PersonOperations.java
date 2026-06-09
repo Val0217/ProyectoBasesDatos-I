@@ -28,7 +28,7 @@ public class PersonOperations {
 
         String sql = "{ call pr_insert_person(?, ?, ?, ?, ?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(sql)) {
 
             cs.setString(1, FirstName);
@@ -56,7 +56,7 @@ public class PersonOperations {
         String password = null;
 
         try {
-            try (Connection con = ConexionOracle.connect(); CallableStatement cs = con.prepareCall("{ ? = call fn_get_person_Password(?) }")) {
+            try (Connection con = ConexionMariaDB.conectar(); CallableStatement cs = con.prepareCall("{call fn_get_person_password(?) }")) {
                 
                 // Parámetro de retorno
                 cs.registerOutParameter(1, java.sql.Types.VARCHAR);
@@ -84,7 +84,7 @@ public class PersonOperations {
 
         try {
             // Conexión a la base de datos
-            try (Connection con = ConexionOracle.connect(); CallableStatement cs = con.prepareCall("{ ? = call fn_get_person_id(?) }")) {
+            try (Connection con = ConexionMariaDB.conectar(); CallableStatement cs = con.prepareCall("{ call fn_get_person_id(?) }")) {
                 
                 // Parámetro de retorno
                 cs.registerOutParameter(1, java.sql.Types.INTEGER);
@@ -112,7 +112,7 @@ public class PersonOperations {
 
         try {
             // Usamos un CallableStatement para llamar a la función almacenada en la base de datos que devuelve el rol del usuario
-            try (Connection con = ConexionOracle.connect(); CallableStatement cs = con.prepareCall("{ ? = call fn_is_admin(?) }")) {
+            try (Connection con = ConexionMariaDB.conectar(); CallableStatement cs = con.prepareCall("{ call fn_is_admin(?) }")) {
                 
                 // Parámetro de retorno
                 cs.registerOutParameter(1, java.sql.Types.INTEGER);
@@ -138,7 +138,7 @@ public class PersonOperations {
     public static ArrayList<String> getPersonPhones(int personId) {
         ArrayList<String> phones = new ArrayList<>();
 
-        try (Connection con = ConexionOracle.connect();CallableStatement cs = con.prepareCall("{ ? = call fn_get_phone_by_person_id(?) }")) {
+        try (Connection con = ConexionMariaDB.conectar();CallableStatement cs = con.prepareCall("{call pr_get_phone_by_person_id(?) }")) {
 
             cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
 
@@ -165,7 +165,7 @@ public class PersonOperations {
     public static ArrayList<String> getPersonEmails(int personId) {
         ArrayList<String> emails = new ArrayList<>();
 
-        try (Connection con = ConexionOracle.connect();CallableStatement cs = con.prepareCall("{ ? = call fn_get_email_by_person_id(?) }")) {
+        try (Connection con = ConexionMariaDB.conectar();CallableStatement cs = con.prepareCall("{ call pr_get_email_by_person_id(?) }")) {
 
             cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
 
@@ -190,7 +190,7 @@ public class PersonOperations {
     public static boolean addEmailsToPerson(int idPerson, DefaultListModel<String> modelEmail) {
         String sql = "{ call ADD_EMAIL_PERSON(?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement stmt = con.prepareCall(sql)) {
 
             for (int i = 0; i < modelEmail.size(); i++) {
@@ -213,7 +213,7 @@ public class PersonOperations {
     public static boolean addPhonesToPerson(int idPerson, DefaultListModel<String> modelPhone) {
         String sql = "{ call ADD_PHONE_PERSON(?, ?) }";
 
-        try (Connection con = ConexionOracle.connect();
+        try (Connection con = ConexionMariaDB.conectar();
              CallableStatement stmt = con.prepareCall(sql)) {
 
             for (int i = 0; i < modelPhone.size(); i++) {

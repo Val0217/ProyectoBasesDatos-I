@@ -23,8 +23,8 @@ public class CountryOperations {
         ArrayList<DbObject> listCountry = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "{ ? = call fn_get_country_all() }";
-            Connection con = ConexionOracle.connect();
+            String SQL = "{ call pr_get_country_all() }";
+            Connection con = ConexionMariaDB.conectar();
             CallableStatement cs = con.prepareCall(SQL);
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);
@@ -55,8 +55,8 @@ public class CountryOperations {
         ArrayList<DbObject> listProvince = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "{ ? = call fn_get_province_by_country(?) }";
-            Connection con = ConexionOracle.connect();
+            String SQL = "{ call fn_get_province_by_country(?) }";
+            Connection con = ConexionMariaDB.conectar();
             CallableStatement cs = con.prepareCall(SQL);
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);
@@ -88,8 +88,8 @@ public class CountryOperations {
         ArrayList<DbObject> listCanton = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "{ ? = call fn_get_canton_by_province(?) }";
-            Connection con = ConexionOracle.connect();
+            String SQL = "{ call fn_get_canton_by_province(?) }";
+            Connection con = ConexionMariaDB.conectar();
             CallableStatement cs = con.prepareCall(SQL);
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);
@@ -121,9 +121,9 @@ public class CountryOperations {
         ArrayList<DbObject> listDistrict = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "{ ? = call fn_get_districts_by_canton(?) }";
+            String SQL = "{ call fn_get_districts_by_canton(?) }";
 
-            Connection con = ConexionOracle.connect();
+            Connection con = ConexionMariaDB.conectar();
 
             CallableStatement cs = con.prepareCall(SQL);
 
