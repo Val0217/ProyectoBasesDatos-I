@@ -1,5 +1,6 @@
 package animalwelfare.userInterface;
 
+import animalwelfare.access.ConexionMariaDB;
 import animalwelfare.access.ConexionOracle;
 import animalwelfare.access.DbObject;
 import animalwelfare.business.CatalogController;
@@ -486,14 +487,17 @@ public class CatalogForm extends javax.swing.JFrame {
     private void loadComboFromTable(JComboBox<DbObject> combo, String tableName) {
         combo.removeAllItems();
         String sql = "SELECT Id, Name FROM " + tableName + " ORDER BY Name";
-        try (Connection con = ConexionOracle.connect();
-             PreparedStatement ps = con.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        try (Connection con = ConexionMariaDB.conectar();
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery()) {
+
             while (rs.next()) {
                 combo.addItem(new DbObject(rs.getInt(1), rs.getString(2)));
             }
+
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error loading combo: " + e.getMessage());
+            JOptionPane.showMessageDialog(this,
+                "Error loading combo: " + e.getMessage());
         }
     }
 
