@@ -4,10 +4,6 @@
  */
 package animalwelfare.access;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.CallableStatement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import oracle.jdbc.OracleTypes;
@@ -56,18 +52,20 @@ public class PersonOperations {
         String password = null;
 
         try {
-            try (Connection con = ConexionMariaDB.conectar(); CallableStatement cs = con.prepareCall("{call fn_get_person_password(?) }")) {
+            try (Connection con = ConexionMariaDB.conectar(); CallableStatement cs = con.prepareCall("Select fn_get_person_password(?)")) {
                 
                 // Parámetro de retorno
-                cs.registerOutParameter(1, java.sql.Types.VARCHAR);
+                //cs.registerOutParameter(1, java.sql.Types.VARCHAR);
                 
                 // Parámetro de entrada
-                cs.setString(2, userName);
+                cs.setString(1, userName);
                 
-                cs.execute();
+                ResultSet rs = cs.executeQuery();
                 
                 // Obtener resultado
-                password = cs.getString(1);
+                if (rs.next()) {
+                    password = rs.getString(1);
+                }
                 
             }
 
