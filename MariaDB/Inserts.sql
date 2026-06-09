@@ -35,4 +35,64 @@ INSERT INTO District (Name, IdCanton) VALUES ('Bella Vista',       7);
 INSERT INTO District (Name, IdCanton) VALUES ('Calidonia',         8);
 INSERT INTO District (Name, IdCanton) VALUES ('Belisario Porras',  9);
 INSERT INTO District (Name, IdCanton) VALUES ('David Centro',     10);
-INSERT INTO District (Name, IdCanton) VALUES ('Santiago Centro',  11);
+INSERT INTO District (Name, IdCanton) VALUES ('Santiago Centro',  10);
+
+--> Mascotas
+-- Tipos de mascota
+INSERT INTO PetType (Name) VALUES ('Perro');
+INSERT INTO PetType (Name) VALUES ('Gato');
+INSERT INTO PetType (Name) VALUES ('Conejo');
+INSERT INTO PetType (Name) VALUES ('Ave');
+INSERT INTO PetType (Name) VALUES ('Otro');
+
+-- Razas de perros
+INSERT INTO PetBreed (Name, IdType) VALUES ('Labrador Retriever', 1);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Golden Retriever', 1);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Pastor Alemán', 1);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Bulldog', 1);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Poodle', 1);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Beagle', 1);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Rottweiler', 1);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Chihuahua', 1);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Husky Siberiano', 1);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Dalmata', 1);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Boxer', 1);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Doberman', 1);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Shih Tzu', 1);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Pug', 1);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Border Collie', 1);
+
+-- Gatos
+INSERT INTO PetBreed (Name, IdType) VALUES ('Persa', 2);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Siames', 2);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Maine Coon', 2);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Bengalí', 2);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Ragdoll', 2);
+INSERT INTO PetBreed (Name, IdType) VALUES ('British Shorthair', 2);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Sphynx', 2);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Azul Ruso', 2);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Abisinio', 2);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Scottish Fold', 2);
+
+-- Conejos
+INSERT INTO PetBreed (Name, IdType) VALUES ('Mini Lop', 3);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Holandes', 3);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Lionhead', 3);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Rex', 3);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Angora', 3);
+
+-- Aves
+INSERT INTO PetBreed (Name, IdType) VALUES ('Periquito', 4);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Canario', 4);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Cacata', 4);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Loro Amazonico', 4);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Agapornis', 4);
+
+-- Otros
+INSERT INTO PetBreed (Name, IdType) VALUES ('Hamster Sirio', 5);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Cobaya', 5);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Erizo', 5);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Tortuga', 5);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Huran', 5);
+INSERT INTO PetBreed (Name, IdType) VALUES ('Raza Unica', 5);
+

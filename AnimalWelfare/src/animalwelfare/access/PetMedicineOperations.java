@@ -25,9 +25,7 @@ public class PetMedicineOperations {
             Connection con = ConexionMariaDB.conectar();
             CallableStatement cs = con.prepareCall(SQL);
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.execute();
-            ResultSet res = (ResultSet) cs.getObject(1);
+            ResultSet res = cs.executeQuery();
 
             while (res.next()) {
 

@@ -152,7 +152,7 @@ INSERT INTO PetTraining (Id, Name) VALUES (5, 'Muy dificil');
 
 -- Monedas
 INSERT INTO Currency (Id, Name) VALUES (1, 'Colones');
-INSERT INTO Currency (Id, Name) VALUES (2, 'Dolares');
+INSERT INTO Currency (Id, Name) VALUES (2, 'Dolars');
 
 -- -------------------------------------------------------------
 -- 3. ENFERMEDADES, MEDICAMENTOS, TRATAMIENTOS
