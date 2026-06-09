@@ -23,13 +23,12 @@ public class CountryOperations {
         ArrayList<DbObject> listCountry = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "{ call pr_get_country_all() }";
+            String SQL = "{CALL pr_get_country_all()}";
             Connection con = ConexionMariaDB.conectar();
             CallableStatement cs = con.prepareCall(SQL);
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.execute();
-            ResultSet res = (ResultSet) cs.getObject(1);
+            //cs.registerOutParameter(1, OracleTypes.CURSOR);
+            ResultSet res = cs.executeQuery();
 
             while (res.next()) {
 
@@ -55,14 +54,13 @@ public class CountryOperations {
         ArrayList<DbObject> listProvince = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "{ call fn_get_province_by_country(?) }";
+            String SQL = "{CALL pr_get_province_by_country(?)}";
             Connection con = ConexionMariaDB.conectar();
             CallableStatement cs = con.prepareCall(SQL);
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.setInt(2, IdCountry);
-            cs.execute();
-            ResultSet res = (ResultSet) cs.getObject(1);
+            //cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(1, IdCountry);
+            ResultSet res = cs.executeQuery();
 
             while (res.next()) {
 
@@ -88,14 +86,13 @@ public class CountryOperations {
         ArrayList<DbObject> listCanton = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "{ call fn_get_canton_by_province(?) }";
+            String SQL = "{CALL pr_get_canton_by_province(?)}";
             Connection con = ConexionMariaDB.conectar();
             CallableStatement cs = con.prepareCall(SQL);
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.setInt(2, IdProvince);
-            cs.execute();
-            ResultSet res = (ResultSet) cs.getObject(1);
+            //cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(1, IdProvince);
+            ResultSet res = cs.executeQuery();
 
             while (res.next()) {
 
@@ -121,18 +118,16 @@ public class CountryOperations {
         ArrayList<DbObject> listDistrict = new ArrayList(); //creamos una lista para guardar los resultados.
 
         try {
-            String SQL = "{ call fn_get_districts_by_canton(?) }";
+            String SQL = "{CALL pr_get_districts_by_canton(?)}";
 
             Connection con = ConexionMariaDB.conectar();
 
             CallableStatement cs = con.prepareCall(SQL);
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.setInt(2, IdCanton);
+            //cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(1, IdCanton);
 
-            cs.execute();
-
-            ResultSet res = (ResultSet) cs.getObject(1);
+            ResultSet res = cs.executeQuery();
 
             while (res.next()) {
 
