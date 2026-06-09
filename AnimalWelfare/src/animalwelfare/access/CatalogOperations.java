@@ -38,8 +38,7 @@ public class CatalogOperations {
 
     /** Inserts a row into a simple catalog table using its Oracle sequence. */
     public static boolean insertSimple(String tableName, String name) {
-        String seq = "s_" + tableName;
-        String sql = "INSERT INTO " + tableName + " (Id, Name) VALUES (" + seq + ".NEXTVAL, ?)";
+        String sql = "INSERT INTO " + tableName + " (Name) VALUES ( ?)";
         return executeWrite(sql, name);
     }
 
@@ -82,7 +81,7 @@ public class CatalogOperations {
 
     public static boolean insertBreed(String name, int idType) {
         return executeWrite(
-            "INSERT INTO PetBreed (Id, Name, IdType) VALUES (s_PetBreed.NEXTVAL, ?, ?)",
+            "INSERT INTO PetBreed (Name, IdType) VALUES ( ?, ?)",
             name, String.valueOf(idType));
     }
 
@@ -121,7 +120,7 @@ public class CatalogOperations {
 
     public static boolean insertMedicine(String name, String dose) {
         return executeWrite(
-            "INSERT INTO Medicine (Id, Name, Dose) VALUES (s_Medicine.NEXTVAL, ?, ?)",
+            "INSERT INTO Medicine ( Name, Dose) VALUES ( ?, ?)",
             name, dose);
     }
 
@@ -167,8 +166,8 @@ public class CatalogOperations {
 
     public static boolean insertAssociation(String name, String phone, String email, String bank) {
         return executeWrite(
-            "INSERT INTO Association (Id, Name, PhoneNumber, Email, BankAccount) "
-          + "VALUES (s_Association.NEXTVAL, ?, ?, ?, ?)",
+            "INSERT INTO Association (Name, PhoneNumber, Email, BankAccount) "
+          + "VALUES (?, ?, ?, ?)",
             name, phone, email, bank);
     }
 
