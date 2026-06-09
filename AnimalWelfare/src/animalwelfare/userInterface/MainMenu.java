@@ -264,6 +264,9 @@ public class MainMenu extends javax.swing.JFrame {
         LogOffButton.setBackground(new java.awt.Color(255, 204, 51));
         LogOffButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LogOffButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LogOffButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 LogOffButtonMouseEntered(evt);
             }
@@ -617,6 +620,11 @@ public class MainMenu extends javax.swing.JFrame {
     private void ParametersButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ParametersButtonMouseExited
         ParametersButton.setBackground(buttonBase);
     }//GEN-LAST:event_ParametersButtonMouseExited
+
+    private void LogOffButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogOffButtonMouseClicked
+        SignInForm SignInForm = new SignInForm();
+        dispose();
+    }//GEN-LAST:event_LogOffButtonMouseClicked
 
     /**
      * @param args the command line arguments
