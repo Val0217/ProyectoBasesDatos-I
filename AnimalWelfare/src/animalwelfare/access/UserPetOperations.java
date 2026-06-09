@@ -53,7 +53,7 @@ public class UserPetOperations {
     public DefaultTableModel getUserPets(int ownerId, PetFilter filter) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall(
-                 "{call pr_get_user_pet_table(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}")) {
+                 "call pr_get_user_pet_table(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
 
             cs.setInt(1, ownerId);
             setNullableInt(cs, 2, filter.idEnergy);
@@ -74,27 +74,22 @@ public class UserPetOperations {
             setNullableInt(cs, 14, filter.age);
             setNullableString(cs, 15, filter.name);
             setNullableString(cs, 16, filter.chip);
+            
+            ResultSet res = cs.executeQuery();
 
-            cs.registerOutParameter(17, OracleTypes.CURSOR);
-
-            cs.execute();
-
-            try (ResultSet rs = (ResultSet) cs.getObject(17)) {
-                return buildPetTableModel(rs);
-            }
+            
+            return buildPetTableModel(res);     
         }
     }
     public DefaultTableModel getFoundPets(int currentUserId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_get_found_pet_table(?,?)}")) {
+             CallableStatement cs = conn.prepareCall("call pr_get_found_pet_table(?)")) {
 
             cs.setInt(1, currentUserId);
-            cs.registerOutParameter(2, OracleTypes.CURSOR);
-            cs.execute();
-
-            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
-                return buildFoundPetTableModel(rs);
-            }
+         
+            ResultSet rs = cs.executeQuery();            
+            return buildFoundPetTableModel(rs);
+            
         }
     }
     private DefaultTableModel buildFoundPetTableModel(ResultSet rs) throws SQLException {
@@ -143,17 +138,15 @@ public class UserPetOperations {
         List<String> emails = new ArrayList<>();
 
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_get_owner_emails(?,?)}")) {
+             CallableStatement cs = conn.prepareCall("call pr_get_owner_emails(?)")) {
 
             cs.setInt(1, ownerId);
-            cs.registerOutParameter(2, OracleTypes.CURSOR);
-            cs.execute();
-
-            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
-                while (rs.next()) {
-                    emails.add(rs.getString(1));
-                }
+            ResultSet rs = cs.executeQuery();
+            
+            while (rs.next()) {
+                emails.add(rs.getString(1));
             }
+          
         }
 
         return emails;
@@ -162,17 +155,15 @@ public class UserPetOperations {
         List<String> phones = new ArrayList<>();
 
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_get_owner_phones(?,?)}")) {
+             CallableStatement cs = conn.prepareCall("call pr_get_owner_phones(?)")) {
 
             cs.setInt(1, ownerId);
-            cs.registerOutParameter(2, OracleTypes.CURSOR);
-            cs.execute();
-
-            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
-                while (rs.next()) {
-                    phones.add(rs.getString(1));
-                }
+            ResultSet rs = cs.executeQuery();
+            
+            while (rs.next()) {
+                phones.add(rs.getString(1));
             }
+            
         }
 
         return phones;
@@ -180,33 +171,32 @@ public class UserPetOperations {
     public DefaultTableModel getUserMissingPets(int ownerId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall(
-                 "{call pr_get_user_missing_pet_table(?,?)}")) {
+                 "call pr_get_user_missing_pet_table(?)")) {
 
             cs.setInt(1, ownerId);
-            cs.registerOutParameter(2, OracleTypes.CURSOR);
 
-            cs.execute();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
-                return buildPetTableModel(rs);
-            }
+            ResultSet rs = cs.executeQuery();
+            
+            return buildPetTableModel(rs);
+            
         }
     }
     public void takeBackMissingReport(int petId, int ownerId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall(
-                 "{call pr_take_back_missing_report(?,?)}")) {
+                 "call pr_take_back_missing_report(?,?)")) {
 
             cs.setInt(1, petId);
             cs.setInt(2, ownerId);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
         }
     }
 
         public DefaultTableModel getAdoptionPets(int currentUserId, PetFilter filter) throws SQLException {
             try (Connection conn = ConexionMariaDB.conectar();
                  CallableStatement cs = conn.prepareCall(
-                     "{call pr_get_adoption_pet_table(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}")) {
+                     "call pr_get_adoption_pet_table(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
 
                 cs.setInt(1, currentUserId);
 
@@ -227,37 +217,32 @@ public class UserPetOperations {
                 setNullableString(cs, 13, filter.color);
                 setNullableInt(cs, 14, filter.age);
                 setNullableString(cs, 15, filter.name);
-                setNullableString(cs, 16, filter.chip);
+                setNullableString(cs, 16, filter.chip);        
 
-                cs.registerOutParameter(17, OracleTypes.CURSOR);
-
-                cs.execute();
-
-                try (ResultSet rs = (ResultSet) cs.getObject(17)) {
-                    return buildPetTableModel(rs);
-                }
+                ResultSet rs = cs.executeQuery();                
+                return buildPetTableModel(rs);
+                
             }
         }
 
     public void putPetUpForAdoption(int petId, int ownerId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall(
-                 "{ call pr_put_pet_up_for_adoption(?, ?) }")) {
+                 "call pr_put_pet_up_for_adoption(?, ?)")) {
 
-            cs.registerOutParameter(1, Types.INTEGER);
-            cs.setInt(2, petId);
-            cs.setInt(3, ownerId);
-            cs.execute();
+            cs.setInt(1, petId);
+            cs.setInt(2, ownerId);
+            ResultSet rs = cs.executeQuery();
 
             int result = cs.getInt(1);
 
-    if (result == -2) {
-        throw new SQLException("This pet is reported as missing and cannot be put up for adoption.");
-    }
+            if (result == -2) {
+                throw new SQLException("This pet is reported as missing and cannot be put up for adoption.");
+            }
 
-    if (result != 1) {
-        throw new SQLException("Pet not found, or this pet does not belong to this user.");
-    }
+            if (result != 1) {
+                throw new SQLException("Pet not found, or this pet does not belong to this user.");
+            }
         }
     }
     public void reportPetMissing(int petId, int ownerId) throws SQLException {
@@ -266,7 +251,7 @@ public class UserPetOperations {
 
             cs.setInt(1, petId);
             cs.setInt(2, ownerId);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
         }
     }
     public List<CatalogItem> getCatalog(String catalogName) throws SQLException {
@@ -274,19 +259,15 @@ public class UserPetOperations {
         items.add(new CatalogItem(null, "Todos"));
 
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_get_catalog(?,?)}")) {
+             CallableStatement cs = conn.prepareCall("{call pr_get_catalog(?)}")) {
 
             cs.setString(1, catalogName);
-            cs.registerOutParameter(2, OracleTypes.CURSOR);
-            cs.execute();
-
-            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
-                while (rs.next()) {
-                    items.add(new CatalogItem(rs.getInt("Id"), rs.getString("Name")));
-                }
+            ResultSet rs = cs.executeQuery();
+            
+            while (rs.next()) {
+                items.add(new CatalogItem(rs.getInt("Id"), rs.getString("Name")));
             }
-        }
-
+            }
         return items;
     }
 
@@ -354,37 +335,34 @@ public class UserPetOperations {
     }
     public void undoPetUpForAdoption(int petId, int ownerId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_undo_pet_up_for_adoption(?,?)}")) {
+             CallableStatement cs = conn.prepareCall("call pr_undo_pet_up_for_adoption(?,?)")) {
 
             cs.setInt(1, petId);
             cs.setInt(2, ownerId);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
         }
     }
     
 public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_get_adoption_requests_owner(?,?)}")) {
+             CallableStatement cs = conn.prepareCall("call pr_get_adoption_requests_owner(?)")) {
 
             cs.setInt(1, ownerId);
-            cs.registerOutParameter(2, OracleTypes.CURSOR);
-            cs.execute();
-
-            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
-                return buildAdoptionRequestTableModel(rs);
-            }
+            ResultSet rs = cs.executeQuery();
+            
+            return buildAdoptionRequestTableModel(rs);
+            
         }
     }
 
     public void createAdoptionRequest(int petId, int adopterId, String description) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_create_adoption_request(?,?,?,?)}")) {
+             CallableStatement cs = conn.prepareCall("call pr_create_adoption_request(?,?,?)")) {
 
             cs.setInt(1, petId);
             cs.setInt(2, adopterId);
             setNullableString(cs, 3, description);
-            cs.registerOutParameter(4, Types.NUMERIC);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
         }
     }
 
@@ -394,7 +372,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
 
             cs.setInt(1, adoptionId);
             cs.setInt(2, ownerId);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
         }
     }
 
@@ -404,7 +382,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
 
             cs.setInt(1, adoptionId);
             cs.setInt(2, ownerId);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
         }
     }
 
@@ -412,7 +390,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
                                            String place, String description,
                                            java.math.BigDecimal reward, int currencyId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_register_lost_for_owner(?,?,?,?,?,?,?,?)}")) {
+             CallableStatement cs = conn.prepareCall("call pr_register_lost_for_owner(?,?,?,?,?,?,?,?)")) {
 
             cs.setInt(1, petId);
             cs.setInt(2, ownerId);
@@ -426,7 +404,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
             }
             cs.setInt(7, currencyId);
             cs.registerOutParameter(8, Types.NUMERIC);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
         }
     }
 
@@ -470,47 +448,44 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
     }
     public void createPetClaimRequest(int petId, int claimantId, String description) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_create_pet_claim(?,?,?,?)}")) {
+             CallableStatement cs = conn.prepareCall("call pr_create_pet_claim(?,?,?)")) {
 
             cs.setInt(1, petId);
             cs.setInt(2, claimantId);
             setNullableString(cs, 3, description);
-            cs.registerOutParameter(4, Types.NUMERIC);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
         }
     }
 
     public DefaultTableModel getClaimRequestsForOwner(int ownerId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_get_claim_requests_owner(?,?)}")) {
+             CallableStatement cs = conn.prepareCall("call pr_get_claim_requests_owner(?)")) {
 
             cs.setInt(1, ownerId);
-            cs.registerOutParameter(2, OracleTypes.CURSOR);
-            cs.execute();
-
-            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
-                return buildClaimRequestTableModel(rs);
-            }
+            ResultSet rs = cs.executeQuery();
+            
+            return buildClaimRequestTableModel(rs);
+            
         }
     }
 
     public void acceptPetClaimRequest(int claimId, int ownerId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_accept_pet_claim(?,?)}")) {
+             CallableStatement cs = conn.prepareCall("call pr_accept_pet_claim(?,?)")) {
 
             cs.setInt(1, claimId);
             cs.setInt(2, ownerId);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
         }
     }
 
     public void rejectPetClaimRequest(int claimId, int ownerId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_reject_pet_claim(?,?)}")) {
+             CallableStatement cs = conn.prepareCall("call pr_reject_pet_claim(?,?)")) {
 
             cs.setInt(1, claimId);
             cs.setInt(2, ownerId);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
         }
     }
 
@@ -561,7 +536,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
     
     public DefaultTableModel getBitacora() throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_query_bitacora(?,?,?,?,?,?)}")) {
+             CallableStatement cs = conn.prepareCall("call pr_query_bitacora(?,?,?,?,?)")) {
 
             cs.setNull(1, Types.VARCHAR); // p_table_name
             cs.setNull(2, Types.VARCHAR); // p_field_name
@@ -569,12 +544,10 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
             cs.setNull(4, Types.DATE);    // p_start_date
             cs.setNull(5, Types.DATE);    // p_end_date
 
-            cs.registerOutParameter(6, OracleTypes.CURSOR);
-            cs.execute();
-
-            try (ResultSet rs = (ResultSet) cs.getObject(6)) {
-                return buildBitacoraTableModel(rs);
-            }
+            ResultSet rs = cs.executeQuery();
+            
+            return buildBitacoraTableModel(rs);
+            
         }
     }
     private DefaultTableModel buildBitacoraTableModel(ResultSet rs) throws SQLException {
