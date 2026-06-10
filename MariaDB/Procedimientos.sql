@@ -909,10 +909,6 @@ BEGIN
         SET MESSAGE_TEXT = 'You already have a pending claim for this pet.';
     END IF;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c23a79b (arregle el desastre)
     /* Insert */
     INSERT INTO PetClaim (
         ClaimDate,
@@ -929,13 +925,7 @@ BEGIN
         p_claimant_id,
         v_owner_id
     );
-<<<<<<< HEAD
-
-    SET p_new_id = LAST_INSERT_ID();
-
-=======
 SET p_new_id = LAST_INSERT_ID();
->>>>>>> c23a79b (arregle el desastre)
 END $$
 
 DELIMITER ;
@@ -1154,11 +1144,7 @@ BEGIN
     );
 
     COMMIT;
-<<<<<<< HEAD
-    SET p_new_id = LAST_INSERT_ID();
-=======
 SET p_new_id = LAST_INSERT_ID();
->>>>>>> c23a79b (arregle el desastre)
 END $$
 
 DELIMITER ;
@@ -1356,10 +1342,6 @@ BEGIN
     WHERE Id = p_pet_id
       AND IdOwner = p_owner_id;
 
-<<<<<<< HEAD
-    /* Insert LostReport */
-=======
->>>>>>> c23a79b (arregle el desastre)
     INSERT INTO LostReport (
         LostDate,
         Place,
@@ -1558,15 +1540,6 @@ BEGIN
 
     /* Insert solicitud */
     INSERT INTO Adoption (
-<<<<<<< HEAD
-        AdoptionDate,
-        AvailableDate,
-        Description,
-        State,
-        IdPet,
-        IdAdopter,
-        IdOwner
-=======
     AdoptionDate,
     AvailableDate,
     Description,
@@ -1574,7 +1547,6 @@ BEGIN
     IdPet,
     IdAdopter,
     IdOwner
->>>>>>> c23a79b (arregle el desastre)
     )
     VALUES (
         NULL,
@@ -1586,12 +1558,8 @@ BEGIN
         v_owner_id
     );
 
-<<<<<<< HEAD
-    COMMIT;
-=======
->>>>>>> c23a79b (arregle el desastre)
     SET p_new_id = LAST_INSERT_ID();
-
+    COMMIT;
 END $$
 
 DELIMITER ;
@@ -2767,12 +2735,7 @@ BEGIN
         p_id_currency,
         p_id_association
     );
-<<<<<<< HEAD
-
-    SET p_new_id = LAST_INSERT_ID();
-=======
 SET p_new_id = LAST_INSERT_ID();
->>>>>>> c23a79b (arregle el desastre)
 END$$
 
 DELIMITER ;
