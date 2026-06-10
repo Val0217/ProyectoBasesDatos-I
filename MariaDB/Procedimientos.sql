@@ -949,13 +949,8 @@ BEGIN
         SET MESSAGE_TEXT = 'You already have a pending claim for this pet.';
     END IF;
 
-    /* Generar nuevo ID (manteniendo tu lógica actual) */
-    SELECT fn_next_id('PetClaim')
-    INTO p_new_id;
-
     /* Insert */
     INSERT INTO PetClaim (
-        Id,
         ClaimDate,
         Description,
         State,
@@ -963,7 +958,6 @@ BEGIN
         IdClaimant,
         IdOwner
     ) VALUES (
-        p_new_id,
         NOW(),
         p_description,
         'To be confirmed',
@@ -971,6 +965,8 @@ BEGIN
         p_claimant_id,
         v_owner_id
     );
+
+    SET p_new_id = LAST_INSERT_ID();
 
 END $$
 
@@ -1170,12 +1166,7 @@ BEGIN
 
     START TRANSACTION;
 
-    /* Generar ID (Oracle fn_next_id reemplazado por AUTO_INCREMENT recomendado) */
-    SELECT fn_next_id('Veterinarian')
-    INTO p_new_id;
-
     INSERT INTO Veterinarian (
-        Id,
         FirstName,
         LastName,
         Name,
@@ -1185,7 +1176,6 @@ BEGIN
         IdDistrict
     )
     VALUES (
-        p_new_id,
         p_first_name,
         p_last_name,
         p_clinic_name,
@@ -1196,6 +1186,7 @@ BEGIN
     );
 
     COMMIT;
+    SET p_new_id = LAST_INSERT_ID();
 END $$
 
 DELIMITER ;
@@ -1393,13 +1384,8 @@ BEGIN
     WHERE Id = p_pet_id
       AND IdOwner = p_owner_id;
 
-    /* Generar ID (manteniendo lógica existente) */
-    SELECT fn_next_id('LostReport')
-    INTO p_new_id;
-
     /* Insert LostReport */
     INSERT INTO LostReport (
-        Id,
         LostDate,
         Place,
         Description,
@@ -1410,7 +1396,6 @@ BEGIN
         IdCurrency
     )
     VALUES (
-        p_new_id,
         p_lost_date,
         SUBSTRING(p_place, 1, 100),
         SUBSTRING(p_description, 1, 100),
@@ -1434,6 +1419,7 @@ BEGIN
       AND State IN ('In process', 'To be confirmed');
 
     COMMIT;
+    SET p_new_id = LAST_INSERT_ID();
 
 END $$
 
@@ -2029,7 +2015,6 @@ BEGIN
 
         IF ROW_COUNT() = 0 THEN
             INSERT INTO Adoption (
-                Id,
                 AdoptionDate,
                 AvailableDate,
                 Description,
@@ -2039,7 +2024,6 @@ BEGIN
                 IdOwner
             )
             VALUES (
-                fn_next_id('Adoption'),
                 NULL,
                 NOW(),
                 'Pet put up for adoption by owner.',
@@ -2701,7 +2685,6 @@ CREATE OR REPLACE PROCEDURE pr_calificate_person (
     OUT p_new_id INT
 )
 BEGIN
-    SET p_new_id = fn_next_id('Calification');
 
     INSERT INTO Calification (
         Id,
@@ -2717,6 +2700,8 @@ BEGIN
         NOW(),
         p_id_person
     );
+
+    SET p_new_id = LAST_INSERT_ID();
 END$$
 
 DELIMITER ;
@@ -2729,7 +2714,6 @@ CREATE OR REPLACE PROCEDURE pr_add_to_blocklist (
     OUT p_new_id INT
 )
 BEGIN
-    SET p_new_id = fn_next_id('BlockList');
 
     INSERT INTO BlockList (
         Id,
@@ -2741,6 +2725,8 @@ BEGIN
         NOW(),
         p_id_person
     );
+
+    SET p_new_id = LAST_INSERT_ID();
 END$$
 
 DELIMITER ;
@@ -2757,7 +2743,6 @@ CREATE OR REPLACE PROCEDURE pr_register_donation (
     OUT p_new_id INT
 )
 BEGIN
-    SET p_new_id = fn_next_id('Donation');
 
     INSERT INTO Donation (
         Id,
@@ -2775,6 +2760,8 @@ BEGIN
         p_id_currency,
         p_id_association
     );
+
+    SET p_new_id = LAST_INSERT_ID();
 END$$
 
 DELIMITER ;
@@ -2849,7 +2836,6 @@ CREATE OR REPLACE PROCEDURE pr_register_foster_home (
     OUT p_new_id INT
 )
 BEGIN
-    SET p_new_id = fn_next_id('FosterHome');
 
     INSERT INTO FosterHome (
         Id,
@@ -2861,6 +2847,8 @@ BEGIN
         p_needs_donation,
         p_id_person
     );
+
+    SET p_new_id = LAST_INSERT_ID();
 END$$
 
 DELIMITER ;

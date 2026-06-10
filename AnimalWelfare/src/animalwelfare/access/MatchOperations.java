@@ -53,14 +53,18 @@ public class MatchOperations {
      * @return count of pending matches
      */
     public static int countPendingMatches() {
-        String call = "{ call fn_count_pending_matches() }";
+        String call = "Select fn_count_pending_matches()";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
-            cs.registerOutParameter(1, Types.NUMERIC);
-            cs.execute();
-            return cs.getInt(1);
+            ResultSet rs = cs.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            else {
+                return 0;
+            }   
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
@@ -83,33 +87,32 @@ public class MatchOperations {
             public boolean isCellEditable(int row, int col) { return false; }
         };
 
-        String call = "{ call pr_get_match_report(?) }";
+        String call = "{ call pr_get_match_report() }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-                while (rs.next()) {
-                    model.addRow(new Object[]{
-                        rs.getInt("MatchId"),
-                        rs.getInt("SimilarityPercentage") + "%",
-                        rs.getString("LostPetName")  + " — " +
-                            rs.getString("LostPetType")  + "/" +
-                            rs.getString("LostPetBreed") + "/" +
-                            rs.getString("LostPetColor"),
-                        rs.getString("LostOwnerName"),
-                        rs.getString("FoundPetName") + " — " +
-                            rs.getString("FoundPetType")  + "/" +
-                            rs.getString("FoundPetBreed") + "/" +
-                            rs.getString("FoundPetColor"),
-                        rs.getString("FinderName"),
-                        rs.getDate("MatchDate")
-                    });
-                }
+            
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getInt("MatchId"),
+                    rs.getInt("SimilarityPercentage") + "%",
+                    rs.getString("LostPetName")  + " — " +
+                        rs.getString("LostPetType")  + "/" +
+                        rs.getString("LostPetBreed") + "/" +
+                        rs.getString("LostPetColor"),
+                    rs.getString("LostOwnerName"),
+                    rs.getString("FoundPetName") + " — " +
+                        rs.getString("FoundPetType")  + "/" +
+                        rs.getString("FoundPetBreed") + "/" +
+                        rs.getString("FoundPetColor"),
+                    rs.getString("FinderName"),
+                    rs.getDate("MatchDate")
+                });
             }
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
