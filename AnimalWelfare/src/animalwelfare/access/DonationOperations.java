@@ -62,7 +62,7 @@ public class DonationOperations {
             }
         };
 
-        String call = "{ call pr_get_donations(?, ?, ?, ?, ?) }";
+        String call = "{ call pr_get_donations(?, ?, ?, ?) }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
@@ -72,23 +72,21 @@ public class DonationOperations {
             setNullableInt(cs, 2, idAssociation);
             setNullableDate(cs, 3, dateFrom);
             setNullableDate(cs, 4, dateTo);
-
-            cs.registerOutParameter(5, OracleTypes.CURSOR);
-            cs.execute();
-
-            try (ResultSet rs = (ResultSet) cs.getObject(5)) {
-                while (rs.next()) {
-                    model.addRow(new Object[]{
-                        rs.getInt("Id"),
-                        rs.getInt("PersonId"),
-                        rs.getString("DonorName"),
-                        rs.getString("AssociationName"),
-                        rs.getDouble("Amount"),
-                        rs.getString("Currency"),
-                        rs.getDate("DonationDate")
-                    });
-                }
+            
+            ResultSet rs = cs.executeQuery();
+            
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getInt("Id"),
+                    rs.getInt("PersonId"),
+                    rs.getString("DonorName"),
+                    rs.getString("AssociationName"),
+                    rs.getDouble("Amount"),
+                    rs.getString("Currency"),
+                    rs.getDate("DonationDate")
+                });
             }
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
@@ -103,22 +101,20 @@ public class DonationOperations {
      */
     public static ArrayList<DbObject> listAssociations() {
         ArrayList<DbObject> list = new ArrayList<>();
-        String call = "{ call fn_get_associations_all() }";
+        String call = "{ call pr_get_associations_all() }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.execute();
-
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-                while (rs.next()) {
-                    list.add(new DbObject(
-                        rs.getInt("Id"),
-                        rs.getString("Name")
-                    ));
-                }
+            ResultSet rs = cs.executeQuery();
+            
+            while (rs.next()) {
+                list.add(new DbObject(
+                    rs.getInt("Id"),
+                    rs.getString("Name")
+                ));
             }
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
@@ -133,21 +129,18 @@ public class DonationOperations {
      */
     public static ArrayList<DbObject> listCurrencies() {
         ArrayList<DbObject> list = new ArrayList<>();
-        String call = "{ call fn_get_currency_all() }";
+        String call = "{ call pr_get_currency_all() }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-                while (rs.next()) {
-                    list.add(new DbObject(
-                        rs.getInt("Id"),
-                        rs.getString("Name")
-                    ));
-                }
+            while (rs.next()) {
+                list.add(new DbObject(
+                    rs.getInt("Id"),
+                    rs.getString("Name")
+                ));
             }
 
         } catch (SQLException e) {
