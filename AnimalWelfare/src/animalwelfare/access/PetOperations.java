@@ -9,11 +9,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
-import oracle.jdbc.OracleTypes;
+
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import java.sql.Types;
-import oracle.jdbc.OracleConnection;
+
 import java.sql.Array;
 
 public class PetOperations {
@@ -66,11 +66,8 @@ public class PetOperations {
             statement.setString(10, getFilter(filters, "training"));
             statement.setString(11, getFilter(filters, "size"));
             statement.setString(12, getFilter(filters, "veterinarian"));
-            statement.registerOutParameter(13, OracleTypes.CURSOR);
-
-            statement.execute();
-
-            try (ResultSet resultSet = (ResultSet) statement.getObject(13)) {
+            
+            try (ResultSet resultSet =  statement.executeQuery()) {
                 while (resultSet.next()) {
                     model.addRow(new Object[] {
                         resultSet.getInt("PetId"),
@@ -198,19 +195,15 @@ public class PetOperations {
 
     private List<String> callOptionsProcedure(String procedureName, String columnName) {
         List<String> options = new ArrayList<>();
-        String call = "{ call " + procedureName + "(?) }";
+        String call = "{ call " + procedureName + "() }";
 
         try (
             Connection connection = ConexionMariaDB.conectar();
-            CallableStatement statement = connection.prepareCall(call)
+            CallableStatement statement = connection.prepareCall(call);
+            ResultSet resultSet = statement.executeQuery()
         ) {
-            statement.registerOutParameter(1, OracleTypes.CURSOR);
-            statement.execute();
-
-            try (ResultSet resultSet = (ResultSet) statement.getObject(1)) {
-                while (resultSet.next()) {
-                    options.add(resultSet.getString(columnName));
-                }
+            while (resultSet.next()) {
+                options.add(resultSet.getString(columnName));
             }
         } catch (SQLException | NullPointerException e) {
             System.out.println("Error loading options from stored procedure: " + e.getMessage());
@@ -261,10 +254,50 @@ public class PetOperations {
             statement.setInt(1, petId);
             statement.setInt(2, ownerId);
 
+<<<<<<< HEAD
             ResultSet resultSet = statement.executeQuery();
 
             if (!resultSet.next()) {
                 return null;
+=======
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (!resultSet.next()) {
+                    return null;
+                }
+
+                PetEditData pet = new PetEditData();
+
+                pet.idPet = resultSet.getInt("IdPet");
+                pet.idOwner = resultSet.getInt("IdOwner");
+
+                pet.color = resultSet.getString("Color");
+                pet.age = resultSet.getInt("Age");
+                pet.description = resultSet.getString("Description");
+                pet.petName = resultSet.getString("PetName");
+                pet.chip = resultSet.getString("Chip");
+
+                pet.idEnergy = resultSet.getInt("IdEnergy");
+                pet.idType = resultSet.getInt("IdType");
+
+                int breedId = resultSet.getInt("IdBreed");
+                if (resultSet.wasNull()) {
+                    pet.idBreed = null;
+                } else {
+                    pet.idBreed = breedId;
+                }
+
+                pet.idDistrict = resultSet.getInt("IdDistrict");
+                pet.idCanton = resultSet.getInt("IdCanton");
+                pet.idProvince = resultSet.getInt("IdProvince");
+                pet.idCountry = resultSet.getInt("IdCountry");
+
+                pet.idSpace = resultSet.getInt("IdSpace");
+                pet.idPetTraining = resultSet.getInt("IdPetTraining");
+                pet.idSize = resultSet.getInt("IdSize");
+                pet.idVeterinarian = resultSet.getInt("IdVeterinarian");
+
+                return pet;
+>>>>>>> c23a79b (arregle el desastre)
             }
 
             PetEditData pet = new PetEditData();

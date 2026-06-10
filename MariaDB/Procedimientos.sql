@@ -1,44 +1,4 @@
-DELIMITER $$
 
-DROP FUNCTION IF EXISTS fn_next_id$$
-
-CREATE FUNCTION fn_next_id(
-    p_table_name VARCHAR(64)
-)
-RETURNS BIGINT
-READS SQL DATA
-NOT DETERMINISTIC
-BEGIN
-    DECLARE v_next_id BIGINT DEFAULT NULL;
-
-    CASE UPPER(TRIM(p_table_name))
-        WHEN 'PETCLAIM' THEN
-            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM PetClaim;
-        WHEN 'VETERINARIAN' THEN
-            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM Veterinarian;
-        WHEN 'LOSTREPORT' THEN
-            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM LostReport;
-        WHEN 'ADOPTER' THEN
-            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM Adopter;
-        WHEN 'ADOPTION' THEN
-            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM Adoption;
-        WHEN 'CALIFICATION' THEN
-            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM Calification;
-        WHEN 'BLOCKLIST' THEN
-            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM BlockList;
-        WHEN 'DONATION' THEN
-            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM Donation;
-        WHEN 'FOSTERHOME' THEN
-            SELECT COALESCE(MAX(Id), 0) + 1 INTO v_next_id FROM FosterHome;
-        ELSE
-            SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = 'Tabla no soportada por fn_next_id';
-    END CASE;
-
-    RETURN v_next_id;
-END$$
-
-DELIMITER ;
 
 /*
     Procedimiento almacenado para obtener los distritos de un cantón específico.
@@ -949,6 +909,10 @@ BEGIN
         SET MESSAGE_TEXT = 'You already have a pending claim for this pet.';
     END IF;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c23a79b (arregle el desastre)
     /* Insert */
     INSERT INTO PetClaim (
         ClaimDate,
@@ -965,9 +929,13 @@ BEGIN
         p_claimant_id,
         v_owner_id
     );
+<<<<<<< HEAD
 
     SET p_new_id = LAST_INSERT_ID();
 
+=======
+SET p_new_id = LAST_INSERT_ID();
+>>>>>>> c23a79b (arregle el desastre)
 END $$
 
 DELIMITER ;
@@ -1186,7 +1154,11 @@ BEGIN
     );
 
     COMMIT;
+<<<<<<< HEAD
     SET p_new_id = LAST_INSERT_ID();
+=======
+SET p_new_id = LAST_INSERT_ID();
+>>>>>>> c23a79b (arregle el desastre)
 END $$
 
 DELIMITER ;
@@ -1384,7 +1356,10 @@ BEGIN
     WHERE Id = p_pet_id
       AND IdOwner = p_owner_id;
 
+<<<<<<< HEAD
     /* Insert LostReport */
+=======
+>>>>>>> c23a79b (arregle el desastre)
     INSERT INTO LostReport (
         LostDate,
         Place,
@@ -1405,6 +1380,8 @@ BEGIN
         v_district_id,
         p_currency_id
     );
+
+SET p_new_id = LAST_INSERT_ID();
 
     /* Cambiar estado del pet */
     UPDATE Pet
@@ -1492,8 +1469,8 @@ BEGIN
 
     /* Insertar rol si no existe */
     IF v_role_count = 0 THEN
-        INSERT INTO Adopter (Id, IdPerson)
-        VALUES (fn_next_id('Adopter'), v_adopter_id);
+       INSERT INTO Adopter (IdPerson)
+       VALUES (v_adopter_id);
     END IF;
 
     COMMIT;
@@ -1581,6 +1558,7 @@ BEGIN
 
     /* Insert solicitud */
     INSERT INTO Adoption (
+<<<<<<< HEAD
         AdoptionDate,
         AvailableDate,
         Description,
@@ -1588,6 +1566,15 @@ BEGIN
         IdPet,
         IdAdopter,
         IdOwner
+=======
+    AdoptionDate,
+    AvailableDate,
+    Description,
+    State,
+    IdPet,
+    IdAdopter,
+    IdOwner
+>>>>>>> c23a79b (arregle el desastre)
     )
     VALUES (
         NULL,
@@ -1599,7 +1586,10 @@ BEGIN
         v_owner_id
     );
 
+<<<<<<< HEAD
     COMMIT;
+=======
+>>>>>>> c23a79b (arregle el desastre)
     SET p_new_id = LAST_INSERT_ID();
 
 END $$
@@ -1757,7 +1747,6 @@ BEGIN
     UPDATE Adoption
     SET State = 'Canceled'
     WHERE IdPet = p_pet_id
-      AND IdOwner = p_owner_id
       AND State IN ('In process', 'To be confirmed');
 
     COMMIT;
@@ -1840,7 +1829,38 @@ BEGIN
     WHERE IdState = 4;
 END $$
 
+DROP PROCEDURE IF EXISTS pr_put_pet_up_for_adoption;
+DELIMITER $$
 
+CREATE PROCEDURE pr_put_pet_up_for_adoption (
+    IN p_pet_id INT,
+    IN p_owner_id INT,
+    OUT p_result INT
+)
+BEGIN
+    DECLARE v_missing_count INT DEFAULT 0;
+
+    SELECT COUNT(*)
+    INTO v_missing_count
+    FROM Pet
+    WHERE Id = p_pet_id
+      AND IdOwner = p_owner_id
+      AND IdState = 3;
+
+    IF v_missing_count > 0 THEN
+        SET p_result = -2;
+    ELSE
+        UPDATE Pet
+        SET IdState = 1
+        WHERE Id = p_pet_id
+          AND IdOwner = p_owner_id
+          AND IdState <> 3;
+
+        SET p_result = ROW_COUNT();
+    END IF;
+END$$
+
+DELIMITER ;
 /* ------------------------------------------------------------
    FN_PUT_PET_UP_FOR_ADOPTION (FUNCTION → PROCEDURE)
 ------------------------------------------------------------ */
@@ -1911,6 +1931,9 @@ DELIMITER $$
 /* ============================================================
    GET PETS BY STATE (CORE FILTER)
 ============================================================ */
+DROP PROCEDURE IF EXISTS pr_pkg_get_pets_by_state;
+DELIMITER $$
+
 CREATE OR REPLACE PROCEDURE pr_pkg_get_pets_by_state (
     IN p_id_state INT,
     IN p_color VARCHAR(100),
@@ -1929,8 +1952,22 @@ CREATE OR REPLACE PROCEDURE pr_pkg_get_pets_by_state (
 BEGIN
     SELECT *
     FROM VW_TABLE_ADOPTION
-    WHERE IdState = p_id_state;
+    WHERE IdState = p_id_state
+      AND (p_color IS NULL OR UPPER(Color) LIKE CONCAT('%', UPPER(p_color), '%'))
+      AND (p_age IS NULL OR Age = p_age)
+      AND (p_name IS NULL OR UPPER(PetName) LIKE CONCAT('%', UPPER(p_name), '%'))
+      AND (p_chip IS NULL OR UPPER(Chip) LIKE CONCAT('%', UPPER(p_chip), '%'))
+      AND (p_energy IS NULL OR UPPER(Energy) LIKE CONCAT('%', UPPER(p_energy), '%'))
+      AND (p_type IS NULL OR UPPER(PetType) LIKE CONCAT('%', UPPER(p_type), '%'))
+      AND (p_breed IS NULL OR UPPER(Breed) LIKE CONCAT('%', UPPER(p_breed), '%'))
+      AND (p_district IS NULL OR UPPER(District) LIKE CONCAT('%', UPPER(p_district), '%'))
+      AND (p_space_required IS NULL OR UPPER(SpaceRequired) LIKE CONCAT('%', UPPER(p_space_required), '%'))
+      AND (p_training IS NULL OR UPPER(Training) LIKE CONCAT('%', UPPER(p_training), '%'))
+      AND (p_size IS NULL OR UPPER(PetSize) LIKE CONCAT('%', UPPER(p_size), '%'))
+      AND (p_veterinarian IS NULL OR UPPER(VeterinarianName) LIKE CONCAT('%', UPPER(p_veterinarian), '%'));
 END $$
+
+DELIMITER ;
 
 
 /* ============================================================
@@ -1951,7 +1988,7 @@ CREATE OR REPLACE PROCEDURE pr_pkg_get_pets_up_for_adoption (
     IN p_veterinarian VARCHAR(100)
 )
 BEGIN
-    CALL pr_get_pets_by_state(1, p_color, p_age, p_name, p_chip,
+    CALL pr_pkg_get_pets_by_state(1, p_color, p_age, p_name, p_chip,
         p_energy, p_type, p_breed, p_district, p_space_required,
         p_training, p_size, p_veterinarian);
 END $$
@@ -1975,7 +2012,7 @@ CREATE OR REPLACE PROCEDURE pr_pkg_get_found_pets (
     IN p_veterinarian VARCHAR(100)
 )
 BEGIN
-    CALL pr_get_pets_by_state(4, p_color, p_age, p_name, p_chip,
+    CALL pr_pkg_get_pets_by_state(4, p_color, p_age, p_name, p_chip,
         p_energy, p_type, p_breed, p_district, p_space_required,
         p_training, p_size, p_veterinarian);
 END $$
@@ -2290,36 +2327,6 @@ END $$
 
 DELIMITER ;
 
-/** Procedimiento almacenado para poner una mascota en adopción, con validaciones para asegurar que la mascota existe, que pertenece al dueño que realiza la acción, y que se actualizan correctamente el estado de la mascota y las solicitudes de adopción relacionadas. */
-DELIMITER $$
-
-CREATE OR REPLACE PROCEDURE pr_put_pet_up_for_adoption (
-    IN p_pet_id INT,
-    IN p_owner_id INT
-)
-BEGIN
-    DECLARE v_rows INT DEFAULT 0;
-
-    START TRANSACTION;
-
-    UPDATE Pet
-    SET IdState = 1
-    WHERE Id = p_pet_id
-      AND IdOwner = p_owner_id;
-
-    SET v_rows = ROW_COUNT();
-
-    IF v_rows = 0 THEN
-        ROLLBACK;
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Pet not found, or this pet does not belong to this user.';
-    ELSE
-        COMMIT;
-    END IF;
-
-END $$
-
-DELIMITER ;
 
 /** Procedimiento almacenado para registrar una nueva mascota, con validaciones para asegurar que se insertan correctamente los datos de la mascota y que se devuelve el ID de la nueva mascota creada. */
 DELIMITER $$
@@ -2703,7 +2710,7 @@ BEGIN
 
     SET p_new_id = LAST_INSERT_ID();
 END$$
-
+SET p_new_id = LAST_INSERT_ID();
 DELIMITER ;
 
 /* Procedimiento almacenado para agregar una persona a la lista de bloqueados, con validaciones para asegurar que se inserta correctamente el registro en la tabla de bloqueados y que se devuelve el ID del nuevo registro creado. */
@@ -2728,7 +2735,7 @@ BEGIN
 
     SET p_new_id = LAST_INSERT_ID();
 END$$
-
+SET p_new_id = LAST_INSERT_ID();
 DELIMITER ;
 
 /* Procedimiento almacenado para registrar una nueva donación, con validaciones para asegurar que se insertan correctamente los datos de la donación y que se devuelve el ID de la nueva donación creada. */
@@ -2760,8 +2767,12 @@ BEGIN
         p_id_currency,
         p_id_association
     );
+<<<<<<< HEAD
 
     SET p_new_id = LAST_INSERT_ID();
+=======
+SET p_new_id = LAST_INSERT_ID();
+>>>>>>> c23a79b (arregle el desastre)
 END$$
 
 DELIMITER ;
