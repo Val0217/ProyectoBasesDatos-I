@@ -8,7 +8,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import oracle.jdbc.OracleTypes;
+
 
 public class UserPetOperations {
 
@@ -189,7 +189,7 @@ public class UserPetOperations {
 
             cs.setInt(1, petId);
             cs.setInt(2, ownerId);
-            ResultSet rs = cs.executeQuery();
+            cs.execute();
         }
     }
 
@@ -249,11 +249,18 @@ public class UserPetOperations {
     }
     public void reportPetMissing(int petId, int ownerId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_report_pet_missing(?,?)}")) {
+             CallableStatement cs = conn.prepareCall("{call pr_register_lost_for_owner(?,?,?,?,?,?,?,?)}")) {
 
             cs.setInt(1, petId);
             cs.setInt(2, ownerId);
-            ResultSet rs = cs.executeQuery();
+            cs.setDate(3, new java.sql.Date(System.currentTimeMillis()));
+            cs.setNull(4, Types.VARCHAR);
+            cs.setNull(5, Types.VARCHAR);
+            cs.setNull(6, Types.NUMERIC);
+            cs.setNull(7, Types.NUMERIC);
+            cs.registerOutParameter(8, Types.INTEGER);
+
+            cs.execute();
         }
     }
     public List<CatalogItem> getCatalog(String catalogName) throws SQLException {
@@ -341,7 +348,7 @@ public class UserPetOperations {
 
             cs.setInt(1, petId);
             cs.setInt(2, ownerId);
-            ResultSet rs = cs.executeQuery();
+            cs.execute();
         }
     }
     
@@ -364,10 +371,8 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
             cs.setInt(1, petId);
             cs.setInt(2, adopterId);
             setNullableString(cs, 3, description);
-            
             cs.registerOutParameter(4, Types.INTEGER);
             cs.execute();
-            int newId = cs.getInt(4);
         }
     }
 
@@ -377,7 +382,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
 
             cs.setInt(1, adoptionId);
             cs.setInt(2, ownerId);
-            ResultSet rs = cs.executeQuery();
+            cs.execute();
         }
     }
 
@@ -387,7 +392,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
 
             cs.setInt(1, adoptionId);
             cs.setInt(2, ownerId);
-            ResultSet rs = cs.executeQuery();
+            cs.execute();
         }
     }
 
@@ -409,7 +414,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
             }
             cs.setInt(7, currencyId);
             cs.registerOutParameter(8, Types.NUMERIC);
-            ResultSet rs = cs.executeQuery();
+            cs.execute();
         }
     }
 
@@ -453,12 +458,13 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
     }
     public void createPetClaimRequest(int petId, int claimantId, String description) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("call pr_create_pet_claim(?,?,?)")) {
+             CallableStatement cs = conn.prepareCall("call pr_create_pet_claim(?,?,?,?)")) {
 
             cs.setInt(1, petId);
             cs.setInt(2, claimantId);
             setNullableString(cs, 3, description);
-            ResultSet rs = cs.executeQuery();
+            cs.registerOutParameter(4, Types.INTEGER);
+            cs.execute();
         }
     }
 
@@ -480,7 +486,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
 
             cs.setInt(1, claimId);
             cs.setInt(2, ownerId);
-            ResultSet rs = cs.executeQuery();
+            cs.execute();
         }
     }
 
@@ -490,7 +496,7 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
 
             cs.setInt(1, claimId);
             cs.setInt(2, ownerId);
-            ResultSet rs = cs.executeQuery();
+            cs.execute();
         }
     }
 
