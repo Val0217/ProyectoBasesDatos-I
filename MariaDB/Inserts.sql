@@ -511,3 +511,53 @@ VALUES (
     'CR21015200009111111111',
     'patitas@felices.cr'
 );
+
+INSERT INTO Adoption
+(AdoptionDate, AvailableDate, Description, State, IdPet, IdAdopter, IdOwner)
+VALUES
+('2024-02-15', '2024-01-20', 'Adopcion aprobada de perro mestizo', 'Approved', 3, 5, 1);
+
+INSERT INTO Adoption
+(AdoptionDate, AvailableDate, Description, State, IdPet, IdAdopter, IdOwner)
+VALUES
+('2024-05-10', '2024-04-18', 'Adopcion aprobada de gato adulto', 'Approved', 7, 6, 2);
+
+INSERT INTO Adoption
+(AdoptionDate, AvailableDate, Description, State, IdPet, IdAdopter, IdOwner)
+VALUES
+('2024-08-22', '2024-07-30', 'Adopcion aprobada por familia Rodríguez', 'Approved', 9, 8, 3);
+
+INSERT INTO Adoption
+(AdoptionDate, AvailableDate, Description, State, IdPet, IdAdopter, IdOwner)
+VALUES
+('2024-11-05', '2024-10-12', 'Adopcion aprobada de mascota rescatada', 'Approved', 12, 4, 2);
+
+INSERT INTO Adoption
+(AdoptionDate, AvailableDate, Description, State, IdPet, IdAdopter, IdOwner)
+VALUES
+('2025-01-18', '2024-12-28', 'Adopcion aprobada de cachorro mestizo', 'Approved', 14, 9, 5);
+
+INSERT INTO Adoption
+(AdoptionDate, AvailableDate, Description, State, IdPet, IdAdopter, IdOwner)
+VALUES
+('2025-03-27', '2025-03-01', 'Adopcion aprobada de conejo domestico', 'Approved', 18, 7, 4);
+
+INSERT INTO Adoption
+(AdoptionDate, AvailableDate, Description, State, IdPet, IdAdopter, IdOwner)
+VALUES
+('2025-06-14', '2025-05-25', 'Adopcion aprobada por cumplimiento de requisitos', 'Approved', 5, 10, 1);
+
+INSERT INTO Adoption
+(AdoptionDate, AvailableDate, Description, State, IdPet, IdAdopter, IdOwner)
+VALUES
+('2025-09-09', '2025-08-11', 'Adopcion aprobada de gato joven', 'Approved', 11, 2, 1);
+
+INSERT INTO Adoption
+(AdoptionDate, AvailableDate, Description, State, IdPet, IdAdopter, IdOwner)
+VALUES
+('2026-01-12', '2025-12-15', 'Adopcion aprobada de perro de tamaño mediano', 'Approved', 15, 3, 2);
+
+INSERT INTO Adoption
+(AdoptionDate, AvailableDate, Description, State, IdPet, IdAdopter, IdOwner)
+VALUES
+('2026-04-30', '2026-04-02', 'Adopcion aprobada de mascota encontrada', 'Approved', 21, 1, 2);

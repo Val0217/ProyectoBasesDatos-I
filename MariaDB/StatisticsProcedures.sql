@@ -76,7 +76,7 @@ BEGIN
         ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (), 1) AS Percentage
     FROM Pet p
     JOIN PetState ps ON p.IdState = ps.Id
-    WHERE ps.Name IN ('Adoptado', 'En Adopcion')
+    WHERE ps.Name IN ('Adopted', 'For adoption')
       AND (p_idType  IS NULL OR p.IdType  = p_idType)
       AND (p_idBreed IS NULL OR p.IdBreed = p_idBreed)
     GROUP BY ps.Name;
@@ -102,8 +102,7 @@ BEGIN
         ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (), 1) AS Percentage
     FROM Pet p
     JOIN PetState ps ON p.IdState = ps.Id
-    WHERE ps.Name = 'For adoption'
-      AND p.Age IS NOT NULL
+    WHERE p.Age IS NOT NULL
     GROUP BY
         CASE
             WHEN p.Age < 1               THEN '0-1 yrs (Puppies)'
