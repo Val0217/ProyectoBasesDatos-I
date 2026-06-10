@@ -25,25 +25,23 @@ public class StatisticsOperations {
 
     public static ArrayList<String[]> getPetsByTypeAndState() {
         ArrayList<String[]> rows = new ArrayList<>();
-        String call = "{ call pr_stat_pets_by_type_state(?, ?, ?) }";
+        String call = "{ call pr_stat_pets_by_type_state(?, ?) }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             setNullableDate(cs, 1, null);
             setNullableDate(cs, 2, null);
-            cs.registerOutParameter(3, OracleTypes.CURSOR);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(3)) {
-                while (rs.next()) {
-                    rows.add(new String[]{
-                        rs.getString("PetType"),
-                        rs.getString("PetState"),
-                        String.valueOf(rs.getInt("Total"))
-                    });
-                }
+            while (rs.next()) {
+                rows.add(new String[]{
+                    rs.getString("PetType"),
+                    rs.getString("PetState"),
+                    String.valueOf(rs.getInt("Total"))
+                });
             }
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
@@ -54,25 +52,23 @@ public class StatisticsOperations {
     }
     public static ArrayList<String[]> getPetsByTypeAndState(Date dateFrom, Date dateTo) {
         ArrayList<String[]> rows = new ArrayList<>();
-        String call = "{ call pr_stat_pets_by_type_state(?, ?, ?) }";
+        String call = "{ call pr_stat_pets_by_type_state(?, ?) }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             setNullableDate(cs, 1, dateFrom);
             setNullableDate(cs, 2, dateTo);
-            cs.registerOutParameter(3, OracleTypes.CURSOR);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(3)) {
-                while (rs.next()) {
-                    rows.add(new String[]{
+            while (rs.next()) {
+                rows.add(new String[]{
                         rs.getString("PetType"),
                         rs.getString("PetState"),
                         String.valueOf(rs.getInt("Total"))
                     });
-                }
             }
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
@@ -94,25 +90,22 @@ public class StatisticsOperations {
      */
     public static ArrayList<String[]> getDonationsByAssociation(Date dateFrom, Date dateTo) {
         ArrayList<String[]> rows = new ArrayList<>();
-        String call = "{ call pr_stat_donation_by_asso(?, ?, ?) }";
+        String call = "{ call pr_stat_donation_by_asso(?, ?) }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             setNullableDate(cs, 1, dateFrom);
             setNullableDate(cs, 2, dateTo);
-            cs.registerOutParameter(3, OracleTypes.CURSOR);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(3)) {
-                while (rs.next()) {
-                    rows.add(new String[]{
-                        rs.getString("AssociationName"),
-                        rs.getString("Currency"),
-                        String.valueOf(rs.getDouble("TotalAmount")),
-                        String.valueOf(rs.getInt("DonationCount"))
-                    });
-                }
+            while (rs.next()) {
+                rows.add(new String[]{
+                    rs.getString("AssociationName"),
+                    rs.getString("Currency"),
+                    String.valueOf(rs.getDouble("TotalAmount")),
+                    String.valueOf(rs.getInt("DonationCount"))
+                });
             }
 
         } catch (SQLException e) {
@@ -135,25 +128,23 @@ public class StatisticsOperations {
      */
     public static ArrayList<String[]> getAdoptionsVsWaiting(Integer idType, Integer idBreed) {
         ArrayList<String[]> rows = new ArrayList<>();
-        String call = "{ call pr_stat_adoptions_vs_waiting(?, ?, ?) }";
+        String call = "{ call pr_stat_adoptions_vs_waiting(?, ?) }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             setNullableInt(cs, 1, idType);
             setNullableInt(cs, 2, idBreed);
-            cs.registerOutParameter(3, OracleTypes.CURSOR);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(3)) {
-                while (rs.next()) {
-                    rows.add(new String[]{
-                        rs.getString("PetState"),
-                        String.valueOf(rs.getInt("Total")),
-                        String.valueOf(rs.getDouble("Percentage"))
-                    });
-                }
+            while (rs.next()) {
+                rows.add(new String[]{
+                    rs.getString("PetState"),
+                    String.valueOf(rs.getInt("Total")),
+                    String.valueOf(rs.getDouble("Percentage"))
+                });
             }
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
@@ -173,23 +164,21 @@ public class StatisticsOperations {
      */
     public static ArrayList<String[]> getNonAdoptedByAge() {
         ArrayList<String[]> rows = new ArrayList<>();
-        String call = "{ call pr_stat_nonadopted_by_age(?) }";
+        String call = "{ call pr_stat_nonadopted_by_age() }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.execute();
-
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-                while (rs.next()) {
-                    rows.add(new String[]{
-                        rs.getString("AgeRange"),
-                        String.valueOf(rs.getInt("Total")),
-                        String.valueOf(rs.getDouble("Percentage"))
-                    });
-                }
+            ResultSet rs = cs.executeQuery();
+            
+            while (rs.next()) {
+                rows.add(new String[]{
+                    rs.getString("AgeRange"),
+                    String.valueOf(rs.getInt("Total")),
+                    String.valueOf(rs.getDouble("Percentage"))
+                });
             }
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
@@ -209,23 +198,19 @@ public class StatisticsOperations {
      */
     public static ArrayList<String[]> getAvgAdoptionTime() {
         ArrayList<String[]> rows = new ArrayList<>();
-        String call = "{ call pr_stat_avg_adoption_time(?) }";
+        String call = "{ call pr_stat_avg_adoption_time() }";
 
         try (Connection con = ConexionMariaDB.conectar();
-             CallableStatement cs = con.prepareCall(call)) {
+            CallableStatement cs = con.prepareCall(call)) {
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.execute();
-
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-                while (rs.next()) {
-                    rows.add(new String[]{
-                        rs.getString("PetType"),
-                        rs.getString("PetBreed"),
-                        String.valueOf(rs.getDouble("AvgDays")),
-                        String.valueOf(rs.getInt("TotalAdoptions"))
-                    });
-                }
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                rows.add(new String[]{
+                    rs.getString("PetType"),
+                    rs.getString("PetBreed"),
+                    String.valueOf(rs.getDouble("AvgDays")),
+                    String.valueOf(rs.getInt("TotalAdoptions"))
+                });
             }
 
         } catch (SQLException e) {
@@ -247,7 +232,7 @@ public class StatisticsOperations {
 
     /** Returns all breeds for filter combos */
     public static ArrayList<DbObject> listBreeds() {
-        return listCatalog("{ call pr_get_pet_type_all() }");
+        return listCatalog("{ call pr_get_pet_breed_all() }");
     }
 
     private static ArrayList<DbObject> listCatalog(String sql) {
@@ -256,13 +241,10 @@ public class StatisticsOperations {
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(sql)) {
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-                while (rs.next()) {
-                    list.add(new DbObject(rs.getInt("Id"), rs.getString("Name")));
-                }
+            while (rs.next()) {
+                list.add(new DbObject(rs.getInt("Id"), rs.getString("Name")));
             }
 
         } catch (SQLException e) {
