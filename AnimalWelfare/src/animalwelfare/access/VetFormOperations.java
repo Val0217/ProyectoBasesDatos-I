@@ -21,19 +21,17 @@ public class VetFormOperations {
 
     public List<DbObject> getCountries() throws SQLException {
         List<DbObject> list = new ArrayList<>();
-        String sql = "SELECT welfare.pr_get_country_all(?)";
+        String sql = "{ call pr_get_country_all() }";
  
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(sql)) {
  
-            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
  
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-                while (rs.next()) {
-                    list.add(new DbObject(rs.getInt("Id"), rs.getString("Name")));
-                }
+            while (rs.next()) {
+                list.add(new DbObject(rs.getInt("Id"), rs.getString("Name")));
             }
+            
         }
         return list;
     }
@@ -46,15 +44,14 @@ public class VetFormOperations {
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(sql)) {
  
-            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
-            cs.setInt(2, idCountry);
-            cs.execute();
- 
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-                while (rs.next()) {
-                    list.add(new DbObject(rs.getInt("Id"), rs.getString("Name")));
-                }
+            
+            cs.setInt(1, idCountry);
+            ResultSet rs = cs.executeQuery();
+            
+            while (rs.next()) {
+                list.add(new DbObject(rs.getInt("Id"), rs.getString("Name")));
             }
+            
         }
         return list;
     }
@@ -62,20 +59,17 @@ public class VetFormOperations {
 
     public List<DbObject> getCantonsByProvince(int idProvince) throws SQLException {
         List<DbObject> list = new ArrayList<>();
-        String sql = "{ ? = call pr_get_canton_by_province(?) }";
+        String sql = "{ call pr_get_canton_by_province(?) }";
  
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(sql)) {
  
-            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
-            cs.setInt(2, idProvince);
-            cs.execute();
- 
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-                while (rs.next()) {
-                    list.add(new DbObject(rs.getInt("Id"), rs.getString("Name")));
-                }
+            cs.setInt(1, idProvince);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                list.add(new DbObject(rs.getInt("Id"), rs.getString("Name")));
             }
+            
         }
         return list;
     }
@@ -83,20 +77,17 @@ public class VetFormOperations {
 
     public List<DbObject> getDistrictsByCanton(int idCanton) throws SQLException {
         List<DbObject> list = new ArrayList<>();
-        String sql = "{ ? = call pr_get_districts_by_canton(?) }";
+        String sql = "{ call pr_get_districts_by_canton(?) }";
  
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(sql)) {
  
-            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
-            cs.setInt(2, idCanton);
-            cs.execute();
- 
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-                while (rs.next()) {
-                    list.add(new DbObject(rs.getInt("Id"), rs.getString("Name")));
-                }
+            cs.setInt(1, idCanton);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                list.add(new DbObject(rs.getInt("Id"), rs.getString("Name")));
             }
+            
         }
         return list;
     }

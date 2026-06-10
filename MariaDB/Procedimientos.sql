@@ -1,16 +1,4 @@
 
-
-/*
-    Procedimiento almacenado para obtener los distritos de un cantón específico.
-    Parámetros:
-        - pIdCanton: El ID del cantón para el cual se desean obtener los distritos.
-    Retorna:
-        - Una lista de distritos con su ID y nombre.
-
-    Cambiar logica.
-*/
-DROP PROCEDURE IF EXISTS pr_get_districts_by_canton;
-
 DELIMITER $$
 
 CREATE OR REPLACE PROCEDURE pr_get_districts_by_canton(
@@ -33,8 +21,6 @@ DELIMITER ;
     Cambiar logica.
 */
 
-DROP PROCEDURE IF EXISTS pr_get_canton_by_province;
-
 DELIMITER $$
 
 CREATE OR REPLACE PROCEDURE pr_get_canton_by_province(
@@ -56,7 +42,6 @@ DELIMITER ;
 
     Cambiar logica.
 */
-DROP PROCEDURE IF EXISTS pr_get_province_by_country;
 
 DELIMITER $$
 
@@ -80,8 +65,6 @@ DELIMITER ;
     Cambiar logica.
 */
 DELIMITER $$
-
-DROP PROCEDURE IF EXISTS pr_get_all$$
 
 CREATE OR REPLACE PROCEDURE pr_get_all(
     IN p_table_name VARCHAR(50)
@@ -112,8 +95,6 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-
-DROP PROCEDURE IF EXISTS pr_get_by_id$$
 
 CREATE OR REPLACE PROCEDURE pr_get_by_id (
     IN p_table_name VARCHAR(64),
@@ -153,8 +134,6 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener todas las personas registradas en la base de datos. */
 DELIMITER $$
 
-DROP PROCEDURE IF EXISTS pr_get_person_all$$
-
 CREATE OR REPLACE PROCEDURE pr_get_person_all()
 BEGIN
     SELECT * FROM Person;
@@ -164,8 +143,6 @@ DELIMITER ;
 
 /* Procedimiento almacenado para obtener una persona por su ID. */
 DELIMITER $$
-
-DROP PROCEDURE IF EXISTS pr_get_person_by_id$$
 
 CREATE OR REPLACE PROCEDURE pr_get_person_by_id (
     IN p_id BIGINT
@@ -181,8 +158,6 @@ DELIMITER ;
 /* Procedimiento almacenado para obtener todas las mascotas registradas en la base de datos. */
 DELIMITER $$
 
-DROP PROCEDURE IF EXISTS pr_get_pet_all$$
-
 CREATE OR REPLACE PROCEDURE pr_get_pet_all()
 BEGIN
     SELECT * FROM Pet;
@@ -192,8 +167,6 @@ DELIMITER ;
 
 /* Procedimiento almacenado para obtener una mascota por su ID. */
 DELIMITER $$
-
-DROP PROCEDURE IF EXISTS pr_get_pet_by_id$$
 CREATE OR REPLACE PROCEDURE pr_get_pet_by_id (
     IN p_id BIGINT
 )
@@ -204,14 +177,12 @@ BEGIN
 END$$
 
 /* Procedimiento almacenado para obtener todas las razas de mascotas registradas en la base de datos. */
-DROP PROCEDURE IF EXISTS pr_get_pet_type_all$$
 CREATE OR REPLACE PROCEDURE pr_get_pet_type_all()
 BEGIN
     SELECT * FROM PetType;
 END$$
 
 /* Procedimiento almacenado para obtener una raza de mascota por su ID. */
-DROP PROCEDURE IF EXISTS pr_get_pet_type_by_id$$
 CREATE OR REPLACE PROCEDURE pr_get_pet_type_by_id (
     IN p_id BIGINT
 )
@@ -222,7 +193,6 @@ BEGIN
 END$$
 
 /* Procedimiento almacenado para obtener todas las razas de mascotas registradas en la base de datos. */
-DROP PROCEDURE IF EXISTS pr_get_pet_breed_all$$
 CREATE OR REPLACE PROCEDURE pr_get_pet_breed_all()
 BEGIN
     SELECT * FROM PetBreed;
@@ -1144,7 +1114,7 @@ BEGIN
     );
 
     COMMIT;
-SET p_new_id = LAST_INSERT_ID();
+    SET p_new_id = LAST_INSERT_ID();
 END $$
 
 DELIMITER ;
@@ -1590,15 +1560,6 @@ END $$
 
 DELIMITER ;
 
-/* Alter table */
-ALTER TABLE Adoption
-DROP CONSTRAINT chk_Adoption_State;
-
-/* Alter table */
-ALTER TABLE Adoption
-ADD CONSTRAINT chk_Adoption_State
-CHECK (State IN ('In process', 'To be confirmed', 'Canceled', 'Approved'));
-
 /* Procedimiento almacenado para actualizar la información de una mascota, con validaciones para asegurar que la mascota existe, que pertenece al dueño que realiza la actualización, y que se actualizan correctamente los campos relacionados. */
 DELIMITER $$
 
@@ -1797,10 +1758,9 @@ BEGIN
     WHERE IdState = 4;
 END $$
 
-DROP PROCEDURE IF EXISTS pr_put_pet_up_for_adoption;
 DELIMITER $$
 
-CREATE PROCEDURE pr_put_pet_up_for_adoption (
+CREATE OR REPLACEPROCEDURE pr_put_pet_up_for_adoption (
     IN p_pet_id INT,
     IN p_owner_id INT,
     OUT p_result INT
@@ -1899,7 +1859,6 @@ DELIMITER $$
 /* ============================================================
    GET PETS BY STATE (CORE FILTER)
 ============================================================ */
-DROP PROCEDURE IF EXISTS pr_pkg_get_pets_by_state;
 DELIMITER $$
 
 CREATE OR REPLACE PROCEDURE pr_pkg_get_pets_by_state (

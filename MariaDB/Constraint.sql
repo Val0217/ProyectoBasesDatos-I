@@ -133,9 +133,10 @@ MODIFY COLUMN IdPet INT NOT NULL,
 MODIFY COLUMN IdAdopter INT NULL,
 MODIFY COLUMN IdOwner INT NOT NULL;
 
+/* Alter table */
 ALTER TABLE Adoption
 ADD CONSTRAINT chk_Adoption_State
-CHECK (State IN ('In progress', 'Adopted', 'Cancelled'));
+CHECK (State IN ('In process', 'To be confirmed', 'Canceled', 'Approved'));
 
 ALTER TABLE Adoption
 ADD CONSTRAINT chk_Adoption_Dates
