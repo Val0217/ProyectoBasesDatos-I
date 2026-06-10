@@ -1348,7 +1348,6 @@ SET p_new_id = LAST_INSERT_ID();
       AND State IN ('In process', 'To be confirmed');
 
     COMMIT;
-    SET p_new_id = LAST_INSERT_ID();
 
 END $$
 
@@ -2609,7 +2608,7 @@ END$$
 
 DELIMITER ;
 
-/
+/* Procedimiento almacenado para calificar a una persona, con validaciones para asegurar que se insertan correctamente los datos de la calificación y que se devuelve el ID de la nueva calificación creada. */ 
 DELIMITER $$
 
 CREATE OR REPLACE PROCEDURE pr_calificate_person (
@@ -2637,7 +2636,6 @@ BEGIN
 
     SET p_new_id = LAST_INSERT_ID();
 END$$
-SET p_new_id = LAST_INSERT_ID();
 DELIMITER ;
 
 /* Procedimiento almacenado para agregar una persona a la lista de bloqueados, con validaciones para asegurar que se inserta correctamente el registro en la tabla de bloqueados y que se devuelve el ID del nuevo registro creado. */
@@ -2662,7 +2660,6 @@ BEGIN
 
     SET p_new_id = LAST_INSERT_ID();
 END$$
-SET p_new_id = LAST_INSERT_ID();
 DELIMITER ;
 
 /* Procedimiento almacenado para registrar una nueva donación, con validaciones para asegurar que se insertan correctamente los datos de la donación y que se devuelve el ID de la nueva donación creada. */

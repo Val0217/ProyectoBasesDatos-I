@@ -102,7 +102,7 @@ BEGIN
         ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (), 1) AS Percentage
     FROM Pet p
     JOIN PetState ps ON p.IdState = ps.Id
-    WHERE ps.Name = 'up for adoption'
+    WHERE ps.Name = 'For adoption'
       AND p.Age IS NOT NULL
     GROUP BY
         CASE
