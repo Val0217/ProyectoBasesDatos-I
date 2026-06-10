@@ -254,12 +254,6 @@ public class PetOperations {
             statement.setInt(1, petId);
             statement.setInt(2, ownerId);
 
-<<<<<<< HEAD
-            ResultSet resultSet = statement.executeQuery();
-
-            if (!resultSet.next()) {
-                return null;
-=======
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (!resultSet.next()) {
                     return null;
@@ -297,42 +291,7 @@ public class PetOperations {
                 pet.idVeterinarian = resultSet.getInt("IdVeterinarian");
 
                 return pet;
->>>>>>> c23a79b (arregle el desastre)
-            }
-
-            PetEditData pet = new PetEditData();
-
-            pet.idPet = resultSet.getInt("IdPet");
-            pet.idOwner = resultSet.getInt("IdOwner");
-
-            pet.color = resultSet.getString("Color");
-            pet.age = resultSet.getInt("Age");
-            pet.description = resultSet.getString("Description");
-            pet.petName = resultSet.getString("PetName");
-            pet.chip = resultSet.getString("Chip");
-
-            pet.idEnergy = resultSet.getInt("IdEnergy");
-            pet.idType = resultSet.getInt("IdType");
-
-            int breedId = resultSet.getInt("IdBreed");
-            if (resultSet.wasNull()) {
-                pet.idBreed = null;
-            } else {
-                pet.idBreed = breedId;
-            }
-
-            pet.idDistrict = resultSet.getInt("IdDistrict");
-            pet.idCanton = resultSet.getInt("IdCanton");
-            pet.idProvince = resultSet.getInt("IdProvince");
-            pet.idCountry = resultSet.getInt("IdCountry");
-
-            pet.idSpace = resultSet.getInt("IdSpace");
-            pet.idPetTraining = resultSet.getInt("IdPetTraining");
-            pet.idSize = resultSet.getInt("IdSize");
-            pet.idVeterinarian = resultSet.getInt("IdVeterinarian");
-
-            return pet;
-            
+            }          
         }
     }
     private static String toJson(Integer[] values) {

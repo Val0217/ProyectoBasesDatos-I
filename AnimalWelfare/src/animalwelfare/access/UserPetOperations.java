@@ -352,7 +352,7 @@ public class UserPetOperations {
         }
     }
     
-public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLException {
+    public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall("call pr_get_adoption_requests_owner(?)")) {
 
