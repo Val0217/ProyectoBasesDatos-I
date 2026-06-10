@@ -2,6 +2,9 @@ package animalwelfare.access;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import oracle.jdbc.OracleTypes;
@@ -39,12 +42,9 @@ public class FosterHomeOperations {
             cs.setInt(1, idPerson);
             cs.setString(2, needsDonation);
 
-            oracle.jdbc.OracleConnection oraConn =
-                con.unwrap(oracle.jdbc.OracleConnection.class);
-
-            cs.setArray(3, oraConn.createOracleArray("NUMBERLIST", sizeIds));
-            cs.setArray(4, oraConn.createOracleArray("NUMBERLIST", energyIds));
-            cs.setArray(5, oraConn.createOracleArray("NUMBERLIST", spaceIds));
+            cs.setString(3, toCsv(sizeIds));
+            cs.setString(4, toCsv(energyIds));
+            cs.setString(5, toCsv(spaceIds));
 
             cs.execute();
             return true;
@@ -72,27 +72,25 @@ public class FosterHomeOperations {
             public boolean isCellEditable(int row, int col) { return false; }
         };
 
-        String call = "{ call pr_get_foster_homes(?) }";
+        String call = "{ call pr_get_foster_homes() }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-                while (rs.next()) {
-                    model.addRow(new Object[]{
-                        rs.getInt("FosterHomeId"),
-                        rs.getInt("PersonId"),
-                        rs.getString("PersonName"),
-                        rs.getString("NeedsDonation").equals("Y") ? "Yes" : "No",
-                        rs.getString("AcceptedSizes"),
-                        rs.getString("AcceptedEnergy"),
-                        rs.getString("AcceptedSpaces")
-                    });
-                }
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getInt("FosterHomeId"),
+                    rs.getInt("PersonId"),
+                    rs.getString("PersonName"),
+                    rs.getString("NeedsDonation").equals("Y") ? "Yes" : "No",
+                    rs.getString("AcceptedSizes"),
+                    rs.getString("AcceptedEnergy"),
+                    rs.getString("AcceptedSpaces")
+                });
             }
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error loading foster homes: " + e.getMessage());
@@ -111,27 +109,25 @@ public class FosterHomeOperations {
      * @return FosterHomeData or null
      */
     public static FosterHomeData getFosterHomeByPerson(int idPerson) {
-        String call = "{ call pr_get_foster_home_by_person(?, ?) }";
+        String call = "{ call pr_get_foster_home_by_person(?) }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.setInt(1, idPerson);
-            cs.registerOutParameter(2, OracleTypes.CURSOR);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
-                if (!rs.next()) return null;
+            if (!rs.next()) return null;
 
-                FosterHomeData data = new FosterHomeData();
-                data.id            = rs.getInt("FosterHomeId");
-                data.idPerson      = rs.getInt("IdPerson");
-                data.needsDonation = rs.getString("NeedsDonation");
-                data.sizeIds       = parseIntArray(rs.getString("SizeIds"));
-                data.energyIds     = parseIntArray(rs.getString("EnergyIds"));
-                data.spaceIds      = parseIntArray(rs.getString("SpaceIds"));
-                return data;
-            }
+            FosterHomeData data = new FosterHomeData();
+            data.id            = rs.getInt("FosterHomeId");
+            data.idPerson      = rs.getInt("IdPerson");
+            data.needsDonation = rs.getString("NeedsDonation");
+            data.sizeIds       = parseIntArray(rs.getString("SizeIds"));
+            data.energyIds     = parseIntArray(rs.getString("EnergyIds"));
+            data.spaceIds      = parseIntArray(rs.getString("SpaceIds"));
+            return data;
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error loading foster home: " + e.getMessage());
@@ -157,12 +153,9 @@ public class FosterHomeOperations {
             cs.setInt(2, idPerson);
             cs.setString(3, needsDonation);
 
-            oracle.jdbc.OracleConnection oraConn =
-                con.unwrap(oracle.jdbc.OracleConnection.class);
-
-            cs.setArray(4, oraConn.createOracleArray("NUMBERLIST", sizeIds));
-            cs.setArray(5, oraConn.createOracleArray("NUMBERLIST", energyIds));
-            cs.setArray(6, oraConn.createOracleArray("NUMBERLIST", spaceIds));
+            cs.setString(4, toCsv(sizeIds));
+            cs.setString(5, toCsv(energyIds));
+            cs.setString(6, toCsv(spaceIds));
 
             cs.execute();
             return true;
@@ -220,14 +213,13 @@ public class FosterHomeOperations {
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(sql)) {
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-                while (rs.next()) {
-                    list.add(new DbObject(rs.getInt("Id"), rs.getString("Name")));
-                }
+            
+            while (rs.next()) {
+                list.add(new DbObject(rs.getInt("Id"), rs.getString("Name")));
             }
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error loading catalog: " + e.getMessage());
@@ -260,4 +252,10 @@ public class FosterHomeOperations {
         public Integer[] energyIds;
         public Integer[] spaceIds;
     }
+
+    private static String toCsv(Integer[] values) {
+    return Arrays.stream(values)
+            .map(String::valueOf)
+            .collect(Collectors.joining(","));
+}
 }

@@ -142,19 +142,15 @@ public class PersonOperations {
 
         try (Connection con = ConexionMariaDB.conectar();CallableStatement cs = con.prepareCall("{call pr_get_phone_by_person_id(?) }")) {
 
-            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+            cs.setInt(1, personId);
 
-            cs.setInt(2, personId);
+            ResultSet rs = cs.executeQuery();
 
-            cs.execute();
-
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-
-                while (rs.next()) {
-                    phones.add(rs.getString("Phone"));
-                }
-
+            while (rs.next()) {
+                phones.add(rs.getString("Phone"));
             }
+
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
@@ -169,19 +165,15 @@ public class PersonOperations {
 
         try (Connection con = ConexionMariaDB.conectar();CallableStatement cs = con.prepareCall("{ call pr_get_email_by_person_id(?) }")) {
 
-            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+            cs.setInt(1, personId);
 
-            cs.setInt(2, personId);
-
-            cs.execute();
-
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-
-                while (rs.next()) {
-                    emails.add(rs.getString("Email"));
-                }
-
+            ResultSet rs = cs.executeQuery();
+            
+            while (rs.next()) {
+                emails.add(rs.getString("Email"));
             }
+
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
