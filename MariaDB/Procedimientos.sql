@@ -1593,13 +1593,8 @@ BEGIN
         SET v_available_date = NOW();
     END IF;
 
-    /* Generar ID (manteniendo lógica actual) */
-    SELECT fn_next_id('Adoption')
-    INTO p_new_id;
-
     /* Insert solicitud */
     INSERT INTO Adoption (
-        Id,
         AdoptionDate,
         AvailableDate,
         Description,
@@ -1609,7 +1604,6 @@ BEGIN
         IdOwner
     )
     VALUES (
-        p_new_id,
         NULL,
         v_available_date,
         SUBSTRING(p_description, 1, 100),

@@ -74,7 +74,7 @@ BEGIN
         SET NEW.Id = NEXT VALUE FOR seq_bitacora;
     END IF;
     IF NEW.ChangeDate IS NULL THEN
-        SET NEW.ChangeDate = NOW();
+        SET NEW.ChangeDate = CURTIME();
     END IF;
     IF NEW.ChangedBy IS NULL THEN
         SET NEW.ChangedBy = fn_audit_changed_by();
@@ -118,7 +118,7 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETLEVELENERGY', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETLEVELENERGY', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
 END//
 
@@ -149,7 +149,7 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETBREED', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETBREED', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
 END//
 
@@ -180,7 +180,7 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETTYPE', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETTYPE', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
 END//
 
@@ -211,7 +211,7 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETSTATE', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETSTATE', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
 END//
 
@@ -242,11 +242,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETILLNESS', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETILLNESS', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
     IF COALESCE(SUBSTR(OLD.Description, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Description, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETILLNESS', NOW(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETILLNESS', CURTIME(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
     END IF;
 END//
 
@@ -277,11 +277,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'MEDICINE', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'MEDICINE', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
     IF COALESCE(SUBSTR(OLD.Dose, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Dose, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'MEDICINE', NOW(), SUBSTR(OLD.Dose, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Dose, 1, 50), 'DOSE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'MEDICINE', CURTIME(), SUBSTR(OLD.Dose, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Dose, 1, 50), 'DOSE');
     END IF;
 END//
 
@@ -312,11 +312,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETTREATMENT', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETTREATMENT', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
     IF COALESCE(SUBSTR(OLD.Description, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Description, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETTREATMENT', NOW(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETTREATMENT', CURTIME(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
     END IF;
 END//
 
@@ -347,7 +347,7 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETTRAINING', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETTRAINING', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
 END//
 
@@ -378,7 +378,7 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'SPACEREQUIRED', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'SPACEREQUIRED', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
 END//
 
@@ -409,7 +409,7 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETSIZE', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETSIZE', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
 END//
 
@@ -440,11 +440,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'DISTRICT', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'DISTRICT', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdCanton AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdCanton AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'DISTRICT', NOW(), SUBSTR(CAST(OLD.IdCanton AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdCanton AS CHAR), 1, 50), 'IDCANTON');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'DISTRICT', CURTIME(), SUBSTR(CAST(OLD.IdCanton AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdCanton AS CHAR), 1, 50), 'IDCANTON');
     END IF;
 END//
 
@@ -475,11 +475,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'CANTON', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'CANTON', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdProvince AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdProvince AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'CANTON', NOW(), SUBSTR(CAST(OLD.IdProvince AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdProvince AS CHAR), 1, 50), 'IDPROVINCE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'CANTON', CURTIME(), SUBSTR(CAST(OLD.IdProvince AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdProvince AS CHAR), 1, 50), 'IDPROVINCE');
     END IF;
 END//
 
@@ -510,11 +510,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PROVINCE', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PROVINCE', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdCountry AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdCountry AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PROVINCE', NOW(), SUBSTR(CAST(OLD.IdCountry AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdCountry AS CHAR), 1, 50), 'IDCOUNTRY');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PROVINCE', CURTIME(), SUBSTR(CAST(OLD.IdCountry AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdCountry AS CHAR), 1, 50), 'IDCOUNTRY');
     END IF;
 END//
 
@@ -545,7 +545,7 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'COUNTRY', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'COUNTRY', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
 END//
 
@@ -576,7 +576,7 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETSEVERITY', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETSEVERITY', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
 END//
 
@@ -607,63 +607,63 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Color, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Color, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(OLD.Color, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Color, 1, 50), 'COLOR');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(OLD.Color, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Color, 1, 50), 'COLOR');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.Age AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.Age AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(CAST(OLD.Age AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.Age AS CHAR), 1, 50), 'AGE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(CAST(OLD.Age AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.Age AS CHAR), 1, 50), 'AGE');
     END IF;
     IF COALESCE(SUBSTR(OLD.Description, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Description, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
     END IF;
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
     IF COALESCE(SUBSTR(OLD.Chip, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Chip, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(OLD.Chip, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Chip, 1, 50), 'CHIP');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(OLD.Chip, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Chip, 1, 50), 'CHIP');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdEnergy AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdEnergy AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(CAST(OLD.IdEnergy AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdEnergy AS CHAR), 1, 50), 'IDENERGY');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(CAST(OLD.IdEnergy AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdEnergy AS CHAR), 1, 50), 'IDENERGY');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdState AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdState AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(CAST(OLD.IdState AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdState AS CHAR), 1, 50), 'IDSTATE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(CAST(OLD.IdState AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdState AS CHAR), 1, 50), 'IDSTATE');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdType AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdType AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(CAST(OLD.IdType AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdType AS CHAR), 1, 50), 'IDTYPE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(CAST(OLD.IdType AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdType AS CHAR), 1, 50), 'IDTYPE');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdBreed AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdBreed AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(CAST(OLD.IdBreed AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdBreed AS CHAR), 1, 50), 'IDBREED');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(CAST(OLD.IdBreed AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdBreed AS CHAR), 1, 50), 'IDBREED');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), 'IDDISTRICT');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), 'IDDISTRICT');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdSpace AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdSpace AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(CAST(OLD.IdSpace AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdSpace AS CHAR), 1, 50), 'IDSPACE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(CAST(OLD.IdSpace AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdSpace AS CHAR), 1, 50), 'IDSPACE');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPetTraining AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPetTraining AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(CAST(OLD.IdPetTraining AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPetTraining AS CHAR), 1, 50), 'IDPETTRAINING');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(CAST(OLD.IdPetTraining AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPetTraining AS CHAR), 1, 50), 'IDPETTRAINING');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdSize AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdSize AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(CAST(OLD.IdSize AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdSize AS CHAR), 1, 50), 'IDSIZE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(CAST(OLD.IdSize AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdSize AS CHAR), 1, 50), 'IDSIZE');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdOwner AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdOwner AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(CAST(OLD.IdOwner AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdOwner AS CHAR), 1, 50), 'IDOWNER');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(CAST(OLD.IdOwner AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdOwner AS CHAR), 1, 50), 'IDOWNER');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdVeterinarian AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdVeterinarian AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', NOW(), SUBSTR(CAST(OLD.IdVeterinarian AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdVeterinarian AS CHAR), 1, 50), 'IDVETERINARIAN');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PET', CURTIME(), SUBSTR(CAST(OLD.IdVeterinarian AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdVeterinarian AS CHAR), 1, 50), 'IDVETERINARIAN');
     END IF;
 END//
 
@@ -694,31 +694,31 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Email, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Email, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'VETERINARIAN', NOW(), SUBSTR(OLD.Email, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Email, 1, 50), 'EMAIL');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'VETERINARIAN', CURTIME(), SUBSTR(OLD.Email, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Email, 1, 50), 'EMAIL');
     END IF;
     IF COALESCE(SUBSTR(OLD.FirstName, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.FirstName, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'VETERINARIAN', NOW(), SUBSTR(OLD.FirstName, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.FirstName, 1, 50), 'FIRSTNAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'VETERINARIAN', CURTIME(), SUBSTR(OLD.FirstName, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.FirstName, 1, 50), 'FIRSTNAME');
     END IF;
     IF COALESCE(SUBSTR(OLD.LastName, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.LastName, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'VETERINARIAN', NOW(), SUBSTR(OLD.LastName, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.LastName, 1, 50), 'LASTNAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'VETERINARIAN', CURTIME(), SUBSTR(OLD.LastName, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.LastName, 1, 50), 'LASTNAME');
     END IF;
     IF COALESCE(SUBSTR(OLD.Location, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Location, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'VETERINARIAN', NOW(), SUBSTR(OLD.Location, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Location, 1, 50), 'LOCATION');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'VETERINARIAN', CURTIME(), SUBSTR(OLD.Location, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Location, 1, 50), 'LOCATION');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'VETERINARIAN', NOW(), SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), 'IDDISTRICT');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'VETERINARIAN', CURTIME(), SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), 'IDDISTRICT');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.Phone AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.Phone AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'VETERINARIAN', NOW(), SUBSTR(CAST(OLD.Phone AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.Phone AS CHAR), 1, 50), 'PHONE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'VETERINARIAN', CURTIME(), SUBSTR(CAST(OLD.Phone AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.Phone AS CHAR), 1, 50), 'PHONE');
     END IF;
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'VETERINARIAN', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'VETERINARIAN', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
 END//
 
@@ -749,11 +749,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(CAST(OLD.IdPetSize AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPetSize AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETSIZEXFOSTERHOME', NOW(), SUBSTR(CAST(OLD.IdPetSize AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPetSize AS CHAR), 1, 50), 'IDPETSIZE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETSIZEXFOSTERHOME', CURTIME(), SUBSTR(CAST(OLD.IdPetSize AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPetSize AS CHAR), 1, 50), 'IDPETSIZE');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdFosterHome AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdFosterHome AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETSIZEXFOSTERHOME', NOW(), SUBSTR(CAST(OLD.IdFosterHome AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdFosterHome AS CHAR), 1, 50), 'IDFOSTERHOME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETSIZEXFOSTERHOME', CURTIME(), SUBSTR(CAST(OLD.IdFosterHome AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdFosterHome AS CHAR), 1, 50), 'IDFOSTERHOME');
     END IF;
 END//
 
@@ -784,11 +784,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETXPETTREATMENT', NOW(), SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), 'IDPET');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETXPETTREATMENT', CURTIME(), SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), 'IDPET');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPetTreatment AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPetTreatment AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETXPETTREATMENT', NOW(), SUBSTR(CAST(OLD.IdPetTreatment AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPetTreatment AS CHAR), 1, 50), 'IDPETTREATMENT');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETXPETTREATMENT', CURTIME(), SUBSTR(CAST(OLD.IdPetTreatment AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPetTreatment AS CHAR), 1, 50), 'IDPETTREATMENT');
     END IF;
 END//
 
@@ -819,11 +819,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETXPETILLNESS', NOW(), SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), 'IDPET');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETXPETILLNESS', CURTIME(), SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), 'IDPET');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPetIllness AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPetIllness AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETXPETILLNESS', NOW(), SUBSTR(CAST(OLD.IdPetIllness AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPetIllness AS CHAR), 1, 50), 'IDPETILLNESS');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETXPETILLNESS', CURTIME(), SUBSTR(CAST(OLD.IdPetIllness AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPetIllness AS CHAR), 1, 50), 'IDPETILLNESS');
     END IF;
 END//
 
@@ -854,11 +854,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETXMEDICINE', NOW(), SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), 'IDPET');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETXMEDICINE', CURTIME(), SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), 'IDPET');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdMedicine AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdMedicine AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETXMEDICINE', NOW(), SUBSTR(CAST(OLD.IdMedicine AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdMedicine AS CHAR), 1, 50), 'IDMEDICINE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETXMEDICINE', CURTIME(), SUBSTR(CAST(OLD.IdMedicine AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdMedicine AS CHAR), 1, 50), 'IDMEDICINE');
     END IF;
 END//
 
@@ -889,11 +889,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(CAST(OLD.IdPetLevelEnergy AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPetLevelEnergy AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETLEVELENERGYXFOSTERHOME', NOW(), SUBSTR(CAST(OLD.IdPetLevelEnergy AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPetLevelEnergy AS CHAR), 1, 50), 'IDPETLEVELENERGY');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETLEVELENERGYXFOSTERHOME', CURTIME(), SUBSTR(CAST(OLD.IdPetLevelEnergy AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPetLevelEnergy AS CHAR), 1, 50), 'IDPETLEVELENERGY');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdFosterHome AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdFosterHome AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETLEVELENERGYXFOSTERHOME', NOW(), SUBSTR(CAST(OLD.IdFosterHome AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdFosterHome AS CHAR), 1, 50), 'IDFOSTERHOME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETLEVELENERGYXFOSTERHOME', CURTIME(), SUBSTR(CAST(OLD.IdFosterHome AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdFosterHome AS CHAR), 1, 50), 'IDFOSTERHOME');
     END IF;
 END//
 
@@ -924,11 +924,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(CAST(OLD.IdSpaceRequired AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdSpaceRequired AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'SPACEREQUIREDXFOSTERHOME', NOW(), SUBSTR(CAST(OLD.IdSpaceRequired AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdSpaceRequired AS CHAR), 1, 50), 'IDSPACEREQUIRED');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'SPACEREQUIREDXFOSTERHOME', CURTIME(), SUBSTR(CAST(OLD.IdSpaceRequired AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdSpaceRequired AS CHAR), 1, 50), 'IDSPACEREQUIRED');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdFosterHome AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdFosterHome AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'SPACEREQUIREDXFOSTERHOME', NOW(), SUBSTR(CAST(OLD.IdFosterHome AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdFosterHome AS CHAR), 1, 50), 'IDFOSTERHOME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'SPACEREQUIREDXFOSTERHOME', CURTIME(), SUBSTR(CAST(OLD.IdFosterHome AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdFosterHome AS CHAR), 1, 50), 'IDFOSTERHOME');
     END IF;
 END//
 
@@ -959,27 +959,27 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(DATE_FORMAT(OLD.FoundDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') <> COALESCE(SUBSTR(DATE_FORMAT(NEW.FoundDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'FOUNDREPORT', NOW(), SUBSTR(DATE_FORMAT(OLD.FoundDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.FoundDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'FOUNDDATE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'FOUNDREPORT', CURTIME(), SUBSTR(DATE_FORMAT(OLD.FoundDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.FoundDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'FOUNDDATE');
     END IF;
     IF COALESCE(SUBSTR(OLD.Place, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Place, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'FOUNDREPORT', NOW(), SUBSTR(OLD.Place, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Place, 1, 50), 'PLACE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'FOUNDREPORT', CURTIME(), SUBSTR(OLD.Place, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Place, 1, 50), 'PLACE');
     END IF;
     IF COALESCE(SUBSTR(OLD.Description, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Description, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'FOUNDREPORT', NOW(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'FOUNDREPORT', CURTIME(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'FOUNDREPORT', NOW(), SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), 'IDPET');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'FOUNDREPORT', CURTIME(), SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), 'IDPET');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'FOUNDREPORT', NOW(), SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), 'IDDISTRICT');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'FOUNDREPORT', CURTIME(), SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), 'IDDISTRICT');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'FOUNDREPORT', NOW(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'FOUNDREPORT', CURTIME(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
     END IF;
 END//
 
@@ -1010,19 +1010,19 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(CAST(OLD.SimilarityPercentage AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.SimilarityPercentage AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETMATCH', NOW(), SUBSTR(CAST(OLD.SimilarityPercentage AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.SimilarityPercentage AS CHAR), 1, 50), 'SIMILARITYPERCENTAGE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETMATCH', CURTIME(), SUBSTR(CAST(OLD.SimilarityPercentage AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.SimilarityPercentage AS CHAR), 1, 50), 'SIMILARITYPERCENTAGE');
     END IF;
     IF COALESCE(SUBSTR(DATE_FORMAT(OLD.MatchDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') <> COALESCE(SUBSTR(DATE_FORMAT(NEW.MatchDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETMATCH', NOW(), SUBSTR(DATE_FORMAT(OLD.MatchDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.MatchDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'MATCHDATE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETMATCH', CURTIME(), SUBSTR(DATE_FORMAT(OLD.MatchDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.MatchDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'MATCHDATE');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdLostReport AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdLostReport AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETMATCH', NOW(), SUBSTR(CAST(OLD.IdLostReport AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdLostReport AS CHAR), 1, 50), 'IDLOSTREPORT');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETMATCH', CURTIME(), SUBSTR(CAST(OLD.IdLostReport AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdLostReport AS CHAR), 1, 50), 'IDLOSTREPORT');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdFoundReport AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdFoundReport AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PETMATCH', NOW(), SUBSTR(CAST(OLD.IdFoundReport AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdFoundReport AS CHAR), 1, 50), 'IDFOUNDREPORT');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PETMATCH', CURTIME(), SUBSTR(CAST(OLD.IdFoundReport AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdFoundReport AS CHAR), 1, 50), 'IDFOUNDREPORT');
     END IF;
 END//
 
@@ -1053,35 +1053,35 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(DATE_FORMAT(OLD.LostDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') <> COALESCE(SUBSTR(DATE_FORMAT(NEW.LostDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', NOW(), SUBSTR(DATE_FORMAT(OLD.LostDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.LostDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'LOSTDATE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', CURTIME(), SUBSTR(DATE_FORMAT(OLD.LostDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.LostDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'LOSTDATE');
     END IF;
     IF COALESCE(SUBSTR(OLD.Place, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Place, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', NOW(), SUBSTR(OLD.Place, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Place, 1, 50), 'PLACE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', CURTIME(), SUBSTR(OLD.Place, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Place, 1, 50), 'PLACE');
     END IF;
     IF COALESCE(SUBSTR(OLD.Description, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Description, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', NOW(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', CURTIME(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.Reward AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.Reward AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', NOW(), SUBSTR(CAST(OLD.Reward AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.Reward AS CHAR), 1, 50), 'REWARD');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', CURTIME(), SUBSTR(CAST(OLD.Reward AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.Reward AS CHAR), 1, 50), 'REWARD');
     END IF;
     IF COALESCE(SUBSTR(OLD.State, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.State, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', NOW(), SUBSTR(OLD.State, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.State, 1, 50), 'STATE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', CURTIME(), SUBSTR(OLD.State, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.State, 1, 50), 'STATE');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', NOW(), SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), 'IDPET');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', CURTIME(), SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), 'IDPET');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', NOW(), SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), 'IDDISTRICT');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', CURTIME(), SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), 'IDDISTRICT');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdCurrency AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdCurrency AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', NOW(), SUBSTR(CAST(OLD.IdCurrency AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdCurrency AS CHAR), 1, 50), 'IDCURRENCY');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'LOSTREPORT', CURTIME(), SUBSTR(CAST(OLD.IdCurrency AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdCurrency AS CHAR), 1, 50), 'IDCURRENCY');
     END IF;
 END//
 
@@ -1112,31 +1112,31 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(DATE_FORMAT(OLD.AdoptionDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') <> COALESCE(SUBSTR(DATE_FORMAT(NEW.AdoptionDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTION', NOW(), SUBSTR(DATE_FORMAT(OLD.AdoptionDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.AdoptionDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'ADOPTIONDATE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTION', CURTIME(), SUBSTR(DATE_FORMAT(OLD.AdoptionDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.AdoptionDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'ADOPTIONDATE');
     END IF;
     IF COALESCE(SUBSTR(DATE_FORMAT(OLD.AvailableDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') <> COALESCE(SUBSTR(DATE_FORMAT(NEW.AvailableDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTION', NOW(), SUBSTR(DATE_FORMAT(OLD.AvailableDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.AvailableDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'AVAILABLEDATE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTION', CURTIME(), SUBSTR(DATE_FORMAT(OLD.AvailableDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.AvailableDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'AVAILABLEDATE');
     END IF;
     IF COALESCE(SUBSTR(OLD.Description, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Description, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTION', NOW(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTION', CURTIME(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
     END IF;
     IF COALESCE(SUBSTR(OLD.State, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.State, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTION', NOW(), SUBSTR(OLD.State, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.State, 1, 50), 'STATE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTION', CURTIME(), SUBSTR(OLD.State, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.State, 1, 50), 'STATE');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTION', NOW(), SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), 'IDPET');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTION', CURTIME(), SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), 'IDPET');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdAdopter AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdAdopter AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTION', NOW(), SUBSTR(CAST(OLD.IdAdopter AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdAdopter AS CHAR), 1, 50), 'IDADOPTER');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTION', CURTIME(), SUBSTR(CAST(OLD.IdAdopter AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdAdopter AS CHAR), 1, 50), 'IDADOPTER');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdOwner AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdOwner AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTION', NOW(), SUBSTR(CAST(OLD.IdOwner AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdOwner AS CHAR), 1, 50), 'IDOWNER');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTION', CURTIME(), SUBSTR(CAST(OLD.IdOwner AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdOwner AS CHAR), 1, 50), 'IDOWNER');
     END IF;
 END//
 
@@ -1167,31 +1167,31 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(DATE_FORMAT(OLD.RescueDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') <> COALESCE(SUBSTR(DATE_FORMAT(NEW.RescueDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUED', NOW(), SUBSTR(DATE_FORMAT(OLD.RescueDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.RescueDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'RESCUEDATE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUED', CURTIME(), SUBSTR(DATE_FORMAT(OLD.RescueDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.RescueDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'RESCUEDATE');
     END IF;
     IF COALESCE(SUBSTR(OLD.Place, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Place, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUED', NOW(), SUBSTR(OLD.Place, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Place, 1, 50), 'PLACE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUED', CURTIME(), SUBSTR(OLD.Place, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Place, 1, 50), 'PLACE');
     END IF;
     IF COALESCE(SUBSTR(OLD.Description, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Description, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUED', NOW(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUED', CURTIME(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUED', NOW(), SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), 'IDPET');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUED', CURTIME(), SUBSTR(CAST(OLD.IdPet AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPet AS CHAR), 1, 50), 'IDPET');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUED', NOW(), SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), 'IDDISTRICT');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUED', CURTIME(), SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), 'IDDISTRICT');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdRescuer AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdRescuer AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUED', NOW(), SUBSTR(CAST(OLD.IdRescuer AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdRescuer AS CHAR), 1, 50), 'IDRESCUER');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUED', CURTIME(), SUBSTR(CAST(OLD.IdRescuer AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdRescuer AS CHAR), 1, 50), 'IDRESCUER');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPetSeverity AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPetSeverity AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUED', NOW(), SUBSTR(CAST(OLD.IdPetSeverity AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPetSeverity AS CHAR), 1, 50), 'IDPETSEVERITY');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUED', CURTIME(), SUBSTR(CAST(OLD.IdPetSeverity AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPetSeverity AS CHAR), 1, 50), 'IDPETSEVERITY');
     END IF;
 END//
 
@@ -1222,23 +1222,23 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(CAST(OLD.Amount AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.Amount AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'DONATION', NOW(), SUBSTR(CAST(OLD.Amount AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.Amount AS CHAR), 1, 50), 'AMOUNT');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'DONATION', CURTIME(), SUBSTR(CAST(OLD.Amount AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.Amount AS CHAR), 1, 50), 'AMOUNT');
     END IF;
     IF COALESCE(SUBSTR(DATE_FORMAT(OLD.DonationDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') <> COALESCE(SUBSTR(DATE_FORMAT(NEW.DonationDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'DONATION', NOW(), SUBSTR(DATE_FORMAT(OLD.DonationDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.DonationDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'DONATIONDATE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'DONATION', CURTIME(), SUBSTR(DATE_FORMAT(OLD.DonationDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.DonationDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'DONATIONDATE');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'DONATION', NOW(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'DONATION', CURTIME(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdCurrency AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdCurrency AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'DONATION', NOW(), SUBSTR(CAST(OLD.IdCurrency AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdCurrency AS CHAR), 1, 50), 'IDCURRENCY');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'DONATION', CURTIME(), SUBSTR(CAST(OLD.IdCurrency AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdCurrency AS CHAR), 1, 50), 'IDCURRENCY');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdAssociation AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdAssociation AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'DONATION', NOW(), SUBSTR(CAST(OLD.IdAssociation AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdAssociation AS CHAR), 1, 50), 'IDASSOCIATION');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'DONATION', CURTIME(), SUBSTR(CAST(OLD.IdAssociation AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdAssociation AS CHAR), 1, 50), 'IDASSOCIATION');
     END IF;
 END//
 
@@ -1269,7 +1269,7 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'CURRENCY', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'CURRENCY', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
 END//
 
@@ -1300,19 +1300,19 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.FirstName, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.FirstName, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PERSON', NOW(), SUBSTR(OLD.FirstName, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.FirstName, 1, 50), 'FIRSTNAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PERSON', CURTIME(), SUBSTR(OLD.FirstName, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.FirstName, 1, 50), 'FIRSTNAME');
     END IF;
     IF COALESCE(SUBSTR(OLD.LastName, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.LastName, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PERSON', NOW(), SUBSTR(OLD.LastName, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.LastName, 1, 50), 'LASTNAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PERSON', CURTIME(), SUBSTR(OLD.LastName, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.LastName, 1, 50), 'LASTNAME');
     END IF;
     IF COALESCE(SUBSTR(OLD.Password, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Password, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PERSON', NOW(), SUBSTR(OLD.Password, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Password, 1, 50), 'PASSWORD');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PERSON', CURTIME(), SUBSTR(OLD.Password, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Password, 1, 50), 'PASSWORD');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PERSON', NOW(), SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), 'IDDISTRICT');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PERSON', CURTIME(), SUBSTR(CAST(OLD.IdDistrict AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdDistrict AS CHAR), 1, 50), 'IDDISTRICT');
     END IF;
 END//
 
@@ -1343,19 +1343,19 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Description, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Description, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'REPORTLIST', NOW(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'REPORTLIST', CURTIME(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'REPORTLIST', NOW(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'REPORTLIST', CURTIME(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdReporter AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdReporter AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'REPORTLIST', NOW(), SUBSTR(CAST(OLD.IdReporter AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdReporter AS CHAR), 1, 50), 'IDREPORTER');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'REPORTLIST', CURTIME(), SUBSTR(CAST(OLD.IdReporter AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdReporter AS CHAR), 1, 50), 'IDREPORTER');
     END IF;
     IF COALESCE(SUBSTR(DATE_FORMAT(OLD.ReportDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') <> COALESCE(SUBSTR(DATE_FORMAT(NEW.ReportDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'REPORTLIST', NOW(), SUBSTR(DATE_FORMAT(OLD.ReportDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.ReportDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'REPORTDATE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'REPORTLIST', CURTIME(), SUBSTR(DATE_FORMAT(OLD.ReportDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.ReportDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'REPORTDATE');
     END IF;
 END//
 
@@ -1386,7 +1386,7 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUER', NOW(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'RESCUER', CURTIME(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
     END IF;
 END//
 
@@ -1417,7 +1417,7 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTER', NOW(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'ADOPTER', CURTIME(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
     END IF;
 END//
 
@@ -1448,19 +1448,19 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(CAST(OLD.Stars AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.Stars AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'CALIFICATION', NOW(), SUBSTR(CAST(OLD.Stars AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.Stars AS CHAR), 1, 50), 'STARS');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'CALIFICATION', CURTIME(), SUBSTR(CAST(OLD.Stars AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.Stars AS CHAR), 1, 50), 'STARS');
     END IF;
     IF COALESCE(SUBSTR(OLD.Note, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Note, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'CALIFICATION', NOW(), SUBSTR(OLD.Note, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Note, 1, 50), 'NOTE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'CALIFICATION', CURTIME(), SUBSTR(OLD.Note, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Note, 1, 50), 'NOTE');
     END IF;
     IF COALESCE(SUBSTR(DATE_FORMAT(OLD.CalificationDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') <> COALESCE(SUBSTR(DATE_FORMAT(NEW.CalificationDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'CALIFICATION', NOW(), SUBSTR(DATE_FORMAT(OLD.CalificationDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.CalificationDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'CALIFICATIONDATE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'CALIFICATION', CURTIME(), SUBSTR(DATE_FORMAT(OLD.CalificationDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.CalificationDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'CALIFICATIONDATE');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'CALIFICATION', NOW(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'CALIFICATION', CURTIME(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
     END IF;
 END//
 
@@ -1491,11 +1491,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.NeedsDonation, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.NeedsDonation, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'FOSTERHOME', NOW(), SUBSTR(OLD.NeedsDonation, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.NeedsDonation, 1, 50), 'NEEDSDONATION');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'FOSTERHOME', CURTIME(), SUBSTR(OLD.NeedsDonation, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.NeedsDonation, 1, 50), 'NEEDSDONATION');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'FOSTERHOME', NOW(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'FOSTERHOME', CURTIME(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
     END IF;
 END//
 
@@ -1526,7 +1526,7 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'ADMIN', NOW(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'ADMIN', CURTIME(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
     END IF;
 END//
 
@@ -1557,11 +1557,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Email, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Email, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'EMAIL', NOW(), SUBSTR(OLD.Email, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Email, 1, 50), 'EMAIL');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'EMAIL', CURTIME(), SUBSTR(OLD.Email, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Email, 1, 50), 'EMAIL');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'EMAIL', NOW(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'EMAIL', CURTIME(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
     END IF;
 END//
 
@@ -1592,11 +1592,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(CAST(OLD.Phone AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.Phone AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PHONE', NOW(), SUBSTR(CAST(OLD.Phone AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.Phone AS CHAR), 1, 50), 'PHONE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PHONE', CURTIME(), SUBSTR(CAST(OLD.Phone AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.Phone AS CHAR), 1, 50), 'PHONE');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PHONE', NOW(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PHONE', CURTIME(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
     END IF;
 END//
 
@@ -1627,11 +1627,11 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(DATE_FORMAT(OLD.BlockDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') <> COALESCE(SUBSTR(DATE_FORMAT(NEW.BlockDate, '%Y-%m-%d %H:%i:%s'), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'BLOCKLIST', NOW(), SUBSTR(DATE_FORMAT(OLD.BlockDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.BlockDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'BLOCKDATE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'BLOCKLIST', CURTIME(), SUBSTR(DATE_FORMAT(OLD.BlockDate, '%Y-%m-%d %H:%i:%s'), 1, 50), fn_audit_changed_by(), SUBSTR(DATE_FORMAT(NEW.BlockDate, '%Y-%m-%d %H:%i:%s'), 1, 50), 'BLOCKDATE');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'BLOCKLIST', NOW(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'BLOCKLIST', CURTIME(), SUBSTR(CAST(OLD.IdPerson AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.IdPerson AS CHAR), 1, 50), 'IDPERSON');
     END IF;
 END//
 
@@ -1662,19 +1662,19 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'ASSOCIATION', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'ASSOCIATION', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
     IF COALESCE(SUBSTR(CAST(OLD.PhoneNumber AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.PhoneNumber AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'ASSOCIATION', NOW(), SUBSTR(CAST(OLD.PhoneNumber AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.PhoneNumber AS CHAR), 1, 50), 'PHONENUMBER');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'ASSOCIATION', CURTIME(), SUBSTR(CAST(OLD.PhoneNumber AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.PhoneNumber AS CHAR), 1, 50), 'PHONENUMBER');
     END IF;
     IF COALESCE(SUBSTR(OLD.BankAccount, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.BankAccount, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'ASSOCIATION', NOW(), SUBSTR(OLD.BankAccount, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.BankAccount, 1, 50), 'BANKACCOUNT');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'ASSOCIATION', CURTIME(), SUBSTR(OLD.BankAccount, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.BankAccount, 1, 50), 'BANKACCOUNT');
     END IF;
     IF COALESCE(SUBSTR(OLD.Email, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Email, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'ASSOCIATION', NOW(), SUBSTR(OLD.Email, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Email, 1, 50), 'EMAIL');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'ASSOCIATION', CURTIME(), SUBSTR(OLD.Email, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Email, 1, 50), 'EMAIL');
     END IF;
 END//
 
@@ -1705,15 +1705,15 @@ FOR EACH ROW
 BEGIN
     IF COALESCE(SUBSTR(CAST(OLD.Value AS CHAR), 1, 50), '#NULL#') <> COALESCE(SUBSTR(CAST(NEW.Value AS CHAR), 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PARAMETER', NOW(), SUBSTR(CAST(OLD.Value AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.Value AS CHAR), 1, 50), 'VALUE');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PARAMETER', CURTIME(), SUBSTR(CAST(OLD.Value AS CHAR), 1, 50), fn_audit_changed_by(), SUBSTR(CAST(NEW.Value AS CHAR), 1, 50), 'VALUE');
     END IF;
     IF COALESCE(SUBSTR(OLD.Name, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Name, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PARAMETER', NOW(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PARAMETER', CURTIME(), SUBSTR(OLD.Name, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Name, 1, 50), 'NAME');
     END IF;
     IF COALESCE(SUBSTR(OLD.Description, 1, 50), '#NULL#') <> COALESCE(SUBSTR(NEW.Description, 1, 50), '#NULL#') THEN
         INSERT INTO Bitacora (Id, TableName, ChangeDate, PreviousValue, ChangedBy, CurrentValue, FieldName)
-        VALUES (NEXT VALUE FOR seq_bitacora, 'PARAMETER', NOW(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
+        VALUES (NEXT VALUE FOR seq_bitacora, 'PARAMETER', CURTIME(), SUBSTR(OLD.Description, 1, 50), fn_audit_changed_by(), SUBSTR(NEW.Description, 1, 50), 'DESCRIPTION');
     END IF;
 END//
 
