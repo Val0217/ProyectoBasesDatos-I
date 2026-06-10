@@ -158,7 +158,7 @@ BEGIN
 
     -- p_idPerson representa la persona, por eso se usa IdPerson
     DELETE FROM BlockList
-    WHERE IdPerson = p_idPerson;
+    WHERE Id = p_idPerson;
 
     COMMIT;
 END$$

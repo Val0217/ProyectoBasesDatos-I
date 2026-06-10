@@ -60,26 +60,24 @@ public class BlockListOperations {
             public boolean isCellEditable(int row, int col) { return false; }
         };
 
-        String call = "{ call pr_get_block_list(?) }";
+        String call = "{ call pr_get_block_list() }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-                while (rs.next()) {
-                    model.addRow(new Object[]{
-                        rs.getInt("BlockListId"),
-                        rs.getString("PersonName"),
-                        rs.getDate("BlockDate"),
-                        rs.getString("Reason"),
-                        rs.getDouble("AvgStars"),
-                        rs.getString("LatestNote")
-                    });
-                }
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getInt("BlockListId"),
+                    rs.getString("PersonName"),
+                    rs.getDate("BlockDate"),
+                    rs.getString("Reason"),
+                    rs.getDouble("AvgStars"),
+                    rs.getString("LatestNote")
+                });
             }
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error loading block list: " + e.getMessage());
@@ -106,29 +104,27 @@ public class BlockListOperations {
             public boolean isCellEditable(int row, int col) { return false; }
         };
 
-        String call = "{ call pr_get_block_list_detail(?, ?) }";
+        String call = "{ call pr_get_block_list_detail(?) }";
 
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.setInt(1, idPerson);
-            cs.registerOutParameter(2, OracleTypes.CURSOR);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
-                while (rs.next()) {
-                    model.addRow(new Object[]{
-                        rs.getString("PersonName"),
-                        rs.getDate("BlockDate"),
-                        rs.getString("ReportReason"),
-                        rs.getString("ReportedBy"),
-                        rs.getDate("ReportDate"),
-                        rs.getInt("Stars"),
-                        rs.getString("Note"),
-                        rs.getDate("CalificationDate")
-                    });
-                }
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("PersonName"),
+                    rs.getDate("BlockDate"),
+                    rs.getString("ReportReason"),
+                    rs.getString("ReportedBy"),
+                    rs.getDate("ReportDate"),
+                    rs.getInt("Stars"),
+                    rs.getString("Note"),
+                    rs.getDate("CalificationDate")
+                });
             }
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error loading detail: " + e.getMessage());
@@ -179,17 +175,15 @@ public class BlockListOperations {
         try (Connection con = ConexionMariaDB.conectar();
              CallableStatement cs = con.prepareCall(call)) {
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.execute();
+            ResultSet rs = cs.executeQuery();
 
-            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
-                while (rs.next()) {
-                    list.add(new DbObject(
-                        rs.getInt("Id"),
-                        rs.getString("Name")
-                    ));
-                }
+            while (rs.next()) {
+                list.add(new DbObject(
+                    rs.getInt("Id"),
+                    rs.getString("Name")
+                ));
             }
+            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error listing persons: " + e.getMessage());
