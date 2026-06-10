@@ -54,7 +54,7 @@ BEGIN
         pl.IdType = pf.IdType
 
         -- reporte aun perdido
-        AND lr.State = 'Perdido'
+        AND lr.State = 'lost'
 
         -- evitar duplicados
         AND NOT EXISTS (
