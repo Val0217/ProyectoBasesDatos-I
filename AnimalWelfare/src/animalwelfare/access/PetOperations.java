@@ -252,7 +252,7 @@ public class PetOperations {
         }
     }
     public static PetEditData GetPetForEdit(int petId, int ownerId) throws SQLException {
-        String call = "{ call pr_get_pet_for_edit(?, ?, ?) }";
+        String call = "{ call pr_get_pet_for_edit(?, ?) }";
 
         try (
             Connection connection = ConexionMariaDB.conectar();
@@ -260,48 +260,46 @@ public class PetOperations {
         ) {
             statement.setInt(1, petId);
             statement.setInt(2, ownerId);
-            statement.registerOutParameter(3, OracleTypes.CURSOR);
 
-            statement.execute();
+            ResultSet resultSet = statement.executeQuery();
 
-            try (ResultSet resultSet = (ResultSet) statement.getObject(3)) {
-                if (!resultSet.next()) {
-                    return null;
-                }
-
-                PetEditData pet = new PetEditData();
-
-                pet.idPet = resultSet.getInt("IdPet");
-                pet.idOwner = resultSet.getInt("IdOwner");
-
-                pet.color = resultSet.getString("Color");
-                pet.age = resultSet.getInt("Age");
-                pet.description = resultSet.getString("Description");
-                pet.petName = resultSet.getString("PetName");
-                pet.chip = resultSet.getString("Chip");
-
-                pet.idEnergy = resultSet.getInt("IdEnergy");
-                pet.idType = resultSet.getInt("IdType");
-
-                int breedId = resultSet.getInt("IdBreed");
-                if (resultSet.wasNull()) {
-                    pet.idBreed = null;
-                } else {
-                    pet.idBreed = breedId;
-                }
-
-                pet.idDistrict = resultSet.getInt("IdDistrict");
-                pet.idCanton = resultSet.getInt("IdCanton");
-                pet.idProvince = resultSet.getInt("IdProvince");
-                pet.idCountry = resultSet.getInt("IdCountry");
-
-                pet.idSpace = resultSet.getInt("IdSpace");
-                pet.idPetTraining = resultSet.getInt("IdPetTraining");
-                pet.idSize = resultSet.getInt("IdSize");
-                pet.idVeterinarian = resultSet.getInt("IdVeterinarian");
-
-                return pet;
+            if (!resultSet.next()) {
+                return null;
             }
+
+            PetEditData pet = new PetEditData();
+
+            pet.idPet = resultSet.getInt("IdPet");
+            pet.idOwner = resultSet.getInt("IdOwner");
+
+            pet.color = resultSet.getString("Color");
+            pet.age = resultSet.getInt("Age");
+            pet.description = resultSet.getString("Description");
+            pet.petName = resultSet.getString("PetName");
+            pet.chip = resultSet.getString("Chip");
+
+            pet.idEnergy = resultSet.getInt("IdEnergy");
+            pet.idType = resultSet.getInt("IdType");
+
+            int breedId = resultSet.getInt("IdBreed");
+            if (resultSet.wasNull()) {
+                pet.idBreed = null;
+            } else {
+                pet.idBreed = breedId;
+            }
+
+            pet.idDistrict = resultSet.getInt("IdDistrict");
+            pet.idCanton = resultSet.getInt("IdCanton");
+            pet.idProvince = resultSet.getInt("IdProvince");
+            pet.idCountry = resultSet.getInt("IdCountry");
+
+            pet.idSpace = resultSet.getInt("IdSpace");
+            pet.idPetTraining = resultSet.getInt("IdPetTraining");
+            pet.idSize = resultSet.getInt("IdSize");
+            pet.idVeterinarian = resultSet.getInt("IdVeterinarian");
+
+            return pet;
+            
         }
     }
     private static String toJson(Integer[] values) {

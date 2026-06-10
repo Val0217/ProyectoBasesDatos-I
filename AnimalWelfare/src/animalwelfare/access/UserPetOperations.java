@@ -359,18 +359,21 @@ public DefaultTableModel getAdoptionRequestsForOwner(int ownerId) throws SQLExce
 
     public void createAdoptionRequest(int petId, int adopterId, String description) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("call pr_create_adoption_request(?,?,?)")) {
+             CallableStatement cs = conn.prepareCall("call pr_create_adoption_request(?,?,?,?)")) {
 
             cs.setInt(1, petId);
             cs.setInt(2, adopterId);
             setNullableString(cs, 3, description);
-            ResultSet rs = cs.executeQuery();
+            
+            cs.registerOutParameter(4, Types.INTEGER);
+            cs.execute();
+            int newId = cs.getInt(4);
         }
     }
 
     public void acceptAdoptionRequest(int adoptionId, int ownerId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
-             CallableStatement cs = conn.prepareCall("{call pr_accept_adoption_request(?,?)}")) {
+             CallableStatement cs = conn.prepareCall("call pr_accept_adoption_request(?,?)")) {
 
             cs.setInt(1, adoptionId);
             cs.setInt(2, ownerId);
