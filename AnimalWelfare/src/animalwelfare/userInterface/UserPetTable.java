@@ -189,13 +189,27 @@ public class UserPetTable extends javax.swing.JFrame {
 
         String state = getSelectedPetStateFromTable();
 
-        boolean isLost =
-                state != null &&
-                (state.equalsIgnoreCase("Lost")
-                || state.equalsIgnoreCase("Missing")
-                || state.equals("3"));
+        boolean cannotPutForAdoption =
+            isMissingState(state)
+            || isAdoptionState(state);
 
-        jButtonPutAdopt.setEnabled(!isLost);
+        jButtonPutAdopt.setEnabled(!cannotPutForAdoption);
+    }
+    
+    private boolean isAdoptionState(String state) {
+        if (state == null) {
+            return false;
+        }
+
+        String cleanState = state.trim();
+
+        return cleanState.equalsIgnoreCase("En Adopcion")
+                || cleanState.equalsIgnoreCase("En Adopción")
+                || cleanState.equalsIgnoreCase("Up for adoption")
+                || cleanState.equalsIgnoreCase("In adoption")
+                || cleanState.equalsIgnoreCase("In process")
+                || cleanState.equalsIgnoreCase("To be confirmed")
+                || cleanState.equals("1");
     }
     
     private void handleFoundPetsTableClick() {
@@ -1079,6 +1093,7 @@ private String nullToEmpty(String text) {
                 );
 
                 loadTables();
+                jButtonPutAdopt.setEnabled(false);
                 jButtonUndoAdoption.setVisible(false);
                 jButtonEditPet.setEnabled(false);
                 jButtonReportMissing.setEnabled(false);

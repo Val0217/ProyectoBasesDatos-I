@@ -1947,59 +1947,86 @@ END $$
 /* ============================================================
    PUT PET UP FOR ADOPTION (FUNCTION → PROCEDURE)
 ============================================================ */
+DELIMITER $$
+
 CREATE OR REPLACE PROCEDURE pr_pkg_put_pet_up_for_adoption (
     IN p_pet_id INT,
     IN p_owner_id INT,
     OUT p_result INT
 )
 BEGIN
-    DECLARE v_state INT;
+    DECLARE v_state INT DEFAULT NULL;
+    DECLARE v_pet_count INT DEFAULT 0;
 
-    SELECT IdState INTO v_state
+    SELECT COUNT(*)
+    INTO v_pet_count
     FROM Pet
-    WHERE Id = p_pet_id AND IdOwner = p_owner_id;
+    WHERE Id = p_pet_id
+      AND IdOwner = p_owner_id;
 
-    IF v_state = 3 THEN
-        SET p_result = -2;
+    IF v_pet_count = 0 THEN
+        SET p_result = 0;
+
     ELSE
-        UPDATE Pet
-        SET IdState = 1
-        WHERE Id = p_pet_id AND IdOwner = p_owner_id;
+        SELECT IdState
+        INTO v_state
+        FROM Pet
+        WHERE Id = p_pet_id
+          AND IdOwner = p_owner_id;
 
-        UPDATE Adoption
-        SET AdoptionDate = NULL,
-            AvailableDate = NOW(),
-            Description = 'Pet put up for adoption by owner.',
-            State = 'In process',
-            IdAdopter = NULL,
-            IdOwner = p_owner_id
-        WHERE IdPet = p_pet_id
-          AND State IN ('In process', 'To be confirmed');
+        IF v_state = 3 THEN
+            SET p_result = -2;
 
-        IF ROW_COUNT() = 0 THEN
-            INSERT INTO Adoption (
-                AdoptionDate,
-                AvailableDate,
-                Description,
-                State,
-                IdPet,
-                IdAdopter,
-                IdOwner
-            )
-            VALUES (
-                NULL,
-                NOW(),
-                'Pet put up for adoption by owner.',
-                'In process',
-                p_pet_id,
-                NULL,
-                p_owner_id
-            );
+        ELSEIF v_state = 1 THEN
+            SET p_result = -3;
+
+        ELSE
+            START TRANSACTION;
+
+            UPDATE Pet
+            SET IdState = 1
+            WHERE Id = p_pet_id
+              AND IdOwner = p_owner_id;
+
+            UPDATE Adoption
+            SET AdoptionDate = NULL,
+                AvailableDate = NOW(),
+                Description = 'Pet put up for adoption by owner.',
+                State = 'In process',
+                IdAdopter = NULL,
+                IdOwner = p_owner_id
+            WHERE IdPet = p_pet_id
+              AND State IN ('In process', 'To be confirmed');
+
+            IF ROW_COUNT() = 0 THEN
+                INSERT INTO Adoption (
+                    AdoptionDate,
+                    AvailableDate,
+                    Description,
+                    State,
+                    IdPet,
+                    IdAdopter,
+                    IdOwner
+                )
+                VALUES (
+                    NULL,
+                    NOW(),
+                    'Pet put up for adoption by owner.',
+                    'In process',
+                    p_pet_id,
+                    NULL,
+                    p_owner_id
+                );
+            END IF;
+
+            COMMIT;
+
+            SET p_result = 1;
         END IF;
-
-        SET p_result = 1;
     END IF;
-END $$
+END$$
+
+DELIMITER ;
 
 
 /* ============================================================
