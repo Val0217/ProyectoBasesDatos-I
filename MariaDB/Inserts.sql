@@ -337,6 +337,51 @@ VALUES
 
 ('Gris y blanco', 1, 'Gato pequeño y curioso', 'Nina', 'CH020', 1, 1, 2, 20, 1, 1, 1, 1, 1, 1);
 
+INSERT INTO Pet
+(Color, Age, Description, Name, Chip, IdEnergy, IdState, IdType,
+ IdBreed, IdDistrict, IdSpace, IdPetTraining, IdSize, IdOwner, IdVeterinarian)
+VALUES
+('Negro', 2, 'Perro amigable y activo', 'AJ', 'CH00100', 1, 4, 1, 1, 1, 1, 1, 2, 7, 1),
+
+('Blanco', 1, 'Gato tranquilo y cariñoso', 'Abby', 'CH00200', 2, 4, 2, 16, 1, 1, 2, 1, 7, 1),
+
+('Marrón', 3, 'Conejo pequeño y juguetón', 'Adelaide', 'CH00300', 1, 4, 3, 26, 1, 1, 1, 1, 7, 1),
+
+('Gris', 4, 'Ave muy sociable', 'ATwood', 'CH00400', 2, 3, 4, 31, 1, 1, 2, 1, 7, 1),
+
+('Dorado', 5, 'Perro protector y leal', 'Amber', 'CH00500', 3, 2, 1, 3, 1, 2, 2, 3, 7, 1),
+
+('Blanco y negro', 2, 'Gato curioso', 'Amelie', 'CH00600', 1, 3, 2, 17, 1, 1, 1, 1, 7, 1),
+
+('Beige', 1, 'Conejo muy tranquilo', 'Aubree', 'CH00700', 1, 4, 3, 27, 1, 1, 1, 1, 7, 1),
+
+('Verde', 2, 'Ave parlanchina', 'Elsa', 'CH00800', 2, 4, 4, 34, 1, 1, 2, 1, 7, 1),
+
+('Negro y café', 6, 'Perro muy energético', 'Emma', 'CH00900', 3, 4, 1, 9, 1, 3, 2, 3, 7, 1),
+
+('Naranja', 3, 'Gato dormilón', 'Evy', 'CH01000', 1, 4, 2, 18, 1, 1, 1, 2, 7, 1),
+
+('Blanco', 2, 'Conejo amigable', 'Esther', 'CH01100', 1, 4, 3, 28, 1, 1, 1, 1, 7, 1),
+
+('Azul', 1, 'Ave pequeña y rápida', 'Fancy', 'CH01200', 2, 4, 4, 32, 1, 1, 2, 1, 7, 1),
+
+('Café', 7, 'Perro obediente', 'Fauna', 'CH01300', 2, 4, 1, 7, 1, 2, 2, 3, 7, 1),
+
+('Gris oscuro', 4, 'Gato independiente', 'Ezra', 'CH01400', 2, 3, 2, 21, 1, 1, 1, 2, 7, 1),
+
+('Marrón claro', 1, 'Conejo curioso', 'Clara', 'CH01500', 1, 4, 3, 29, 1, 1, 1, 1, 7, 1),
+
+('Amarillo', 2, 'Ave muy activa', 'Carmen', 'CH01600', 3, 3, 4, 35, 1, 1, 2, 1, 7, 1),
+
+('Negro', 5, 'Perro tranquilo', 'Chanel', 'CH01700', 2, 4, 1, 11, 1, 2, 2, 3, 7, 1),
+
+('Blanco', 2, 'Gato amigable', 'Dolly', 'CH01800', 1, 3, 2, 25, 1, 1, 1, 1, 7, 1),
+
+('Café oscuro', 3, 'Perro juguetón', 'Harper', 'CH01900', 3, 4, 1, 6, 1, 2, 2, 2, 7, 1),
+
+('Gris y blanco', 1, 'Gato pequeño y curioso', 'Jade', 'CH02000', 1, 3, 2, 20, 1, 1, 1, 1, 7, 1);
+
+
 -- Relaciones de mascota con enfermedades, medicamentos y tratamientos
 
 INSERT INTO PetXPetIllness (IdPet, IdPetIllness) VALUES (1, 4);
