@@ -3079,7 +3079,8 @@ CREATE OR REPLACE PROCEDURE pr_insert_pet (
     IN pIllnessJson JSON,
     IN pTreatmentJson JSON,
     IN pMedicineJson JSON,
-    IN pPhotoJson JSON
+    IN pPhotoJson JSON,
+    IN pIdState INT
 )
 BEGIN
     DECLARE vcIdPet INT;
@@ -3093,7 +3094,7 @@ BEGIN
     )
     VALUES (
         pColor, pAge, pDescription, pPetName, pChip,
-        pIdEnergy, 2, pIdType, pIdBreed,
+        pIdEnergy, pIdState, pIdType, pIdBreed,
         pIdDistrict, pIdSpaceRequired, pIdPetTraining,
         pIdPetSize, pIdPerson, pIdVeterinarian
     );
@@ -3126,6 +3127,12 @@ BEGIN
         INSERT INTO PetPhoto (Photo, IdPet)
         SELECT value, vcIdPet
         FROM JSON_TABLE(pPhotoJson, '$[*]' COLUMNS(value TEXT PATH '$')) AS jt;
+    END IF;
+
+    -- 6, FoundReport
+    IF pIdState = 4 THEN
+        INSERT INTO FoundReport (FoundDate, Place, Description, IdPet, IdDistrict, IdPerson)
+        VALUES (NOW(), 'Lugar desconocido', 'Reportado automáticamente al registrar mascota con estado ENCONTRADO', vcIdPet, pIdDistrict, pIdPerson);
     END IF;
 
 END//

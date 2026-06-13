@@ -25,6 +25,12 @@ public class InsertPetForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InsertPetForm.class.getName());
 
+    // bandera boton de rescatado o adoptado
+    boolean isAdopted = true;
+
+    // colores de los botones
+    Color buttonHover = new Color(0, 102, 102);
+    Color buttonBase = new Color(0, 153, 153);
 
     // controlador del formulario
     private InsertPetController controller = null;
@@ -305,7 +311,7 @@ public class InsertPetForm extends javax.swing.JFrame {
         ButtonCancel = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         ToggleButtonFoundAdopted = new javax.swing.JPanel();
-        LabelButtonSelectImage4 = new javax.swing.JLabel();
+        LabelButtonFoundAdopted = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -931,12 +937,17 @@ public class InsertPetForm extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        ToggleButtonFoundAdopted.setBackground(new java.awt.Color(0, 102, 102));
+        ToggleButtonFoundAdopted.setBackground(new java.awt.Color(0, 153, 153));
+        ToggleButtonFoundAdopted.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ToggleButtonFoundAdoptedMouseClicked(evt);
+            }
+        });
 
-        LabelButtonSelectImage4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        LabelButtonSelectImage4.setForeground(new java.awt.Color(255, 255, 255));
-        LabelButtonSelectImage4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LabelButtonSelectImage4.setText("Adopt");
+        LabelButtonFoundAdopted.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelButtonFoundAdopted.setForeground(new java.awt.Color(255, 255, 255));
+        LabelButtonFoundAdopted.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelButtonFoundAdopted.setText("Adopt");
 
         javax.swing.GroupLayout ToggleButtonFoundAdoptedLayout = new javax.swing.GroupLayout(ToggleButtonFoundAdopted);
         ToggleButtonFoundAdopted.setLayout(ToggleButtonFoundAdoptedLayout);
@@ -944,12 +955,12 @@ public class InsertPetForm extends javax.swing.JFrame {
             ToggleButtonFoundAdoptedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ToggleButtonFoundAdoptedLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LabelButtonSelectImage4, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addComponent(LabelButtonFoundAdopted, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
                 .addContainerGap())
         );
         ToggleButtonFoundAdoptedLayout.setVerticalGroup(
             ToggleButtonFoundAdoptedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LabelButtonSelectImage4, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+            .addComponent(LabelButtonFoundAdopted, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout FormPanelInsertPetLayout = new javax.swing.GroupLayout(FormPanelInsertPet);
@@ -1171,7 +1182,7 @@ public class InsertPetForm extends javax.swing.JFrame {
 
         boolean correct;
         try {
-            correct = controller.InsertPet(color, age, description, petName, chip, Energy, Type, Breed, District, SpaceRequired, Training, Size, Veterinarian, illnessList, treatmentList, medicineList, imageFiles);
+            correct = controller.InsertPet(color, age, description, petName, chip, Energy, Type, Breed, District, SpaceRequired, Training, Size, Veterinarian, illnessList, treatmentList, medicineList, imageFiles, isAdopted);
             if (correct){
                 MainMenu window = new MainMenu();
                 dispose();
@@ -1307,6 +1318,18 @@ public class InsertPetForm extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_ButtonCancelMouseClicked
 
+    private void ToggleButtonFoundAdoptedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ToggleButtonFoundAdoptedMouseClicked
+        if (isAdopted) {
+            isAdopted = false;
+            LabelButtonFoundAdopted.setText("Found");
+            ToggleButtonFoundAdopted.setBackground(buttonHover);
+        } else {
+            isAdopted = true;
+            LabelButtonFoundAdopted.setText("Adopt");
+            ToggleButtonFoundAdopted.setBackground(buttonBase);
+        }
+    }//GEN-LAST:event_ToggleButtonFoundAdoptedMouseClicked
+
     
     
     
@@ -1365,8 +1388,8 @@ public class InsertPetForm extends javax.swing.JFrame {
     private javax.swing.JLabel LabelButtonAddIllness;
     private javax.swing.JLabel LabelButtonAddMedicine;
     private javax.swing.JLabel LabelButtonAddTreatment;
+    private javax.swing.JLabel LabelButtonFoundAdopted;
     private javax.swing.JLabel LabelButtonSelectImage3;
-    private javax.swing.JLabel LabelButtonSelectImage4;
     private javax.swing.JLabel LabelDistrict;
     private javax.swing.JLabel LableTitle;
     private javax.swing.JList<String> ListImages;

@@ -120,13 +120,13 @@ public class PetOperations {
         }
     }
 
-    public static boolean InsertPet(String color, int age, String description, String petName, String chip, int idEnergy, int idType, int idBreed, int idDistrict, int idSpaceRequired, int idPetTraining, int idPetSize, int idPerson, int idVeterinarian, Integer[] illnessIds, Integer[] treatmentIds, Integer[] medicineIds, String[] imageFiles) throws SQLException {
+    public static boolean InsertPet(String color, int age, String description, String petName, String chip, int idEnergy, int idType, int idBreed, int idDistrict, int idSpaceRequired, int idPetTraining, int idPetSize, int idPerson, int idVeterinarian, Integer[] illnessIds, Integer[] treatmentIds, Integer[] medicineIds, String[] imageFiles, int idState) throws SQLException {
 
         try {
             Connection con = ConexionMariaDB.conectar();
 
             CallableStatement cs =
-                con.prepareCall("{ CALL pr_insert_pet(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
+                con.prepareCall("{ CALL pr_insert_pet(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
 
             cs.setString(1, color);
             cs.setInt(2, age);
@@ -147,6 +147,7 @@ public class PetOperations {
             cs.setString(16, toJson(treatmentIds));
             cs.setString(17, toJson(medicineIds));
             cs.setString(18, toJson(imageFiles));
+            cs.setInt(19, idState);
 
             cs.execute();
 
