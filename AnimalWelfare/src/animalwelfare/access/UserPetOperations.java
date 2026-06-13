@@ -228,7 +228,7 @@ public class UserPetOperations {
     public void putPetUpForAdoption(int petId, int ownerId) throws SQLException {
         try (Connection conn = ConexionMariaDB.conectar();
              CallableStatement cs = conn.prepareCall(
-                 "{CALL pr_put_pet_up_for_adoption(?, ?, ?)}")) {
+                 "{CALL pr_pkg_put_pet_up_for_adoption(?, ?, ?)}")) {
 
             cs.setInt(1, petId);
             cs.setInt(2, ownerId);
@@ -244,6 +244,9 @@ public class UserPetOperations {
 
             if (result != 1) {
                 throw new SQLException("Pet not found, or this pet does not belong to this user.");
+            }
+            if (result == -3) {
+                throw new SQLException("This pet is already up for adoption.");
             }
         }
     }

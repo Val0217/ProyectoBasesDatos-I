@@ -191,6 +191,7 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         TextVetFirstName = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         ButtonCreateAccount = new javax.swing.JButton();
+        ButtonGoBack = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -302,7 +303,15 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         ButtonCreateAccount.setText("REGISTER");
         ButtonCreateAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ButtonCreateAccount.addActionListener(this::ButtonCreateAccountActionPerformed);
-        jPanel2.add(ButtonCreateAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 550, 120, 40));
+        jPanel2.add(ButtonCreateAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, 120, 40));
+
+        ButtonGoBack.setBackground(new java.awt.Color(0, 102, 102));
+        ButtonGoBack.setFont(new java.awt.Font("Roboto SemiBold", 0, 14)); // NOI18N
+        ButtonGoBack.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonGoBack.setText("MAIN MENU");
+        ButtonGoBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ButtonGoBack.addActionListener(this::ButtonGoBackActionPerformed);
+        jPanel2.add(ButtonGoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 550, 120, 40));
 
         jLabel24.setBackground(new java.awt.Color(255, 255, 255));
         jLabel24.setFont(new java.awt.Font("Roboto SemiBold", 0, 36)); // NOI18N
@@ -366,6 +375,11 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextPhoneVetActionPerformed
 
+    private void ButtonGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonGoBackActionPerformed
+        MainMenu window = new MainMenu();
+        dispose();
+    }//GEN-LAST:event_ButtonGoBackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -393,6 +407,7 @@ public class RegisterVeterinarian extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonCreateAccount;
+    private javax.swing.JButton ButtonGoBack;
     private javax.swing.JComboBox<DbObject> ComboCanton3;
     private javax.swing.JComboBox<DbObject> ComboCountry3;
     private javax.swing.JComboBox<DbObject> ComboDistrict3;
